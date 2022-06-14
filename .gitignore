@@ -1,3 +1,4 @@
 .yml
 .drawio
 docker-compose.yml
+*.drawio
