@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4b78f7a10e0845a8be58f843d8868c25" Name="Diagram1">
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Customer" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Employee" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Orders" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Shipments" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.ShoppingCart" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Total_Users" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.fk_order_customer_id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.fk_shipment_customer_id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.fk_shoppingCart_customer_id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.fk_total_users_customer_id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.fk_total_users_employee_id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.fk_shipment_order_id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.fk_shoppingCart_product_id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
