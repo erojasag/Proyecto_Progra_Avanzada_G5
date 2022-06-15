@@ -156,8 +156,10 @@ CREATE OR ALTER PROCEDURE view_customer_by_id
 @Id as INT
 AS
 BEGIN 
-	SELECT * FROM Customer c where c.customer_user_id = @Id
-for json auto
+	SELECT c.customer_user_id, c.customer_name, c.customer_first_last_name, c.customer_last_name, c.customer_id, c.customer_phone,
+	c.customer_email, c.customer_registration_date, c.customer_birthDate, c.customer_photo, c.customer_address 
+	FROM Customer c where c.customer_user_id = @Id
+
 END;
 
 EXEC view_customer_by_id 2;

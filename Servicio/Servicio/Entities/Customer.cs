@@ -44,4 +44,13 @@ namespace Servicio.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Total_Users> Total_Users { get; set; }
     }
+
+    public class Respuesta
+    {
+        public int Id { get; set; }
+        public string Message { get; set; }
+        public bool transaccion { get; set; }
+        public Customer customer { get; set; }
+        public List<Customer> customers { get; set; }
+    }
 }
