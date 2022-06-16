@@ -12,7 +12,9 @@ namespace Servicio.Controllers
     public class CustomersController : ApiController
     {
         readonly CustomerModel model = new CustomerModel();
-        readonly RespuestaController respuesta = new RespuestaController();
+        readonly Respuesta respuesta = new Respuesta();
+
+
         [HttpGet]
         [Route("customers/viewCustomers")]
         public Respuesta viewCustomers()
@@ -20,11 +22,11 @@ namespace Servicio.Controllers
 
             try 
             {
-                return respuesta.ArmarRespuesta(0, "OK", false, null, model.viewCustomers());
+                return model.ArmarRespuesta(0, "OK", false, null, model.viewCustomers());
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuesta(-1, ex.Message, false, null, null);
+                return model.ArmarRespuesta(-1, ex.Message, false, null, null);
 
             }
 
@@ -40,11 +42,11 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuesta(0, "OK", false, model.viewCustomerById(Id), null);
+                return model.ArmarRespuesta(0, "OK", false, model.viewCustomerById(Id), null);
             }
             catch (Exception ex) {
 
-                return respuesta.ArmarRespuesta(-1, ex.Message, false, null, null);
+                return model.ArmarRespuesta(-1, ex.Message, false, null, null);
             }
         }
 
@@ -54,11 +56,11 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuesta(0, "OK", model.addCustomer(customer), customer, null);
+                return model.ArmarRespuesta(0, "OK", model.addCustomer(customer), customer, null);
             }
             catch(Exception ex)
             {
-                return respuesta.ArmarRespuesta(-1, ex.Message, false, null, null);
+                return model.ArmarRespuesta(-1, ex.Message, false, null, null);
             }
         }
 
@@ -69,11 +71,11 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuesta(0, "OK", model.editCustomer(customer), null, null);
+                return model.ArmarRespuesta(0, "OK", model.editCustomer(customer), null, null);
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuesta(-1, ex.Message, false, null, null);
+                return model.ArmarRespuesta(-1, ex.Message, false, null, null);
             }
         }
 
@@ -83,11 +85,11 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuesta(0, "OK", model.deleteCustomerById(Id), null, null);
+                return model.ArmarRespuesta(0, "OK", model.deleteCustomerById(Id), null, null);
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuesta(-1, ex.Message, false, null, null);
+                return model.ArmarRespuesta(-1, ex.Message, false, null, null);
             }
         }
 

@@ -144,6 +144,8 @@ CREATE OR ALTER PROCEDURE view_Customer
 AS
 BEGIN 
 	SELECT * FROM Customer c
+	FOR JSON AUTO;
+
 END;
 
 EXEC view_Customer;
@@ -159,6 +161,7 @@ BEGIN
 	SELECT c.customer_user_id, c.customer_name, c.customer_first_last_name, c.customer_last_name, c.customer_id, c.customer_phone,
 	c.customer_email, c.customer_registration_date, c.customer_birthDate, c.customer_photo, c.customer_address 
 	FROM Customer c where c.customer_user_id = @Id
+FOR JSON AUTO;
 
 END;
 
@@ -192,7 +195,7 @@ BEGIN
 	DELETE FROM Customer where Customer.customer_user_id=@id
 END;
 
-exec delete_customer 2;
+exec delete_customer_by_id 5;
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------CUSTOMER CRUD PROCEDURES---------------------------------------------------------------------------------------------
@@ -242,6 +245,8 @@ CREATE OR ALTER PROCEDURE view_Product
 AS 
 BEGIN 
 	SELECT * FROM Product
+	FOR JSON AUTO;
+
 END;
 
 EXEC view_Product;
@@ -256,6 +261,8 @@ AS
 BEGIN
 	SELECT * FROM Product p 
 	WHERE p.product_id = @product_id
+	FOR JSON AUTO;
+
 END;
 
 EXEC view_product_by_id 1;
@@ -345,7 +352,8 @@ EXEC insert_Employee 'Trabajador', 'Apellido1', 'Apellido2', '000000002', '89502
 CREATE OR ALTER PROCEDURE view_Employee
 AS 
 BEGIN 
-	SELECT * FROM Employee e;
+	SELECT * FROM Employee e
+	FOR JSON AUTO;
 END;
 
 EXEC view_Employee;
@@ -361,6 +369,8 @@ AS
 BEGIN 
 	SELECT * FROM Employee
 	where employee_user_id = @employee_Id
+	FOR JSON AUTO;
+
 END;
 
 

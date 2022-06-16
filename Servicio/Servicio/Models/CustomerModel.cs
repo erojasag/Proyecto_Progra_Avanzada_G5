@@ -144,5 +144,20 @@ namespace Servicio.Models
                 }
             }
         }
+
+        public Respuesta ArmarRespuesta(int Id, string Message, bool transaccion, Customer customer
+            , List<Customer> customers)
+        {
+
+            Respuesta respuesta = new Respuesta();
+            respuesta.Id = 0;
+            respuesta.Message = "OK";
+            respuesta.transaccion = transaccion;
+            respuesta.customers = customers;
+            respuesta.customer = customer;
+
+            return respuesta;
+
+        }
     }
 }
