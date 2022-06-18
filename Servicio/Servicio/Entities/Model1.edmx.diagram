@@ -4,8 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="87d5e13a80834e0e81b2149d5a6a8340" Name="Diagram1">
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.TCustomer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="e0df2820efcd4f13bef275a5e72c03f9" Name="Diagram1">
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Customer" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Employee" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Product" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.ShoppingCart" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_shoppingCart_customer_id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_shoppingCart_product_id" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

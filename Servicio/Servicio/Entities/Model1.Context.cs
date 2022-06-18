@@ -27,65 +27,68 @@ namespace Servicio.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<TCustomer> TCustomer { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
     
-        public virtual int insert_customer(string login_name_customer, string password_hash_customer, string name, string first_last_name, string second_last_name, Nullable<int> id, string phone, string email, Nullable<System.DateTime> birth_date, string address)
+        public virtual int Insert_Employee(string user_name, string password, string name, string first_last_name, string second_last_name, Nullable<int> id, string phone, string email)
         {
-            var login_name_customerParameter = login_name_customer != null ?
-                new ObjectParameter("login_name_customer", login_name_customer) :
-                new ObjectParameter("login_name_customer", typeof(string));
+            var user_nameParameter = user_name != null ?
+                new ObjectParameter("User_name", user_name) :
+                new ObjectParameter("User_name", typeof(string));
     
-            var password_hash_customerParameter = password_hash_customer != null ?
-                new ObjectParameter("password_hash_customer", password_hash_customer) :
-                new ObjectParameter("password_hash_customer", typeof(string));
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
     
             var nameParameter = name != null ?
-                new ObjectParameter("name", name) :
-                new ObjectParameter("name", typeof(string));
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
     
             var first_last_nameParameter = first_last_name != null ?
-                new ObjectParameter("first_last_name", first_last_name) :
-                new ObjectParameter("first_last_name", typeof(string));
+                new ObjectParameter("First_last_name", first_last_name) :
+                new ObjectParameter("First_last_name", typeof(string));
     
             var second_last_nameParameter = second_last_name != null ?
-                new ObjectParameter("second_last_name", second_last_name) :
-                new ObjectParameter("second_last_name", typeof(string));
+                new ObjectParameter("Second_last_name", second_last_name) :
+                new ObjectParameter("Second_last_name", typeof(string));
     
-            var idParameter = id.HasValue ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(int));
-    
-            var phoneParameter = phone != null ?
-                new ObjectParameter("phone", phone) :
-                new ObjectParameter("phone", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("email", email) :
-                new ObjectParameter("email", typeof(string));
-    
-            var birth_dateParameter = birth_date.HasValue ?
-                new ObjectParameter("birth_date", birth_date) :
-                new ObjectParameter("birth_date", typeof(System.DateTime));
-    
-            var addressParameter = address != null ?
-                new ObjectParameter("address", address) :
-                new ObjectParameter("address", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_customer", login_name_customerParameter, password_hash_customerParameter, nameParameter, first_last_nameParameter, second_last_nameParameter, idParameter, phoneParameter, emailParameter, birth_dateParameter, addressParameter);
-        }
-    
-        public virtual ObjectResult<view_Customer_Result> view_Customer()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_Customer_Result>("view_Customer");
-        }
-    
-        public virtual int view_customer_by_id(Nullable<int> id)
-        {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
                 new ObjectParameter("Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("view_customer_by_id", idParameter);
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Employee", user_nameParameter, passwordParameter, nameParameter, first_last_nameParameter, second_last_nameParameter, idParameter, phoneParameter, emailParameter);
+        }
+    
+        public virtual int Change_Employee_Password(string user_name, string old_Password, string new_Password)
+        {
+            var user_nameParameter = user_name != null ?
+                new ObjectParameter("User_name", user_name) :
+                new ObjectParameter("User_name", typeof(string));
+    
+            var old_PasswordParameter = old_Password != null ?
+                new ObjectParameter("Old_Password", old_Password) :
+                new ObjectParameter("Old_Password", typeof(string));
+    
+            var new_PasswordParameter = new_Password != null ?
+                new ObjectParameter("New_Password", new_Password) :
+                new ObjectParameter("New_Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Change_Employee_Password", user_nameParameter, old_PasswordParameter, new_PasswordParameter);
+        }
+    
+        public virtual ObjectResult<View_Employees_Result> View_Employees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<View_Employees_Result>("View_Employees");
         }
     }
 }

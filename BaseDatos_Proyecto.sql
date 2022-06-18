@@ -1,77 +1,161 @@
 CREATE DATABASE Proyecto_Progra_Avanzada_G5;
 USE Proyecto_Progra_Avanzada_G5;
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------CUSTOMER TABLE---------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE Customer(
-    customer_user_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    customer_name varchar(50) NOT NULL,
-    customer_first_last_name varchar(50) NOT NULL,
-    customer_last_name varchar(50) NOT NULL,
-    customer_id varchar(50) NOT NULL,
-    customer_phone varchar(50) NOT NULL,
-    customer_email varchar(50) NOT NULL,
-    customer_registration_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    customer_birthDate DATE NOT NULL,
-    customer_photo varchar(50),
-    customer_address varchar(50) NOT NULL
+	User_Id INT IDENTITY(1,1) NOT NULL,
+	Login_name_customer VARCHAR(40) NOT NULL,
+	Password varchar(50) NOT NULL,
+    Name varchar(50) NOT NULL,
+    First_last_name varchar(50) NOT NULL,
+    Second_last_name varchar(50) NOT NULL,
+    Id varchar(9) NOT NULL,
+    Phone varchar(50) NOT NULL,
+    Email varchar(50) NOT NULL,
+    Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Modification_date DATETIME2 NULL,
+    Birth_date DATETIME2 NOT NULL,
+    Photo varchar(50),
+    Address varchar(50) NOT NULL,
+CONSTRAINT PK_Customer_Id  PRIMARY KEY (user_Id)
 );
 
+INSERT INTO Customer(Login_name_customer, Password, Name,First_last_name,Second_last_name,
+Id, Phone, Email, Birth_date, Address) 
+VALUES('erojasag', 'holamundo123', 'Emanuel', 'Rojas','Aguero',117250521,'88667456',
+'eroaguero01@gmail.com','1998-11-01','Alajuela')
 
+SELECT * FROM Customer;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------CUSTOMER TABLE---------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------PRODUCT TABLE--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE Product(
-    product_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    product_name varchar(50) NOT NULL,
-    product_description varchar(50) NOT NULL,
-    product_price DECIMAL(10,2) NOT NULL,
-    product_stock INT NOT NULL,
-    product_image varchar(50),
-    product_brand varchar(50) NOT NULL,
-    product_model varchar(50) NOT NULL,
-    product_registration_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+    Id INT NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    Stock INT NOT NULL,
+    Photo varchar(50),
+    Brand varchar(50) NOT NULL,
+    Model varchar(50) NOT NULL,
+    Color varchar(50) NOT NULL,
+    Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Modification_date DATETIME2 NULL,
+    CONSTRAINT PK_Product_Id PRIMARY KEY (id)
+); 
+
+INSERT INTO Product(Id,Price, Stock, Brand, Model, Color) 
+VALUES(0001,150000, 15, 'Nike', 'Jordan Retro 1', 'Chocolate');
+
+SELECT * FROM Product;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------PRODUCT TABLE--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------SHOPPING_CART TABLE--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE ShoppingCart(
-    shoppingCart_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    shoppingCart_customer_id INT NOT NULL,
-    shoppingCart_product_id INT NOT NULL,
-    shoppipingCart_product_name varchar(50) NOT NULL,
-    shoppingCart_image varchar(50) NOT NULL,
-    shoppingCart_description varchar(50) NOT NULL,
-    shoppingCart_quantity INT NOT NULL,
-    shoppingCart_product_price DECIMAL(10,2) NOT NULL,
-    shoppingCart_state char(2) NOT NULL
-    CONSTRAINT fk_shoppingCart_customer_id FOREIGN KEY (shoppingCart_customer_id) REFERENCES Customer(customer_user_id),
-    CONSTRAINT fk_shoppingCart_product_id FOREIGN KEY (shoppingCart_product_id) REFERENCES Product(product_id)
+    Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    Customer_id int NOT NULL,
+    Product_id INT NOT NULL,
+    Name varchar(50) NOT NULL,
+    Photo varchar(50) NOT NULL,
+    Quantity INT NOT NULL,
+    Estimate_Total DECIMAL(10,2) NOT NULL,
+    Tax DECIMAL(10,2) NOT NULL DEFAULT 13,
+    Total DECIMAL(10,2) NOT NULL,
+    State char(2) NOT NULL
+    CONSTRAINT FK_shoppingCart_customer_id FOREIGN KEY (customer_id) REFERENCES Customer(User_Id),
+    CONSTRAINT FK_shoppingCart_product_id FOREIGN KEY (product_id) REFERENCES Product(Id)
 );
+
+INSERT INTO ShoppingCart (Customer_id, Product_id, Name, Photo, Quantity, Estimate_Total, Total, State) 
+VALUES(1,1,'test','',1,0,0,1)
+
+SELECT * FROM ShoppingCart sc ;
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------SHOPPING_CART TABLE--------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------EMPLOYEE TABLE--------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 CREATE TABLE Employee(
-    employee_user_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    employee_name varchar(50) NOT NULL,
-    employee_first_last_name varchar(50) NOT NULL,
-    employee_second_last_name varchar(50) NOT NULL,
-    employee_id varchar(50) NOT NULL,
-    employee_phone varchar(50) NOT NULL,
-    employee_email varchar(50) NOT NULL,
-    employee_hire_date TIMESTAMP NOT NULL,
-    employee_birthDate DATE NOT NULL,
+    User_Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    User_name varchar(50) NOT NULL,
+    Password varchar(50) NOT NULL,
+    Name varchar(50) NOT NULL,
+    First_last_name varchar(50) NOT NULL,
+    Second_last_name varchar(50) NOT NULL,
+    Id varchar(9) NOT NULL,
+    Phone varchar(50) NOT NULL,
+    Email varchar(50) NOT NULL,
+    Hire_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Birth_date DATETIME2 NOT NULL,
 );
+
+INSERT INTO Employee(User_name, Password, Name, First_last_name, Second_last_name, Id, Phone, Email, Birth_date) 
+VALUES('ema_rojas','motopapi123', 'Emanuel', 'Rojas', 'Aguero', '117250521', '88667456', 'ema_rojas@shoeCorp.com', '1998-11-01');
+
+SELECT * FROM Employee ;
+
+
+
+EXEC Insert_Employee 'xime_rojas', 'mundocosmetico123', 'Ximena', 'Rojas', 'Aguero', 209098765, '86099433', 'ximenara@shoeCorp.com','2001-03-07'; 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------EMPLOYEE TABLE--------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------Total_Users TABLE--------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE Total_Users(
     total_users INT NOT NULL,
     customer_user_id INT,
-    employee_user_id INT
+    employee_user_id varchar(50)
     CONSTRAINT fk_total_users_customer_id FOREIGN KEY (customer_user_id) REFERENCES Customer(customer_user_id),
     CONSTRAINT fk_total_users_employee_id FOREIGN KEY (employee_user_id) REFERENCES Employee(employee_user_id)
 );
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------Total_Users TABLE--------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------ORDERS TABLE--------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE Orders(
     order_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     order_customer_id INT NOT NULL,
     order_date TIMESTAMP NOT NULL,
-    order_total DECIMAL(10,2) NOT NULL,
+    order_total DECIMAL(10,2) NOT NULL
     CONSTRAINT fk_order_customer_id FOREIGN KEY (order_customer_id) REFERENCES Customer(customer_user_id)
 );
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------ORDERS TABLE--------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------SHIPMENTS TABLE--------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 CREATE TABLE Shipments(
     shipment_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
@@ -90,303 +174,15 @@ CREATE TABLE Shipments(
     CONSTRAINT fk_shipment_customer_id FOREIGN KEY (shipment_customer_id) REFERENCES Customer(customer_user_id)
 );
 
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------CUSTOMER CRUD PROCEDURES---------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------INSERT CUSTOMER------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-CREATE OR ALTER PROCEDURE insert_customer
-@name as varchar(50),
-@first_last_name as varchar(50),
-@last_name as varchar(50),
-@id as varchar(50),
-@phone as varchar(50),
-@email as varchar(50),
-@birtDate as DATE,
-@address as varchar(50)
-AS
-BEGIN 
-	INSERT INTO Customer(
-    customer_name,
-    customer_first_last_name,
-    customer_last_name,
-    customer_id,
-    customer_phone,
-    customer_email,
-    customer_birthDate,
-    customer_address
-	) VALUES(
-    @name,
-    @first_last_name,
-    @last_name,
-    @id,
-    @phone,
-    @email,
-    @birtDate,
-    @address
-	)
-END;
-
-EXEC insert_customer 'Emanuel', 'Rojas', 'Aguero', '117250521', '88667456', 'eroaguero01@gmail.com', '1998-11-01', 'Alajuela';  --linea para volcado de datos
-EXEC insert_customer 'Ximena', 'Rojas', 'Aguero', '000000001', '86099433', 'ximenara@gmail.com', '2001-03-07', 'Alajuela';
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------visualizar el total de clientes en la tabla Customer---------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE OR ALTER PROCEDURE view_Customer
-AS
-BEGIN 
-	SELECT * FROM Customer c
-	FOR JSON AUTO;
-
-END;
-
-EXEC view_Customer;
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------Visualizar un cliente por Id en la tabla Customer--------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE OR ALTER PROCEDURE view_customer_by_id
-@Id as INT
-AS
-BEGIN 
-	SELECT c.customer_user_id, c.customer_name, c.customer_first_last_name, c.customer_last_name, c.customer_id, c.customer_phone,
-	c.customer_email, c.customer_registration_date, c.customer_birthDate, c.customer_photo, c.customer_address 
-	FROM Customer c where c.customer_user_id = @Id
-FOR JSON AUTO;
-
-END;
-
-EXEC view_customer_by_id 2;
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------Actualizar un cliente segund su id en la tabla Customer--------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE OR ALTER PROCEDURE update_customer_by_id
-@Id as INT,
-@phone as varchar(50),
-@email as varchar(50),
-@address as varchar(50)
-AS
-BEGIN 
-	UPDATE Customer 
-	SET Customer.customer_phone = @phone, Customer.customer_email = @email, Customer.customer_address = @address
-	WHERE Customer.customer_user_id = @Id
-END;
-
-EXEC update_customer_by_id 2, 24389113, 'ximena1d@hotmail.com','Belen';
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------Borrar un cliente segun su codigo-----------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE OR ALTER PROCEDURE delete_customer_by_id
-@Id as INT
-AS
-BEGIN 
-	DELETE FROM Customer where Customer.customer_user_id=@id
-END;
-
-exec delete_customer_by_id 5;
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------CUSTOMER CRUD PROCEDURES---------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------Product CRUD PROCEDURES---------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------INSERT PRODUCT-------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE OR ALTER PROCEDURE insert_product
-@product_name as varchar(50),
-@product_description as varchar(50),
-@product_price as decimal(10,2),
-@product_stock as INT,
-@product_brand as varchar(50),
-@product_model as varchar(50)
-AS
-BEGIN 
-	INSERT INTO Product(
-    product_name,
-    product_description,
-    product_price,
-    product_stock,
-    product_brand,
-    product_model
-	) VALUES(
-    @product_name,
-    @product_description,
-    @product_price,
-    @product_stock,
-    @product_brand,
-    @product_model
-	)
-END;
-
-EXEC insert_product 'Jordan 1 Retro 1 CHOC', 'Nike jordan 1 chocolate', 130000,00, 'Nike', 'Jordan Retro 1';  --linea para volcado de datos
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------VIEW ALL Product----------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE OR ALTER PROCEDURE view_Product
-AS 
-BEGIN 
-	SELECT * FROM Product
-	FOR JSON AUTO;
-
-END;
-
-EXEC view_Product;
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------VIEW Product BY CODE------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE OR ALTER PROCEDURE view_product_by_id
-@product_Id as INT
-AS 
-BEGIN
-	SELECT * FROM Product p 
-	WHERE p.product_id = @product_id
-	FOR JSON AUTO;
-
-END;
-
-EXEC view_product_by_id 1;
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------UPDATE Product BY CODE----------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE OR ALTER PROCEDURE update_Product_by_id
-@product_Id as INT,
-@product_price as VARCHAR,
-@product_stock as INT
-AS 
-BEGIN 
-	UPDATE Product 
-	SET product_price = @product_price, product_stock = @product_stock
-	WHERE product_id = @product_Id
-END;
-
-EXEC update_Product_by_id 1;
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------DELETE Product BY CODE----------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE OR ALTER PROCEDURE delete_Product_by_id
-@product_Id as INT
-AS 
-BEGIN 
-	DELETE FROM Product 
-	WHERE product_id = @product_Id
-END;
-
-EXEC delete_Product_by_id;
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------Product CRUD PROCEDURES---------------------------------------------------------------------------------------------
+--------------------------------------SHIPMENTS TABLE--------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------Employee CRUD PROCEDURES--------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------INSERT Employee-----------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE OR ALTER PROCEDURE insert_Employee
-    @name varchar(50),
-    @first_last_name varchar(50),
-    @second_last_name varchar(50),
-    @id varchar(50),
-    @phone varchar(50),
-    @email varchar(50),
-    @birthDate DATE
-AS 
-BEGIN 
-	INSERT INTO Employee(
-    employee_name,
-    employee_first_last_name,
-    employee_second_last_name,
-    employee_id,
-    employee_phone,
-    employee_email,
-    employee_birthDate
-    )
-	VALUES(
-	@name,
-    @first_last_name ,
-    @second_last_name,
-    @id,
-    @phonE,
-    @email,
-    @birthDate
-	)
-END;
 
 
-EXEC insert_Employee 'Trabajador', 'Apellido1', 'Apellido2', '000000002', '89502955', 'trabajo@trabajo2.com', '1996-05-02';
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------VIEW Employee-------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE OR ALTER PROCEDURE view_Employee
-AS 
-BEGIN 
-	SELECT * FROM Employee e
-	FOR JSON AUTO;
-END;
-
-EXEC view_Employee;
 
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------VIEW EMPLOYEE BY ID--------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE OR ALTER PROCEDURE view_Employee_by_id
-@employee_Id as INT
-AS 
-BEGIN 
-	SELECT * FROM Employee
-	where employee_user_id = @employee_Id
-	FOR JSON AUTO;
-
-END;
 
 
-EXEC view_Employee_by_id 1;
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------DELETE EMPLOYEE BY ID------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE OR ALTER PROCEDURE delete_Employee_by_id
-@employee_Id as INT
-AS 
-BEGIN 
-	DELETE FROM Employee
-	WHERE employee_user_id = @employee_Id
-END;
-
-EXEC delete_Employee_by_id 1;

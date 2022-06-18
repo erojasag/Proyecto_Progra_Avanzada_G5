@@ -11,16 +11,16 @@ namespace Servicio.Controllers
 {
     public class CustomerController : ApiController
     {
-        CustomerModel model = new CustomerModel();
-        Customer customer = new Customer();
+        readonly CustomerModel model = new CustomerModel();
+        
 
         [HttpGet]
         [Route("customer/ViewCustomers")]
-        public Respuesta viewCustomers()
+        public Respuesta ViewCustomers()
         {
             try
             {
-                return model.ArmarRespuesta(0, "OK", false, null, model.viewCustomers());
+                return model.ArmarRespuesta(0, "OK", false, null, model.ViewCustomers());
 
             }
             catch (Exception ex)

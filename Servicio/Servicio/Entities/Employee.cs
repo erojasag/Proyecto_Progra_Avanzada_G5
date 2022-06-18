@@ -12,16 +12,10 @@ namespace Servicio.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Employee
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
-        {
-            this.ShoppingCart = new HashSet<ShoppingCart>();
-        }
-    
         public int User_Id { get; set; }
-        public string Login_name_customer { get; set; }
+        public string User_name { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
         public string First_last_name { get; set; }
@@ -29,13 +23,7 @@ namespace Servicio.Entities
         public string Id { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public System.DateTime Registration_date { get; set; }
-        public Nullable<System.DateTime> Modification_date { get; set; }
+        public System.DateTime Hire_date { get; set; }
         public System.DateTime Birth_date { get; set; }
-        public string Photo { get; set; }
-        public string Address { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingCart> ShoppingCart { get; set; }
     }
 }

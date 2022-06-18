@@ -1,45 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Proyecto_Progra_Avanzada_G5ModelStoreContainer" CdmEntityContainer="Proyecto_Progra_Avanzada_G5Entities">
-    <EntitySetMapping Name="TCustomer">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.TCustomer">
-        <MappingFragment StoreEntitySet="TCustomer">
-          <ScalarProperty Name="user_Id" ColumnName="user_Id" />
-          <ScalarProperty Name="login_name_customer" ColumnName="login_name_customer" />
-          <ScalarProperty Name="password_hash_customer" ColumnName="password_hash_customer" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="first_last_name" ColumnName="first_last_name" />
-          <ScalarProperty Name="second_last_name" ColumnName="second_last_name" />
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="Login_name_customer" ColumnName="Login_name_customer" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
+          <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="registration_date" ColumnName="registration_date" />
-          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
-          <ScalarProperty Name="customer_photo" ColumnName="customer_photo" />
-          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
+          <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
+          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="insert_customer" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.insert_customer" />
-    <FunctionImportMapping FunctionImportName="view_Customer" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_Customer">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_Customer_Result">
-          <ScalarProperty Name="user_Id" ColumnName="user_Id" />
-          <ScalarProperty Name="login_name_customer" ColumnName="login_name_customer" />
-          <ScalarProperty Name="password_hash_customer" ColumnName="password_hash_customer" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="first_last_name" ColumnName="first_last_name" />
-          <ScalarProperty Name="second_last_name" ColumnName="second_last_name" />
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="User_name" ColumnName="User_name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
+          <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="registration_date" ColumnName="registration_date" />
-          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
-          <ScalarProperty Name="customer_photo" ColumnName="customer_photo" />
-          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Hire_date" ColumnName="Hire_date" />
+          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
+          <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShoppingCart">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.ShoppingCart">
+        <MappingFragment StoreEntitySet="ShoppingCart">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Estimate_Total" ColumnName="Estimate_Total" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Insert_Employee" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.Insert_Employee" />
+    <FunctionImportMapping FunctionImportName="Change_Employee_Password" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.Change_Employee_Password" />
+    <FunctionImportMapping FunctionImportName="View_Employees" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.View_Employees">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.View_Employees_Result">
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="User_name" ColumnName="User_name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
+          <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Hire_date" ColumnName="Hire_date" />
+          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="view_customer_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_customer_by_id" />
   </EntityContainerMapping>
 </Mapping>

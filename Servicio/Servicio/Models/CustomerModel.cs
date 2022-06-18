@@ -8,13 +8,13 @@ namespace Servicio.Models
 {
     public class CustomerModel
     {
-        public List<Customer> viewCustomers()
+        public List<Customer> ViewCustomers()
         {
-            using (var conection = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var connection = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var data = conection.TCustomer.ToList();
+                    var data = connection.Customer.ToList();
 
            
                     List<Customer> customers = new List<Customer>();
@@ -24,19 +24,19 @@ namespace Servicio.Models
                        
                         customers.Add(new Customer
                         {
-                            user_Id = customer.user_Id,
-                            login_name_customer = customer.login_name_customer,
-                            password_hash_customer = customer.password_hash_customer,
-                            name = customer.name,
-                            first_last_name = customer.first_last_name,
-                            second_last_name = customer.second_last_name,
+                            User_Id = customer.User_Id,
+                            Login_name_customer = customer.Login_name_customer,
+                            Password = customer.Password,
+                            Name = customer.Name,
+                            First_last_name = customer.First_last_name,
+                            Second_last_name = customer.Second_last_name,
                             Id = customer.Id,
-                            phone = customer.phone,
-                            email = customer.email,
-                            registration_date = customer.registration_date,
-                            birth_date = customer.birth_date,
-                            customer_photo = customer.customer_photo,
-                            address = customer.address
+                            Phone = customer.Phone,
+                            Email = customer.Email,
+                            Registration_date = customer.Registration_date,
+                            Birth_date = customer.Birth_date,
+                            Photo = customer.Photo,
+                            Address = customer.Address
                         });
                     }
                     return customers;
@@ -44,7 +44,7 @@ namespace Servicio.Models
                 }
                 catch (Exception ex)
                 {
-                    conection.Dispose();
+                    connection.Dispose();
                     throw ex;
                 }
             }
@@ -53,32 +53,31 @@ namespace Servicio.Models
         public Customer ViewCustomerById(int Id)
         {
 
-            using (var conection = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var connection = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
                     Customer customer = new Customer();
-                    var getCustomer = conection.TCustomer.FirstOrDefault();
+                    var getCustomer = connection.Customer.Find(Id);
                     
-                    customer.user_Id = getCustomer.user_Id;
-                    customer.login_name_customer = getCustomer.login_name_customer;
-                    customer.password_hash_customer = getCustomer.password_hash_customer;
-                    customer.name = getCustomer.name;
-                    customer.first_last_name = getCustomer.first_last_name;
-                    customer.second_last_name = getCustomer.second_last_name;
+                    customer.User_Id = getCustomer.User_Id;
+                    customer.Login_name_customer = getCustomer.Login_name_customer;
+                    customer.Password = getCustomer.Password;
+                    customer.Name = getCustomer.Name;
+                    customer.First_last_name = getCustomer.First_last_name;
+                    customer.Second_last_name = getCustomer.Second_last_name;
                     customer.Id = getCustomer.Id;
-                    customer.phone = getCustomer.phone;
-                    customer.email = getCustomer.email;
-                    customer.registration_date = getCustomer.registration_date;
-                    customer.birth_date = getCustomer.birth_date;
-                    customer.customer_photo = getCustomer.customer_photo;
-                    customer.address = getCustomer.address;
+                    customer.Phone = getCustomer.Phone;
+                    customer.Email = getCustomer.Email;
+                    customer.Birth_date = getCustomer.Birth_date;
+                    customer.Photo = getCustomer.Photo;
+                    customer.Address = getCustomer.Address;
 
                     return customer;
                 }
                 catch (Exception ex)
                 {
-                    conection.Dispose();
+                    connection.Dispose();
                     throw ex;
                 }
             }
@@ -88,7 +87,7 @@ namespace Servicio.Models
         {
             
 
-            using (var conection = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var connection = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
@@ -96,20 +95,21 @@ namespace Servicio.Models
 
                     if (customer != null)
                     {
-                        TCustomer tcustomer = new TCustomer();
-                        tcustomer.login_name_customer = customer.login_name_customer;
-                        tcustomer.password_hash_customer = customer.password_hash_customer;
-                        tcustomer.name = customer.name;
-                        tcustomer.first_last_name = customer.first_last_name;
-                        tcustomer.second_last_name = customer.second_last_name;
+                        Customer tcustomer = new Customer();
+                        tcustomer.Login_name_customer = customer.Login_name_customer;
+                        tcustomer.Password = customer.Password;
+                        tcustomer.Name = customer.Name;
+                        tcustomer.First_last_name = customer.First_last_name;
+                        tcustomer.Second_last_name = customer.Second_last_name;
                         tcustomer.Id = customer.Id;
-                        tcustomer.phone = customer.phone;
-                        tcustomer.email = customer.email;
-                        tcustomer.birth_date = new DateTime();
-                        tcustomer.customer_photo = customer.customer_photo;
-                        tcustomer.address = customer.address;
-                        conection.TCustomer.Add(tcustomer);
-                        conection.SaveChanges();
+                        tcustomer.Phone = customer.Phone;
+                        tcustomer.Email = customer.Email;
+                        tcustomer.Registration_date = DateTime.Now;
+                        tcustomer.Birth_date = new DateTime();
+                        tcustomer.Photo = customer.Photo;
+                        tcustomer.Address = customer.Address;
+                        connection.Customer.Add(tcustomer);
+                        connection.SaveChanges();
                         return true;
                     }
                     else
@@ -119,7 +119,7 @@ namespace Servicio.Models
                 }
                 catch (Exception ex)
                 {
-                    conection.Dispose();
+                    connection.Dispose();
                     throw ex;
                 }
             }
@@ -128,23 +128,24 @@ namespace Servicio.Models
 
         public bool UpdateCustomer(Customer customer)
         {
-            using(var conection = new Proyecto_Progra_Avanzada_G5Entities())
+            using(var connection = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var getCustomer = conection.TCustomer.Find(customer.user_Id);
+                    var getCustomer = connection.Customer.Find(customer.User_Id);
 
                     if(getCustomer != null)
                     {
 
-                        getCustomer.name = customer.name;
-                        getCustomer.first_last_name = customer.first_last_name;
-                        getCustomer.second_last_name = customer.second_last_name;
-                        getCustomer.phone = customer.phone;
-                        getCustomer.email = customer.email;
-                        getCustomer.customer_photo = customer.customer_photo;
-                        getCustomer.address = customer.address;
-                        conection.SaveChanges();
+                        getCustomer.Name = customer.Name;
+                        getCustomer.First_last_name = customer.First_last_name;
+                        getCustomer.Second_last_name = customer.Second_last_name;
+                        getCustomer.Phone = customer.Phone;
+                        getCustomer.Email = customer.Email;
+                        getCustomer.Photo = customer.Photo;
+                        getCustomer.Address = customer.Address;
+                        getCustomer.Modification_date = DateTime.Now;
+                        connection.SaveChanges();
                         return true;
                     }
                     else
@@ -154,7 +155,7 @@ namespace Servicio.Models
                 }
                 catch (Exception ex)
                 {
-                    conection.Dispose();
+                    connection.Dispose();
                     throw ex;
 
                 }
@@ -163,15 +164,15 @@ namespace Servicio.Models
 
         public bool DeleteCustomer(int user_Id)
         {
-            using (var conection = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var connection = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var getCustomer = conection.TCustomer.Find(user_Id);
+                    var getCustomer = connection.Customer.Find(user_Id);
                     if( getCustomer != null)
                     {
-                        conection.TCustomer.Remove(getCustomer);
-                        conection.SaveChanges();
+                        connection.Customer.Remove(getCustomer);
+                        connection.SaveChanges();
                         return true;
                     }
                     else
@@ -181,7 +182,7 @@ namespace Servicio.Models
                 }
                 catch (Exception ex)
                 {
-                    conection.Dispose();
+                    connection.Dispose();
                     throw ex;
                 }
             }
