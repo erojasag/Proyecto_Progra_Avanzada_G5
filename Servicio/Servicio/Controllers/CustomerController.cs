@@ -9,69 +9,64 @@ using System.Web.Http;
 
 namespace Servicio.Controllers
 {
-    public class CustomersController : ApiController
+    public class CustomerController : ApiController
     {
-        readonly CustomerModel model = new CustomerModel();
-        readonly Respuesta respuesta = new Respuesta();
-
+        CustomerModel model = new CustomerModel();
+        Customer customer = new Customer();
 
         [HttpGet]
-        [Route("customers/viewCustomers")]
+        [Route("customer/ViewCustomers")]
         public Respuesta viewCustomers()
         {
-
-            try 
+            try
             {
                 return model.ArmarRespuesta(0, "OK", false, null, model.viewCustomers());
+
             }
             catch (Exception ex)
             {
                 return model.ArmarRespuesta(-1, ex.Message, false, null, null);
-
             }
-
-
-
         }
 
-
         [HttpGet]
-        [Route("customers/viewCustomerById")]
-
-        public Respuesta viewCustomerById(int Id)
+        [Route("customer/ViewCustomerById")]
+        public Respuesta ViewCustomerById(int Id)
         {
             try
             {
-                return model.ArmarRespuesta(0, "OK", false, model.viewCustomerById(Id), null);
-            }
-            catch (Exception ex) {
+                return model.ArmarRespuesta(0, "OK", false, model.ViewCustomerById(Id), null);
 
+            }
+            catch (Exception ex)
+            {
                 return model.ArmarRespuesta(-1, ex.Message, false, null, null);
             }
         }
 
         [HttpPost]
-        [Route("customers/addCustomer")]
-        public Respuesta addCustomer(Customer customer)
+        [Route("customer/InsertCustomer")]
+        public Respuesta InsertCustomer(Customer customer)
         {
             try
             {
-                return model.ArmarRespuesta(0, "OK", model.addCustomer(customer), customer, null);
+                return model.ArmarRespuesta(0, "OK", model.InsertCustomer(customer), customer, null);
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return model.ArmarRespuesta(-1, ex.Message, false, null, null);
             }
         }
 
-
         [HttpPut]
-        [Route("customers/editCustomer")]
-        public Respuesta editCustomer(Customer customer)
+        [Route("customer/UpdateCustomer")]
+        public Respuesta UpdateCustomer(Customer customer)
         {
             try
             {
-                return model.ArmarRespuesta(0, "OK", model.editCustomer(customer), null, null);
+                return model.ArmarRespuesta(0, "OK", model.UpdateCustomer(customer), customer, null);
+
             }
             catch (Exception ex)
             {
@@ -80,18 +75,18 @@ namespace Servicio.Controllers
         }
 
         [HttpDelete]
-        [Route("customers/deleteCustomerById")]
-        public Respuesta deleteCustomerById(int Id)
+        [Route("customer/DeleteCustomer")]
+        public Respuesta DeleteCustomer(int user_Id)
         {
             try
             {
-                return model.ArmarRespuesta(0, "OK", model.deleteCustomerById(Id), null, null);
+                return model.ArmarRespuesta(0, "OK", model.DeleteCustomer(user_Id), null, null);
+
             }
             catch (Exception ex)
             {
                 return model.ArmarRespuesta(-1, ex.Message, false, null, null);
             }
         }
-
     }
 }

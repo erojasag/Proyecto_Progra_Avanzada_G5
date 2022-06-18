@@ -5,645 +5,98 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Proyecto_Progra_Avanzada_G5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Customer">
+        <EntityType Name="TCustomer">
           <Key>
-            <PropertyRef Name="customer_user_id" />
+            <PropertyRef Name="user_Id" />
           </Key>
-          <Property Name="customer_user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="customer_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="customer_first_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="customer_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="customer_id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="customer_phone" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="customer_email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="customer_registration_date" Type="datetime" Nullable="false" />
-          <Property Name="customer_birthDate" Type="date" Nullable="false" />
+          <Property Name="user_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login_name_customer" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="password_hash_customer" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="first_last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="second_last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="registration_date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="birth_date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="customer_photo" Type="varchar" MaxLength="50" />
-          <Property Name="customer_address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="employee_user_id" />
-          </Key>
-          <Property Name="employee_user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="employee_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="employee_first_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="employee_second_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="employee_id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="employee_phone" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="employee_email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="employee_hire_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="employee_birthDate" Type="date" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Orders">
-          <Key>
-            <PropertyRef Name="order_id" />
-          </Key>
-          <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="order_customer_id" Type="int" Nullable="false" />
-          <Property Name="order_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="order_total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="product_id" />
-          </Key>
-          <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="product_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="product_description" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="product_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="product_stock" Type="int" Nullable="false" />
-          <Property Name="product_image" Type="varchar" MaxLength="50" />
-          <Property Name="product_brand" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="product_model" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="product_registration_date" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Shipments">
-          <Key>
-            <PropertyRef Name="shipment_id" />
-          </Key>
-          <Property Name="shipment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="shipment_order_id" Type="int" Nullable="false" />
-          <Property Name="shipment_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="shipment_status" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shipment_address" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shipment_city" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shipment_state" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shipment_zip_code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shipment_country" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shipment_phone" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shipment_email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shipment_customer_id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ShoppingCart">
-          <Key>
-            <PropertyRef Name="shoppingCart_id" />
-          </Key>
-          <Property Name="shoppingCart_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="shoppingCart_customer_id" Type="int" Nullable="false" />
-          <Property Name="shoppingCart_product_id" Type="int" Nullable="false" />
-          <Property Name="shoppipingCart_product_name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shoppingCart_image" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shoppingCart_description" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="shoppingCart_quantity" Type="int" Nullable="false" />
-          <Property Name="shoppingCart_product_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="shoppingCart_state" Type="char" MaxLength="2" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Proyecto_Progra_Avanzada_G5.dbo.Total_Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Total_Users">
-          <Key>
-            <PropertyRef Name="total_users" />
-          </Key>
-          <Property Name="total_users" Type="int" Nullable="false" />
-          <Property Name="customer_user_id" Type="int" />
-          <Property Name="employee_user_id" Type="int" />
-        </EntityType>
-        <Association Name="fk_order_customer_id">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_user_id" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="order_customer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_shipment_customer_id">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_user_id" />
-            </Principal>
-            <Dependent Role="Shipments">
-              <PropertyRef Name="shipment_customer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_shipment_order_id">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="order_id" />
-            </Principal>
-            <Dependent Role="Shipments">
-              <PropertyRef Name="shipment_order_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_shoppingCart_customer_id">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_user_id" />
-            </Principal>
-            <Dependent Role="ShoppingCart">
-              <PropertyRef Name="shoppingCart_customer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_shoppingCart_product_id">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="ShoppingCart">
-              <PropertyRef Name="shoppingCart_product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_total_users_customer_id">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Total_Users" Type="Self.Total_Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_user_id" />
-            </Principal>
-            <Dependent Role="Total_Users">
-              <PropertyRef Name="customer_user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_total_users_employee_id">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="Total_Users" Type="Self.Total_Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="employee_user_id" />
-            </Principal>
-            <Dependent Role="Total_Users">
-              <PropertyRef Name="employee_user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Function Name="delete_customer_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="delete_Employee_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="employee_Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="delete_Product_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="product_Id" Type="int" Mode="In" />
-        </Function>
         <Function Name="insert_customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="name" Type="varchar" Mode="In" />
-          <Parameter Name="first_last_name" Type="varchar" Mode="In" />
-          <Parameter Name="last_name" Type="varchar" Mode="In" />
-          <Parameter Name="id" Type="varchar" Mode="In" />
-          <Parameter Name="phone" Type="varchar" Mode="In" />
-          <Parameter Name="email" Type="varchar" Mode="In" />
-          <Parameter Name="birtDate" Type="date" Mode="In" />
-          <Parameter Name="address" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="insert_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="login_name_customer" Type="varchar" Mode="In" />
+          <Parameter Name="password_hash_customer" Type="varchar" Mode="In" />
           <Parameter Name="name" Type="varchar" Mode="In" />
           <Parameter Name="first_last_name" Type="varchar" Mode="In" />
           <Parameter Name="second_last_name" Type="varchar" Mode="In" />
-          <Parameter Name="id" Type="varchar" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="phone" Type="varchar" Mode="In" />
           <Parameter Name="email" Type="varchar" Mode="In" />
-          <Parameter Name="birthDate" Type="date" Mode="In" />
-        </Function>
-        <Function Name="insert_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="product_name" Type="varchar" Mode="In" />
-          <Parameter Name="product_description" Type="varchar" Mode="In" />
-          <Parameter Name="product_price" Type="decimal" Mode="In" />
-          <Parameter Name="product_stock" Type="int" Mode="In" />
-          <Parameter Name="product_brand" Type="varchar" Mode="In" />
-          <Parameter Name="product_model" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="update_customer_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-          <Parameter Name="phone" Type="varchar" Mode="In" />
-          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="birth_date" Type="datetime2" Mode="In" />
           <Parameter Name="address" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="update_Product_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="product_Id" Type="int" Mode="In" />
-          <Parameter Name="product_price" Type="varchar" Mode="In" />
-          <Parameter Name="product_stock" Type="int" Mode="In" />
         </Function>
         <Function Name="view_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="view_customer_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
         </Function>
-        <Function Name="view_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="view_Employee_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="employee_Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="view_Product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="view_product_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="product_Id" Type="int" Mode="In" />
-        </Function>
         <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
-          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Total_Users" EntityType="Self.Total_Users" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Total_Users].[total_users] AS [total_users], 
-    [Total_Users].[customer_user_id] AS [customer_user_id], 
-    [Total_Users].[employee_user_id] AS [employee_user_id]
-    FROM [dbo].[Total_Users] AS [Total_Users]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="fk_order_customer_id" Association="Self.fk_order_customer_id">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="fk_shipment_customer_id" Association="Self.fk_shipment_customer_id">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Shipments" EntitySet="Shipments" />
-          </AssociationSet>
-          <AssociationSet Name="fk_shipment_order_id" Association="Self.fk_shipment_order_id">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="Shipments" EntitySet="Shipments" />
-          </AssociationSet>
-          <AssociationSet Name="fk_shoppingCart_customer_id" Association="Self.fk_shoppingCart_customer_id">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
-          </AssociationSet>
-          <AssociationSet Name="fk_shoppingCart_product_id" Association="Self.fk_shoppingCart_product_id">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
-          </AssociationSet>
-          <AssociationSet Name="fk_total_users_customer_id" Association="Self.fk_total_users_customer_id">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Total_Users" EntitySet="Total_Users" />
-          </AssociationSet>
-          <AssociationSet Name="fk_total_users_employee_id" Association="Self.fk_total_users_employee_id">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Total_Users" EntitySet="Total_Users" />
-          </AssociationSet>
+          <EntitySet Name="TCustomer" EntityType="Self.TCustomer" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Proyecto_Progra_Avanzada_G5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Customer">
+        <EntityType Name="TCustomer">
           <Key>
-            <PropertyRef Name="customer_user_id" />
+            <PropertyRef Name="user_Id" />
           </Key>
-          <Property Name="customer_user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="customer_first_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="customer_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="customer_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="customer_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="customer_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="customer_registration_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="customer_birthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="user_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login_name_customer" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password_hash_customer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="first_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="registration_date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="birth_date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="customer_photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="customer_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Orders" Relationship="Self.fk_order_customer_id" FromRole="Customer" ToRole="Orders" />
-          <NavigationProperty Name="Shipments" Relationship="Self.fk_shipment_customer_id" FromRole="Customer" ToRole="Shipments" />
-          <NavigationProperty Name="ShoppingCart" Relationship="Self.fk_shoppingCart_customer_id" FromRole="Customer" ToRole="ShoppingCart" />
-          <NavigationProperty Name="Total_Users" Relationship="Self.fk_total_users_customer_id" FromRole="Customer" ToRole="Total_Users" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="employee_user_id" />
-          </Key>
-          <Property Name="employee_user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="employee_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="employee_first_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="employee_second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="employee_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="employee_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="employee_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="employee_hire_date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="employee_birthDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Total_Users" Relationship="Self.fk_total_users_employee_id" FromRole="Employee" ToRole="Total_Users" />
-        </EntityType>
-        <EntityType Name="Orders">
-          <Key>
-            <PropertyRef Name="order_id" />
-          </Key>
-          <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="order_customer_id" Type="Int32" Nullable="false" />
-          <Property Name="order_date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="order_total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.fk_order_customer_id" FromRole="Orders" ToRole="Customer" />
-          <NavigationProperty Name="Shipments" Relationship="Self.fk_shipment_order_id" FromRole="Orders" ToRole="Shipments" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="product_id" />
-          </Key>
-          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="product_description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="product_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="product_stock" Type="Int32" Nullable="false" />
-          <Property Name="product_image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="product_brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="product_model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="product_registration_date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="ShoppingCart" Relationship="Self.fk_shoppingCart_product_id" FromRole="Product" ToRole="ShoppingCart" />
-        </EntityType>
-        <EntityType Name="Shipments">
-          <Key>
-            <PropertyRef Name="shipment_id" />
-          </Key>
-          <Property Name="shipment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="shipment_order_id" Type="Int32" Nullable="false" />
-          <Property Name="shipment_date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="shipment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shipment_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shipment_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shipment_state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shipment_zip_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shipment_country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shipment_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shipment_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shipment_customer_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.fk_shipment_customer_id" FromRole="Shipments" ToRole="Customer" />
-          <NavigationProperty Name="Orders" Relationship="Self.fk_shipment_order_id" FromRole="Shipments" ToRole="Orders" />
-        </EntityType>
-        <EntityType Name="ShoppingCart">
-          <Key>
-            <PropertyRef Name="shoppingCart_id" />
-          </Key>
-          <Property Name="shoppingCart_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="shoppingCart_customer_id" Type="Int32" Nullable="false" />
-          <Property Name="shoppingCart_product_id" Type="Int32" Nullable="false" />
-          <Property Name="shoppipingCart_product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shoppingCart_image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shoppingCart_description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="shoppingCart_quantity" Type="Int32" Nullable="false" />
-          <Property Name="shoppingCart_product_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="shoppingCart_state" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Customer" Relationship="Self.fk_shoppingCart_customer_id" FromRole="ShoppingCart" ToRole="Customer" />
-          <NavigationProperty Name="Product" Relationship="Self.fk_shoppingCart_product_id" FromRole="ShoppingCart" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Total_Users">
-          <Key>
-            <PropertyRef Name="total_users1" />
-          </Key>
-          <Property Name="total_users1" Type="Int32" Nullable="false" />
-          <Property Name="customer_user_id" Type="Int32" />
-          <Property Name="employee_user_id" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="Self.fk_total_users_customer_id" FromRole="Total_Users" ToRole="Customer" />
-          <NavigationProperty Name="Employee" Relationship="Self.fk_total_users_employee_id" FromRole="Total_Users" ToRole="Employee" />
-        </EntityType>
-        <Association Name="fk_order_customer_id">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_user_id" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="order_customer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_shipment_customer_id">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_user_id" />
-            </Principal>
-            <Dependent Role="Shipments">
-              <PropertyRef Name="shipment_customer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_shoppingCart_customer_id">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_user_id" />
-            </Principal>
-            <Dependent Role="ShoppingCart">
-              <PropertyRef Name="shoppingCart_customer_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_total_users_customer_id">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Total_Users" Type="Self.Total_Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="customer_user_id" />
-            </Principal>
-            <Dependent Role="Total_Users">
-              <PropertyRef Name="customer_user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_total_users_employee_id">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-          <End Role="Total_Users" Type="Self.Total_Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="employee_user_id" />
-            </Principal>
-            <Dependent Role="Total_Users">
-              <PropertyRef Name="employee_user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_shipment_order_id">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="order_id" />
-            </Principal>
-            <Dependent Role="Shipments">
-              <PropertyRef Name="shipment_order_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_shoppingCart_product_id">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="ShoppingCart">
-              <PropertyRef Name="shoppingCart_product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Proyecto_Progra_Avanzada_G5Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Customer" EntityType="Self.Customer" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" />
-          <EntitySet Name="Orders" EntityType="Self.Orders" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="Shipments" EntityType="Self.Shipments" />
-          <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" />
-          <EntitySet Name="Total_Users" EntityType="Self.Total_Users" />
-          <AssociationSet Name="fk_order_customer_id" Association="Self.fk_order_customer_id">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="fk_shipment_customer_id" Association="Self.fk_shipment_customer_id">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Shipments" EntitySet="Shipments" />
-          </AssociationSet>
-          <AssociationSet Name="fk_shoppingCart_customer_id" Association="Self.fk_shoppingCart_customer_id">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
-          </AssociationSet>
-          <AssociationSet Name="fk_total_users_customer_id" Association="Self.fk_total_users_customer_id">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Total_Users" EntitySet="Total_Users" />
-          </AssociationSet>
-          <AssociationSet Name="fk_total_users_employee_id" Association="Self.fk_total_users_employee_id">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Total_Users" EntitySet="Total_Users" />
-          </AssociationSet>
-          <AssociationSet Name="fk_shipment_order_id" Association="Self.fk_shipment_order_id">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="Shipments" EntitySet="Shipments" />
-          </AssociationSet>
-          <AssociationSet Name="fk_shoppingCart_product_id" Association="Self.fk_shoppingCart_product_id">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
-          </AssociationSet>
-          <FunctionImport Name="delete_customer_by_id">
-          <Parameter Name="Id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="delete_Employee_by_id">
-          <Parameter Name="employee_Id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="delete_Product_by_id">
-          <Parameter Name="product_Id" Mode="In" Type="Int32" />
-          </FunctionImport>
+          <EntitySet Name="TCustomer" EntityType="Self.TCustomer" />
           <FunctionImport Name="insert_customer">
-            <Parameter Name="name" Mode="In" Type="String" />
-            <Parameter Name="first_last_name" Mode="In" Type="String" />
-            <Parameter Name="last_name" Mode="In" Type="String" />
-            <Parameter Name="id" Mode="In" Type="String" />
-            <Parameter Name="phone" Mode="In" Type="String" />
-            <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="birtDate" Mode="In" Type="DateTime" />
-            <Parameter Name="address" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="insert_Employee">
+            <Parameter Name="login_name_customer" Mode="In" Type="String" />
+            <Parameter Name="password_hash_customer" Mode="In" Type="String" />
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="first_last_name" Mode="In" Type="String" />
             <Parameter Name="second_last_name" Mode="In" Type="String" />
-            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="phone" Mode="In" Type="String" />
             <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="birthDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="insert_product">
-            <Parameter Name="product_name" Mode="In" Type="String" />
-            <Parameter Name="product_description" Mode="In" Type="String" />
-            <Parameter Name="product_price" Mode="In" Type="Decimal" />
-            <Parameter Name="product_stock" Mode="In" Type="Int32" />
-            <Parameter Name="product_brand" Mode="In" Type="String" />
-            <Parameter Name="product_model" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="update_customer_by_id">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
-            <Parameter Name="phone" Mode="In" Type="String" />
-            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="birth_date" Mode="In" Type="DateTime" />
             <Parameter Name="address" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="update_Product_by_id">
-            <Parameter Name="product_Id" Mode="In" Type="Int32" />
-            <Parameter Name="product_price" Mode="In" Type="String" />
-            <Parameter Name="product_stock" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="view_Customer" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_Customer_Result)" />
-          <FunctionImport Name="view_customer_by_id" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_customer_by_id_Result)">
-          <Parameter Name="Id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="view_Employee" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_Employee_Result)" />
-          <FunctionImport Name="view_Employee_by_id" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_Employee_by_id_Result)">
-          <Parameter Name="employee_Id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="view_Product" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_Product_Result)" />
-          <FunctionImport Name="view_product_by_id" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_product_by_id_Result)">
-          <Parameter Name="product_Id" Mode="In" Type="Int32" />
+          <FunctionImport Name="view_customer_by_id">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="view_Customer_Result">
-          <Property Type="Int32" Name="customer_user_id" Nullable="false" />
-          <Property Type="String" Name="customer_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_first_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_id" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_phone" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_email" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="customer_registration_date" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="customer_birthDate" Nullable="false" />
+          <Property Type="Int32" Name="user_Id" Nullable="false" />
+          <Property Type="String" Name="login_name_customer" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="password_hash_customer" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="first_last_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="second_last_name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="registration_date" Nullable="false" />
+          <Property Type="DateTime" Name="birth_date" Nullable="false" />
           <Property Type="String" Name="customer_photo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="customer_address" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="view_customer_by_id_Result">
-          <Property Type="Int32" Name="customer_user_id" Nullable="false" />
-          <Property Type="String" Name="customer_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_first_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_id" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_phone" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="customer_email" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="customer_registration_date" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="customer_birthDate" Nullable="false" />
-          <Property Type="String" Name="customer_photo" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="customer_address" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="view_Employee_Result">
-          <Property Type="Int32" Name="employee_user_id" Nullable="false" />
-          <Property Type="String" Name="employee_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_first_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_second_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_id" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_phone" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_email" Nullable="false" MaxLength="50" />
-          <Property Type="Binary" Name="employee_hire_date" Nullable="false" MaxLength="8" />
-          <Property Type="DateTime" Name="employee_birthDate" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="view_Employee_by_id_Result">
-          <Property Type="Int32" Name="employee_user_id" Nullable="false" />
-          <Property Type="String" Name="employee_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_first_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_second_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_id" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_phone" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="employee_email" Nullable="false" MaxLength="50" />
-          <Property Type="Binary" Name="employee_hire_date" Nullable="false" MaxLength="8" />
-          <Property Type="DateTime" Name="employee_birthDate" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="view_Product_Result">
-          <Property Type="Int32" Name="product_id" Nullable="false" />
-          <Property Type="String" Name="product_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="product_description" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="product_price" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Int32" Name="product_stock" Nullable="false" />
-          <Property Type="String" Name="product_image" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="product_brand" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="product_model" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="product_registration_date" Nullable="false" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="view_product_by_id_Result">
-          <Property Type="Int32" Name="product_id" Nullable="false" />
-          <Property Type="String" Name="product_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="product_description" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="product_price" Nullable="false" Precision="10" Scale="2" />
-          <Property Type="Int32" Name="product_stock" Nullable="false" />
-          <Property Type="String" Name="product_image" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="product_brand" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="product_model" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="product_registration_date" Nullable="false" Precision="23" />
+          <Property Type="String" Name="address" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -651,207 +104,46 @@ warning 6002: The table/view 'Proyecto_Progra_Avanzada_G5.dbo.Total_Users' does 
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Proyecto_Progra_Avanzada_G5ModelStoreContainer" CdmEntityContainer="Proyecto_Progra_Avanzada_G5Entities">
-          <EntitySetMapping Name="Customer">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="customer_user_id" ColumnName="customer_user_id" />
-                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-                <ScalarProperty Name="customer_first_last_name" ColumnName="customer_first_last_name" />
-                <ScalarProperty Name="customer_last_name" ColumnName="customer_last_name" />
-                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-                <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
-                <ScalarProperty Name="customer_email" ColumnName="customer_email" />
-                <ScalarProperty Name="customer_registration_date" ColumnName="customer_registration_date" />
-                <ScalarProperty Name="customer_birthDate" ColumnName="customer_birthDate" />
+          <EntitySetMapping Name="TCustomer">
+            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.TCustomer">
+              <MappingFragment StoreEntitySet="TCustomer">
+                <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+                <ScalarProperty Name="login_name_customer" ColumnName="login_name_customer" />
+                <ScalarProperty Name="password_hash_customer" ColumnName="password_hash_customer" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="first_last_name" ColumnName="first_last_name" />
+                <ScalarProperty Name="second_last_name" ColumnName="second_last_name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
                 <ScalarProperty Name="customer_photo" ColumnName="customer_photo" />
-                <ScalarProperty Name="customer_address" ColumnName="customer_address" />
+                <ScalarProperty Name="address" ColumnName="address" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Employee">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="employee_user_id" ColumnName="employee_user_id" />
-                <ScalarProperty Name="employee_name" ColumnName="employee_name" />
-                <ScalarProperty Name="employee_first_last_name" ColumnName="employee_first_last_name" />
-                <ScalarProperty Name="employee_second_last_name" ColumnName="employee_second_last_name" />
-                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
-                <ScalarProperty Name="employee_phone" ColumnName="employee_phone" />
-                <ScalarProperty Name="employee_email" ColumnName="employee_email" />
-                <ScalarProperty Name="employee_hire_date" ColumnName="employee_hire_date" />
-                <ScalarProperty Name="employee_birthDate" ColumnName="employee_birthDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Orders">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="order_customer_id" ColumnName="order_customer_id" />
-                <ScalarProperty Name="order_date" ColumnName="order_date" />
-                <ScalarProperty Name="order_total" ColumnName="order_total" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="product_name" ColumnName="product_name" />
-                <ScalarProperty Name="product_description" ColumnName="product_description" />
-                <ScalarProperty Name="product_price" ColumnName="product_price" />
-                <ScalarProperty Name="product_stock" ColumnName="product_stock" />
-                <ScalarProperty Name="product_image" ColumnName="product_image" />
-                <ScalarProperty Name="product_brand" ColumnName="product_brand" />
-                <ScalarProperty Name="product_model" ColumnName="product_model" />
-                <ScalarProperty Name="product_registration_date" ColumnName="product_registration_date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Shipments">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Shipments">
-              <MappingFragment StoreEntitySet="Shipments">
-                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
-                <ScalarProperty Name="shipment_order_id" ColumnName="shipment_order_id" />
-                <ScalarProperty Name="shipment_date" ColumnName="shipment_date" />
-                <ScalarProperty Name="shipment_status" ColumnName="shipment_status" />
-                <ScalarProperty Name="shipment_address" ColumnName="shipment_address" />
-                <ScalarProperty Name="shipment_city" ColumnName="shipment_city" />
-                <ScalarProperty Name="shipment_state" ColumnName="shipment_state" />
-                <ScalarProperty Name="shipment_zip_code" ColumnName="shipment_zip_code" />
-                <ScalarProperty Name="shipment_country" ColumnName="shipment_country" />
-                <ScalarProperty Name="shipment_phone" ColumnName="shipment_phone" />
-                <ScalarProperty Name="shipment_email" ColumnName="shipment_email" />
-                <ScalarProperty Name="shipment_customer_id" ColumnName="shipment_customer_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ShoppingCart">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.ShoppingCart">
-              <MappingFragment StoreEntitySet="ShoppingCart">
-                <ScalarProperty Name="shoppingCart_id" ColumnName="shoppingCart_id" />
-                <ScalarProperty Name="shoppingCart_customer_id" ColumnName="shoppingCart_customer_id" />
-                <ScalarProperty Name="shoppingCart_product_id" ColumnName="shoppingCart_product_id" />
-                <ScalarProperty Name="shoppipingCart_product_name" ColumnName="shoppipingCart_product_name" />
-                <ScalarProperty Name="shoppingCart_image" ColumnName="shoppingCart_image" />
-                <ScalarProperty Name="shoppingCart_description" ColumnName="shoppingCart_description" />
-                <ScalarProperty Name="shoppingCart_quantity" ColumnName="shoppingCart_quantity" />
-                <ScalarProperty Name="shoppingCart_product_price" ColumnName="shoppingCart_product_price" />
-                <ScalarProperty Name="shoppingCart_state" ColumnName="shoppingCart_state" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Total_Users">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Total_Users">
-              <MappingFragment StoreEntitySet="Total_Users">
-                <ScalarProperty Name="total_users1" ColumnName="total_users" />
-                <ScalarProperty Name="customer_user_id" ColumnName="customer_user_id" />
-                <ScalarProperty Name="employee_user_id" ColumnName="employee_user_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="delete_customer_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.delete_customer_by_id" />
-          <FunctionImportMapping FunctionImportName="delete_Employee_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.delete_Employee_by_id" />
-          <FunctionImportMapping FunctionImportName="delete_Product_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.delete_Product_by_id" />
           <FunctionImportMapping FunctionImportName="insert_customer" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.insert_customer" />
-          <FunctionImportMapping FunctionImportName="insert_Employee" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.insert_Employee" />
-          <FunctionImportMapping FunctionImportName="insert_product" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.insert_product" />
-          <FunctionImportMapping FunctionImportName="update_customer_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.update_customer_by_id" />
-          <FunctionImportMapping FunctionImportName="update_Product_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.update_Product_by_id" />
           <FunctionImportMapping FunctionImportName="view_Customer" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_Customer">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_Customer_Result">
-                <ScalarProperty Name="customer_user_id" ColumnName="customer_user_id" />
-                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-                <ScalarProperty Name="customer_first_last_name" ColumnName="customer_first_last_name" />
-                <ScalarProperty Name="customer_last_name" ColumnName="customer_last_name" />
-                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-                <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
-                <ScalarProperty Name="customer_email" ColumnName="customer_email" />
-                <ScalarProperty Name="customer_registration_date" ColumnName="customer_registration_date" />
-                <ScalarProperty Name="customer_birthDate" ColumnName="customer_birthDate" />
+                <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+                <ScalarProperty Name="login_name_customer" ColumnName="login_name_customer" />
+                <ScalarProperty Name="password_hash_customer" ColumnName="password_hash_customer" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="first_last_name" ColumnName="first_last_name" />
+                <ScalarProperty Name="second_last_name" ColumnName="second_last_name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
                 <ScalarProperty Name="customer_photo" ColumnName="customer_photo" />
-                <ScalarProperty Name="customer_address" ColumnName="customer_address" />
+                <ScalarProperty Name="address" ColumnName="address" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="view_customer_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_customer_by_id">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_customer_by_id_Result">
-                <ScalarProperty Name="customer_user_id" ColumnName="customer_user_id" />
-                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-                <ScalarProperty Name="customer_first_last_name" ColumnName="customer_first_last_name" />
-                <ScalarProperty Name="customer_last_name" ColumnName="customer_last_name" />
-                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-                <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
-                <ScalarProperty Name="customer_email" ColumnName="customer_email" />
-                <ScalarProperty Name="customer_registration_date" ColumnName="customer_registration_date" />
-                <ScalarProperty Name="customer_birthDate" ColumnName="customer_birthDate" />
-                <ScalarProperty Name="customer_photo" ColumnName="customer_photo" />
-                <ScalarProperty Name="customer_address" ColumnName="customer_address" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="view_Employee" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_Employee">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_Employee_Result">
-                <ScalarProperty Name="employee_user_id" ColumnName="employee_user_id" />
-                <ScalarProperty Name="employee_name" ColumnName="employee_name" />
-                <ScalarProperty Name="employee_first_last_name" ColumnName="employee_first_last_name" />
-                <ScalarProperty Name="employee_second_last_name" ColumnName="employee_second_last_name" />
-                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
-                <ScalarProperty Name="employee_phone" ColumnName="employee_phone" />
-                <ScalarProperty Name="employee_email" ColumnName="employee_email" />
-                <ScalarProperty Name="employee_hire_date" ColumnName="employee_hire_date" />
-                <ScalarProperty Name="employee_birthDate" ColumnName="employee_birthDate" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="view_Employee_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_Employee_by_id">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_Employee_by_id_Result">
-                <ScalarProperty Name="employee_user_id" ColumnName="employee_user_id" />
-                <ScalarProperty Name="employee_name" ColumnName="employee_name" />
-                <ScalarProperty Name="employee_first_last_name" ColumnName="employee_first_last_name" />
-                <ScalarProperty Name="employee_second_last_name" ColumnName="employee_second_last_name" />
-                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
-                <ScalarProperty Name="employee_phone" ColumnName="employee_phone" />
-                <ScalarProperty Name="employee_email" ColumnName="employee_email" />
-                <ScalarProperty Name="employee_hire_date" ColumnName="employee_hire_date" />
-                <ScalarProperty Name="employee_birthDate" ColumnName="employee_birthDate" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="view_Product" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_Product">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_Product_Result">
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="product_name" ColumnName="product_name" />
-                <ScalarProperty Name="product_description" ColumnName="product_description" />
-                <ScalarProperty Name="product_price" ColumnName="product_price" />
-                <ScalarProperty Name="product_stock" ColumnName="product_stock" />
-                <ScalarProperty Name="product_image" ColumnName="product_image" />
-                <ScalarProperty Name="product_brand" ColumnName="product_brand" />
-                <ScalarProperty Name="product_model" ColumnName="product_model" />
-                <ScalarProperty Name="product_registration_date" ColumnName="product_registration_date" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="view_product_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_product_by_id">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_product_by_id_Result">
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="product_name" ColumnName="product_name" />
-                <ScalarProperty Name="product_description" ColumnName="product_description" />
-                <ScalarProperty Name="product_price" ColumnName="product_price" />
-                <ScalarProperty Name="product_stock" ColumnName="product_stock" />
-                <ScalarProperty Name="product_image" ColumnName="product_image" />
-                <ScalarProperty Name="product_brand" ColumnName="product_brand" />
-                <ScalarProperty Name="product_model" ColumnName="product_model" />
-                <ScalarProperty Name="product_registration_date" ColumnName="product_registration_date" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="view_customer_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_customer_by_id" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

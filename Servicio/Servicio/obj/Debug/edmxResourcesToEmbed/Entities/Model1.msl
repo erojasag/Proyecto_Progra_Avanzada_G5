@@ -1,206 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Proyecto_Progra_Avanzada_G5ModelStoreContainer" CdmEntityContainer="Proyecto_Progra_Avanzada_G5Entities">
-    <EntitySetMapping Name="Customer">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="customer_user_id" ColumnName="customer_user_id" />
-          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-          <ScalarProperty Name="customer_first_last_name" ColumnName="customer_first_last_name" />
-          <ScalarProperty Name="customer_last_name" ColumnName="customer_last_name" />
-          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-          <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
-          <ScalarProperty Name="customer_email" ColumnName="customer_email" />
-          <ScalarProperty Name="customer_registration_date" ColumnName="customer_registration_date" />
-          <ScalarProperty Name="customer_birthDate" ColumnName="customer_birthDate" />
+    <EntitySetMapping Name="TCustomer">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.TCustomer">
+        <MappingFragment StoreEntitySet="TCustomer">
+          <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+          <ScalarProperty Name="login_name_customer" ColumnName="login_name_customer" />
+          <ScalarProperty Name="password_hash_customer" ColumnName="password_hash_customer" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="first_last_name" ColumnName="first_last_name" />
+          <ScalarProperty Name="second_last_name" ColumnName="second_last_name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
           <ScalarProperty Name="customer_photo" ColumnName="customer_photo" />
-          <ScalarProperty Name="customer_address" ColumnName="customer_address" />
+          <ScalarProperty Name="address" ColumnName="address" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Employee">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Employee">
-        <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="employee_user_id" ColumnName="employee_user_id" />
-          <ScalarProperty Name="employee_name" ColumnName="employee_name" />
-          <ScalarProperty Name="employee_first_last_name" ColumnName="employee_first_last_name" />
-          <ScalarProperty Name="employee_second_last_name" ColumnName="employee_second_last_name" />
-          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
-          <ScalarProperty Name="employee_phone" ColumnName="employee_phone" />
-          <ScalarProperty Name="employee_email" ColumnName="employee_email" />
-          <ScalarProperty Name="employee_hire_date" ColumnName="employee_hire_date" />
-          <ScalarProperty Name="employee_birthDate" ColumnName="employee_birthDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Orders">
-        <MappingFragment StoreEntitySet="Orders">
-          <ScalarProperty Name="order_id" ColumnName="order_id" />
-          <ScalarProperty Name="order_customer_id" ColumnName="order_customer_id" />
-          <ScalarProperty Name="order_date" ColumnName="order_date" />
-          <ScalarProperty Name="order_total" ColumnName="order_total" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Product">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Product">
-        <MappingFragment StoreEntitySet="Product">
-          <ScalarProperty Name="product_id" ColumnName="product_id" />
-          <ScalarProperty Name="product_name" ColumnName="product_name" />
-          <ScalarProperty Name="product_description" ColumnName="product_description" />
-          <ScalarProperty Name="product_price" ColumnName="product_price" />
-          <ScalarProperty Name="product_stock" ColumnName="product_stock" />
-          <ScalarProperty Name="product_image" ColumnName="product_image" />
-          <ScalarProperty Name="product_brand" ColumnName="product_brand" />
-          <ScalarProperty Name="product_model" ColumnName="product_model" />
-          <ScalarProperty Name="product_registration_date" ColumnName="product_registration_date" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Shipments">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Shipments">
-        <MappingFragment StoreEntitySet="Shipments">
-          <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
-          <ScalarProperty Name="shipment_order_id" ColumnName="shipment_order_id" />
-          <ScalarProperty Name="shipment_date" ColumnName="shipment_date" />
-          <ScalarProperty Name="shipment_status" ColumnName="shipment_status" />
-          <ScalarProperty Name="shipment_address" ColumnName="shipment_address" />
-          <ScalarProperty Name="shipment_city" ColumnName="shipment_city" />
-          <ScalarProperty Name="shipment_state" ColumnName="shipment_state" />
-          <ScalarProperty Name="shipment_zip_code" ColumnName="shipment_zip_code" />
-          <ScalarProperty Name="shipment_country" ColumnName="shipment_country" />
-          <ScalarProperty Name="shipment_phone" ColumnName="shipment_phone" />
-          <ScalarProperty Name="shipment_email" ColumnName="shipment_email" />
-          <ScalarProperty Name="shipment_customer_id" ColumnName="shipment_customer_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ShoppingCart">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.ShoppingCart">
-        <MappingFragment StoreEntitySet="ShoppingCart">
-          <ScalarProperty Name="shoppingCart_id" ColumnName="shoppingCart_id" />
-          <ScalarProperty Name="shoppingCart_customer_id" ColumnName="shoppingCart_customer_id" />
-          <ScalarProperty Name="shoppingCart_product_id" ColumnName="shoppingCart_product_id" />
-          <ScalarProperty Name="shoppipingCart_product_name" ColumnName="shoppipingCart_product_name" />
-          <ScalarProperty Name="shoppingCart_image" ColumnName="shoppingCart_image" />
-          <ScalarProperty Name="shoppingCart_description" ColumnName="shoppingCart_description" />
-          <ScalarProperty Name="shoppingCart_quantity" ColumnName="shoppingCart_quantity" />
-          <ScalarProperty Name="shoppingCart_product_price" ColumnName="shoppingCart_product_price" />
-          <ScalarProperty Name="shoppingCart_state" ColumnName="shoppingCart_state" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Total_Users">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Total_Users">
-        <MappingFragment StoreEntitySet="Total_Users">
-          <ScalarProperty Name="total_users1" ColumnName="total_users" />
-          <ScalarProperty Name="customer_user_id" ColumnName="customer_user_id" />
-          <ScalarProperty Name="employee_user_id" ColumnName="employee_user_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="delete_customer_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.delete_customer_by_id" />
-    <FunctionImportMapping FunctionImportName="delete_Employee_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.delete_Employee_by_id" />
-    <FunctionImportMapping FunctionImportName="delete_Product_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.delete_Product_by_id" />
     <FunctionImportMapping FunctionImportName="insert_customer" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.insert_customer" />
-    <FunctionImportMapping FunctionImportName="insert_Employee" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.insert_Employee" />
-    <FunctionImportMapping FunctionImportName="insert_product" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.insert_product" />
-    <FunctionImportMapping FunctionImportName="update_customer_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.update_customer_by_id" />
-    <FunctionImportMapping FunctionImportName="update_Product_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.update_Product_by_id" />
     <FunctionImportMapping FunctionImportName="view_Customer" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_Customer">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_Customer_Result">
-          <ScalarProperty Name="customer_user_id" ColumnName="customer_user_id" />
-          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-          <ScalarProperty Name="customer_first_last_name" ColumnName="customer_first_last_name" />
-          <ScalarProperty Name="customer_last_name" ColumnName="customer_last_name" />
-          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-          <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
-          <ScalarProperty Name="customer_email" ColumnName="customer_email" />
-          <ScalarProperty Name="customer_registration_date" ColumnName="customer_registration_date" />
-          <ScalarProperty Name="customer_birthDate" ColumnName="customer_birthDate" />
+          <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+          <ScalarProperty Name="login_name_customer" ColumnName="login_name_customer" />
+          <ScalarProperty Name="password_hash_customer" ColumnName="password_hash_customer" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="first_last_name" ColumnName="first_last_name" />
+          <ScalarProperty Name="second_last_name" ColumnName="second_last_name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="registration_date" ColumnName="registration_date" />
+          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
           <ScalarProperty Name="customer_photo" ColumnName="customer_photo" />
-          <ScalarProperty Name="customer_address" ColumnName="customer_address" />
+          <ScalarProperty Name="address" ColumnName="address" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="view_customer_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_customer_by_id">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_customer_by_id_Result">
-          <ScalarProperty Name="customer_user_id" ColumnName="customer_user_id" />
-          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-          <ScalarProperty Name="customer_first_last_name" ColumnName="customer_first_last_name" />
-          <ScalarProperty Name="customer_last_name" ColumnName="customer_last_name" />
-          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-          <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
-          <ScalarProperty Name="customer_email" ColumnName="customer_email" />
-          <ScalarProperty Name="customer_registration_date" ColumnName="customer_registration_date" />
-          <ScalarProperty Name="customer_birthDate" ColumnName="customer_birthDate" />
-          <ScalarProperty Name="customer_photo" ColumnName="customer_photo" />
-          <ScalarProperty Name="customer_address" ColumnName="customer_address" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="view_Employee" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_Employee">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_Employee_Result">
-          <ScalarProperty Name="employee_user_id" ColumnName="employee_user_id" />
-          <ScalarProperty Name="employee_name" ColumnName="employee_name" />
-          <ScalarProperty Name="employee_first_last_name" ColumnName="employee_first_last_name" />
-          <ScalarProperty Name="employee_second_last_name" ColumnName="employee_second_last_name" />
-          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
-          <ScalarProperty Name="employee_phone" ColumnName="employee_phone" />
-          <ScalarProperty Name="employee_email" ColumnName="employee_email" />
-          <ScalarProperty Name="employee_hire_date" ColumnName="employee_hire_date" />
-          <ScalarProperty Name="employee_birthDate" ColumnName="employee_birthDate" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="view_Employee_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_Employee_by_id">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_Employee_by_id_Result">
-          <ScalarProperty Name="employee_user_id" ColumnName="employee_user_id" />
-          <ScalarProperty Name="employee_name" ColumnName="employee_name" />
-          <ScalarProperty Name="employee_first_last_name" ColumnName="employee_first_last_name" />
-          <ScalarProperty Name="employee_second_last_name" ColumnName="employee_second_last_name" />
-          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
-          <ScalarProperty Name="employee_phone" ColumnName="employee_phone" />
-          <ScalarProperty Name="employee_email" ColumnName="employee_email" />
-          <ScalarProperty Name="employee_hire_date" ColumnName="employee_hire_date" />
-          <ScalarProperty Name="employee_birthDate" ColumnName="employee_birthDate" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="view_Product" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_Product">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_Product_Result">
-          <ScalarProperty Name="product_id" ColumnName="product_id" />
-          <ScalarProperty Name="product_name" ColumnName="product_name" />
-          <ScalarProperty Name="product_description" ColumnName="product_description" />
-          <ScalarProperty Name="product_price" ColumnName="product_price" />
-          <ScalarProperty Name="product_stock" ColumnName="product_stock" />
-          <ScalarProperty Name="product_image" ColumnName="product_image" />
-          <ScalarProperty Name="product_brand" ColumnName="product_brand" />
-          <ScalarProperty Name="product_model" ColumnName="product_model" />
-          <ScalarProperty Name="product_registration_date" ColumnName="product_registration_date" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="view_product_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_product_by_id">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_product_by_id_Result">
-          <ScalarProperty Name="product_id" ColumnName="product_id" />
-          <ScalarProperty Name="product_name" ColumnName="product_name" />
-          <ScalarProperty Name="product_description" ColumnName="product_description" />
-          <ScalarProperty Name="product_price" ColumnName="product_price" />
-          <ScalarProperty Name="product_stock" ColumnName="product_stock" />
-          <ScalarProperty Name="product_image" ColumnName="product_image" />
-          <ScalarProperty Name="product_brand" ColumnName="product_brand" />
-          <ScalarProperty Name="product_model" ColumnName="product_model" />
-          <ScalarProperty Name="product_registration_date" ColumnName="product_registration_date" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="view_customer_by_id" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_customer_by_id" />
   </EntityContainerMapping>
 </Mapping>

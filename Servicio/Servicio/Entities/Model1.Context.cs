@@ -27,80 +27,18 @@ namespace Servicio.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<Shipments> Shipments { get; set; }
-        public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
-        public virtual DbSet<Total_Users> Total_Users { get; set; }
+        public virtual DbSet<TCustomer> TCustomer { get; set; }
     
-        public virtual int delete_customer_by_id(Nullable<int> id)
+        public virtual int insert_customer(string login_name_customer, string password_hash_customer, string name, string first_last_name, string second_last_name, Nullable<int> id, string phone, string email, Nullable<System.DateTime> birth_date, string address)
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
+            var login_name_customerParameter = login_name_customer != null ?
+                new ObjectParameter("login_name_customer", login_name_customer) :
+                new ObjectParameter("login_name_customer", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("delete_customer_by_id", idParameter);
-        }
+            var password_hash_customerParameter = password_hash_customer != null ?
+                new ObjectParameter("password_hash_customer", password_hash_customer) :
+                new ObjectParameter("password_hash_customer", typeof(string));
     
-        public virtual int delete_Employee_by_id(Nullable<int> employee_Id)
-        {
-            var employee_IdParameter = employee_Id.HasValue ?
-                new ObjectParameter("employee_Id", employee_Id) :
-                new ObjectParameter("employee_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("delete_Employee_by_id", employee_IdParameter);
-        }
-    
-        public virtual int delete_Product_by_id(Nullable<int> product_Id)
-        {
-            var product_IdParameter = product_Id.HasValue ?
-                new ObjectParameter("product_Id", product_Id) :
-                new ObjectParameter("product_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("delete_Product_by_id", product_IdParameter);
-        }
-    
-        public virtual int insert_customer(string name, string first_last_name, string last_name, string id, string phone, string email, Nullable<System.DateTime> birtDate, string address)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("name", name) :
-                new ObjectParameter("name", typeof(string));
-    
-            var first_last_nameParameter = first_last_name != null ?
-                new ObjectParameter("first_last_name", first_last_name) :
-                new ObjectParameter("first_last_name", typeof(string));
-    
-            var last_nameParameter = last_name != null ?
-                new ObjectParameter("last_name", last_name) :
-                new ObjectParameter("last_name", typeof(string));
-    
-            var idParameter = id != null ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(string));
-    
-            var phoneParameter = phone != null ?
-                new ObjectParameter("phone", phone) :
-                new ObjectParameter("phone", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("email", email) :
-                new ObjectParameter("email", typeof(string));
-    
-            var birtDateParameter = birtDate.HasValue ?
-                new ObjectParameter("birtDate", birtDate) :
-                new ObjectParameter("birtDate", typeof(System.DateTime));
-    
-            var addressParameter = address != null ?
-                new ObjectParameter("address", address) :
-                new ObjectParameter("address", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_customer", nameParameter, first_last_nameParameter, last_nameParameter, idParameter, phoneParameter, emailParameter, birtDateParameter, addressParameter);
-        }
-    
-        public virtual int insert_Employee(string name, string first_last_name, string second_last_name, string id, string phone, string email, Nullable<System.DateTime> birthDate)
-        {
             var nameParameter = name != null ?
                 new ObjectParameter("name", name) :
                 new ObjectParameter("name", typeof(string));
@@ -113,59 +51,9 @@ namespace Servicio.Entities
                 new ObjectParameter("second_last_name", second_last_name) :
                 new ObjectParameter("second_last_name", typeof(string));
     
-            var idParameter = id != null ?
-                new ObjectParameter("id", id) :
-                new ObjectParameter("id", typeof(string));
-    
-            var phoneParameter = phone != null ?
-                new ObjectParameter("phone", phone) :
-                new ObjectParameter("phone", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("email", email) :
-                new ObjectParameter("email", typeof(string));
-    
-            var birthDateParameter = birthDate.HasValue ?
-                new ObjectParameter("birthDate", birthDate) :
-                new ObjectParameter("birthDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_Employee", nameParameter, first_last_nameParameter, second_last_nameParameter, idParameter, phoneParameter, emailParameter, birthDateParameter);
-        }
-    
-        public virtual int insert_product(string product_name, string product_description, Nullable<decimal> product_price, Nullable<int> product_stock, string product_brand, string product_model)
-        {
-            var product_nameParameter = product_name != null ?
-                new ObjectParameter("product_name", product_name) :
-                new ObjectParameter("product_name", typeof(string));
-    
-            var product_descriptionParameter = product_description != null ?
-                new ObjectParameter("product_description", product_description) :
-                new ObjectParameter("product_description", typeof(string));
-    
-            var product_priceParameter = product_price.HasValue ?
-                new ObjectParameter("product_price", product_price) :
-                new ObjectParameter("product_price", typeof(decimal));
-    
-            var product_stockParameter = product_stock.HasValue ?
-                new ObjectParameter("product_stock", product_stock) :
-                new ObjectParameter("product_stock", typeof(int));
-    
-            var product_brandParameter = product_brand != null ?
-                new ObjectParameter("product_brand", product_brand) :
-                new ObjectParameter("product_brand", typeof(string));
-    
-            var product_modelParameter = product_model != null ?
-                new ObjectParameter("product_model", product_model) :
-                new ObjectParameter("product_model", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_product", product_nameParameter, product_descriptionParameter, product_priceParameter, product_stockParameter, product_brandParameter, product_modelParameter);
-        }
-    
-        public virtual int update_customer_by_id(Nullable<int> id, string phone, string email, string address)
-        {
             var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
     
             var phoneParameter = phone != null ?
                 new ObjectParameter("phone", phone) :
@@ -174,29 +62,16 @@ namespace Servicio.Entities
             var emailParameter = email != null ?
                 new ObjectParameter("email", email) :
                 new ObjectParameter("email", typeof(string));
+    
+            var birth_dateParameter = birth_date.HasValue ?
+                new ObjectParameter("birth_date", birth_date) :
+                new ObjectParameter("birth_date", typeof(System.DateTime));
     
             var addressParameter = address != null ?
                 new ObjectParameter("address", address) :
                 new ObjectParameter("address", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_customer_by_id", idParameter, phoneParameter, emailParameter, addressParameter);
-        }
-    
-        public virtual int update_Product_by_id(Nullable<int> product_Id, string product_price, Nullable<int> product_stock)
-        {
-            var product_IdParameter = product_Id.HasValue ?
-                new ObjectParameter("product_Id", product_Id) :
-                new ObjectParameter("product_Id", typeof(int));
-    
-            var product_priceParameter = product_price != null ?
-                new ObjectParameter("product_price", product_price) :
-                new ObjectParameter("product_price", typeof(string));
-    
-            var product_stockParameter = product_stock.HasValue ?
-                new ObjectParameter("product_stock", product_stock) :
-                new ObjectParameter("product_stock", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("update_Product_by_id", product_IdParameter, product_priceParameter, product_stockParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insert_customer", login_name_customerParameter, password_hash_customerParameter, nameParameter, first_last_nameParameter, second_last_nameParameter, idParameter, phoneParameter, emailParameter, birth_dateParameter, addressParameter);
         }
     
         public virtual ObjectResult<view_Customer_Result> view_Customer()
@@ -204,41 +79,13 @@ namespace Servicio.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_Customer_Result>("view_Customer");
         }
     
-        public virtual ObjectResult<view_customer_by_id_Result> view_customer_by_id(Nullable<int> id)
+        public virtual int view_customer_by_id(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
                 new ObjectParameter("Id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_customer_by_id_Result>("view_customer_by_id", idParameter);
-        }
-    
-        public virtual ObjectResult<view_Employee_Result> view_Employee()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_Employee_Result>("view_Employee");
-        }
-    
-        public virtual ObjectResult<view_Employee_by_id_Result> view_Employee_by_id(Nullable<int> employee_Id)
-        {
-            var employee_IdParameter = employee_Id.HasValue ?
-                new ObjectParameter("employee_Id", employee_Id) :
-                new ObjectParameter("employee_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_Employee_by_id_Result>("view_Employee_by_id", employee_IdParameter);
-        }
-    
-        public virtual ObjectResult<view_Product_Result> view_Product()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_Product_Result>("view_Product");
-        }
-    
-        public virtual ObjectResult<view_product_by_id_Result> view_product_by_id(Nullable<int> product_Id)
-        {
-            var product_IdParameter = product_Id.HasValue ?
-                new ObjectParameter("product_Id", product_Id) :
-                new ObjectParameter("product_Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_product_by_id_Result>("view_product_by_id", product_IdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("view_customer_by_id", idParameter);
         }
     }
 }

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data.Entity;
 
 namespace Servicio.Models
 {
@@ -11,72 +10,106 @@ namespace Servicio.Models
     {
         public List<Customer> viewCustomers()
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var conection = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var customers = db.Customer.ToList();
+                    var data = conection.TCustomer.ToList();
+
+           
+                    List<Customer> customers = new List<Customer>();
+                    foreach (var customer in data)
+                    {
+                   
+                       
+                        customers.Add(new Customer
+                        {
+                            user_Id = customer.user_Id,
+                            login_name_customer = customer.login_name_customer,
+                            password_hash_customer = customer.password_hash_customer,
+                            name = customer.name,
+                            first_last_name = customer.first_last_name,
+                            second_last_name = customer.second_last_name,
+                            Id = customer.Id,
+                            phone = customer.phone,
+                            email = customer.email,
+                            registration_date = customer.registration_date,
+                            birth_date = customer.birth_date,
+                            customer_photo = customer.customer_photo,
+                            address = customer.address
+                        });
+                    }
                     return customers;
+
                 }
                 catch (Exception ex)
                 {
-                    db.Dispose();
+                    conection.Dispose();
                     throw ex;
                 }
-
             }
-           
         }
 
-        public Customer viewCustomerById(int Id)
+        public Customer ViewCustomerById(int Id)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+
+            using (var conection = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var customer = db.Customer.Find(Id);
+                    Customer customer = new Customer();
+                    var getCustomer = conection.TCustomer.FirstOrDefault();
+                    
+                    customer.user_Id = getCustomer.user_Id;
+                    customer.login_name_customer = getCustomer.login_name_customer;
+                    customer.password_hash_customer = getCustomer.password_hash_customer;
+                    customer.name = getCustomer.name;
+                    customer.first_last_name = getCustomer.first_last_name;
+                    customer.second_last_name = getCustomer.second_last_name;
+                    customer.Id = getCustomer.Id;
+                    customer.phone = getCustomer.phone;
+                    customer.email = getCustomer.email;
+                    customer.registration_date = getCustomer.registration_date;
+                    customer.birth_date = getCustomer.birth_date;
+                    customer.customer_photo = getCustomer.customer_photo;
+                    customer.address = getCustomer.address;
+
+                    return customer;
+                }
+                catch (Exception ex)
+                {
+                    conection.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
+        public bool InsertCustomer(Customer customer)
+        {
+            
+
+            using (var conection = new Proyecto_Progra_Avanzada_G5Entities())
+            {
+                try
+                {
+                    
+
                     if (customer != null)
                     {
-
-                        return customer;
-
-                    }
-                    else
-                    {
-                        db.Dispose();
-                        return null;
-                    }
-
-
-                }
-                catch (Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }
-
-        public bool addCustomer(Customer customer)
-        {
-            Customer customer2 = new Customer();
-            using(var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    if(customer2 != null)
-                    {
-                        customer2.customer_name = customer.customer_name;
-                        customer2.customer_first_last_name = customer.customer_first_last_name;
-                        customer2.customer_last_name = customer.customer_last_name;
-                        customer2.customer_phone = customer.customer_phone;
-                        customer2.customer_email = customer.customer_email;
-                        customer2.customer_address = customer.customer_address;
-                        customer2.customer_id = customer.customer_id;
-                        customer2.customer_birthDate = customer.customer_birthDate;
-                        customer2.customer_registration_date = DateTime.Now;
-                        db.Customer.Add(customer2);
-                        db.SaveChanges();
+                        TCustomer tcustomer = new TCustomer();
+                        tcustomer.login_name_customer = customer.login_name_customer;
+                        tcustomer.password_hash_customer = customer.password_hash_customer;
+                        tcustomer.name = customer.name;
+                        tcustomer.first_last_name = customer.first_last_name;
+                        tcustomer.second_last_name = customer.second_last_name;
+                        tcustomer.Id = customer.Id;
+                        tcustomer.phone = customer.phone;
+                        tcustomer.email = customer.email;
+                        tcustomer.birth_date = new DateTime();
+                        tcustomer.customer_photo = customer.customer_photo;
+                        tcustomer.address = customer.address;
+                        conection.TCustomer.Add(tcustomer);
+                        conection.SaveChanges();
                         return true;
                     }
                     else
@@ -84,62 +117,71 @@ namespace Servicio.Models
                         return false;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    db.Dispose();
+                    conection.Dispose();
                     throw ex;
                 }
             }
+
         }
-        public bool editCustomer(Customer customer)
+
+        public bool UpdateCustomer(Customer customer)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using(var conection = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var data = db.Customer.Find(customer.customer_user_id);
-                    if(data != null)
+                    var getCustomer = conection.TCustomer.Find(customer.user_Id);
+
+                    if(getCustomer != null)
                     {
-                        data.customer_email = customer.customer_email;
-                        data.customer_address = customer.customer_address;
-                        data.customer_phone = customer.customer_phone;
-                        db.SaveChanges();
+
+                        getCustomer.name = customer.name;
+                        getCustomer.first_last_name = customer.first_last_name;
+                        getCustomer.second_last_name = customer.second_last_name;
+                        getCustomer.phone = customer.phone;
+                        getCustomer.email = customer.email;
+                        getCustomer.customer_photo = customer.customer_photo;
+                        getCustomer.address = customer.address;
+                        conection.SaveChanges();
                         return true;
                     }
                     else
                     {
-                        throw new Exception("No se pudo actualizar la informacion del cliente");
+                        throw new Exception("Cliente no encontrado");
                     }
                 }
                 catch (Exception ex)
                 {
-                    db.Dispose();
+                    conection.Dispose();
                     throw ex;
+
                 }
             }
         }
 
-        public bool deleteCustomerById(int Id)
+        public bool DeleteCustomer(int user_Id)
         {
-            using(var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var conection = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var data = db.Customer.Find(Id);
-                    if(data != null)
+                    var getCustomer = conection.TCustomer.Find(user_Id);
+                    if( getCustomer != null)
                     {
-                        db.Customer.Remove(data);
-                        db.SaveChanges();
+                        conection.TCustomer.Remove(getCustomer);
+                        conection.SaveChanges();
                         return true;
-
                     }
                     else
                     {
-                        throw new Exception("No se encontro el cliente que desea eliminar");
+                        throw new Exception("No se encontro el cliente a eliminar");
                     }
                 }
                 catch (Exception ex)
                 {
+                    conection.Dispose();
                     throw ex;
                 }
             }

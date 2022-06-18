@@ -1,283 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Proyecto_Progra_Avanzada_G5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Customer">
+  <EntityType Name="TCustomer">
     <Key>
-      <PropertyRef Name="customer_user_id" />
+      <PropertyRef Name="user_Id" />
     </Key>
-    <Property Name="customer_user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="customer_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="customer_first_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="customer_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="customer_id" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="customer_phone" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="customer_email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="customer_registration_date" Type="datetime" Nullable="false" />
-    <Property Name="customer_birthDate" Type="date" Nullable="false" />
+    <Property Name="user_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="login_name_customer" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="password_hash_customer" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="first_last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="second_last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="registration_date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="birth_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="customer_photo" Type="varchar" MaxLength="50" />
-    <Property Name="customer_address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="employee_user_id" />
-    </Key>
-    <Property Name="employee_user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="employee_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="employee_first_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="employee_second_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="employee_id" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="employee_phone" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="employee_email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="employee_hire_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-    <Property Name="employee_birthDate" Type="date" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Orders">
-    <Key>
-      <PropertyRef Name="order_id" />
-    </Key>
-    <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="order_customer_id" Type="int" Nullable="false" />
-    <Property Name="order_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-    <Property Name="order_total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Product">
-    <Key>
-      <PropertyRef Name="product_id" />
-    </Key>
-    <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="product_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="product_description" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="product_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="product_stock" Type="int" Nullable="false" />
-    <Property Name="product_image" Type="varchar" MaxLength="50" />
-    <Property Name="product_brand" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="product_model" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="product_registration_date" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Shipments">
-    <Key>
-      <PropertyRef Name="shipment_id" />
-    </Key>
-    <Property Name="shipment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="shipment_order_id" Type="int" Nullable="false" />
-    <Property Name="shipment_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-    <Property Name="shipment_status" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shipment_address" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shipment_city" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shipment_state" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shipment_zip_code" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shipment_country" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shipment_phone" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shipment_email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shipment_customer_id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ShoppingCart">
-    <Key>
-      <PropertyRef Name="shoppingCart_id" />
-    </Key>
-    <Property Name="shoppingCart_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="shoppingCart_customer_id" Type="int" Nullable="false" />
-    <Property Name="shoppingCart_product_id" Type="int" Nullable="false" />
-    <Property Name="shoppipingCart_product_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shoppingCart_image" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shoppingCart_description" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shoppingCart_quantity" Type="int" Nullable="false" />
-    <Property Name="shoppingCart_product_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="shoppingCart_state" Type="char" MaxLength="2" Nullable="false" />
-  </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Proyecto_Progra_Avanzada_G5.dbo.Total_Users' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="Total_Users">
-    <Key>
-      <PropertyRef Name="total_users" />
-    </Key>
-    <Property Name="total_users" Type="int" Nullable="false" />
-    <Property Name="customer_user_id" Type="int" />
-    <Property Name="employee_user_id" Type="int" />
-  </EntityType>
-  <Association Name="fk_order_customer_id">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="customer_user_id" />
-      </Principal>
-      <Dependent Role="Orders">
-        <PropertyRef Name="order_customer_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_shipment_customer_id">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="customer_user_id" />
-      </Principal>
-      <Dependent Role="Shipments">
-        <PropertyRef Name="shipment_customer_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_shipment_order_id">
-    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-    <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Orders">
-        <PropertyRef Name="order_id" />
-      </Principal>
-      <Dependent Role="Shipments">
-        <PropertyRef Name="shipment_order_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_shoppingCart_customer_id">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="customer_user_id" />
-      </Principal>
-      <Dependent Role="ShoppingCart">
-        <PropertyRef Name="shoppingCart_customer_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_shoppingCart_product_id">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Product">
-        <PropertyRef Name="product_id" />
-      </Principal>
-      <Dependent Role="ShoppingCart">
-        <PropertyRef Name="shoppingCart_product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_total_users_customer_id">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-    <End Role="Total_Users" Type="Self.Total_Users" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="customer_user_id" />
-      </Principal>
-      <Dependent Role="Total_Users">
-        <PropertyRef Name="customer_user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_total_users_employee_id">
-    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
-    <End Role="Total_Users" Type="Self.Total_Users" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="employee_user_id" />
-      </Principal>
-      <Dependent Role="Total_Users">
-        <PropertyRef Name="employee_user_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Function Name="delete_customer_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="delete_Employee_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="employee_Id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="delete_Product_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="product_Id" Type="int" Mode="In" />
-  </Function>
   <Function Name="insert_customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="name" Type="varchar" Mode="In" />
-    <Parameter Name="first_last_name" Type="varchar" Mode="In" />
-    <Parameter Name="last_name" Type="varchar" Mode="In" />
-    <Parameter Name="id" Type="varchar" Mode="In" />
-    <Parameter Name="phone" Type="varchar" Mode="In" />
-    <Parameter Name="email" Type="varchar" Mode="In" />
-    <Parameter Name="birtDate" Type="date" Mode="In" />
-    <Parameter Name="address" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="insert_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="login_name_customer" Type="varchar" Mode="In" />
+    <Parameter Name="password_hash_customer" Type="varchar" Mode="In" />
     <Parameter Name="name" Type="varchar" Mode="In" />
     <Parameter Name="first_last_name" Type="varchar" Mode="In" />
     <Parameter Name="second_last_name" Type="varchar" Mode="In" />
-    <Parameter Name="id" Type="varchar" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
     <Parameter Name="phone" Type="varchar" Mode="In" />
     <Parameter Name="email" Type="varchar" Mode="In" />
-    <Parameter Name="birthDate" Type="date" Mode="In" />
-  </Function>
-  <Function Name="insert_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="product_name" Type="varchar" Mode="In" />
-    <Parameter Name="product_description" Type="varchar" Mode="In" />
-    <Parameter Name="product_price" Type="decimal" Mode="In" />
-    <Parameter Name="product_stock" Type="int" Mode="In" />
-    <Parameter Name="product_brand" Type="varchar" Mode="In" />
-    <Parameter Name="product_model" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="update_customer_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Id" Type="int" Mode="In" />
-    <Parameter Name="phone" Type="varchar" Mode="In" />
-    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="birth_date" Type="datetime2" Mode="In" />
     <Parameter Name="address" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="update_Product_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="product_Id" Type="int" Mode="In" />
-    <Parameter Name="product_price" Type="varchar" Mode="In" />
-    <Parameter Name="product_stock" Type="int" Mode="In" />
   </Function>
   <Function Name="view_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="view_customer_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
   </Function>
-  <Function Name="view_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="view_Employee_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="employee_Id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="view_Product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="view_product_by_id" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="product_Id" Type="int" Mode="In" />
-  </Function>
   <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
-    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Total_Users" EntityType="Self.Total_Users" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Total_Users].[total_users] AS [total_users], 
-    [Total_Users].[customer_user_id] AS [customer_user_id], 
-    [Total_Users].[employee_user_id] AS [employee_user_id]
-    FROM [dbo].[Total_Users] AS [Total_Users]</DefiningQuery>
-    </EntitySet>
-    <AssociationSet Name="fk_order_customer_id" Association="Self.fk_order_customer_id">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="Orders" EntitySet="Orders" />
-    </AssociationSet>
-    <AssociationSet Name="fk_shipment_customer_id" Association="Self.fk_shipment_customer_id">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="Shipments" EntitySet="Shipments" />
-    </AssociationSet>
-    <AssociationSet Name="fk_shipment_order_id" Association="Self.fk_shipment_order_id">
-      <End Role="Orders" EntitySet="Orders" />
-      <End Role="Shipments" EntitySet="Shipments" />
-    </AssociationSet>
-    <AssociationSet Name="fk_shoppingCart_customer_id" Association="Self.fk_shoppingCart_customer_id">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
-    </AssociationSet>
-    <AssociationSet Name="fk_shoppingCart_product_id" Association="Self.fk_shoppingCart_product_id">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="ShoppingCart" EntitySet="ShoppingCart" />
-    </AssociationSet>
-    <AssociationSet Name="fk_total_users_customer_id" Association="Self.fk_total_users_customer_id">
-      <End Role="Customer" EntitySet="Customer" />
-      <End Role="Total_Users" EntitySet="Total_Users" />
-    </AssociationSet>
-    <AssociationSet Name="fk_total_users_employee_id" Association="Self.fk_total_users_employee_id">
-      <End Role="Employee" EntitySet="Employee" />
-      <End Role="Total_Users" EntitySet="Total_Users" />
-    </AssociationSet>
+    <EntitySet Name="TCustomer" EntityType="Self.TCustomer" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

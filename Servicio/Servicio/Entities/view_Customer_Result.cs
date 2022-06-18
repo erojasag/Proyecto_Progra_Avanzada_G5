@@ -13,16 +13,18 @@ namespace Servicio.Entities
     
     public partial class view_Customer_Result
     {
-        public int customer_user_id { get; set; }
-        public string customer_name { get; set; }
-        public string customer_first_last_name { get; set; }
-        public string customer_last_name { get; set; }
-        public string customer_id { get; set; }
-        public string customer_phone { get; set; }
-        public string customer_email { get; set; }
-        public System.DateTime customer_registration_date { get; set; }
-        public System.DateTime customer_birthDate { get; set; }
+        public int user_Id { get; set; }
+        public string login_name_customer { get; set; }
+        public string password_hash_customer { get; set; }
+        public string name { get; set; }
+        public string first_last_name { get; set; }
+        public string second_last_name { get; set; }
+        public int Id { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
+        public System.DateTime registration_date { get; set; }
+        public System.DateTime birth_date { get; set; }
         public string customer_photo { get; set; }
-        public string customer_address { get; set; }
+        public string address { get; set; }
     }
 }
