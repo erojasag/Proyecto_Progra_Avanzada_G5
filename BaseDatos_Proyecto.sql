@@ -109,12 +109,34 @@ CREATE TABLE Employee(
 
 INSERT INTO Employee(User_name, Password, Name, First_last_name, Second_last_name, Id, Phone, Email, Birth_date) 
 VALUES('ema_rojas','motopapi123', 'Emanuel', 'Rojas', 'Aguero', '117250521', '88667456', 'ema_rojas@shoeCorp.com', '1998-11-01');
+INSERT INTO Employee(User_name, Password, Name, First_last_name, Second_last_name, Id, Phone, Email, Birth_date) 
+VALUES('xime_rojas', 'mundocosmetico123', 'Ximena', 'Rojas', 'Aguero', 209098765, '86099433', 'ximenara@shoeCorp.com','2001-03-07'); 
 
 SELECT * FROM Employee ;
 
+CREATE OR ALTER PROCEDURE Change_Employee_Password
+	@User_name as varchar,
+	@Old_Password as varchar(50),
+	@New_Password as varchar(50)
+AS 	
+BEGIN
+	UPDATE Employee
+	SET Password = @New_Password
+	WHERE User_name = @User_name AND Password = @Old_Password;
+END
+
+EXEC Change_Employee_Password 'xime_rojas','mundocosmetico123', 'tomas123'
 
 
-EXEC Insert_Employee 'xime_rojas', 'mundocosmetico123', 'Ximena', 'Rojas', 'Aguero', 209098765, '86099433', 'ximenara@shoeCorp.com','2001-03-07'; 
+
+CREATE OR ALTER PROCEDURE View_Employees
+AS 
+BEGIN 
+	SELECT * FROM Employee e 
+END
+
+
+Exec View_Employees 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------EMPLOYEE TABLE--------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -127,10 +149,23 @@ EXEC Insert_Employee 'xime_rojas', 'mundocosmetico123', 'Ximena', 'Rojas', 'Ague
 CREATE TABLE Total_Users(
     total_users INT NOT NULL,
     customer_user_id INT,
-    employee_user_id varchar(50)
-    CONSTRAINT fk_total_users_customer_id FOREIGN KEY (customer_user_id) REFERENCES Customer(customer_user_id),
-    CONSTRAINT fk_total_users_employee_id FOREIGN KEY (employee_user_id) REFERENCES Employee(employee_user_id)
+    employee_user_id INT
+    CONSTRAINT fk_total_users_customer_id FOREIGN KEY (customer_user_id) REFERENCES Customer(User_Id),
+    CONSTRAINT fk_total_users_employee_id FOREIGN KEY (employee_user_id) REFERENCES Employee(User_Id)
 );
+
+INSERT INTO Total_Users(total_users)
+SELECT count(e.User_Id) + count(c.User_Id)  FROM Employee e, Customer c;
+
+SELECT COUNT(*) from Employee e 
+
+SELECT COUNT(*) FROM Customer c 
+
+SELECT * FROM Customer c 
+
+DELETE FROM Total_Users 
+
+SELECT * FROM Total_Users ;
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------Total_Users TABLE--------------------------------------------------------------------------------------------
