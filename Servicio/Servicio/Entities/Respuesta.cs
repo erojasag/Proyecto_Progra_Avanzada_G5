@@ -7,7 +7,7 @@ namespace Servicio.Entities
 {
     public class Respuesta
     {
-        Respuesta respuesta = new Respuesta();
+        
         public int Id { get; set; }
         public string Message { get; set; }
         public bool Transaction { get; set; }
@@ -22,6 +22,7 @@ namespace Servicio.Entities
 
         public Respuesta ArmarRespuestaUsers(int Id, string Message, bool Transaction, Users User, List<Users> Users)
         {
+            Respuesta respuesta = new Respuesta();
             respuesta.Id = Id;
             respuesta.Message = Message;
             respuesta.Transaction = Transaction;
@@ -54,6 +55,7 @@ namespace Servicio.Entities
 
         public Respuesta ArmarRespuestaPersons(int Id, string Message, bool Transaction, Persons person, List<Persons> persons)
         {
+            Respuesta respuesta = new Respuesta();
             respuesta.Id = Id;
             respuesta.Message = Message;
             respuesta.Transaction = Transaction;

@@ -21,7 +21,7 @@ namespace Servicio.Controllers
         {
             try
             {
-                return null;
+                return respuesta.ArmarRespuestaPersons(1, "OK", false, null, model.viewPersons());
             }
             catch(Exception ex)
             {
@@ -31,11 +31,11 @@ namespace Servicio.Controllers
 
         [HttpGet]
         [Route("persons/ViewPersonById")]
-        public Respuesta ViewPersonById()
+        public Respuesta ViewPersonById(int Id)
         {
             try
             {
-                return null;
+                return respuesta.ArmarRespuestaPersons(1, "OK", true, model.ViewPersonById(Id), null);
             }
             catch (Exception ex)
             {
@@ -45,11 +45,11 @@ namespace Servicio.Controllers
 
         [HttpPost]
         [Route("persons/InsertPerson")]
-        public Respuesta InsertPerson()
+        public Respuesta InsertPerson(Persons Person, Users User)
         {
             try
             {
-                return null;
+                return respuesta.ArmarRespuestaPersons(1, "OK", model.InsertPerson(Person, User), null, null);
             }
             catch (Exception ex)
             {

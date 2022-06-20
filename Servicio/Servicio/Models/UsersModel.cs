@@ -87,7 +87,6 @@ namespace Servicio.Models
                     Users tusers = new Users();
                     if (User != null)
                     {
-                        tusers.Id = User.Id;
                         tusers.Username = User.Username;
                         tusers.Password = User.Password;
                         tusers.User_type = User.User_type;
