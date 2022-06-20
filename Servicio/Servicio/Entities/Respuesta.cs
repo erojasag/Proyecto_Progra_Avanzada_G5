@@ -7,18 +7,59 @@ namespace Servicio.Entities
 {
     public class Respuesta
     {
+        Respuesta respuesta = new Respuesta();
         public int Id { get; set; }
         public string Message { get; set; }
-        public bool transaccion { get; set; }
-        public Customer customer { get; set; }
-        public List<Customer> customers { get; set; }
+        public bool Transaction { get; set; }
+        public Users User { get; set; }
+        public List<Users> Users { get; set; }
+        public Products Product { get; set; }
+        public List<Products> Products { get; set; }
+        public Brand Brand { get; set; }
+        public List<Brand> Brands { get; set; }
+        public Persons Person { get; set; }
+        public List<Persons> Persons { get; set; }
 
-        public Product product { get; set; }
-        public List<Product> products { get; set; }
+        public Respuesta ArmarRespuestaUsers(int Id, string Message, bool Transaction, Users User, List<Users> Users)
+        {
+            respuesta.Id = Id;
+            respuesta.Message = Message;
+            respuesta.Transaction = Transaction;
+            respuesta.User = User;
+            respuesta.Users = Users;
+            return respuesta;
+        }
 
-        public Employee employee { get; set; }
+        public Respuesta ArmarRespuestaProducts(int Id, string Message, bool Transaction, Products Product, List<Products> Products)
+        {
+            Respuesta respuesta = new Respuesta();
+            respuesta.Id = Id;
+            respuesta.Message = Message;
+            respuesta.Transaction = Transaction;
+            respuesta.Product = Product;
+            respuesta.Products = Products;
+            return respuesta;
+        }
 
-        public List<Employee> employees { get; set; }
+        public Respuesta ArmarRespuestaBrand(int Id, string Message, bool Transaction, Brand Brand, List<Brand> Brands)
+        {
+            Respuesta respuesta = new Respuesta();
+            respuesta.Id = Id;
+            respuesta.Message = Message;
+            respuesta.Transaction = Transaction;
+            respuesta.Brand = Brand;
+            respuesta.Brands = Brands;
+            return respuesta;
+        }
 
+        public Respuesta ArmarRespuestaPersons(int Id, string Message, bool Transaction, Persons person, List<Persons> persons)
+        {
+            respuesta.Id = Id;
+            respuesta.Message = Message;
+            respuesta.Transaction = Transaction;
+            respuesta.Person = person;
+            respuesta.Persons = persons;
+            return respuesta;
+        }
     }
 }

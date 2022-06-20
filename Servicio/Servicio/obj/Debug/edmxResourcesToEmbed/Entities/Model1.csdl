@@ -1,138 +1,213 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Proyecto_Progra_Avanzada_G5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Customer">
-    <Key>
-      <PropertyRef Name="User_Id" />
-    </Key>
-    <Property Name="User_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Login_name_customer" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="First_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Id" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Modification_date" Type="DateTime" Precision="7" />
-    <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_customer_id" FromRole="Customer" ToRole="ShoppingCart" />
-  </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="User_Id" />
-    </Key>
-    <Property Name="User_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="User_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="First_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Id" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Hire_date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="7" />
-  </EntityType>
-  <EntityType Name="Product">
+  <EntityType Name="Brand">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Brand_Id" FromRole="Brand" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Order_User_Id" Type="Int32" Nullable="false" />
+    <Property Name="Order_date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Order_total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Order_Id" FromRole="Orders" ToRole="Product_By_Order" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Order_User_Id" FromRole="Orders" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="First_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Identification" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Modification_date" Type="DateTime" Precision="7" />
+    <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="User_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_Id" FromRole="Persons" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Product_By_Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_Id" Type="Int32" Nullable="false" />
+    <Property Name="Order_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Id" FromRole="Product_By_Order" ToRole="Orders" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Id" FromRole="Product_By_Order" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="Stock" Type="Int32" Nullable="false" />
     <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Brand_Id" Type="Int32" Nullable="false" />
     <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="Modification_date" Type="DateTime" Precision="7" />
-    <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_product_id" FromRole="Product" ToRole="ShoppingCart" />
+    <NavigationProperty Name="Brand" Relationship="Self.FK_Brand_Id" FromRole="Products" ToRole="Brand" />
+    <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Product_Id" FromRole="Products" ToRole="Product_By_Order" />
+    <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_Product_id" FromRole="Products" ToRole="ShoppingCart" />
   </EntityType>
   <EntityType Name="ShoppingCart">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Customer_id" Type="Int32" Nullable="false" />
-    <Property Name="Product_id" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <Property Name="Estimate_Total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="Tax" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="Total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK_shoppingCart_customer_id" FromRole="ShoppingCart" ToRole="Customer" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_shoppingCart_product_id" FromRole="ShoppingCart" ToRole="Product" />
+    <Property Name="User_Id" Type="Int32" Nullable="false" />
+    <Property Name="Product_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_shoppingCart_Product_id" FromRole="ShoppingCart" ToRole="Products" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_shoppingCart_User_id" FromRole="ShoppingCart" ToRole="Users" />
   </EntityType>
-  <Association Name="FK_shoppingCart_customer_id">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="User_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User_Id" FromRole="Users" ToRole="Orders" />
+    <NavigationProperty Name="Persons" Relationship="Self.FK_User_Id" FromRole="Users" ToRole="Persons" />
+    <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_User_id" FromRole="Users" ToRole="ShoppingCart" />
+  </EntityType>
+  <Association Name="FK_Brand_Id">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="User_Id" />
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="ShoppingCart">
-        <PropertyRef Name="Customer_id" />
+      <Dependent Role="Products">
+        <PropertyRef Name="Brand_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_shoppingCart_product_id">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+  <Association Name="FK_Order_Id">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Product_By_Order" Type="Self.Product_By_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product_By_Order">
+        <PropertyRef Name="Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_User_Id">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Id">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Id">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Product_By_Order" Type="Self.Product_By_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product_By_Order">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_shoppingCart_Product_id">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Product">
+      <Principal Role="Products">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ShoppingCart">
-        <PropertyRef Name="Product_id" />
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_shoppingCart_User_id">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="User_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Proyecto_Progra_Avanzada_G5Entities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Customer" EntityType="Self.Customer" />
-    <EntitySet Name="Employee" EntityType="Self.Employee" />
-    <EntitySet Name="Product" EntityType="Self.Product" />
+    <EntitySet Name="Brand" EntityType="Self.Brand" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="Persons" EntityType="Self.Persons" />
+    <EntitySet Name="Product_By_Order" EntityType="Self.Product_By_Order" />
+    <EntitySet Name="Products" EntityType="Self.Products" />
     <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" />
-    <AssociationSet Name="FK_shoppingCart_customer_id" Association="Self.FK_shoppingCart_customer_id">
-      <End Role="Customer" EntitySet="Customer" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_Brand_Id" Association="Self.FK_Brand_Id">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Id" Association="Self.FK_Order_Id">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Product_By_Order" EntitySet="Product_By_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_User_Id" Association="Self.FK_Order_User_Id">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Id" Association="Self.FK_User_Id">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Persons" EntitySet="Persons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Id" Association="Self.FK_Product_Id">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Product_By_Order" EntitySet="Product_By_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_shoppingCart_Product_id" Association="Self.FK_shoppingCart_Product_id">
+      <End Role="Products" EntitySet="Products" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
     </AssociationSet>
-    <AssociationSet Name="FK_shoppingCart_product_id" Association="Self.FK_shoppingCart_product_id">
-      <End Role="Product" EntitySet="Product" />
+    <AssociationSet Name="FK_shoppingCart_User_id" Association="Self.FK_shoppingCart_User_id">
+      <End Role="Users" EntitySet="Users" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
     </AssociationSet>
-    <FunctionImport Name="Insert_Employee">
-      <Parameter Name="User_name" Mode="In" Type="String" />
-      <Parameter Name="Password" Mode="In" Type="String" />
-      <Parameter Name="Name" Mode="In" Type="String" />
-      <Parameter Name="First_last_name" Mode="In" Type="String" />
-      <Parameter Name="Second_last_name" Mode="In" Type="String" />
-      <Parameter Name="Id" Mode="In" Type="Int32" />
-      <Parameter Name="Phone" Mode="In" Type="String" />
-      <Parameter Name="Email" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="Change_Employee_Password">
-      <Parameter Name="User_name" Mode="In" Type="String" />
-      <Parameter Name="Old_Password" Mode="In" Type="String" />
-      <Parameter Name="New_Password" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="View_Employees" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.View_Employees_Result)" />
   </EntityContainer>
-  <ComplexType Name="View_Employees_Result">
-    <Property Type="Int32" Name="User_Id" Nullable="false" />
-    <Property Type="String" Name="User_name" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="First_last_name" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Second_last_name" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Id" Nullable="false" MaxLength="9" />
-    <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
-    <Property Type="DateTime" Name="Hire_date" Nullable="false" />
-    <Property Type="DateTime" Name="Birth_date" Nullable="false" />
-  </ComplexType>
 </Schema>

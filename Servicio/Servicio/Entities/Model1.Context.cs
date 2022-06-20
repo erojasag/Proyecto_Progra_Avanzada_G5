@@ -12,8 +12,6 @@ namespace Servicio.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class Proyecto_Progra_Avanzada_G5Entities : DbContext
     {
@@ -27,68 +25,12 @@ namespace Servicio.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Brand> Brand { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Persons> Persons { get; set; }
+        public virtual DbSet<Product_By_Order> Product_By_Order { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
-    
-        public virtual int Insert_Employee(string user_name, string password, string name, string first_last_name, string second_last_name, Nullable<int> id, string phone, string email)
-        {
-            var user_nameParameter = user_name != null ?
-                new ObjectParameter("User_name", user_name) :
-                new ObjectParameter("User_name", typeof(string));
-    
-            var passwordParameter = password != null ?
-                new ObjectParameter("Password", password) :
-                new ObjectParameter("Password", typeof(string));
-    
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            var first_last_nameParameter = first_last_name != null ?
-                new ObjectParameter("First_last_name", first_last_name) :
-                new ObjectParameter("First_last_name", typeof(string));
-    
-            var second_last_nameParameter = second_last_name != null ?
-                new ObjectParameter("Second_last_name", second_last_name) :
-                new ObjectParameter("Second_last_name", typeof(string));
-    
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            var phoneParameter = phone != null ?
-                new ObjectParameter("Phone", phone) :
-                new ObjectParameter("Phone", typeof(string));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insert_Employee", user_nameParameter, passwordParameter, nameParameter, first_last_nameParameter, second_last_nameParameter, idParameter, phoneParameter, emailParameter);
-        }
-    
-        public virtual int Change_Employee_Password(string user_name, string old_Password, string new_Password)
-        {
-            var user_nameParameter = user_name != null ?
-                new ObjectParameter("User_name", user_name) :
-                new ObjectParameter("User_name", typeof(string));
-    
-            var old_PasswordParameter = old_Password != null ?
-                new ObjectParameter("Old_Password", old_Password) :
-                new ObjectParameter("Old_Password", typeof(string));
-    
-            var new_PasswordParameter = new_Password != null ?
-                new ObjectParameter("New_Password", new_Password) :
-                new ObjectParameter("New_Password", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Change_Employee_Password", user_nameParameter, old_PasswordParameter, new_PasswordParameter);
-        }
-    
-        public virtual ObjectResult<View_Employees_Result> View_Employees()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<View_Employees_Result>("View_Employees");
-        }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

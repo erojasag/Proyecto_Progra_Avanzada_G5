@@ -1,5 +1,3 @@
-E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\obj\Debug\Servicio.csproj.AssemblyReference.cache
-E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\obj\Debug\Servicio.csproj.CoreCompileInputs.cache
 E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\bin\Servicio.dll.config
 E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\bin\Servicio.dll
 E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\bin\Servicio.pdb
@@ -84,6 +82,8 @@ E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_
 E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\bin\System.Web.WebPages.Razor.xml
 E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\bin\Antlr3.Runtime.pdb
 E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\obj\Debug\Servicio.csproj.AssemblyReference.cache
+E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\obj\Debug\Servicio.csproj.CoreCompileInputs.cache
 E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\obj\Debug\Servicio.csproj.CopyComplete
 E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\obj\Debug\Servicio.dll
 E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Servicio\Servicio\obj\Debug\Servicio.pdb

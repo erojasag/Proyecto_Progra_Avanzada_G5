@@ -1,36 +1,67 @@
 CREATE DATABASE Proyecto_Progra_Avanzada_G5;
 USE Proyecto_Progra_Avanzada_G5;
-
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------CUSTOMER TABLE---------------------------------------------------------------------------------------------
+--------------------------------------USER TABLE-----------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE TABLE Customer(
-	User_Id INT IDENTITY(1,1) NOT NULL,
-	Login_name_customer VARCHAR(40) NOT NULL,
+CREATE TABLE Users(
+	Id int IDENTITY(1,1) NOT NULL,
+	Username varchar(50) NOT NULL,
 	Password varchar(50) NOT NULL,
+	User_type varchar(50) NOT NULL,
+	Photo varchar(50),
+CONSTRAINT PK_User_ID PRIMARY KEY(Id)
+);
+
+SELECT * FROM Users;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------USER TABLE-----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------PERSON TABLE---------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE Persons(
+    Id INT IDENTITY(1,1) NOT NULL,
     Name varchar(50) NOT NULL,
     First_last_name varchar(50) NOT NULL,
     Second_last_name varchar(50) NOT NULL,
-    Id varchar(9) NOT NULL,
+    Identification varchar(9) NOT NULL,
     Phone varchar(50) NOT NULL,
     Email varchar(50) NOT NULL,
     Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Modification_date DATETIME2 NULL,
     Birth_date DATETIME2 NOT NULL,
-    Photo varchar(50),
     Address varchar(50) NOT NULL,
-CONSTRAINT PK_Customer_Id  PRIMARY KEY (user_Id)
+    User_Id int not null,
+CONSTRAINT PK_Person_Id  PRIMARY KEY (Id),
+CONSTRAINT FK_User_Id FOREIGN KEY (User_Id) REFERENCES Users(Id)
 );
 
-INSERT INTO Customer(Login_name_customer, Password, Name,First_last_name,Second_last_name,
-Id, Phone, Email, Birth_date, Address) 
-VALUES('erojasag', 'holamundo123', 'Emanuel', 'Rojas','Aguero',117250521,'88667456',
-'eroaguero01@gmail.com','1998-11-01','Alajuela')
 
-SELECT * FROM Customer;
+SELECT * FROM Persons;
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------CUSTOMER TABLE---------------------------------------------------------------------------------------------
+--------------------------------------PERSON TABLE---------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------BRAND TABLE----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE Brand(
+	Id INT NOT NULL IDENTITY(1,1),
+	Name varchar(50) NOT NULL,
+	Model varchar(50) NOT NULL,
+	Color varchar(50) NOT NULL,
+	Photo varchar(50) NOT NULL,
+CONSTRAINT PK_Brand_Id PRIMARY KEY (Id)
+);
+SELECT * FROM Brand;
+INSERT INTO Brand(Name, Model, Color, Photo)
+VALUES('Nike', 'Air Jordan 5', 'Green Bean', 'url');
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------BRAND TABLE----------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -38,154 +69,88 @@ SELECT * FROM Customer;
 --------------------------------------PRODUCT TABLE--------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-CREATE TABLE Product(
-    Id INT NOT NULL,
+
+CREATE TABLE Products(
+    Id INT NOT NULL IDENTITY(1,1),
     Price DECIMAL(10,2) NOT NULL,
     Stock INT NOT NULL,
     Photo varchar(50),
-    Brand varchar(50) NOT NULL,
-    Model varchar(50) NOT NULL,
-    Color varchar(50) NOT NULL,
+    Brand_Id INT NOT NULL,
     Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Modification_date DATETIME2 NULL,
-    CONSTRAINT PK_Product_Id PRIMARY KEY (id)
+    CONSTRAINT PK_Product_Id PRIMARY KEY (id),
+    CONSTRAINT FK_Brand_Id FOREIGN KEY (Brand_Id) REFERENCES Brand(Id)
 ); 
 
 INSERT INTO Product(Id,Price, Stock, Brand, Model, Color) 
 VALUES(0001,150000, 15, 'Nike', 'Jordan Retro 1', 'Chocolate');
 
-SELECT * FROM Product;
+SELECT * FROM Product WHERE Brand_Id = '1';
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------PRODUCT TABLE--------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------SHOPPING_CART TABLE--------------------------------------------------------------------------------------------------------
+--------------------------------------SHOPPING_CART TABLE--------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE ShoppingCart(
-    Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    Customer_id int NOT NULL,
-    Product_id INT NOT NULL,
-    Name varchar(50) NOT NULL,
-    Photo varchar(50) NOT NULL,
-    Quantity INT NOT NULL,
-    Estimate_Total DECIMAL(10,2) NOT NULL,
-    Tax DECIMAL(10,2) NOT NULL DEFAULT 13,
-    Total DECIMAL(10,2) NOT NULL,
-    State char(2) NOT NULL
-    CONSTRAINT FK_shoppingCart_customer_id FOREIGN KEY (customer_id) REFERENCES Customer(User_Id),
-    CONSTRAINT FK_shoppingCart_product_id FOREIGN KEY (product_id) REFERENCES Product(Id)
+    Id INT NOT NULL IDENTITY(1,1),
+	Quantity INT NOT NULL,
+	User_Id INT NOT NULL,
+	Product_Id INT NOT NULL,
+	CONSTRAINT PK_ShoppingCart_Id PRIMARY KEY (Id),
+    CONSTRAINT FK_shoppingCart_User_id FOREIGN KEY (User_Id) REFERENCES Users(Id),
+    CONSTRAINT FK_shoppingCart_Product_id FOREIGN KEY (product_id) REFERENCES Products(Id)
 );
 
-INSERT INTO ShoppingCart (Customer_id, Product_id, Name, Photo, Quantity, Estimate_Total, Total, State) 
-VALUES(1,1,'test','',1,0,0,1)
+
 
 SELECT * FROM ShoppingCart sc ;
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------SHOPPING_CART TABLE--------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------EMPLOYEE TABLE--------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-CREATE TABLE Employee(
-    User_Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    User_name varchar(50) NOT NULL,
-    Password varchar(50) NOT NULL,
-    Name varchar(50) NOT NULL,
-    First_last_name varchar(50) NOT NULL,
-    Second_last_name varchar(50) NOT NULL,
-    Id varchar(9) NOT NULL,
-    Phone varchar(50) NOT NULL,
-    Email varchar(50) NOT NULL,
-    Hire_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Birth_date DATETIME2 NOT NULL,
-);
-
-INSERT INTO Employee(User_name, Password, Name, First_last_name, Second_last_name, Id, Phone, Email, Birth_date) 
-VALUES('ema_rojas','motopapi123', 'Emanuel', 'Rojas', 'Aguero', '117250521', '88667456', 'ema_rojas@shoeCorp.com', '1998-11-01');
-INSERT INTO Employee(User_name, Password, Name, First_last_name, Second_last_name, Id, Phone, Email, Birth_date) 
-VALUES('xime_rojas', 'mundocosmetico123', 'Ximena', 'Rojas', 'Aguero', 209098765, '86099433', 'ximenara@shoeCorp.com','2001-03-07'); 
-
-SELECT * FROM Employee ;
-
-CREATE OR ALTER PROCEDURE Change_Employee_Password
-	@User_name as varchar,
-	@Old_Password as varchar(50),
-	@New_Password as varchar(50)
-AS 	
-BEGIN
-	UPDATE Employee
-	SET Password = @New_Password
-	WHERE User_name = @User_name AND Password = @Old_Password;
-END
-
-EXEC Change_Employee_Password 'xime_rojas','mundocosmetico123', 'tomas123'
-
-
-
-CREATE OR ALTER PROCEDURE View_Employees
-AS 
-BEGIN 
-	SELECT * FROM Employee e 
-END
-
-
-Exec View_Employees 
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------EMPLOYEE TABLE--------------------------------------------------------------------------------------------
+--------------------------------------SHOPPING_CART TABLE--------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------Total_Users TABLE--------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE TABLE Total_Users(
-    total_users INT NOT NULL,
-    customer_user_id INT,
-    employee_user_id INT
-    CONSTRAINT fk_total_users_customer_id FOREIGN KEY (customer_user_id) REFERENCES Customer(User_Id),
-    CONSTRAINT fk_total_users_employee_id FOREIGN KEY (employee_user_id) REFERENCES Employee(User_Id)
-);
-
-INSERT INTO Total_Users(total_users)
-SELECT count(e.User_Id) + count(c.User_Id)  FROM Employee e, Customer c;
-
-SELECT COUNT(*) from Employee e 
-
-SELECT COUNT(*) FROM Customer c 
-
-SELECT * FROM Customer c 
-
-DELETE FROM Total_Users 
-
-SELECT * FROM Total_Users ;
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------Total_Users TABLE--------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------ORDERS TABLE--------------------------------------------------------------------------------------------
+--------------------------------------ORDERS TABLE---------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE Orders(
-    order_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    order_customer_id INT NOT NULL,
-    order_date TIMESTAMP NOT NULL,
-    order_total DECIMAL(10,2) NOT NULL
-    CONSTRAINT fk_order_customer_id FOREIGN KEY (order_customer_id) REFERENCES Customer(customer_user_id)
+    Id INT NOT NULL IDENTITY(1,1),
+    Order_User_Id INT NOT NULL,
+    Order_date TIMESTAMP NOT NULL,
+    Order_total DECIMAL(10,2) NOT NULL
+    CONSTRAINT PK_Order_Id PRIMARY KEY (Id),
+    CONSTRAINT FK_Order_User_Id FOREIGN KEY (Order_User_Id) REFERENCES Users(Id)
 );
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------ORDERS TABLE--------------------------------------------------------------------------------------------
+--------------------------------------ORDERS TABLE---------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------PRODUCT_BY_ORDER TABLE-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE Product_By_Order(
+	Id INT NOT NULL IDENTITY(1,1),
+	Product_Id INT NOT NULL,
+	Order_Id INT NOT NULL
+	CONSTRAINT PK_Product_By_Order_Id PRIMARY KEY(Id),
+	CONSTRAINT FK_Product_Id FOREIGN KEY (Product_Id) REFERENCES Products(Id),
+	CONSTRAINT FK_Order_Id FOREIGN KEY (Order_Id) REFERENCES Orders(Id)
+);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------PRODUCT_BY_ORDER TABLE-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------SHIPMENTS TABLE--------------------------------------------------------------------------------------------
@@ -206,7 +171,7 @@ CREATE TABLE Shipments(
     shipment_email varchar(50) NOT NULL,
     shipment_customer_id INT NOT NULL,
     CONSTRAINT fk_shipment_order_id FOREIGN KEY (shipment_order_id) REFERENCES Orders(order_id),
-    CONSTRAINT fk_shipment_customer_id FOREIGN KEY (shipment_customer_id) REFERENCES Customer(customer_user_id)
+    CONSTRAINT fk_shipment_customer_id FOREIGN KEY (shipment_customer_id) REFERENCES Customer(User_Id)
 );
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------

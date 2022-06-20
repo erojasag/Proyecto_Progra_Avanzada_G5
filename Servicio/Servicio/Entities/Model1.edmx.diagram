@@ -4,13 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e0df2820efcd4f13bef275a5e72c03f9" Name="Diagram1">
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Customer" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Employee" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Product" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.ShoppingCart" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_shoppingCart_customer_id" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_shoppingCart_product_id" ManuallyRouted="false" />
+      <Diagram DiagramId="1ef506d4219c44de9eec52c0fd5d62ac" Name="Diagram1">
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Brand" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Orders" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Persons" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Product_By_Order" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Products" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.ShoppingCart" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Users" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_Brand_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_Order_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_Order_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_Product_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_shoppingCart_Product_id" ManuallyRouted="false" />
+        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_shoppingCart_User_id" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

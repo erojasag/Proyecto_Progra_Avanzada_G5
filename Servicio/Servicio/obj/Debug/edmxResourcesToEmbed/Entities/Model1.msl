@@ -1,53 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Proyecto_Progra_Avanzada_G5ModelStoreContainer" CdmEntityContainer="Proyecto_Progra_Avanzada_G5Entities">
-    <EntitySetMapping Name="Customer">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-          <ScalarProperty Name="Login_name_customer" ColumnName="Login_name_customer" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
+    <EntitySetMapping Name="Brand">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Brand">
+        <MappingFragment StoreEntitySet="Brand">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
+          <ScalarProperty Name="Order_date" ColumnName="Order_date" />
+          <ScalarProperty Name="Order_total" ColumnName="Order_total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persons">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Persons">
+        <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
           <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Identification" ColumnName="Identification" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
           <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
           <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Address" ColumnName="Address" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Employee">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Employee">
-        <MappingFragment StoreEntitySet="Employee">
           <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-          <ScalarProperty Name="User_name" ColumnName="User_name" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
-          <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Hire_date" ColumnName="Hire_date" />
-          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Product">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Product">
-        <MappingFragment StoreEntitySet="Product">
+    <EntitySetMapping Name="Product_By_Order">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Product_By_Order">
+        <MappingFragment StoreEntitySet="Product_By_Order">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Products">
+        <MappingFragment StoreEntitySet="Products">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Stock" ColumnName="Stock" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
-          <ScalarProperty Name="Brand" ColumnName="Brand" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
           <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
           <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
         </MappingFragment>
@@ -57,36 +66,22 @@
       <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.ShoppingCart">
         <MappingFragment StoreEntitySet="ShoppingCart">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
-          <ScalarProperty Name="Product_id" ColumnName="Product_id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Estimate_Total" ColumnName="Estimate_Total" />
-          <ScalarProperty Name="Tax" ColumnName="Tax" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="Insert_Employee" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.Insert_Employee" />
-    <FunctionImportMapping FunctionImportName="Change_Employee_Password" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.Change_Employee_Password" />
-    <FunctionImportMapping FunctionImportName="View_Employees" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.View_Employees">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.View_Employees_Result">
-          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-          <ScalarProperty Name="User_name" ColumnName="User_name" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
-          <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Users">
+        <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Hire_date" ColumnName="Hire_date" />
-          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="User_type" ColumnName="User_type" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -12,14 +12,13 @@ namespace Servicio.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class ShoppingCart
+    public partial class Product_By_Order
     {
         public int Id { get; set; }
-        public int Quantity { get; set; }
-        public int User_Id { get; set; }
         public int Product_Id { get; set; }
+        public int Order_Id { get; set; }
     
+        public virtual Orders Orders { get; set; }
         public virtual Products Products { get; set; }
-        public virtual Users Users { get; set; }
     }
 }

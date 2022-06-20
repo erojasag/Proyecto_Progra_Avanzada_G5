@@ -1,51 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Proyecto_Progra_Avanzada_G5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Customer">
+  <EntityType Name="Brand">
     <Key>
-      <PropertyRef Name="User_Id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Login_name_customer" Type="varchar" MaxLength="40" Nullable="false" />
-    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Photo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Order_User_Id" Type="int" Nullable="false" />
+    <Property Name="Order_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Order_total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="First_last_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Second_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Id" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Identification" Type="varchar" MaxLength="9" Nullable="false" />
     <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Modification_date" Type="datetime2" Precision="7" />
     <Property Name="Birth_date" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="Photo" Type="varchar" MaxLength="50" />
     <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="User_Id" />
-    </Key>
-    <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="User_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="First_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Second_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Id" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Hire_date" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="Birth_date" Type="datetime2" Precision="7" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Product">
+  <EntityType Name="Product_By_Order">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_Id" Type="int" Nullable="false" />
+    <Property Name="Order_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="Stock" Type="int" Nullable="false" />
     <Property Name="Photo" Type="varchar" MaxLength="50" />
-    <Property Name="Brand" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Brand_Id" Type="int" Nullable="false" />
     <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Modification_date" Type="datetime2" Precision="7" />
   </EntityType>
@@ -54,68 +61,139 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Customer_id" Type="int" Nullable="false" />
-    <Property Name="Product_id" Type="int" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Photo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
-    <Property Name="Estimate_Total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="Tax" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="Total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="Product_Id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK_shoppingCart_customer_id">
-    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Photo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Brand_Id">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="User_Id" />
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="ShoppingCart">
-        <PropertyRef Name="Customer_id" />
+      <Dependent Role="Products">
+        <PropertyRef Name="Brand_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_shoppingCart_product_id">
-    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+  <Association Name="FK_Order_Id">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="Product_By_Order" Type="Self.Product_By_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product_By_Order">
+        <PropertyRef Name="Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_User_Id">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Order_User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Id">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Product_By_Order" Type="Self.Product_By_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product_By_Order">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_shoppingCart_Product_id">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Product">
+      <Principal Role="Products">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ShoppingCart">
-        <PropertyRef Name="Product_id" />
+        <PropertyRef Name="Product_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="Change_Employee_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="User_name" Type="varchar" Mode="In" />
-    <Parameter Name="Old_Password" Type="varchar" Mode="In" />
-    <Parameter Name="New_Password" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="Insert_Employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="User_name" Type="varchar" Mode="In" />
-    <Parameter Name="Password" Type="varchar" Mode="In" />
-    <Parameter Name="Name" Type="varchar" Mode="In" />
-    <Parameter Name="First_last_name" Type="varchar" Mode="In" />
-    <Parameter Name="Second_last_name" Type="varchar" Mode="In" />
-    <Parameter Name="Id" Type="int" Mode="In" />
-    <Parameter Name="Phone" Type="varchar" Mode="In" />
-    <Parameter Name="Email" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="View_Employees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Association Name="FK_shoppingCart_User_id">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ShoppingCart">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Id">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Persons">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
-    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_By_Order" EntityType="Self.Product_By_Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_shoppingCart_customer_id" Association="Self.FK_shoppingCart_customer_id">
-      <End Role="Customer" EntitySet="Customer" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Brand_Id" Association="Self.FK_Brand_Id">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Id" Association="Self.FK_Order_Id">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Product_By_Order" EntitySet="Product_By_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_User_Id" Association="Self.FK_Order_User_Id">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Id" Association="Self.FK_Product_Id">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Product_By_Order" EntitySet="Product_By_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_shoppingCart_Product_id" Association="Self.FK_shoppingCart_Product_id">
+      <End Role="Products" EntitySet="Products" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
     </AssociationSet>
-    <AssociationSet Name="FK_shoppingCart_product_id" Association="Self.FK_shoppingCart_product_id">
-      <End Role="Product" EntitySet="Product" />
+    <AssociationSet Name="FK_shoppingCart_User_id" Association="Self.FK_shoppingCart_User_id">
+      <End Role="Users" EntitySet="Users" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Id" Association="Self.FK_User_Id">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Persons" EntitySet="Persons" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
