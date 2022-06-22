@@ -85,6 +85,7 @@ namespace Servicio.Models
                         }
                         else
                         {
+                            tbrand.Id = brand.Id;
                             tbrand.Name = brand.Name;
                             tbrand.Model = brand.Model;
                             tbrand.Color = brand.Color;

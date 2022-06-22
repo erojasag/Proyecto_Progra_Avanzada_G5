@@ -25,10 +25,8 @@ namespace Servicio.Entities
         public Nullable<System.DateTime> Modification_date { get; set; }
         public System.DateTime Birth_date { get; set; }
         public string Address { get; set; }
-        public int User_Id { get; set; }
+        public Nullable<int> User_Id { get; set; }
     
         public virtual Users Users { get; set; }
     }
-
-
 }

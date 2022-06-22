@@ -62,6 +62,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Shipments">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Shipments">
+        <MappingFragment StoreEntitySet="Shipments">
+          <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
+          <ScalarProperty Name="shipment_order_id" ColumnName="shipment_order_id" />
+          <ScalarProperty Name="shipment_date" ColumnName="shipment_date" />
+          <ScalarProperty Name="shipment_status" ColumnName="shipment_status" />
+          <ScalarProperty Name="shipment_address" ColumnName="shipment_address" />
+          <ScalarProperty Name="shipment_city" ColumnName="shipment_city" />
+          <ScalarProperty Name="shipment_state" ColumnName="shipment_state" />
+          <ScalarProperty Name="shipment_zip_code" ColumnName="shipment_zip_code" />
+          <ScalarProperty Name="shipment_country" ColumnName="shipment_country" />
+          <ScalarProperty Name="shipment_phone" ColumnName="shipment_phone" />
+          <ScalarProperty Name="shipment_email" ColumnName="shipment_email" />
+          <ScalarProperty Name="shipment_customer_id" ColumnName="shipment_customer_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ShoppingCart">
       <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.ShoppingCart">
         <MappingFragment StoreEntitySet="ShoppingCart">

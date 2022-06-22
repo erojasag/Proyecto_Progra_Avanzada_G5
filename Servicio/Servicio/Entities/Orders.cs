@@ -18,6 +18,7 @@ namespace Servicio.Entities
         public Orders()
         {
             this.Product_By_Order = new HashSet<Product_By_Order>();
+            this.Shipments = new HashSet<Shipments>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,7 @@ namespace Servicio.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_By_Order> Product_By_Order { get; set; }
         public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Shipments> Shipments { get; set; }
     }
 }

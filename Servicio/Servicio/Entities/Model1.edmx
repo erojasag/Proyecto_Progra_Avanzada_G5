@@ -13,7 +13,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Photo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -39,7 +39,7 @@
           <Property Name="Modification_date" Type="datetime2" Precision="7" />
           <Property Name="Birth_date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="User_Id" Type="int" />
         </EntityType>
         <EntityType Name="Product_By_Order">
           <Key>
@@ -60,6 +60,23 @@
           <Property Name="Brand_Id" Type="int" Nullable="false" />
           <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Modification_date" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Shipments">
+          <Key>
+            <PropertyRef Name="shipment_id" />
+          </Key>
+          <Property Name="shipment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shipment_order_id" Type="int" Nullable="false" />
+          <Property Name="shipment_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="shipment_status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shipment_address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shipment_city" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shipment_state" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shipment_zip_code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shipment_country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shipment_phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shipment_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shipment_customer_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ShoppingCart">
           <Key>
@@ -128,6 +145,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_shipment_customer_id">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipments">
+              <PropertyRef Name="shipment_customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_shipment_order_id">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipments">
+              <PropertyRef Name="shipment_order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_shoppingCart_Product_id">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
@@ -153,7 +194,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Id">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -170,6 +211,7 @@
           <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_By_Order" EntityType="Self.Product_By_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Brand_Id" Association="Self.FK_Brand_Id">
@@ -187,6 +229,14 @@
           <AssociationSet Name="FK_Product_Id" Association="Self.FK_Product_Id">
             <End Role="Products" EntitySet="Products" />
             <End Role="Product_By_Order" EntitySet="Product_By_Order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_shipment_customer_id" Association="Self.fk_shipment_customer_id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Shipments" EntitySet="Shipments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_shipment_order_id" Association="Self.fk_shipment_order_id">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Shipments" EntitySet="Shipments" />
           </AssociationSet>
           <AssociationSet Name="FK_shoppingCart_Product_id" Association="Self.FK_shoppingCart_Product_id">
             <End Role="Products" EntitySet="Products" />
@@ -214,7 +264,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Brand_Id" FromRole="Brand" ToRole="Products" />
         </EntityType>
         <EntityType Name="Orders">
@@ -227,6 +277,7 @@
           <Property Name="Order_total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Order_Id" FromRole="Orders" ToRole="Product_By_Order" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Order_User_Id" FromRole="Orders" ToRole="Users" />
+          <NavigationProperty Name="Shipments" Relationship="Self.fk_shipment_order_id" FromRole="Orders" ToRole="Shipments" />
         </EntityType>
         <EntityType Name="Persons">
           <Key>
@@ -243,7 +294,7 @@
           <Property Name="Modification_date" Type="DateTime" Precision="7" />
           <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_Id" FromRole="Persons" ToRole="Users" />
         </EntityType>
         <EntityType Name="Product_By_Order">
@@ -271,6 +322,25 @@
           <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Product_Id" FromRole="Products" ToRole="Product_By_Order" />
           <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_Product_id" FromRole="Products" ToRole="ShoppingCart" />
         </EntityType>
+        <EntityType Name="Shipments">
+          <Key>
+            <PropertyRef Name="shipment_id" />
+          </Key>
+          <Property Name="shipment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shipment_order_id" Type="Int32" Nullable="false" />
+          <Property Name="shipment_date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="shipment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shipment_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shipment_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shipment_state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shipment_zip_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shipment_country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shipment_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shipment_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shipment_customer_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.fk_shipment_order_id" FromRole="Shipments" ToRole="Orders" />
+          <NavigationProperty Name="Users" Relationship="Self.fk_shipment_customer_id" FromRole="Shipments" ToRole="Users" />
+        </EntityType>
         <EntityType Name="ShoppingCart">
           <Key>
             <PropertyRef Name="Id" />
@@ -293,6 +363,7 @@
           <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User_Id" FromRole="Users" ToRole="Orders" />
           <NavigationProperty Name="Persons" Relationship="Self.FK_User_Id" FromRole="Users" ToRole="Persons" />
+          <NavigationProperty Name="Shipments" Relationship="Self.fk_shipment_customer_id" FromRole="Users" ToRole="Shipments" />
           <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_User_id" FromRole="Users" ToRole="ShoppingCart" />
         </EntityType>
         <Association Name="FK_Brand_Id">
@@ -331,8 +402,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_shipment_order_id">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipments">
+              <PropertyRef Name="shipment_order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Id">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -367,6 +450,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_shipment_customer_id">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Shipments" Type="Self.Shipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipments">
+              <PropertyRef Name="shipment_customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_shoppingCart_User_id">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
@@ -385,6 +480,7 @@
           <EntitySet Name="Persons" EntityType="Self.Persons" />
           <EntitySet Name="Product_By_Order" EntityType="Self.Product_By_Order" />
           <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Shipments" EntityType="Self.Shipments" />
           <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_Brand_Id" Association="Self.FK_Brand_Id">
@@ -399,6 +495,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="fk_shipment_order_id" Association="Self.fk_shipment_order_id">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Shipments" EntitySet="Shipments" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_Id" Association="Self.FK_User_Id">
             <End Role="Users" EntitySet="Users" />
             <End Role="Persons" EntitySet="Persons" />
@@ -410,6 +510,10 @@
           <AssociationSet Name="FK_shoppingCart_Product_id" Association="Self.FK_shoppingCart_Product_id">
             <End Role="Products" EntitySet="Products" />
             <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+          </AssociationSet>
+          <AssociationSet Name="fk_shipment_customer_id" Association="Self.fk_shipment_customer_id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Shipments" EntitySet="Shipments" />
           </AssociationSet>
           <AssociationSet Name="FK_shoppingCart_User_id" Association="Self.FK_shoppingCart_User_id">
             <End Role="Users" EntitySet="Users" />
@@ -480,6 +584,24 @@
                 <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
                 <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
                 <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shipments">
+            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Shipments">
+              <MappingFragment StoreEntitySet="Shipments">
+                <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
+                <ScalarProperty Name="shipment_order_id" ColumnName="shipment_order_id" />
+                <ScalarProperty Name="shipment_date" ColumnName="shipment_date" />
+                <ScalarProperty Name="shipment_status" ColumnName="shipment_status" />
+                <ScalarProperty Name="shipment_address" ColumnName="shipment_address" />
+                <ScalarProperty Name="shipment_city" ColumnName="shipment_city" />
+                <ScalarProperty Name="shipment_state" ColumnName="shipment_state" />
+                <ScalarProperty Name="shipment_zip_code" ColumnName="shipment_zip_code" />
+                <ScalarProperty Name="shipment_country" ColumnName="shipment_country" />
+                <ScalarProperty Name="shipment_phone" ColumnName="shipment_phone" />
+                <ScalarProperty Name="shipment_email" ColumnName="shipment_email" />
+                <ScalarProperty Name="shipment_customer_id" ColumnName="shipment_customer_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

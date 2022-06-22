@@ -19,6 +19,9 @@ namespace Servicio.Entities
         public List<Brand> Brands { get; set; }
         public Persons Person { get; set; }
         public List<Persons> Persons { get; set; }
+        public UserPerson UserPerson { get; set; }
+        public List<UserPerson> UserPersons { get; private set; }
+
 
         public Respuesta ArmarRespuestaUsers(int Id, string Message, bool Transaction, Users User, List<Users> Users)
         {
@@ -61,6 +64,17 @@ namespace Servicio.Entities
             respuesta.Transaction = Transaction;
             respuesta.Person = person;
             respuesta.Persons = persons;
+            return respuesta;
+        }
+
+        public Respuesta ArmarRespuestaUserPerson(int Id, string Message, bool Transaction, UserPerson UserPerson, List<UserPerson> UserPersons)
+        {
+            Respuesta respuesta = new Respuesta();
+            respuesta.Id = Id;
+            respuesta.Message = Message;
+            respuesta.Transaction = Transaction;
+            respuesta.UserPerson = UserPerson;
+            respuesta.UserPersons = UserPersons;
             return respuesta;
         }
     }

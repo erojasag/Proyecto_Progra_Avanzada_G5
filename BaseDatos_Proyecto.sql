@@ -4,7 +4,7 @@ USE Proyecto_Progra_Avanzada_G5;
 --------------------------------------USER TABLE-----------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Users(
-	Id int IDENTITY(1,1) NOT NULL,
+	Id int IDENTITY(1,1),
 	Username varchar(50) NOT NULL,
 	Password varchar(50) NOT NULL,
 	User_type varchar(50) NOT NULL,
@@ -32,13 +32,18 @@ CREATE TABLE Persons(
     Modification_date DATETIME2 NULL,
     Birth_date DATETIME2 NOT NULL,
     Address varchar(50) NOT NULL,
-    User_Id int not null,
+    User_Id int,
 CONSTRAINT PK_Person_Id  PRIMARY KEY (Id),
 CONSTRAINT FK_User_Id FOREIGN KEY (User_Id) REFERENCES Users(Id)
 );
 
+INSERT INTO Persons (Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address)
+VALUES('Test', 'testap1', 'testap2', '10000000', '88888888', 'test@test.com', '1998-11-01', 'alajuela');
 
-SELECT * FROM Persons;
+SELECT * FROM Persons p, Users u
+WHERE u.Id = p.Id ;
+
+DELETE FROM Persons
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------PERSON TABLE---------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -53,9 +58,10 @@ CREATE TABLE Brand(
 	Name varchar(50) NOT NULL,
 	Model varchar(50) NOT NULL,
 	Color varchar(50) NOT NULL,
-	Photo varchar(50) NOT NULL,
+	Photo varchar(50),
 CONSTRAINT PK_Brand_Id PRIMARY KEY (Id)
 );
+
 SELECT * FROM Brand;
 INSERT INTO Brand(Name, Model, Color, Photo)
 VALUES('Nike', 'Air Jordan 5', 'Green Bean', 'url');
@@ -170,8 +176,8 @@ CREATE TABLE Shipments(
     shipment_phone varchar(50) NOT NULL,
     shipment_email varchar(50) NOT NULL,
     shipment_customer_id INT NOT NULL,
-    CONSTRAINT fk_shipment_order_id FOREIGN KEY (shipment_order_id) REFERENCES Orders(order_id),
-    CONSTRAINT fk_shipment_customer_id FOREIGN KEY (shipment_customer_id) REFERENCES Customer(User_Id)
+    CONSTRAINT fk_shipment_order_id FOREIGN KEY (shipment_order_id) REFERENCES Orders(id),
+    CONSTRAINT fk_shipment_customer_id FOREIGN KEY (shipment_customer_id) REFERENCES Users(Id)
 );
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------

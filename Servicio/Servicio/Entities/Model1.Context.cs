@@ -30,6 +30,7 @@ namespace Servicio.Entities
         public virtual DbSet<Persons> Persons { get; set; }
         public virtual DbSet<Product_By_Order> Product_By_Order { get; set; }
         public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Shipments> Shipments { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }

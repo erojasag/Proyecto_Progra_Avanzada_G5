@@ -43,6 +43,20 @@ namespace Servicio.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("persons/CheckPersonAndUserById")]
+        public Respuesta CheckPersonAndUserById(int Id)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaUserPerson(1, "OK", true, model.CheckPersonAndUserById(Id), null);
+            }
+            catch (Exception ex)
+            {
+                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+            }
+        }
+
         [HttpPost]
         [Route("persons/InsertPerson")]
         public Respuesta InsertPerson(Persons Person)
@@ -75,11 +89,11 @@ namespace Servicio.Controllers
 
         [HttpPut]
         [Route("persons/EditPerson")]
-        public Respuesta EditPerson()
+        public Respuesta EditPerson(Persons Person)
         {
             try
             {
-                return null;
+                return respuesta.ArmarRespuestaPersons(1, "OK", model.EditPerson(Person), null, null);
             }
             catch (Exception ex)
             {

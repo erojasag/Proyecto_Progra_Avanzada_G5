@@ -114,6 +114,7 @@ namespace Servicio.Models
                         }
                         else
                         {
+                            tproducts.Id = Product.Id;
                             tproducts.Price = Product.Price;
                             tproducts.Stock = Product.Stock;
                             tproducts.Photo = Product.Photo;
