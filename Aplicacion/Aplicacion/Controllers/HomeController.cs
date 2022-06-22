@@ -26,5 +26,12 @@ namespace Aplicacion.Controllers
 
             return View();
         }
+
+        public ActionResult Products()
+        {
+            ViewBag.Message = "Your products page.";
+
+            return View();
+        }
     }
 }

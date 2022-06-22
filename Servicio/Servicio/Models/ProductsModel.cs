@@ -16,17 +16,32 @@ namespace Servicio.Models
                 {
                     var tproducts = db.Products.ToList();
                     List<Products> products = new List<Products>();
+                    
                     foreach (var product in tproducts)
                     {
-                        products.Add(new Products{
-                            Id = product.Id,
-                            Price = product.Price,
-                            Stock = product.Stock,
-                            Photo = product.Photo,
-                            Brand_Id = product.Brand_Id
-                        });
-                    }
+                        if (product.Brand_Id != 0)
+                        {
+                            
+                            var tbrand = db.Brand.Find(product.Brand_Id);
+                            Brand brand = new Brand();
 
+                            brand.Id = product.Brand_Id;
+                            brand.Name = tbrand.Name;
+                            brand.Model = tbrand.Model;
+                            brand.Color = tbrand.Color;
+                            brand.Photo = tbrand.Photo;
+
+                            products.Add(new Products
+                            {
+                                Id = product.Id,
+                                Price = product.Price,
+                                Stock = product.Stock,
+                                Photo = product.Photo,
+                                Brand_Id = product.Brand_Id,
+                                Brand = brand
+                            });
+                        }
+                    }
                     if (products.Count == 0)
                     {
                         throw new Exception("No hay productos para mostrar");
