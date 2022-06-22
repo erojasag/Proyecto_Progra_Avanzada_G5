@@ -44,6 +44,20 @@ namespace Servicio.Controllers
         }
 
         [HttpGet]
+        [Route("persons/ViewPersonsWithUsers")]
+        public Respuesta ViewPersonsWithUsers()
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaUserPerson(1, "OK", true, null, model.ViewPersonsWithUsers());
+            }
+            catch (Exception ex)
+            {
+                return respuesta.ArmarRespuestaUserPerson(-1, ex.Message, false, null, null);
+            }
+        }
+
+        [HttpGet]
         [Route("persons/CheckPersonAndUserById")]
         public Respuesta CheckPersonAndUserById(int Id)
         {
@@ -101,13 +115,41 @@ namespace Servicio.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("persons/DeletePerson")]
-        public Respuesta DeletePerson()
+        [HttpPut]
+        [Route("persons/EditUserPerson")]
+        public Respuesta EditUserPerson(UserPerson UserPerson)
         {
             try
             {
-                return null;
+                return respuesta.ArmarRespuestaUserPerson(1, "OK", model.EditUserPerson(UserPerson), null, null);
+            }
+            catch(Exception ex)
+            {
+                return respuesta.ArmarRespuestaUserPerson(-1, ex.Message, false, null, null);
+            }
+        }
+
+        [HttpDelete]
+        [Route("persons/DeletePerson")]
+        public Respuesta DeletePerson(int Id)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaPersons(1, "OK", model.DeletePerson(Id), null, null);
+            }
+            catch (Exception ex)
+            {
+                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+            }
+        }
+
+        [HttpDelete]
+        [Route("persons/DeletePersonAndUserById")]
+        public Respuesta DeletePersonAndUserById(int Id)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaUserPerson(1, "OK", model.DeletePersonAndUserById(Id), null, null); ;
             }
             catch (Exception ex)
             {

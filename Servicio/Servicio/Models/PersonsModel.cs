@@ -80,6 +80,61 @@ namespace Servicio.Models
                 }
             }
         }
+
+        public List<UserPerson> ViewPersonsWithUsers()
+        {
+            using(var db = new Proyecto_Progra_Avanzada_G5Entities())
+            {
+                try
+                {
+                    List<UserPerson> PersonUserList = new List<UserPerson>();
+
+                    var tUsers = db.Users.ToList();
+                    var tPersons = db.Persons.ToList();
+
+                    if (tUsers != null && tPersons != null)
+                    {
+                        Users user = new Users();
+                        Persons person = new Persons();
+                        foreach (var tUser in tUsers)
+                        {
+                            user.Id = tUser.Id;   
+                            user.Username = tUser.Username;
+                            user.User_type = tUser.User_type;
+
+                        }
+                        foreach (var tPerson in tPersons)
+                        {
+                            person.User_Id = tPerson.User_Id;
+                            person.Name = tPerson.Name;
+                            person.First_last_name = tPerson.First_last_name;
+                            person.Second_last_name = tPerson.Second_last_name;
+                            person.Identification = tPerson.Identification;
+                            person.Phone = tPerson.Phone;
+                            person.Email = tPerson.Email;
+                            person.Birth_date = tPerson.Birth_date;
+                            person.Address = tPerson.Address;
+                            person.Registration_date = tPerson.Registration_date;
+                        }
+                        PersonUserList.Add(new UserPerson
+                        {
+                            Person = person,
+                            User = user
+                        });
+                    }
+                    else
+                    {
+                        throw new Exception("No existen usuarios");
+                    }
+                    return PersonUserList;
+                }
+                catch (Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
         public UserPerson CheckPersonAndUserById(int Id)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
@@ -98,7 +153,9 @@ namespace Servicio.Models
                         person.Name = tperson.Name;
                         person.First_last_name = tperson.First_last_name;
                         person.Second_last_name = tperson.Second_last_name;
+                        person.Identification = tperson.Identification;
                         person.Phone = tperson.Phone;
+                        person.Email = tperson.Email;
                         person.Registration_date = tperson.Registration_date;
                         person.Birth_date = tperson.Birth_date;
                         person.Address = tperson.Address;
@@ -254,6 +311,75 @@ namespace Servicio.Models
             }
         }
 
+        //Edit UserPerson
+        public bool EditUserPerson(UserPerson UserPerson)
+        {
+            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            {
+                try
+                {
+                    var Id = UserPerson.User.Id;
+                    var tUser = db.Users.Find(Id);
+                    var tPerson = db.Persons.Find(Id);
+
+                    if (tUser != null)
+                    {
+                        if (tPerson.Name != UserPerson.Person.Name)
+                        {
+                            tPerson.Name = UserPerson.Person.Name;
+                            tPerson.Modification_date = DateTime.Now;
+                        }
+                        if (tPerson.First_last_name != UserPerson.Person.First_last_name)
+                        {
+                            tPerson.First_last_name = UserPerson.Person.First_last_name;
+                            tPerson.Modification_date = DateTime.Now;
+                        }
+                        if (tPerson.Second_last_name != UserPerson.Person.Second_last_name)
+                        {
+                            tPerson.Second_last_name = UserPerson.Person.Second_last_name;
+                            tPerson.Modification_date = DateTime.Now;
+                        }
+                        if (tPerson.Phone != UserPerson.Person.Phone)
+                        {
+                            tPerson.Phone= UserPerson.Person.Phone;
+                            tPerson.Modification_date = DateTime.Now;
+                        }
+                        if (tPerson.Email != UserPerson.Person.Email)
+                        {
+                            tPerson.Email = UserPerson.Person.Email;
+                            tPerson.Modification_date = DateTime.Now;
+                        }
+                        if (tPerson.Address != UserPerson.Person.Address)
+                        {
+                            tPerson.Address = UserPerson.Person.Address;
+                            tPerson.Modification_date = DateTime.Now;
+                        }
+                        if (tUser.Username != UserPerson.User.Username)
+                        {
+                            tUser.Username = UserPerson.User.Username;
+                        }
+                        if (tUser.Password != UserPerson.User.Password)
+                        {
+                            tUser.Password = UserPerson.User.Password;
+                        }
+
+                        db.SaveChanges();
+                        
+                        return true;
+                    }
+                    else
+                    {
+                        throw new Exception("No se pudo editar el usuario");
+                    }
+
+                }
+                catch(Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
         
 
         public bool DeletePerson(int Id)
@@ -284,7 +410,7 @@ namespace Servicio.Models
             }
         }
 
-        public bool DeletePersonAndUser(int Id)
+        public bool DeletePersonAndUserById(int Id)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
@@ -292,15 +418,23 @@ namespace Servicio.Models
                 {
                     var tperson = db.Persons.Find(Id);
 
+                    
+
                     if (tperson != null)
                     {
-                        db.Persons.Remove(tperson);
-                        db.SaveChanges();
+                        var tuser = db.Users.Find(tperson.User_Id);
+                        if (tuser != null)
+                        {
+                            db.Persons.Remove(tperson);
+                            db.Users.Remove(tuser);
+                            db.SaveChanges();
+                        }
+
                         return true;
                     }
                     else
                     {
-                        throw new Exception("El usuario no se pudo eliminar");
+                        throw new Exception("El usuario no existe");
                     }
 
                 }
@@ -311,11 +445,5 @@ namespace Servicio.Models
                 }
             }
         }
-
-
-
-
-        //DeletePersonAndUserById()
-
     }
 }
