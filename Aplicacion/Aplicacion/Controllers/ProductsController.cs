@@ -1,4 +1,5 @@
-﻿using Aplicacion.Models;
+﻿using Aplicacion.Entities;
+using Aplicacion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,14 @@ namespace Aplicacion.Controllers
 
         ProductsModel model = new ProductsModel();
 
-
-        // GET: Products
         [HttpGet]
         [Route("ViewProducts")]
         public ActionResult ViewProducts()
         {
             try
             {
-                return model.ViewProducts();
+                //var datos = model.ViewProducts();
+                return View();
             }
             catch(Exception ex)
             {

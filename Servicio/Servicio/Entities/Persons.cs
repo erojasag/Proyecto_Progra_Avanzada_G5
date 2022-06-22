@@ -30,8 +30,5 @@ namespace Servicio.Entities
         public virtual Users Users { get; set; }
     }
 
-    public class Employee
-    {
 
-    }
 }

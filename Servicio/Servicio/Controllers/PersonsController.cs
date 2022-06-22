@@ -45,17 +45,34 @@ namespace Servicio.Controllers
 
         [HttpPost]
         [Route("persons/InsertPerson")]
-        public Respuesta InsertPerson(Persons Person, Users User)
+        public Respuesta InsertPerson(Persons Person)
         {
             try
             {
-                return respuesta.ArmarRespuestaPersons(1, "OK", model.InsertPerson(Person, User), null, null);
+                return respuesta.ArmarRespuestaPersons(1, "OK", model.InsertPerson(Person), null, null);
             }
             catch (Exception ex)
             {
                 return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
             }
         }
+
+
+        [HttpPost]
+        [Route("persons/InsertPersonWithUser")]
+        public Respuesta InsertPersonWithUser(UserPerson UserPerson)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaPersons(1, "OK", model.InsertPersonWithUser(UserPerson), null, null);
+            }
+            catch (Exception ex)
+            {
+                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+            }
+        }
+
+
         [HttpPut]
         [Route("persons/EditPerson")]
         public Respuesta EditPerson()

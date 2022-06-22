@@ -79,13 +79,13 @@ namespace Servicio.Models
             }
         }
 
-        public bool InsertPerson(Persons Person, Users User)
+        public bool InsertPerson(Persons Person)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    if (Person != null && User != null)
+                    if (Person != null)
                     {
                         Persons tPerson = new Persons();
                         tPerson.Name = Person.Name;
@@ -97,17 +97,19 @@ namespace Servicio.Models
                         tPerson.Registration_date = DateTime.Now;
                         tPerson.Birth_date = new DateTime();
                         tPerson.Address = Person.Address;
+                        tPerson.Users = Person.Users;
+
+                        
 
 
+                    }
+                    if (Person.Users == null)
+                    {
                         UsersModel model = new UsersModel();
-                        Users tUser = new Users();
-
-                        tUser.Username = User.Username;
-                        tUser.Password = User.Password;
-                        tUser.User_type = User.User_type;
-                        tUser.Photo = User.Photo;
-
-                        model.InsertUser(tUser);
+                        model.InsertUser(new Users
+                        {
+                            
+                        });
                     }
                     return true;
                 }
@@ -118,5 +120,48 @@ namespace Servicio.Models
                 }
             }
         }
+
+        public bool InsertPersonWithUser(UserPerson UserPerson)
+        {
+            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            {
+                try
+                {
+                    
+                    if (UserPerson != null)
+                    {
+                        Persons tPerson = new Persons();
+                        Users user = new Users();
+                        tPerson.Name = UserPerson.Person.Name;
+                        tPerson.First_last_name = UserPerson.Person.First_last_name;
+                        tPerson.Second_last_name = UserPerson.Person.Second_last_name;
+                        tPerson.Identification = UserPerson.Person.Identification;
+                        tPerson.Phone = UserPerson.Person.Phone;
+                        tPerson.Email = UserPerson.Person.Email;
+                        tPerson.Registration_date = DateTime.Now;
+                        tPerson.Birth_date = UserPerson.Person.Birth_date;
+                        tPerson.Address = UserPerson.Person.Address;
+                        user.Username = UserPerson.User.Username;
+                        user.Password = UserPerson.User.Password;
+                        user.User_type = UserPerson.User.User_type;
+                        user.Id = UserPerson.Person.Id;
+                        db.Persons.Add(tPerson);
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        throw new Exception("Faltan parametros");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
     }
 }

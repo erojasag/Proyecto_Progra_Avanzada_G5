@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aplicacion.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -9,26 +10,32 @@ namespace Aplicacion.Models
 {
     public class ProductsModel
     {
-        public ActionResult ViewProducts()
+        public void ViewProducts()
         {
             using(var client = new HttpClient())
             {
-                //ROUTE
-                string Url = System.Configuration.ConfigurationManager.AppSettings["urlServicioProyecto"].ToString();
-                string Route = "products/ViewProducts";
-
-                //I/O PARAMETERS
-
-                HttpResponseMessage response = client.GetAsync(Url+Route).Result;
-                response.EnsureSuccessStatusCode();
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    string responseBody = response.Content.ReadAsStringAsync().Result;
+                    //ROUTE
+                    string Url = System.Configuration.ConfigurationManager.AppSettings["urlServicioProyecto"].ToString();
+                    string Route = "products/ViewProducts";
 
-                    
+                    //I/O PARAMETERS
+
+                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseBody = response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
+                    }
+
+                    //return null;
                 }
-                return null;
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
 
             }
         }
