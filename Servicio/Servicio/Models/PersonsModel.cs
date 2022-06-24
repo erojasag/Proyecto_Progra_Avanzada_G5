@@ -8,19 +8,19 @@ namespace Servicio.Models
 {
     public class PersonsModel
     {
-        public List<Persons> viewPersons()
+        public List<Person> viewPersons()
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var tPersons = db.Persons.ToList();
-                    List<Persons> persons = new List<Persons>();
+                    var tPersons = db.Person.ToList();
+                    List<Person> persons = new List<Person>();
                     if (tPersons.Count != 0)
                     {
                         foreach (var tPerson in tPersons)
                         {
-                            persons.Add(new Persons
+                            persons.Add(new Person
                             {
                                 Id = tPerson.Id,
                                 Name = tPerson.Name,
@@ -51,14 +51,14 @@ namespace Servicio.Models
             }
         }
 
-        public Persons ViewPersonById(int Id)
+        public Person ViewPersonById(int Id)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var tPerson = db.Persons.Find(Id);
-                    Persons Person = new Persons();
+                    var tPerson = db.Person.Find(Id);
+                    Person Person = new Person();
                     if (tPerson != null)
                     {
                         Person.Name = tPerson.Name;
@@ -90,12 +90,12 @@ namespace Servicio.Models
                     List<UserPerson> PersonUserList = new List<UserPerson>();
 
                     var tUsers = db.Users.ToList();
-                    var tPersons = db.Persons.ToList();
+                    var tPersons = db.Person.ToList();
 
                     if (tUsers != null && tPersons != null)
                     {
                         Users user = new Users();
-                        Persons person = new Persons();
+                        Person person = new Person();
                         foreach (var tUser in tUsers)
                         {
                             user.Id = tUser.Id;   
@@ -141,13 +141,13 @@ namespace Servicio.Models
             {
                 try
                 {
-                    var tperson = db.Persons.Find(Id);
+                    var tperson = db.Person.Find(Id);
                     var tuser = db.Users.Find(Id);
                     UserPerson UserPerson = new UserPerson();
 
                     if (tuser != null && tperson != null)
                     {
-                        Persons person = new Persons();
+                        Person person = new Person();
                         Users user = new Users();
                         person.Id = tperson.Id;
                         person.Name = tperson.Name;
@@ -178,7 +178,7 @@ namespace Servicio.Models
         }
 
 
-        public bool InsertPerson(Persons Person)
+        public bool InsertPerson(Person Person)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
@@ -186,7 +186,7 @@ namespace Servicio.Models
                 {
                     if (Person != null)
                     {
-                        Persons tPerson = new Persons();
+                        Person tPerson = new Person();
                         tPerson.Name = Person.Name;
                         tPerson.First_last_name = Person.First_last_name;
                         tPerson.Second_last_name = Person.Second_last_name;
@@ -217,7 +217,7 @@ namespace Servicio.Models
 
                     if (UserPerson != null)
                     {
-                        Persons tPerson = new Persons();
+                        Person tPerson = new Person();
                         Users user = new Users();
                         user.Username = UserPerson.User.Username;
                         user.Password = UserPerson.User.Password;
@@ -237,7 +237,7 @@ namespace Servicio.Models
                         tPerson.Birth_date = UserPerson.Person.Birth_date;
                         tPerson.Address = UserPerson.Person.Address;
                         tPerson.User_Id = u.Id;
-                        db.Persons.Add(tPerson);
+                        db.Person.Add(tPerson);
                         db.SaveChanges();
                         return true;
                     }
@@ -254,13 +254,13 @@ namespace Servicio.Models
             }
         }
 
-        public bool EditPerson(Persons Person)
+        public bool EditPerson(Person Person)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var tperson = db.Persons.Find(Person.Id);
+                    var tperson = db.Person.Find(Person.Id);
                     if (tperson != null)
                     {
                         tperson.Id = Person.Id;
@@ -320,7 +320,7 @@ namespace Servicio.Models
                 {
                     var Id = UserPerson.User.Id;
                     var tUser = db.Users.Find(Id);
-                    var tPerson = db.Persons.Find(Id);
+                    var tPerson = db.Person.Find(Id);
 
                     if (tUser != null)
                     {
@@ -388,11 +388,11 @@ namespace Servicio.Models
             {
                 try
                 {
-                    var tperson = db.Persons.Find(Id);
+                    var tperson = db.Person.Find(Id);
 
                     if (tperson != null)
                     {
-                        db.Persons.Remove(tperson);
+                        db.Person.Remove(tperson);
                         db.SaveChanges();
                         return true;
                     }
@@ -416,7 +416,7 @@ namespace Servicio.Models
             {
                 try
                 {
-                    var tperson = db.Persons.Find(Id);
+                    var tperson = db.Person.Find(Id);
 
                     
 
@@ -425,7 +425,7 @@ namespace Servicio.Models
                         var tuser = db.Users.Find(tperson.User_Id);
                         if (tuser != null)
                         {
-                            db.Persons.Remove(tperson);
+                            db.Person.Remove(tperson);
                             db.Users.Remove(tuser);
                             db.SaveChanges();
                         }

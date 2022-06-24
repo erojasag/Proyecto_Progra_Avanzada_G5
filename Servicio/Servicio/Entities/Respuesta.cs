@@ -13,12 +13,12 @@ namespace Servicio.Entities
         public bool Transaction { get; set; }
         public Users User { get; set; }
         public List<Users> Users { get; set; }
-        public Products Product { get; set; }
-        public List<Products> Products { get; set; }
+        public Product Product { get; set; }
+        public List<Product> Products { get; set; }
         public Brand Brand { get; set; }
         public List<Brand> Brands { get; set; }
-        public Persons Person { get; set; }
-        public List<Persons> Persons { get; set; }
+        public Person Person { get; set; }
+        public List<Person> Persons { get; set; }
         public UserPerson UserPerson { get; set; }
         public List<UserPerson> UserPersons { get; private set; }
 
@@ -34,7 +34,7 @@ namespace Servicio.Entities
             return respuesta;
         }
 
-        public Respuesta ArmarRespuestaProducts(int Id, string Message, bool Transaction, Products Product, List<Products> Products)
+        public Respuesta ArmarRespuestaProducts(int Id, string Message, bool Transaction, Product Product, List<Product> Products)
         {
             Respuesta respuesta = new Respuesta();
             respuesta.Id = Id;
@@ -56,7 +56,7 @@ namespace Servicio.Entities
             return respuesta;
         }
 
-        public Respuesta ArmarRespuestaPersons(int Id, string Message, bool Transaction, Persons person, List<Persons> persons)
+        public Respuesta ArmarRespuestaPerson(int Id, string Message, bool Transaction, Person person, List<Person> persons)
         {
             Respuesta respuesta = new Respuesta();
             respuesta.Id = Id;

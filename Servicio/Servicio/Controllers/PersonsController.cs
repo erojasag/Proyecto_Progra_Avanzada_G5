@@ -16,35 +16,35 @@ namespace Servicio.Controllers
         readonly PersonsModel model = new PersonsModel();
 
         [HttpGet]
-        [Route("persons/ViewPersons")]
+        [Route("person/ViewPersons")]
         public Respuesta ViewPersons()
         {
             try
             {
-                return respuesta.ArmarRespuestaPersons(1, "OK", false, null, model.viewPersons());
+                return respuesta.ArmarRespuestaPerson(1, "OK", false, null, model.viewPersons());
             }
             catch(Exception ex)
             {
-                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
         }
 
         [HttpGet]
-        [Route("persons/ViewPersonById")]
+        [Route("person/ViewPersonById")]
         public Respuesta ViewPersonById(int Id)
         {
             try
             {
-                return respuesta.ArmarRespuestaPersons(1, "OK", true, model.ViewPersonById(Id), null);
+                return respuesta.ArmarRespuestaPerson(1, "OK", true, model.ViewPersonById(Id), null);
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
         }
 
         [HttpGet]
-        [Route("persons/ViewPersonsWithUsers")]
+        [Route("person/ViewPersonsWithUsers")]
         public Respuesta ViewPersonsWithUsers()
         {
             try
@@ -58,7 +58,7 @@ namespace Servicio.Controllers
         }
 
         [HttpGet]
-        [Route("persons/CheckPersonAndUserById")]
+        [Route("person/CheckPersonAndUserById")]
         public Respuesta CheckPersonAndUserById(int Id)
         {
             try
@@ -67,51 +67,51 @@ namespace Servicio.Controllers
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
         }
 
         [HttpPost]
         [Route("persons/InsertPerson")]
-        public Respuesta InsertPerson(Persons Person)
+        public Respuesta InsertPerson(Person Person)
         {
             try
             {
-                return respuesta.ArmarRespuestaPersons(1, "OK", model.InsertPerson(Person), null, null);
+                return respuesta.ArmarRespuestaPerson(1, "OK", model.InsertPerson(Person), null, null);
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
         }
 
 
         [HttpPost]
-        [Route("persons/InsertPersonWithUser")]
+        [Route("Person/InsertPersonWithUser")]
         public Respuesta InsertPersonWithUser(UserPerson UserPerson)
         {
             try
             {
-                return respuesta.ArmarRespuestaPersons(1, "OK", model.InsertPersonWithUser(UserPerson), null, null);
+                return respuesta.ArmarRespuestaPerson(1, "OK", model.InsertPersonWithUser(UserPerson), null, null);
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
         }
 
 
         [HttpPut]
         [Route("persons/EditPerson")]
-        public Respuesta EditPerson(Persons Person)
+        public Respuesta EditPerson(Person Person)
         {
             try
             {
-                return respuesta.ArmarRespuestaPersons(1, "OK", model.EditPerson(Person), null, null);
+                return respuesta.ArmarRespuestaPerson(1, "OK", model.EditPerson(Person), null, null);
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
         }
 
@@ -135,11 +135,11 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuestaPersons(1, "OK", model.DeletePerson(Id), null, null);
+                return respuesta.ArmarRespuestaPerson(1, "OK", model.DeletePerson(Id), null, null);
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
         }
 
@@ -153,7 +153,7 @@ namespace Servicio.Controllers
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuestaPersons(-1, ex.Message, false, null, null);
+                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
         }
 

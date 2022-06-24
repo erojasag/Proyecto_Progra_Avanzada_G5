@@ -8,14 +8,14 @@ namespace Servicio.Models
 {
     public class ProductsModel
     {
-        public List<Products> ViewProducts()
+        public List<Product> ViewProducts()
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var tproducts = db.Products.ToList();
-                    List<Products> products = new List<Products>();
+                    var tproducts = db.Product.ToList();
+                    List<Product> products = new List<Product>();
                     
                     foreach (var product in tproducts)
                     {
@@ -25,17 +25,17 @@ namespace Servicio.Models
                             var tbrand = db.Brand.Find(product.Brand_Id);
                             Brand brand = new Brand();
 
-                            brand.Id = product.Brand_Id;
+                            brand.Id = tbrand.Id;
                             brand.Name = tbrand.Name;
-                            brand.Model = tbrand.Model;
-                            brand.Color = tbrand.Color;
-                            brand.Photo = tbrand.Photo;
 
-                            products.Add(new Products
+
+                            products.Add(new Product
                             {
                                 Id = product.Id,
                                 Price = product.Price,
                                 Stock = product.Stock,
+                                Model = product.Model,
+                                Color = product.Color,
                                 Photo = product.Photo,
                                 Brand_Id = product.Brand_Id,
                                 Brand = brand
@@ -59,14 +59,14 @@ namespace Servicio.Models
             }
         }
 
-        public Products ViewProductById(int Id)
+        public Product ViewProductById(int Id)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var tproduct = db.Products.Find(Id);
-                    Products product = new Products();
+                    var tproduct = db.Product.Find(Id);
+                    Product product = new Product();
                     
                     if (tproduct != null)
                     {
@@ -79,9 +79,6 @@ namespace Servicio.Models
                         var getBrand = db.Brand.Find(product.Brand_Id);
                         brand.Id = getBrand.Id;
                         brand.Name = getBrand.Name;
-                        brand.Model = getBrand.Model;
-                        brand.Color = getBrand.Color;
-                        brand.Photo = getBrand.Photo;
                         product.Brand = brand;
                     }
                     else
@@ -98,16 +95,16 @@ namespace Servicio.Models
             }
         }
 
-        public bool InsertProduct(Products Product)
+        public bool InsertProduct(Product Product)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    Products tproducts = new Products();
+                    Product tproducts = new Product();
                     if (Product != null)
                     {
-                        var checkProduct = db.Products.Find(Product.Id);
+                        var checkProduct = db.Product.Find(Product.Id);
                         if (checkProduct != null)
                         {
                             throw new Exception("El codigo de producto que desea insertar ya existe");
@@ -120,7 +117,7 @@ namespace Servicio.Models
                             tproducts.Photo = Product.Photo;
                             tproducts.Brand_Id = Product.Brand_Id;
                             tproducts.Registration_date = DateTime.Now;
-                            db.Products.Add(tproducts);
+                            db.Product.Add(tproducts);
                             db.SaveChanges();
                         }
                     }
@@ -134,13 +131,13 @@ namespace Servicio.Models
             }
         }
 
-        public bool EditProduct(Products product)
+        public bool EditProduct(Product product)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var tproduct = db.Products.Find(product.Id);
+                    var tproduct = db.Product.Find(product.Id);
                     if (tproduct != null)
                     {
                         tproduct.Id = product.Id;
@@ -186,11 +183,11 @@ namespace Servicio.Models
             {
                 try
                 {
-                    var tproduct = db.Products.Find(Id);
+                    var tproduct = db.Product.Find(Id);
 
                     if (tproduct != null)
                     {
-                        db.Products.Remove(tproduct);
+                        db.Product.Remove(tproduct);
                         db.SaveChanges();
                         return true;
                     }

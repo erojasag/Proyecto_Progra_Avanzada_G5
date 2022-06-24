@@ -6,9 +6,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Photo" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Orders">
     <Key>
@@ -19,7 +16,7 @@
     <Property Name="Order_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="Order_total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
   </EntityType>
-  <EntityType Name="Persons">
+  <EntityType Name="Person">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -36,6 +33,20 @@
     <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="User_Id" Type="int" />
   </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Brand_Id" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Stock" Type="int" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Photo" Type="varchar" MaxLength="50" />
+    <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Modification_date" Type="datetime2" Precision="7" />
+  </EntityType>
   <EntityType Name="Product_By_Order">
     <Key>
       <PropertyRef Name="Id" />
@@ -43,18 +54,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
     <Property Name="Order_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Products">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-    <Property Name="Stock" Type="int" Nullable="false" />
-    <Property Name="Photo" Type="varchar" MaxLength="50" />
-    <Property Name="Brand_Id" Type="int" Nullable="false" />
-    <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="Modification_date" Type="datetime2" Precision="7" />
   </EntityType>
   <EntityType Name="Shipments">
     <Key>
@@ -93,13 +92,13 @@
     <Property Name="Photo" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_Brand_Id">
-    <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
-    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Brand">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Products">
+      <Dependent Role="Product">
         <PropertyRef Name="Brand_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -129,10 +128,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Product_Id">
-    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="Product_By_Order" Type="Self.Product_By_Order" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Products">
+      <Principal Role="Product">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Product_By_Order">
@@ -165,10 +164,10 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_shoppingCart_Product_id">
-    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Products">
+      <Principal Role="Product">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ShoppingCart">
@@ -190,12 +189,12 @@
   </Association>
   <Association Name="FK_User_Id">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-    <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Persons">
+      <Dependent Role="Person">
         <PropertyRef Name="User_Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -203,15 +202,15 @@
   <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_By_Order" EntityType="Self.Product_By_Order" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Brand_Id" Association="Self.FK_Brand_Id">
       <End Role="Brand" EntitySet="Brand" />
-      <End Role="Products" EntitySet="Products" />
+      <End Role="Product" EntitySet="Product" />
     </AssociationSet>
     <AssociationSet Name="FK_Order_Id" Association="Self.FK_Order_Id">
       <End Role="Orders" EntitySet="Orders" />
@@ -222,7 +221,7 @@
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_Id" Association="Self.FK_Product_Id">
-      <End Role="Products" EntitySet="Products" />
+      <End Role="Product" EntitySet="Product" />
       <End Role="Product_By_Order" EntitySet="Product_By_Order" />
     </AssociationSet>
     <AssociationSet Name="fk_shipment_customer_id" Association="Self.fk_shipment_customer_id">
@@ -234,7 +233,7 @@
       <End Role="Shipments" EntitySet="Shipments" />
     </AssociationSet>
     <AssociationSet Name="FK_shoppingCart_Product_id" Association="Self.FK_shoppingCart_Product_id">
-      <End Role="Products" EntitySet="Products" />
+      <End Role="Product" EntitySet="Product" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
     </AssociationSet>
     <AssociationSet Name="FK_shoppingCart_User_id" Association="Self.FK_shoppingCart_User_id">
@@ -243,7 +242,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_User_Id" Association="Self.FK_User_Id">
       <End Role="Users" EntitySet="Users" />
-      <End Role="Persons" EntitySet="Persons" />
+      <End Role="Person" EntitySet="Person" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

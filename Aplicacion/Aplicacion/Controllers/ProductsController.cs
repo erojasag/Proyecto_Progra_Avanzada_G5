@@ -10,8 +10,8 @@ namespace Aplicacion.Controllers
 {
     public class ProductsController : Controller
     {
-
         ProductsModel model = new ProductsModel();
+        Respuesta respuesta = new Respuesta();
 
         [HttpGet]
         [Route("ViewProducts")]
@@ -19,10 +19,42 @@ namespace Aplicacion.Controllers
         {
             try
             {
-                //var datos = model.ViewProducts();
-                return View();
+                var datos = model.ViewProducts();
+
+                if (datos.Id == 0)
+                {
+                    return View();
+                }
+                else
+                {
+                    return View("Error");
+                }
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
+        [Route("ViewProductById")]
+
+        public ActionResult ViewProductById(int Id)
+        {
+            try
+            {
+                var datos = model.ViewProductById(Id);
+
+                if (datos.Id == 0)
+                {
+                    return View();
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

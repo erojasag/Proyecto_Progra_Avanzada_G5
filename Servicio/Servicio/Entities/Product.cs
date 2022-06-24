@@ -12,20 +12,22 @@ namespace Servicio.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Products
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Products()
+        public Product()
         {
             this.Product_By_Order = new HashSet<Product_By_Order>();
             this.ShoppingCart = new HashSet<ShoppingCart>();
         }
     
         public int Id { get; set; }
+        public Nullable<int> Brand_Id { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
+        public string Model { get; set; }
+        public string Color { get; set; }
         public string Photo { get; set; }
-        public int Brand_Id { get; set; }
         public System.DateTime Registration_date { get; set; }
         public Nullable<System.DateTime> Modification_date { get; set; }
     

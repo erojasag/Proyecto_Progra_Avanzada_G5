@@ -6,9 +6,6 @@
         <MappingFragment StoreEntitySet="Brand">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="Color" ColumnName="Color" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -22,9 +19,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Persons">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Persons">
-        <MappingFragment StoreEntitySet="Persons">
+    <EntitySetMapping Name="Person">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Person">
+        <MappingFragment StoreEntitySet="Person">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
@@ -40,25 +37,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Product">
+      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
+          <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Product_By_Order">
       <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Product_By_Order">
         <MappingFragment StoreEntitySet="Product_By_Order">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
           <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Products">
-      <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Products">
-        <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Stock" ColumnName="Stock" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
-          <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
-          <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
-          <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

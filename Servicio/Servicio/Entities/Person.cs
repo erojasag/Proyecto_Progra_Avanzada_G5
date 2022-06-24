@@ -12,7 +12,7 @@ namespace Servicio.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Persons
+    public partial class Person
     {
         public int Id { get; set; }
         public string Name { get; set; }

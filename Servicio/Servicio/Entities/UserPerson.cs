@@ -7,7 +7,7 @@ namespace Servicio.Entities
 {
     public class UserPerson
     {
-        public Persons Person { get; set; }
+        public Person Person { get; set; }
         public Users User { get; set; }
 
     }

@@ -27,9 +27,9 @@ namespace Servicio.Entities
     
         public virtual DbSet<Brand> Brand { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Persons> Persons { get; set; }
+        public virtual DbSet<Person> Person { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Product_By_Order> Product_By_Order { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Shipments> Shipments { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
         public virtual DbSet<Users> Users { get; set; }

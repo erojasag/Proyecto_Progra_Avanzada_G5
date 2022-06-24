@@ -189,10 +189,10 @@
     <Compile Include="Entities\Orders.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Persons.cs">
+    <Compile Include="Entities\Person.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Products.cs">
+    <Compile Include="Entities\Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Product_By_Order.cs">

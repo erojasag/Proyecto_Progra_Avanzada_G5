@@ -21,10 +21,7 @@ namespace Servicio.Models
                         brands.Add(new Brand
                         {
                             Id = brand.Id,
-                            Name = brand.Name,
-                            Model = brand.Model,
-                            Color = brand.Color,
-                            Photo = brand.Photo
+                            Name = brand.Name
                         });
                     }
                     return brands;
@@ -49,9 +46,6 @@ namespace Servicio.Models
                     {
                         brand.Id = tbrand.Id;
                         brand.Name = tbrand.Name;
-                        brand.Model = tbrand.Model;
-                        brand.Color = tbrand.Color;
-                        brand.Photo = tbrand.Photo;
                         return brand;
                     }
                     else
@@ -87,9 +81,6 @@ namespace Servicio.Models
                         {
                             tbrand.Id = brand.Id;
                             tbrand.Name = brand.Name;
-                            tbrand.Model = brand.Model;
-                            tbrand.Color = brand.Color;
-                            tbrand.Photo = brand.Photo;
                             db.Brand.Add(tbrand);
                             db.SaveChanges();
                         }
@@ -116,18 +107,6 @@ namespace Servicio.Models
                         if (brand.Name != null)
                         {
                             tbrand.Name = brand.Name;
-                        }
-                        if (brand.Model != null)
-                        {
-                            tbrand.Model = brand.Model;
-                        }
-                        if (brand.Color != null)
-                        {
-                            tbrand.Color = brand.Color;
-                        }
-                        if (brand.Photo != null)
-                        {
-                            tbrand.Photo = brand.Photo;
                         }
                     }
                     db.SaveChanges();
