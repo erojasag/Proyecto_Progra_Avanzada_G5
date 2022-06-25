@@ -29,7 +29,7 @@ namespace Servicio.Controllers
             }
         }
 
-        [HttpGet]
+        /*[HttpGet]
         [Route("person/ViewPersonById")]
         public Respuesta ViewPersonById(int Id)
         {
@@ -41,7 +41,7 @@ namespace Servicio.Controllers
             {
                 return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
-        }
+        }*/
 
         [HttpGet]
         [Route("person/ViewPersonsWithUsers")]
@@ -71,7 +71,7 @@ namespace Servicio.Controllers
             }
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [Route("persons/InsertPerson")]
         public Respuesta InsertPerson(Person Person)
         {
@@ -83,7 +83,7 @@ namespace Servicio.Controllers
             {
                 return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
-        }
+        }*/
 
 
         [HttpPost]
@@ -101,7 +101,7 @@ namespace Servicio.Controllers
         }
 
 
-        [HttpPut]
+        /*[HttpPut]
         [Route("persons/EditPerson")]
         public Respuesta EditPerson(Person Person)
         {
@@ -113,7 +113,7 @@ namespace Servicio.Controllers
             {
                 return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
-        }
+        }*/
 
         [HttpPut]
         [Route("persons/EditUserPerson")]
@@ -129,7 +129,7 @@ namespace Servicio.Controllers
             }
         }
 
-        [HttpDelete]
+        /*[HttpDelete]
         [Route("persons/DeletePerson")]
         public Respuesta DeletePerson(int Id)
         {
@@ -141,7 +141,7 @@ namespace Servicio.Controllers
             {
                 return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
             }
-        }
+        }*/
 
         [HttpDelete]
         [Route("persons/DeletePersonAndUserById")]

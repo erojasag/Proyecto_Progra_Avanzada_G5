@@ -51,7 +51,7 @@ namespace Servicio.Models
             }
         }
 
-        public Person ViewPersonById(int Id)
+        /*public Person ViewPersonById(int Id)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
@@ -79,7 +79,7 @@ namespace Servicio.Models
                     throw ex;
                 }
             }
-        }
+        }*/
 
         public List<UserPerson> ViewPersonsWithUsers()
         {
@@ -166,6 +166,10 @@ namespace Servicio.Models
                         UserPerson.Person = person;
                         UserPerson.User = user;
                     }
+                    else
+                    {
+                        throw new Exception("El usuario ID:" + Id + " " + "no existe");
+                    }
 
                     return UserPerson;
                 }
@@ -178,7 +182,7 @@ namespace Servicio.Models
         }
 
 
-        public bool InsertPerson(Person Person)
+        /*public bool InsertPerson(Person Person)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
@@ -206,7 +210,7 @@ namespace Servicio.Models
                     throw ex;
                 }
             }
-        }
+        }*/
 
         public bool InsertPersonWithUser(UserPerson UserPerson)
         {
@@ -214,6 +218,52 @@ namespace Servicio.Models
             {
                 try
                 {
+                    var checkPerson = db.Person.ToList();
+                    List<Person> persons = new List<Person>();
+                    var checkUsers = db.Users.ToList();
+                    List<Users> users = new List<Users>();
+
+                    if (checkPerson != null)
+                    {
+                        foreach (var cperson in checkPerson)
+                        {
+                            persons.Add(new Person
+                            {
+                                Name = cperson.Name,
+                                First_last_name = cperson.First_last_name,
+                                Second_last_name = cperson.Second_last_name,
+                                Identification = cperson.Identification,
+                                Phone = cperson.Phone,
+                                Email = cperson.Email,
+                                Address = cperson.Address
+                            });
+                        };
+                        foreach (var cuser in checkUsers)
+                        {
+                            users.Add(new Users
+                            {
+                                Username = cuser.Username
+                            });
+                        }
+                        foreach (var person in persons)
+                        {
+                            if (UserPerson.Person.Identification == person.Identification)
+                            {
+                                throw new Exception("Ya hay un usuario registrado con el numero de identificacion:" + " " + UserPerson.Person.Identification);
+                            }
+                            if (UserPerson.Person.Email == person.Email)
+                            {
+                                throw new Exception("El correo ingresado ya se encuentra registrado a un usuario");
+                            }
+                        };
+                        foreach(var user in users)
+                        {
+                            if (UserPerson.User.Username == user.Username)
+                            {
+                                throw new Exception("El username que intenta usar ya se encuentra registrado");
+                            }
+                        }
+                    }
 
                     if (UserPerson != null)
                     {
@@ -225,8 +275,6 @@ namespace Servicio.Models
                         db.Users.Add(user);
                         db.SaveChanges();
 
-                        var u = db.Users.FirstOrDefault();
-
                         tPerson.Name = UserPerson.Person.Name;
                         tPerson.First_last_name = UserPerson.Person.First_last_name;
                         tPerson.Second_last_name = UserPerson.Person.Second_last_name;
@@ -236,7 +284,7 @@ namespace Servicio.Models
                         tPerson.Registration_date = DateTime.Now;
                         tPerson.Birth_date = UserPerson.Person.Birth_date;
                         tPerson.Address = UserPerson.Person.Address;
-                        tPerson.User_Id = u.Id;
+                        tPerson.User_Id = user.Id;
                         db.Person.Add(tPerson);
                         db.SaveChanges();
                         return true;
@@ -254,7 +302,7 @@ namespace Servicio.Models
             }
         }
 
-        public bool EditPerson(Person Person)
+        /*public bool EditPerson(Person Person)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
@@ -309,7 +357,7 @@ namespace Servicio.Models
                     throw ex;
                 }
             }
-        }
+        }*/
 
         //Edit UserPerson
         public bool EditUserPerson(UserPerson UserPerson)
@@ -382,7 +430,7 @@ namespace Servicio.Models
         }
         
 
-        public bool DeletePerson(int Id)
+        /*public bool DeletePerson(int Id)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
@@ -408,7 +456,7 @@ namespace Servicio.Models
                     throw ex;
                 }
             }
-        }
+        }*/
 
         public bool DeletePersonAndUserById(int Id)
         {

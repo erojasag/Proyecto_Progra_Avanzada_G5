@@ -16,13 +16,14 @@ namespace Servicio.Models
                 {
                     var tbrand = db.Brand.ToList();
                     List<Brand> brands = new List<Brand>();
-                    foreach(var brand in tbrand)
+                    
+                    foreach (var brand in tbrand)
                     {
                         brands.Add(new Brand
                         {
                             Id = brand.Id,
                             Name = brand.Name
-                        });
+                        });                           
                     }
                     return brands;
                 }
@@ -52,7 +53,6 @@ namespace Servicio.Models
                     {
                         throw new Exception("La marca no se encontro con el id" + " " + Id);
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -68,24 +68,42 @@ namespace Servicio.Models
             {
                 try
                 {
-                    Brand tbrand = new Brand();
-
                     if (brand != null)
                     {
-                        var checkBrand = db.Brand.Find(brand.Id);
-                        if(checkBrand != null)
+                        var checkBrand = db.Brand.ToList();
+                        List<Brand> brands = new List<Brand>();
+
+                        if (checkBrand != null)
                         {
-                            throw new Exception("El codigo que desea insertar ya existe");
+                            foreach (var cbrand in checkBrand)
+                            {
+                                brands.Add(new Brand
+                                {
+                                    Id = cbrand.Id,
+                                    Name = cbrand.Name
+                                });
+                            };
                         }
-                        else
+
+                        foreach(var lbrand in brands)
                         {
-                            tbrand.Id = brand.Id;
-                            tbrand.Name = brand.Name;
-                            db.Brand.Add(tbrand);
-                            db.SaveChanges();
-                        }
+                            while(brand.Name == lbrand.Name)
+                            {
+                                throw new Exception("La marca que desea insertar ya existe");
+                            }
+                        };
+
+                        Brand tbrand = new Brand();
+                        tbrand.Name = brand.Name;
+                        db.Brand.Add(tbrand);
+                        db.SaveChanges();
+                        return true;
                     }
-                    return true;
+                    else
+                    {
+                        throw new Exception("No hay marcas registradas");
+                    }
+    
                 }
                 catch (Exception ex)
                 {
