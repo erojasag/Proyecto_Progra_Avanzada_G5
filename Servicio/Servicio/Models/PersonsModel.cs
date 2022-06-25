@@ -106,6 +106,7 @@ namespace Servicio.Models
                         foreach (var tPerson in tPersons)
                         {
                             person.User_Id = tPerson.User_Id;
+                            person.Id = tPerson.Id;
                             person.Name = tPerson.Name;
                             person.First_last_name = tPerson.First_last_name;
                             person.Second_last_name = tPerson.Second_last_name;
@@ -274,7 +275,6 @@ namespace Servicio.Models
                         user.User_type = UserPerson.User.User_type;
                         db.Users.Add(user);
                         db.SaveChanges();
-
                         tPerson.Name = UserPerson.Person.Name;
                         tPerson.First_last_name = UserPerson.Person.First_last_name;
                         tPerson.Second_last_name = UserPerson.Person.Second_last_name;
@@ -370,6 +370,17 @@ namespace Servicio.Models
                     var tUser = db.Users.Find(Id);
                     var tPerson = db.Person.Find(Id);
 
+                    List<Users> users = new List<Users>();
+                    var checkUsers = db.Users.ToList();
+
+                    foreach (var cuser in checkUsers)
+                    {
+                        users.Add(new Users
+                        {
+                            Username = cuser.Username
+                        });
+                    };
+
                     if (tUser != null)
                     {
                         if (tPerson.Name != UserPerson.Person.Name)
@@ -404,6 +415,13 @@ namespace Servicio.Models
                         }
                         if (tUser.Username != UserPerson.User.Username)
                         {
+                            foreach (var user in users)
+                            {
+                                if (UserPerson.User.Username == user.Username)
+                                {
+                                    throw new Exception("El username que intenta usar ya se encuentra registrado");
+                                }
+                            }
                             tUser.Username = UserPerson.User.Username;
                         }
                         if (tUser.Password != UserPerson.User.Password)
