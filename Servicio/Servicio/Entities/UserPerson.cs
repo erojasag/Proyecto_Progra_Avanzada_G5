@@ -10,5 +10,7 @@ namespace Servicio.Entities
         public Person Person { get; set; }
         public Users User { get; set; }
 
+        public List<UserPerson> UserPersons { get; set; }
+
     }
 }

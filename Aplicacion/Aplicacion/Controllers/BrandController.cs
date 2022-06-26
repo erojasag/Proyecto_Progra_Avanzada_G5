@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Entities;
+using Aplicacion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,28 @@ namespace Aplicacion.Controllers
 {
     public class BrandController : Controller
     {
-        // GET: Brand
+        BrandModel model = new BrandModel();
+
+        [HttpGet]
+        [Route("ViewBrands")]
         public ActionResult ViewBrands()
         {
-            return View();
+            try
+            {
+                var datos = model.ViewBrands();
+                if(datos != null)
+                {
+                    return View(datos.Brands);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public ActionResult ViewBrandById(int Id)

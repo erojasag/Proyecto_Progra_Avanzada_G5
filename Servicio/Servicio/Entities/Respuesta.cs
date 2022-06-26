@@ -20,7 +20,7 @@ namespace Servicio.Entities
         public Person Person { get; set; }
         public List<Person> Persons { get; set; }
         public UserPerson UserPerson { get; set; }
-        public List<UserPerson> UserPersons { get; private set; }
+        public List<UserPerson> UsersPersons { get; set; }
 
 
         public Respuesta ArmarRespuestaUsers(int Id, string Message, bool Transaction, Users User, List<Users> Users)
@@ -67,14 +67,14 @@ namespace Servicio.Entities
             return respuesta;
         }
 
-        public Respuesta ArmarRespuestaUserPerson(int Id, string Message, bool Transaction, UserPerson UserPerson, List<UserPerson> UserPersons)
+        public Respuesta ArmarRespuestaUserPerson(int Id, string Message, bool Transaction, UserPerson UserPerson, List<UserPerson> UsersPersons)
         {
             Respuesta respuesta = new Respuesta();
             respuesta.Id = Id;
             respuesta.Message = Message;
             respuesta.Transaction = Transaction;
             respuesta.UserPerson = UserPerson;
-            respuesta.UserPersons = UserPersons;
+            respuesta.UsersPersons = UsersPersons;
             return respuesta;
         }
     }

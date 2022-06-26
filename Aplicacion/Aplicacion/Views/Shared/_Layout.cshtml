@@ -22,9 +22,6 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    @Html.ActionLink("Products", "ViewProducts", "Products", null, new { @class = "nav-link" })
-                </li>
             </ul>
             
             <ul class="navbar-nav ml-auto">
@@ -145,8 +142,8 @@
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Alexander Pierce</a>
-                    </div>-->
-                </div> 
+                </div>-->
+                </div>
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -154,21 +151,73 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Starter Pages
+                                    Products
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Home")" class="nav-link active">
+                                    <a href="@Url.Action("ViewProducts", "Product")" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Home</p>
+                                        <p>View List Of Products</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ViewProductById", "Product")" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Search product By Id</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Brands
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ViewBrands", "Brand")" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>List Of Brands</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="@Url.Action("Contact", "Home")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Contact</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Users
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("ViewPersonsWithUsers", "Persons")" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>View List Of Users</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("CheckPersonAndUserById", "Persons")" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Search user By Id</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("InsertPersonWithUser", "Persons")" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Insert user</p>
                                     </a>
                                 </li>
                             </ul>

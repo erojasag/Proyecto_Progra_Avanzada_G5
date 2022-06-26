@@ -1,7 +1,29 @@
-﻿
-@{
-    ViewBag.Title = "InsertPersonWithUser";
-}
+﻿@model  Aplicacion.Entities.UserPerson
+@{ if (IsPost)
+    {
+        <form method="post" action="">
+            Name:<br />
+            <input type="text" name="Name" value="" /><br />
+            First Name:<br />
+            <input type="text" name="FirstName" value="" /><br />
+            Last Name:<br />
+            <input type="text" name="SecondLastName" value="" /><br />
+            Identification:<br />
+            <input type="text" name="Identification" value="" /><br />
+            Email:<br />
+            <input type="text" name="Email" value="" /><br />
+            Birth_date:<br />
+            <input type="text" name="SecondLastName" value="" /><br />
+            Address:<br />
+            <input type="text" name="Adress" value="" /><br />
+            <input type="submit" value="Submit" class="submit" />
+        </form>
+        string Id = Request["Id"];
+    }
+    else
+    {
 
-<h2>InsertPersonWithUser</h2>
+    }
+    ViewBag.Title = "Insert New User";
+}
 

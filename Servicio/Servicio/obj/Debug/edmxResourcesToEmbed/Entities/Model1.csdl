@@ -33,7 +33,7 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="Modification_date" Type="DateTime" Precision="7" />
-    <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_Id" Type="Int32" />
     <NavigationProperty Name="Users" Relationship="Self.FK_User_Id" FromRole="Person" ToRole="Users" />
@@ -263,5 +263,25 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
     </AssociationSet>
+    <FunctionImport Name="view_users" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_users_Result)" />
   </EntityContainer>
+  <ComplexType Name="view_users_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="First_last_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Second_last_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Identification" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Registration_date" Nullable="false" />
+    <Property Type="DateTime" Name="Modification_date" Nullable="true" />
+    <Property Type="DateTime" Name="Birth_date" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="User_Id" Nullable="true" />
+    <Property Type="Int32" Name="Id1" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="User_type" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Photo" Nullable="true" MaxLength="50" />
+  </ComplexType>
 </Schema>

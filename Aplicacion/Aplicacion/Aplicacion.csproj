@@ -2398,8 +2398,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Products\ViewProducts.cshtml" />
-    <Content Include="Views\Products\ViewProductById.cshtml" />
+    <Content Include="Views\Product\ViewProducts.cshtml" />
+    <Content Include="Views\Product\ViewProductById.cshtml" />
     <Content Include="Views\Brand\ViewBrands.cshtml" />
     <Content Include="Views\Brand\ViewBrandById.cshtml" />
     <Content Include="Views\Brand\InsertBrand.cshtml" />

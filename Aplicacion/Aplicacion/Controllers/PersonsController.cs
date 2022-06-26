@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Entities;
+using Aplicacion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Aplicacion.Controllers
 {
     public class PersonsController : Controller
     {
+        PersonsModel model = new PersonsModel();
         public ActionResult viewPersons()
         {
             return null;
@@ -19,9 +21,26 @@ namespace Aplicacion.Controllers
             
         }*/
 
+        [HttpGet]
+        [Route("ViewPersonsWithUsers")]
         public ActionResult ViewPersonsWithUsers()
         {
-            return null;
+            try
+            {
+                var datos = model.ViewPersonsWithUsers();
+                if (datos != null)
+                {
+                    return View(datos.UsersPersons);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public ActionResult CheckPersonAndUserById(int Id)
         {
@@ -36,7 +55,22 @@ namespace Aplicacion.Controllers
 
         public ActionResult InsertPersonWithUser(UserPerson UserPerson)
         {
-            return null;
+            try
+            {
+                var datos = model.InsertPersonWithUser(UserPerson);
+                if (datos != null)
+                {
+                    return View(datos.UsersPersons);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /*public bool EditPerson(Person Person)

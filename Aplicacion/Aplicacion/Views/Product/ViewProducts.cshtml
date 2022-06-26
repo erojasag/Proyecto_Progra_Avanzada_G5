@@ -2,17 +2,7 @@
 
 @{
     ViewBag.Title = "Products List";
-
-    
 }
-
-
-<style>
-    [class*="col-"] {
-        background-color: lightblue;
-        border: 1px solid black;
-    }
-</style>
 
 <div class="container">
     <table class="table">
@@ -24,7 +14,7 @@
                 <th>@Html.DisplayNameFor(model => model.Stock)</th>
                 <th>@Html.DisplayNameFor(model => model.Model)</th>
                 <th>@Html.DisplayNameFor(model => model.Color)</th>
-                <th>@Html.DisplayNameFor(model => model.shoeSize)</th>
+                <th>@Html.DisplayNameFor(model => model.shoeSize)"Talla"</th>
                 <th>@Html.DisplayNameFor(model => model.Photo)</th>
             </tr>
         </thead>
@@ -32,8 +22,9 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <th></th>
+                    
                     <th>@item.Id</th>
+                    <th>@item.Brand_Id</th>
                     <th>@item.Price</th>
                     <th>@item.Stock</th>
                     <th>@item.Model</th>

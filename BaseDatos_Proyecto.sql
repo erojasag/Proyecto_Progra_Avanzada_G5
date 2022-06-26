@@ -31,7 +31,7 @@ CREATE TABLE Person(
     Email varchar(50) NOT NULL,
     Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Modification_date DATETIME2 NULL,
-    Birth_date DATETIME2 NOT NULL,
+    Birth_date DATE NOT NULL,
     Address varchar(50) NOT NULL,
     User_Id int,
 CONSTRAINT PK_Person_Id  PRIMARY KEY (Id),
@@ -81,6 +81,7 @@ CREATE TABLE Product(
     Stock INT NOT NULL,
     Model varchar(50) not null,
     Color Varchar(50) not null,
+    shoeSize varchar(2) not null,
     Photo varchar(50),
     Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Modification_date DATETIME2 NULL,
@@ -94,11 +95,12 @@ VALUES(0002,1,150000, 8, 'Jordan Retro 1', 'red')
 SELECT * FROM Product p
 INNER JOIN Brand b 
 ON p.Brand_Id = b.Id 
-DELETE FROM Products WHERE Brand_Id = '1';
+DELETE FROM Product WHERE Brand_Id = '1';
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------PRODUCT TABLE--------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 

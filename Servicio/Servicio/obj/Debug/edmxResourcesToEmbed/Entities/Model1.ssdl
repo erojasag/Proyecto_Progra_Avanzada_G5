@@ -29,7 +29,7 @@
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Modification_date" Type="datetime2" Precision="7" />
-    <Property Name="Birth_date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Birth_date" Type="date" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="User_Id" Type="int" />
   </EntityType>
@@ -200,6 +200,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="view_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />

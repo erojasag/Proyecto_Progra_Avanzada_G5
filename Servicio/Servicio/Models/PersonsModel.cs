@@ -87,24 +87,13 @@ namespace Servicio.Models
             {
                 try
                 {
-                    List<UserPerson> PersonUserList = new List<UserPerson>();
-
-                    var tUsers = db.Users.ToList();
                     var tPersons = db.Person.ToList();
-
-                    if (tUsers != null && tPersons != null)
+                    List<UserPerson> PersonUserList = new List<UserPerson>();
+                    if (tPersons != null)
                     {
-                        Users user = new Users();
-                        Person person = new Person();
-                        foreach (var tUser in tUsers)
-                        {
-                            user.Id = tUser.Id;   
-                            user.Username = tUser.Username;
-                            user.User_type = tUser.User_type;
-
-                        }
                         foreach (var tPerson in tPersons)
                         {
+                            Person person = new Person();
                             person.User_Id = tPerson.User_Id;
                             person.Id = tPerson.Id;
                             person.Name = tPerson.Name;
@@ -116,12 +105,18 @@ namespace Servicio.Models
                             person.Birth_date = tPerson.Birth_date;
                             person.Address = tPerson.Address;
                             person.Registration_date = tPerson.Registration_date;
+
+                            var tUser = db.Users.Find(tPerson.User_Id);
+                            Users user = new Users();
+                            user.Id = tUser.Id;
+                            user.Username = tUser.Username;
+                            user.User_type = tUser.User_type;
+                            PersonUserList.Add(new UserPerson
+                            {
+                                User = user,
+                                Person = person
+                            });
                         }
-                        PersonUserList.Add(new UserPerson
-                        {
-                            Person = person,
-                            User = user
-                        });
                     }
                     else
                     {

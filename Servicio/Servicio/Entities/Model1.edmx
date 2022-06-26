@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Proyecto_Progra_Avanzada_G5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Proyecto_Progra_Avanzada_G5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="Id" />
@@ -34,7 +34,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Modification_date" Type="datetime2" Precision="7" />
-          <Property Name="Birth_date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Birth_date" Type="date" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="User_Id" Type="int" />
         </EntityType>
@@ -205,6 +205,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="view_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -251,8 +252,7 @@
             <End Role="Person" EntitySet="Person" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Proyecto_Progra_Avanzada_G5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -289,7 +289,7 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Modification_date" Type="DateTime" Precision="7" />
-          <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="User_Id" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_Id" FromRole="Person" ToRole="Users" />
@@ -519,7 +519,27 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="ShoppingCart" EntitySet="ShoppingCart" />
           </AssociationSet>
+          <FunctionImport Name="view_users" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_users_Result)" />
         </EntityContainer>
+        <ComplexType Name="view_users_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="First_last_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Second_last_name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Identification" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Registration_date" Nullable="false" />
+          <Property Type="DateTime" Name="Modification_date" Nullable="true" />
+          <Property Type="DateTime" Name="Birth_date" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="User_Id" Nullable="true" />
+          <Property Type="Int32" Name="Id1" Nullable="false" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="User_type" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Photo" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -626,6 +646,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="view_users" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_users">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_users_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
+                <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
+                <ScalarProperty Name="Identification" ColumnName="Identification" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
+                <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
+                <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Id1" ColumnName="Id1" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="User_type" ColumnName="User_type" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
