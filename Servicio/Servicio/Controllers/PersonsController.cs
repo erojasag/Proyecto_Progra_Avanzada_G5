@@ -87,7 +87,7 @@ namespace Servicio.Controllers
 
 
         [HttpPost]
-        [Route("Person/InsertPersonWithUser")]
+        [Route("person/InsertPersonWithUser")]
         public Respuesta InsertPersonWithUser(UserPerson UserPerson)
         {
             try
@@ -116,7 +116,7 @@ namespace Servicio.Controllers
         }*/
 
         [HttpPut]
-        [Route("persons/EditUserPerson")]
+        [Route("person/EditUserPerson")]
         public Respuesta EditUserPerson(UserPerson UserPerson)
         {
             try
@@ -144,7 +144,7 @@ namespace Servicio.Controllers
         }*/
 
         [HttpDelete]
-        [Route("persons/DeletePersonAndUserById")]
+        [Route("person/DeletePersonAndUserById")]
         public Respuesta DeletePersonAndUserById(int Id)
         {
             try

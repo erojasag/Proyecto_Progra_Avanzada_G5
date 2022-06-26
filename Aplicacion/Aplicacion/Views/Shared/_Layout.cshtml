@@ -22,6 +22,9 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
                 </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    @Html.ActionLink("Products", "ViewProducts", "Products", null, new { @class = "nav-link" })
+                </li>
             </ul>
             
             <ul class="navbar-nav ml-auto">
@@ -180,24 +183,25 @@
         <div class="content-wrapper">
             <div class="content-header">
                 <div class="container-fluid">
+                    <h1 class="m-0 text-dark">@ViewBag.Title</h1>
 
-                    <div class="row mb-2">
+                    @*<div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0 text-dark">@ViewBag.Title</h1>
-                        </div><!-- /.col -->
+                        </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 @if (@ViewContext.RouteData.Values["controller"].ToString() != "Home" ||
                                     @ViewContext.RouteData.Values["action"].ToString() != "Index")
                                 {
                                     <li class="breadcrumb-item">
-                                        @Html.ActionLink("Home Page", "Index", "Home")
+                                       
                                     </li>
                                 }
                                 <li class="breadcrumb-item active">@ViewBag.Title</li>
                             </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
+                        </div>
+                    </div>*@
 
                 </div>
             </div>

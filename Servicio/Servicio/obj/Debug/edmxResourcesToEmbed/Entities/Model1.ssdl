@@ -43,6 +43,7 @@
     <Property Name="Stock" Type="int" Nullable="false" />
     <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="shoeSize" Type="varchar" MaxLength="2" Nullable="false" />
     <Property Name="Photo" Type="varchar" MaxLength="50" />
     <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Modification_date" Type="datetime2" Precision="7" />

@@ -46,6 +46,7 @@
           <ScalarProperty Name="Stock" ColumnName="Stock" />
           <ScalarProperty Name="Model" ColumnName="Model" />
           <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="shoeSize" ColumnName="shoeSize" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
           <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />

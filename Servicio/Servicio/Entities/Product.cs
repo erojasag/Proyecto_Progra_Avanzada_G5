@@ -27,6 +27,7 @@ namespace Servicio.Entities
         public int Stock { get; set; }
         public string Model { get; set; }
         public string Color { get; set; }
+        public string shoeSize { get; set; }
         public string Photo { get; set; }
         public System.DateTime Registration_date { get; set; }
         public Nullable<System.DateTime> Modification_date { get; set; }

@@ -1,9 +1,11 @@
-﻿
+﻿@model  IEnumerable<Aplicacion.Entities.Product>
+
 @{
-    ViewBag.Title = "ViewProducts";
+    ViewBag.Title = "Products List";
+
+    
 }
 
-<h2>ViewProducts</h2>
 
 <style>
     [class*="col-"] {
@@ -13,18 +15,34 @@
 </style>
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-6 col-md-4">
-            One
-        </div>
-        <div class="col-lg-6 col-md-4">
-            two
-        </div>
-        <div class="col-lg-6 col-md-4">
-            three
-        </div>
-        <div class="col-lg-6 col-md-4">
-            four
-        </div>
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Brand_Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.Stock)</th>
+                <th>@Html.DisplayNameFor(model => model.Model)</th>
+                <th>@Html.DisplayNameFor(model => model.Color)</th>
+                <th>@Html.DisplayNameFor(model => model.shoeSize)</th>
+                <th>@Html.DisplayNameFor(model => model.Photo)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th></th>
+                    <th>@item.Id</th>
+                    <th>@item.Price</th>
+                    <th>@item.Stock</th>
+                    <th>@item.Model</th>
+                    <th>@item.Color</th>
+                    <th>@item.shoeSize</th>
+                    <th>@item.Photo</th>
+                </tr>
+            }
+
+        </tbody>
+    </table>
 </div>

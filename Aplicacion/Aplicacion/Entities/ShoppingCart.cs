@@ -12,7 +12,7 @@ namespace Aplicacion.Entities
         public int User_Id { get; set; }
         public int Product_Id { get; set; }
 
-        public virtual Products Products { get; set; }
+        public virtual Product Products { get; set; }
         public virtual Users Users { get; set; }
     }
 }

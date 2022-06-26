@@ -48,6 +48,7 @@
           <Property Name="Stock" Type="int" Nullable="false" />
           <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="shoeSize" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Photo" Type="varchar" MaxLength="50" />
           <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Modification_date" Type="datetime2" Precision="7" />
@@ -303,6 +304,7 @@
           <Property Name="Stock" Type="Int32" Nullable="false" />
           <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="shoeSize" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Modification_date" Type="DateTime" Precision="7" />
@@ -569,6 +571,7 @@
                 <ScalarProperty Name="Stock" ColumnName="Stock" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="shoeSize" ColumnName="shoeSize" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
                 <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />

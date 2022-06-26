@@ -32,12 +32,14 @@ namespace Servicio.Models
                             products.Add(new Product
                             {
                                 Id = product.Id,
+                                Brand_Id = product.Brand_Id,
                                 Price = product.Price,
                                 Stock = product.Stock,
                                 Model = product.Model,
                                 Color = product.Color,
                                 Photo = product.Photo,
-                                Brand_Id = product.Brand_Id,
+                                shoeSize = product.shoeSize,
+                                Registration_date = product.Registration_date,
                                 Brand = brand
                             });
                         }
@@ -73,6 +75,9 @@ namespace Servicio.Models
                         product.Id = tproduct.Id;
                         product.Price = tproduct.Price;
                         product.Stock = tproduct.Stock;
+                        product.Model = tproduct.Model;
+                        product.Color = tproduct.Color;
+                        product.shoeSize = tproduct.shoeSize;
                         product.Photo = tproduct.Photo;
                         product.Brand_Id = tproduct.Brand_Id;
                         Brand brand = new Brand();
@@ -104,22 +109,66 @@ namespace Servicio.Models
                     Product tproducts = new Product();
                     if (Product != null)
                     {
-                        var checkProduct = db.Product.Find(Product.Id);
-                        if (checkProduct != null)
+                        var checkProduct = db.Product.ToList();
+                        List<Product> products = new List<Product>();
+                        if(checkProduct.Count > 0)
                         {
-                            throw new Exception("El codigo de producto que desea insertar ya existe");
-                        }
-                        else
-                        {
+                            foreach (var item in checkProduct)
+                            {
+                                products.Add(new Product
+                                {
+                                    Id = item.Id,
+                                    Brand_Id = item.Brand_Id,
+                                    Price = item.Price,
+                                    Stock = item.Stock,
+                                    Model = item.Model,
+                                    Color = item.Color,
+                                    shoeSize = item.shoeSize,
+                                    Photo = item.Photo,
+                                });
+                            }
+                            foreach (var item in products)
+                            {
+                                if (item.Id == Product.Id)
+                                {
+                                    throw new Exception("El codigo de producto que desea insertar ya existe");
+                                }
+                                if (item.shoeSize == Product.shoeSize)
+                                {
+                                    throw new Exception("La talla ya se encuentra registrada, para anadir un producto hazlo modificando su stock");
+                                }
+                            };
+
                             tproducts.Id = Product.Id;
+                            tproducts.Brand_Id = Product.Brand_Id;
                             tproducts.Price = Product.Price;
                             tproducts.Stock = Product.Stock;
+                            tproducts.Model = Product.Model;
+                            tproducts.Color = Product.Color;
+                            tproducts.shoeSize = Product.shoeSize;
                             tproducts.Photo = Product.Photo;
-                            tproducts.Brand_Id = Product.Brand_Id;
                             tproducts.Registration_date = DateTime.Now;
                             db.Product.Add(tproducts);
                             db.SaveChanges();
                         }
+                        else
+                        {
+                            tproducts.Id = Product.Id;
+                            tproducts.Brand_Id = Product.Brand_Id;
+                            tproducts.Price = Product.Price;
+                            tproducts.Stock = Product.Stock;
+                            tproducts.Model = Product.Model;
+                            tproducts.Color = Product.Color;
+                            tproducts.shoeSize = Product.shoeSize;
+                            tproducts.Photo = Product.Photo;
+                            tproducts.Registration_date = DateTime.Now;
+                            db.Product.Add(tproducts);
+                            db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Ingrese los parametros del producto");
                     }
                     return true;
                 }
@@ -140,8 +189,6 @@ namespace Servicio.Models
                     var tproduct = db.Product.Find(product.Id);
                     if (tproduct != null)
                     {
-                        tproduct.Id = product.Id;
-
                         if (product.Price != 0)
                         {
                             tproduct.Price = product.Price;
@@ -151,6 +198,41 @@ namespace Servicio.Models
                         {
                             tproduct.Stock = product.Stock;
                             tproduct.Modification_date = DateTime.Now;
+                        }
+                        if (product.Model != null)
+                        {
+                            tproduct.Model = product.Model;
+                            tproduct.Modification_date = DateTime.Now;
+                        }
+                        if (product.Color != null)
+                        {
+                            tproduct.Color = product.Color;
+                            tproduct.Modification_date = DateTime.Now;   
+                        }
+                        if (product.shoeSize != null)
+                        {
+                            var checkProduct = db.Product.ToList();
+                            List<Product> products = new List<Product>();
+                            if (checkProduct.Count > 0)
+                            {
+                                foreach (var item in checkProduct)
+                                {
+                                    products.Add(new Product
+                                    {
+                                        shoeSize = item.shoeSize,
+                                    });
+                                }
+                                foreach (var item in products)
+                                {
+
+                                    if (item.shoeSize == product.shoeSize)
+                                    {
+                                        throw new Exception("La talla ya se encuentra registrada, para anadir un producto hazlo modificando su stock");
+                                    }
+                                };
+                                tproduct.shoeSize = product.shoeSize;
+                                tproduct.Modification_date = DateTime.Now;
+                            }
                         }
                         if (product.Photo != null)
                         {
