@@ -4,7 +4,7 @@ USE Proyecto_Progra_Avanzada_G5;
 --------------------------------------USER TABLE-----------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE Users(
-	Id int IDENTITY(1,1) NOT NULL,
+	Id int IDENTITY(1,1),
 	Username varchar(50) NOT NULL,
 	Password varchar(50) NOT NULL,
 	User_type varchar(50) NOT NULL,
@@ -13,6 +13,7 @@ CONSTRAINT PK_User_ID PRIMARY KEY(Id)
 );
 
 SELECT * FROM Users;
+DELETE FROM Users;
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------USER TABLE-----------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,7 +21,7 @@ SELECT * FROM Users;
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------PERSON TABLE---------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE TABLE Persons(
+CREATE TABLE Person(
     Id INT IDENTITY(1,1) NOT NULL,
     Name varchar(50) NOT NULL,
     First_last_name varchar(50) NOT NULL,
@@ -30,15 +31,26 @@ CREATE TABLE Persons(
     Email varchar(50) NOT NULL,
     Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Modification_date DATETIME2 NULL,
-    Birth_date DATETIME2 NOT NULL,
+    Birth_date DATE NOT NULL,
     Address varchar(50) NOT NULL,
-    User_Id int not null,
+    User_Id int,
 CONSTRAINT PK_Person_Id  PRIMARY KEY (Id),
 CONSTRAINT FK_User_Id FOREIGN KEY (User_Id) REFERENCES Users(Id)
 );
 
+INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address)
+VALUES('Test', 'testap1', 'testap2', '10000000', '88888888', 'test@test.com', '1998-11-01', 'alajuela');
 
-SELECT * FROM Persons;
+CREATE OR ALTER PROCEDURE view_users
+AS 
+BEGIN 
+	SELECT * FROM Person p, Users u
+	WHERE u.Id = p.User_Id;
+END
+
+EXEC view_users
+
+DELETE FROM Person
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------PERSON TABLE---------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -49,16 +61,14 @@ SELECT * FROM Persons;
 
 
 CREATE TABLE Brand(
-	Id INT NOT NULL IDENTITY(1,1),
+	Id INT IDENTITY(1,1),
 	Name varchar(50) NOT NULL,
-	Model varchar(50) NOT NULL,
-	Color varchar(50) NOT NULL,
-	Photo varchar(50) NOT NULL,
 CONSTRAINT PK_Brand_Id PRIMARY KEY (Id)
 );
+
 SELECT * FROM Brand;
-INSERT INTO Brand(Name, Model, Color, Photo)
-VALUES('Nike', 'Air Jordan 5', 'Green Bean', 'url');
+INSERT INTO Brand(Name)
+VALUES('Nike');
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------BRAND TABLE----------------------------------------------------------------------------------------------------------
@@ -70,26 +80,33 @@ VALUES('Nike', 'Air Jordan 5', 'Green Bean', 'url');
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-CREATE TABLE Products(
-    Id INT NOT NULL IDENTITY(1,1),
+CREATE TABLE Product(
+    Id INT NOT NULL,
+    Brand_Id INT,
     Price DECIMAL(10,2) NOT NULL,
     Stock INT NOT NULL,
+    Model varchar(50) not null,
+    Color Varchar(50) not null,
+    shoeSize varchar(2) not null,
     Photo varchar(50),
-    Brand_Id INT NOT NULL,
     Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Modification_date DATETIME2 NULL,
     CONSTRAINT PK_Product_Id PRIMARY KEY (id),
-    CONSTRAINT FK_Brand_Id FOREIGN KEY (Brand_Id) REFERENCES Brand(Id)
+    CONSTRAINT FK_Brand_Id FOREIGN KEY (Brand_Id) REFERENCES Brand(Id),
 ); 
 
-INSERT INTO Product(Id,Price, Stock, Brand, Model, Color) 
-VALUES(0001,150000, 15, 'Nike', 'Jordan Retro 1', 'Chocolate');
+INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color)
+VALUES(0002,1,150000, 8, 'Jordan Retro 1', 'red')
 
-SELECT * FROM Product WHERE Brand_Id = '1';
+SELECT * FROM Product p
+INNER JOIN Brand b 
+ON p.Brand_Id = b.Id 
+DELETE FROM Product WHERE Brand_Id = '1';
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------PRODUCT TABLE--------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
@@ -104,7 +121,7 @@ CREATE TABLE ShoppingCart(
 	Product_Id INT NOT NULL,
 	CONSTRAINT PK_ShoppingCart_Id PRIMARY KEY (Id),
     CONSTRAINT FK_shoppingCart_User_id FOREIGN KEY (User_Id) REFERENCES Users(Id),
-    CONSTRAINT FK_shoppingCart_Product_id FOREIGN KEY (product_id) REFERENCES Products(Id)
+    CONSTRAINT FK_shoppingCart_Product_id FOREIGN KEY (product_id) REFERENCES Product(Id)
 );
 
 
@@ -143,7 +160,7 @@ CREATE TABLE Product_By_Order(
 	Product_Id INT NOT NULL,
 	Order_Id INT NOT NULL
 	CONSTRAINT PK_Product_By_Order_Id PRIMARY KEY(Id),
-	CONSTRAINT FK_Product_Id FOREIGN KEY (Product_Id) REFERENCES Products(Id),
+	CONSTRAINT FK_Product_Id FOREIGN KEY (Product_Id) REFERENCES Product(Id),
 	CONSTRAINT FK_Order_Id FOREIGN KEY (Order_Id) REFERENCES Orders(Id)
 );
 
@@ -170,8 +187,8 @@ CREATE TABLE Shipments(
     shipment_phone varchar(50) NOT NULL,
     shipment_email varchar(50) NOT NULL,
     shipment_customer_id INT NOT NULL,
-    CONSTRAINT fk_shipment_order_id FOREIGN KEY (shipment_order_id) REFERENCES Orders(order_id),
-    CONSTRAINT fk_shipment_customer_id FOREIGN KEY (shipment_customer_id) REFERENCES Customer(User_Id)
+    CONSTRAINT fk_shipment_order_id FOREIGN KEY (shipment_order_id) REFERENCES Orders(id),
+    CONSTRAINT fk_shipment_customer_id FOREIGN KEY (shipment_customer_id) REFERENCES Users(Id)
 );
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------

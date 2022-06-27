@@ -1,0 +1,21 @@
+﻿@model Aplicacion.Entities.Product
+
+@{
+    ViewBag.Title = "ViewProductById";
+}
+
+<h2>ViewProductById</h2>
+
+<div class="container">
+    <form action="ViewProductById" method="get">
+        <table class="table">
+            <tr>
+                <td>Enter ID: </td>
+                <td><input type="text" name="Id" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Submit Form" /></td>
+            </tr>
+        </table>
+    </form>
+</div>

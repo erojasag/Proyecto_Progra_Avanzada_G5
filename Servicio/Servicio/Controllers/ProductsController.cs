@@ -44,7 +44,7 @@ namespace Servicio.Controllers
 
         [HttpPost]
         [Route("products/InsertProduct")]
-        public Respuesta InsertProduct(Products product)
+        public Respuesta InsertProduct(Product product)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Servicio.Controllers
 
         [HttpPut]
         [Route("products/EditProduct")]
-        public Respuesta EditProduct(Products product)
+        public Respuesta EditProduct(Product product)
         {
             try
             {

@@ -9,7 +9,7 @@ namespace Aplicacion.Entities
     {
         public Brand()
         {
-            this.Products = new HashSet<Products>();
+            this.Products = new HashSet<Product>();
         }
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace Aplicacion.Entities
         public string Photo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

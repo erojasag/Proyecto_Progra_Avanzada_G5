@@ -1,0 +1,48 @@
+﻿@model  IEnumerable<Aplicacion.Entities.UserPerson>
+
+@{
+    ViewBag.Title = "Users List";
+}
+
+
+
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Person.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Person.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Person.First_last_name)</th>
+                <th>@Html.DisplayNameFor(model => model.Person.Second_last_name)</th>
+                <th>@Html.DisplayNameFor(model => model.Person.Identification)</th>
+                <th>@Html.DisplayNameFor(model => model.Person.Phone)</th>
+                <th>@Html.DisplayNameFor(model => model.Person.Email)</th>
+                <th>@Html.DisplayNameFor(model => model.Person.Birth_date)</th>
+                <th>@Html.DisplayNameFor(model => model.Person.Address)</th>
+                <th>@Html.DisplayNameFor(model => model.Person.Registration_date)</th>
+                <th>@Html.DisplayNameFor(model => model.User.Username)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.Person.Id</th>
+                    <th>@item.Person.Name</th>
+                    <th>@item.Person.First_last_name</th>
+                    <th>@item.Person.Second_last_name</th>
+                    <th>@item.Person.Identification</th>
+                    <th>@item.Person.Phone</th>
+                    <th>@item.Person.Email</th>
+                    <th>@item.Person.Birth_date</th>
+                    <th>@item.Person.Address</th>
+                    <th>@item.Person.Registration_date</th>
+                    <th>@item.User.Username</th>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
