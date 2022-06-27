@@ -110,9 +110,9 @@ namespace Servicio.Models
                     if (Product != null)
                     {
                         var checkProduct = db.Product.ToList();
-                        List<Product> products = new List<Product>();
                         if(checkProduct.Count > 0)
                         {
+                            List<Product> products = new List<Product>();
                             foreach (var item in checkProduct)
                             {
                                 products.Add(new Product
@@ -133,9 +133,9 @@ namespace Servicio.Models
                                 {
                                     throw new Exception("El codigo de producto que desea insertar ya existe");
                                 }
-                                if (item.shoeSize == Product.shoeSize)
+                                if (item.shoeSize == Product.shoeSize && item.Color == Product.Color)
                                 {
-                                    throw new Exception("La talla ya se encuentra registrada, para anadir un producto hazlo modificando su stock");
+                                    throw new Exception("La talla y color ya se encuentran registrados, para anadir un producto hazlo modificando su stock");
                                 }
                             };
 

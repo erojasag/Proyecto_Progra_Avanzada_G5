@@ -41,8 +41,14 @@ CONSTRAINT FK_User_Id FOREIGN KEY (User_Id) REFERENCES Users(Id)
 INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address)
 VALUES('Test', 'testap1', 'testap2', '10000000', '88888888', 'test@test.com', '1998-11-01', 'alajuela');
 
-SELECT * FROM Person p, Users u
-WHERE u.Id = p.User_Id;
+CREATE OR ALTER PROCEDURE view_users
+AS 
+BEGIN 
+	SELECT * FROM Person p, Users u
+	WHERE u.Id = p.User_Id;
+END
+
+EXEC view_users
 
 DELETE FROM Person
 -----------------------------------------------------------------------------------------------------------------------------------------------------------

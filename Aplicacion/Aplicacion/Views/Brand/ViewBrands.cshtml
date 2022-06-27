@@ -1,6 +1,6 @@
 ﻿@model  IEnumerable<Aplicacion.Entities.Brand>
 @{
-    ViewBag.Title = "ViewBrands";
+    ViewBag.Title = "";
 }
 
 <h2>List Of Brands</h2>
@@ -10,14 +10,12 @@
         <thead>
             <tr>
                 <th>@Html.DisplayNameFor(model => model.Name)</th>
-                <th>@Html.DisplayNameFor(model => model.Id)</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <th>@item.Id</th>
                     <th>@item.Name</th>
                 </tr>
             }

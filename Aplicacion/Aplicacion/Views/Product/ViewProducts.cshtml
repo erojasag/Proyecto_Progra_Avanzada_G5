@@ -8,14 +8,14 @@
     <table class="table">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Id)</th>
-                <th>@Html.DisplayNameFor(model => model.Brand_Id)</th>
-                <th>@Html.DisplayNameFor(model => model.Price)</th>
-                <th>@Html.DisplayNameFor(model => model.Stock)</th>
-                <th>@Html.DisplayNameFor(model => model.Model)</th>
-                <th>@Html.DisplayNameFor(model => model.Color)</th>
-                <th>@Html.DisplayNameFor(model => model.shoeSize)"Talla"</th>
-                <th>@Html.DisplayNameFor(model => model.Photo)</th>
+                <th @Html.DisplayNameFor(model => model.Id)>Product ID</th>
+                <th @Html.DisplayNameFor(model => model.Brand.Name)>Name</th>
+                <th @Html.DisplayNameFor(model => model.Price)>Price</th>
+                <th @Html.DisplayNameFor(model => model.Stock)>Stock</th>
+                <th @Html.DisplayNameFor(model => model.Model)>Model</th>
+                <th @Html.DisplayNameFor(model => model.Color)>Color</th>
+                <th @Html.DisplayNameFor(model => model.shoeSize)>Talla</th>
+                <th @Html.DisplayNameFor(model => model.Photo)>Photo</th>
             </tr>
         </thead>
         <tbody>
@@ -24,13 +24,14 @@
                 <tr>
                     
                     <th>@item.Id</th>
-                    <th>@item.Brand_Id</th>
+                    <th>@item.Brand.Name</th>
                     <th>@item.Price</th>
                     <th>@item.Stock</th>
                     <th>@item.Model</th>
                     <th>@item.Color</th>
                     <th>@item.shoeSize</th>
-                    <th>@item.Photo</th>
+                    <th><img src="https://images.stockx.com/images/New-Balance-575-Staple-Pigeon-Grey.png?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1627415107" 
+                             width="150" height="100"/></th>
                 </tr>
             }
 

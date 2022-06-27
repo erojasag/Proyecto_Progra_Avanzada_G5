@@ -16,7 +16,7 @@ namespace Servicio.Controllers
         readonly PersonsModel model = new PersonsModel();
 
         [HttpGet]
-        [Route("person/ViewPersons")]
+        [Route("persons/ViewPersons")]
         public Respuesta ViewPersons()
         {
             try
@@ -44,7 +44,7 @@ namespace Servicio.Controllers
         }*/
 
         [HttpGet]
-        [Route("person/ViewPersonsWithUsers")]
+        [Route("persons/ViewPersonsWithUsers")]
         public Respuesta ViewPersonsWithUsers()
         {
             try
@@ -58,7 +58,7 @@ namespace Servicio.Controllers
         }
 
         [HttpGet]
-        [Route("person/CheckPersonAndUserById")]
+        [Route("persons/CheckPersonAndUserById")]
         public Respuesta CheckPersonAndUserById(int Id)
         {
             try
@@ -87,7 +87,7 @@ namespace Servicio.Controllers
 
 
         [HttpPost]
-        [Route("person/InsertPersonWithUser")]
+        [Route("persons/InsertPersonWithUser")]
         public Respuesta InsertPersonWithUser(UserPerson UserPerson)
         {
             try
@@ -116,7 +116,7 @@ namespace Servicio.Controllers
         }*/
 
         [HttpPut]
-        [Route("person/EditUserPerson")]
+        [Route("persons/EditUserPerson")]
         public Respuesta EditUserPerson(UserPerson UserPerson)
         {
             try
@@ -144,7 +144,7 @@ namespace Servicio.Controllers
         }*/
 
         [HttpDelete]
-        [Route("person/DeletePersonAndUserById")]
+        [Route("persons/DeletePersonAndUserById")]
         public Respuesta DeletePersonAndUserById(int Id)
         {
             try

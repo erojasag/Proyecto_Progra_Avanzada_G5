@@ -1,29 +1,26 @@
 ﻿@model  Aplicacion.Entities.UserPerson
 @{ if (IsPost)
     {
-        <form method="post" action="">
-            Name:<br />
-            <input type="text" name="Name" value="" /><br />
-            First Name:<br />
-            <input type="text" name="FirstName" value="" /><br />
-            Last Name:<br />
-            <input type="text" name="SecondLastName" value="" /><br />
-            Identification:<br />
-            <input type="text" name="Identification" value="" /><br />
-            Email:<br />
-            <input type="text" name="Email" value="" /><br />
-            Birth_date:<br />
-            <input type="text" name="SecondLastName" value="" /><br />
-            Address:<br />
-            <input type="text" name="Adress" value="" /><br />
-            <input type="submit" value="Submit" class="submit" />
-        </form>
+        
         string Id = Request["Id"];
     }
     else
     {
 
     }
-    ViewBag.Title = "Insert New User";
+    ViewBag.Title = "Registration Form";
 }
 
+<div class="container">
+    <form action="ViewProductById" method="get">
+        <table class="table">
+            <tr>
+                <td>Enter ID: </td>
+                <td><input type="text" name="Id" value="@Html.Editor("Id")" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Submit Form" /></td>
+            </tr>
+        </table>
+    </form>
+</div>

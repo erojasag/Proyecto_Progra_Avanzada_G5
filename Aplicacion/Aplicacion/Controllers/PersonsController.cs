@@ -11,15 +11,6 @@ namespace Aplicacion.Controllers
     public class PersonsController : Controller
     {
         PersonsModel model = new PersonsModel();
-        public ActionResult viewPersons()
-        {
-            return null;
-        }
-
-        /*public Person ViewPersonById(int Id)
-        {
-            
-        }*/
 
         [HttpGet]
         [Route("ViewPersonsWithUsers")]
@@ -42,25 +33,17 @@ namespace Aplicacion.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        [Route("CheckPersonAndUserById")]
         public ActionResult CheckPersonAndUserById(int Id)
-        {
-            return null;
-        }
-
-
-        /*public bool InsertPerson(Person Person)
-        {
-            
-        }*/
-
-        public ActionResult InsertPersonWithUser(UserPerson UserPerson)
         {
             try
             {
-                var datos = model.InsertPersonWithUser(UserPerson);
+                var datos = model.CheckPersonAndUserById(Id);
                 if (datos != null)
                 {
-                    return View(datos.UsersPersons);
+                    return View(datos.UserPerson);
                 }
                 else
                 {
@@ -73,26 +56,73 @@ namespace Aplicacion.Controllers
             }
         }
 
-        /*public bool EditPerson(Person Person)
+        [HttpPost]
+        [Route("InsertPersonWithUser")]
+        public ActionResult InsertPersonWithUser(UserPerson UserPerson)
         {
-            
-        }*/
+            try
+            {
+                var datos = model.InsertPersonWithUser(UserPerson);
+                if (datos != null)
+                {
+                    return View(datos);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
 
         //Edit UserPerson
         public ActionResult EditUserPerson(UserPerson UserPerson)
         {
-            return null;
+            try
+            {
+                var datos = model.EditUserPerson(UserPerson);
+                if (datos != null)
+                {
+                    return View(datos.UserPerson);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
-        /*public bool DeletePerson(int Id)
-        {
-            
-        }*/
 
         public ActionResult DeletePersonAndUserById(int Id)
         {
-            return null;
+            try
+            {
+                var datos = model.DeletePersonAndUserById(Id);
+                if (datos != null)
+                {
+                    return View(datos.User.Id);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
+
     }
 }

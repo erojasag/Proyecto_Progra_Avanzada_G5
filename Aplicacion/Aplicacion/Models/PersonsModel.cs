@@ -12,15 +12,6 @@ namespace Aplicacion.Models
     public class PersonsModel
     {
         string Url = ConfigurationManager.AppSettings["urlServicioProyecto"].ToString();
-        public Respuesta viewPersons()
-        {
-            return null;
-        }
-
-        /*public Person ViewPersonById(int Id)
-        {
-            
-        }*/
 
         public Respuesta ViewPersonsWithUsers()
         {
@@ -28,7 +19,7 @@ namespace Aplicacion.Models
             {
                 try
                 {
-                    string Route = "person/ViewPersonsWithUsers";
+                    string Route = "persons/ViewPersonsWithUsers";
 
                     HttpResponseMessage response = client.GetAsync(Url + Route).Result;
 
@@ -57,19 +48,13 @@ namespace Aplicacion.Models
             return null;
         }
 
-
-        /*public bool InsertPerson(Person Person)
-        {
-            
-        }*/
-
         public Respuesta InsertPersonWithUser(UserPerson UserPerson)
         {
             using (var client = new HttpClient())
             {
                 try
                 {
-                    string api = "person/InsertPersonWithUser";
+                    string api = "persons/InsertPersonWithUser";
                     string Route = Url + api;
                     var content = JsonContent.Create(UserPerson);
                     HttpResponseMessage response = client.PostAsync(Route, content).Result;
