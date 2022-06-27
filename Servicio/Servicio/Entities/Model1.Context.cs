@@ -12,6 +12,8 @@ namespace Servicio.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Proyecto_Progra_Avanzada_G5Entities : DbContext
     {
@@ -27,10 +29,16 @@ namespace Servicio.Entities
     
         public virtual DbSet<Brand> Brand { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Persons> Persons { get; set; }
+        public virtual DbSet<Person> Person { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Product_By_Order> Product_By_Order { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Shipments> Shipments { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+    
+        public virtual ObjectResult<view_users_Result> view_users()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_users_Result>("view_users");
+        }
     }
 }

@@ -27,10 +27,13 @@ namespace Aplicacion.Controllers
             return View();
         }
 
-        public ActionResult Products()
+        public ActionResult UserRegistration()
         {
-            ViewBag.Message = "Your products page.";
+            return View();
+        }
 
+        public ActionResult UserLogIn()
+        {
             return View();
         }
     }

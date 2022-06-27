@@ -19,7 +19,7 @@ namespace Servicio.Entities
         public int User_Id { get; set; }
         public int Product_Id { get; set; }
     
-        public virtual Products Products { get; set; }
+        public virtual Product Product { get; set; }
         public virtual Users Users { get; set; }
     }
 }

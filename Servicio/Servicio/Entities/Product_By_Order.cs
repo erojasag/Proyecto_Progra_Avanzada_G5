@@ -19,6 +19,6 @@ namespace Servicio.Entities
         public int Order_Id { get; set; }
     
         public virtual Orders Orders { get; set; }
-        public virtual Products Products { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

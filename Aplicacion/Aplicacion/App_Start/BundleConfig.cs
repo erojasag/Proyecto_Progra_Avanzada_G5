@@ -26,7 +26,11 @@ namespace Aplicacion
                       "~/Content/bootstrap.css",
                       "~/adminlte/plugins/fontawesome-free/css/all.min.css",
                       "~/adminlte/css/adminlte.min.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/css/bootstrap.min.css",
+                        "~/Content/css/font-awesome.min.css",
+                        "~/Content/css/common.css",
+                       "~/Content/css/style.css"));
 
             bundles.Add(new ScriptBundle("~/adminlte/js").Include(
              "~/adminlte/js/adminlte.min.js"));

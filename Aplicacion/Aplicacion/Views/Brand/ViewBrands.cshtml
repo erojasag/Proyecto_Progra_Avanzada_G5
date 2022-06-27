@@ -1,0 +1,25 @@
+﻿@model  IEnumerable<Aplicacion.Entities.Brand>
+@{
+    ViewBag.Title = "";
+}
+
+<h2>List Of Brands</h2>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.Name</th>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

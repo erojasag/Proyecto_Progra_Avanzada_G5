@@ -2,3 +2,5 @@
 .drawio
 docker-compose.yml
 *.drawio
+/Aplicacion/Aplicacion/Views/Web.Release.config
+/Aplicacion/Aplicacion/Content/Images

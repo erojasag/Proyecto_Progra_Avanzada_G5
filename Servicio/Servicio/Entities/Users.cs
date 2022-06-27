@@ -18,7 +18,8 @@ namespace Servicio.Entities
         public Users()
         {
             this.Orders = new HashSet<Orders>();
-            this.Persons = new HashSet<Persons>();
+            this.Person = new HashSet<Person>();
+            this.Shipments = new HashSet<Shipments>();
             this.ShoppingCart = new HashSet<ShoppingCart>();
         }
     
@@ -31,7 +32,9 @@ namespace Servicio.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persons> Persons { get; set; }
+        public virtual ICollection<Person> Person { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Shipments> Shipments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShoppingCart> ShoppingCart { get; set; }
     }
