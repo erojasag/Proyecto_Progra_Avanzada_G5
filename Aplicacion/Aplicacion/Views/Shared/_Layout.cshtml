@@ -10,7 +10,7 @@
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        @if (Session["Logged_In"] == null) //no estamos logueados
+        @if (Session["Logged_In"] != null) //no estamos logueados tiene que ser == null esta es la vista general
         {
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <ul class="navbar-nav">
@@ -20,7 +20,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        @Html.ActionLink("Sign Up", "UserRegistration", "Home", null, new { @class = "nav-link"})
+                        @Html.ActionLink("Sign Up", "UserRegistration", "Home", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("LogIn", "UserLogIn", "Home", null, new { @class = "nav-link" })
@@ -33,7 +33,7 @@
 
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <a href="@Url.Action("Index", "Home")" class="brand-link">
-                    <img src="~/adminlte/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <img src="~/Content/Images/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                     <span class="brand-text font-weight-light">ShoeCorp</span>
                 </a>
 
@@ -93,7 +93,7 @@
                 <!-- /.sidebar -->
             </aside>
         }
-        @if (Session["Logged_In"] != null)//si estamos logueados como empleados
+        @if (Session["Logged_In"] != null)//si estamos logueados como empleados tiene que ser != null
         {
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <ul class="navbar-nav">
@@ -111,8 +111,8 @@
             </nav>
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <a href="@Url.Action("Index", "Home")" class="brand-link">
-                    <img src="~/adminlte/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                    <span class="brand-text font-weight-light">ShoeCorp</span>
+                    <img src="~/Content/Images/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-light">ShoeCorp Home</span>
                 </a>
 
                 <!-- Sidebar -->
@@ -129,8 +129,8 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li class="nav-item menu">
-                                <a href="#" class="nav-link active">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <a class="nav-link active">
+                                    <i class="nav-icon fa fa-shopping-basket" aria-hidden="true"></i>
                                     <p>
                                         Products
                                         <i class="right fas fa-angle-left"></i>
@@ -149,29 +149,59 @@
                                             <p>Search product By Id</p>
                                         </a>
                                     </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item menu">
-                                <a href="#" class="nav-link active">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Brands
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="@Url.Action("ViewBrands", "Brand")" class="nav-link active">
+                                        <a href="@Url.Action("InsertProduct", "Product")" class="nav-link active">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>List Of Brands</p>
+                                            <p>Add Product</p>
                                         </a>
                                     </li>
-
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EditProduct", "Product")" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Edit Product</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item menu">
+                                        <a href="#" class="nav-link active">
+                                            <i class="nav-icon fas fa-broom"></i>
+                                            <p>
+                                                Brands
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("ViewBrands", "Brand")" class="nav-link active">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>List Of Brands</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("InsertBrand", "Brand")" class="nav-link active">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Add Brand</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("EditBrand", "Brand")" class="nav-link active">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Edit Brand</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="@Url.Action("DeleteBrand", "Brand")" class="nav-link active">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Delete Brand</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
+
                             <li class="nav-item menu">
                                 <a href="#" class="nav-link active">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <i class="nav-icon fas fa-user-alt"></i>
                                     <p>
                                         Users
                                         <i class="right fas fa-angle-left"></i>
@@ -197,6 +227,12 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+                                        <a href="@Url.Action("EditUserPerson", "Persons")" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Edit user</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
                                         <a href="@Url.Action("DeletePersonAndUserById", "Persons")" class="nav-link active">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Delete user</p>
@@ -208,6 +244,147 @@
                                 <a href="@Url.Action("Contact", "Home")" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Contact</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link active">
+                                    <i class="fa fa-sign-out-alt nav-icon" aria-hidden="true"></i><p>Log Out</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
+                </div>
+                <!-- /.sidebar -->
+            </aside>
+        }
+        @if (Session["Logged_In"] == null)//si estamos logueados como clientes
+        {
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="@Url.Action("EditUserPerson", "Persons")" class="nav-link active">
+                            <p><i class="nav-icon fa fa-user" aria-hidden="true" value="Profile"></i></p>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="@Url.Action("ShoppingCart", "")">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <span class="badge badge-danger navbar-badge">3</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <a href="#" class="dropdown-item">
+                                <!-- Message Start -->
+                                <div class="media">
+                                    <img src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/5fe8b5a4-5a93-46d6-bb57-1df8250ebd94/calzado-dunk-low-se-2V4ZHt.png" alt="" class="img-size-50 mr-3 img-circle">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title">
+                                            Nike 
+                                        </h3>
+                                        <p class="text-sm text-muted">Dunk Low Flash</p>
+                                        <p class="text-sm text-muted">$1250000</p>
+                                    </div>
+                                </div>
+                                <!-- Message End -->
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <!-- Message Start -->
+                                <div class="media">
+                                    <img src="https://images.stockx.com/images/Air-Jordan-1-Mid-Earth-Tone-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1635779721" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title">
+                                            Nike Jorda
+                                        </h3>
+                                        <p class=""><p>
+                                        <p class="text-sm text-muted"><p>
+                                    </div>
+                                </div>
+                                <!-- Message End -->
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <!-- Message Start -->
+                                <div class="media">
+                                    <img src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/adc9c7d2-5cd2-4ac5-8583-ab4da7edd96f/dunk-low-se-shoes-bHNln0.png" alt="" class="img-size-50 img-circle mr-3">
+                                    <div class="media-body">
+                                        <h3 class="dropdown-item-title">
+                                            Nora Silvester
+                                            
+                                        </h3>
+                                        <p class="text-sm">The subject goes here</p>
+                                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                                    </div>
+                                </div>
+                                <!-- Message End -->
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    
+                </ul>
+            </nav>
+            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+                <a href="@Url.Action("Index", "Home")" class="brand-link">
+                    <img src="~/Content/Images/logo.png" alt="ShoeCorp Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <span class="brand-text font-weight-light">ShoeCorp Home</span>
+                </a>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                        <div class="image">
+                            <img src="~/adminlte/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block">Emanuel Rojas</a>
+                        </div>
+                    </div>
+
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item menu">
+                                <a class="nav-link active">
+                                    <i class="nav-icon fa fa-shopping-basket" aria-hidden="true"></i>
+                                    <p>
+                                        Products
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewProducts", "Product")" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>View List Of Products</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewProductById", "Product")" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Search product By Id</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            
+                            <li class="nav-item">
+                                <a href="@Url.Action("Contact", "Home")" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Contact</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link active">
+                                    <i class="fa fa-sign-out-alt nav-icon" aria-hidden="true"></i><p>Log Out</p>
                                 </a>
                             </li>
                         </ul>
@@ -257,7 +434,7 @@
 
             <div class="float-right d-none d-sm-inline">
             </div>
-            <strong>Copyright &copy;</strong> Grupo 5 @DateTime.Now.Year
+            <strong>Copyright &copy;</strong> Emanuel Rojas Aguero Grupo 5 @DateTime.Now.Year
         </footer>
     </div>
 

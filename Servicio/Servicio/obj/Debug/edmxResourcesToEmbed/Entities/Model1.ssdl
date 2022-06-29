@@ -6,6 +6,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Photo" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Orders">
     <Key>
@@ -44,7 +45,7 @@
     <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="shoeSize" Type="varchar" MaxLength="2" Nullable="false" />
-    <Property Name="Photo" Type="varchar" MaxLength="50" />
+    <Property Name="Photo" Type="varchar(max)" />
     <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Modification_date" Type="datetime2" Precision="7" />
   </EntityType>
@@ -90,7 +91,7 @@
     <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="User_type" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Photo" Type="varchar" MaxLength="50" />
+    <Property Name="Photo" Type="varchar(max)" />
   </EntityType>
   <Association Name="FK_Brand_Id">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
@@ -200,7 +201,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="view_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Find_product_By_Search_Word" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="searchWord" Type="varchar(max)" Mode="In" />
+  </Function>
   <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />

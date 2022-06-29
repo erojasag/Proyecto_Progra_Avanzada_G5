@@ -8,7 +8,7 @@ namespace Servicio.Models
 {
     public class PersonsModel
     {
-        public List<Person> viewPersons()
+        public List<Person> ViewPersons()
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {

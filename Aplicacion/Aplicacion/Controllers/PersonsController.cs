@@ -63,7 +63,7 @@ namespace Aplicacion.Controllers
             try
             {
                 var datos = model.InsertPersonWithUser(UserPerson);
-                if (datos != null)
+                if (datos == null)
                 {
                     return View(datos);
                 }
@@ -86,9 +86,9 @@ namespace Aplicacion.Controllers
             try
             {
                 var datos = model.EditUserPerson(UserPerson);
-                if (datos != null)
+                if (datos == null)
                 {
-                    return View(datos.UserPerson);
+                    return View();
                 }
                 else
                 {

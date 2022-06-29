@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Brand">
       <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Brand">
         <MappingFragment StoreEntitySet="Brand">
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
@@ -101,26 +102,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="view_users" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_users">
+    <FunctionImportMapping FunctionImportName="Find_product_By_Search_Word" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.Find_product_By_Search_Word">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_users_Result">
+        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Find_product_By_Search_Word_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
-          <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
-          <ScalarProperty Name="Identification" ColumnName="Identification" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="shoeSize" ColumnName="shoeSize" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
           <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
-          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-          <ScalarProperty Name="Id1" ColumnName="Id1" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="User_type" ColumnName="User_type" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

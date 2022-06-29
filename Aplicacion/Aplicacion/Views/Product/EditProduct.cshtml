@@ -1,0 +1,96 @@
+﻿
+@{
+
+
+}
+
+<div class="container bootstrap snippets bootdey">
+    <h1 class="text-primary">Edit Product</h1>
+    <hr>
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-3">
+            <div class="text-center">
+                <img src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/0a685517-4392-4fb0-a596-a2eee41f0e12/air-jordan-1-retro-high-og-shoes-a7Zzxm.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                <h6>Upload a different photo...</h6>
+                <input type="file" class="form-control">
+            </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+            <div class="alert alert-info alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-coffee"></i>
+                This is an <strong>.alert</strong>. Use this to show important messages to the user.
+            </div>
+            <h3>Product info</h3>
+
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Product ID:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" value="" placeholder="Product ID">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Price:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" value="" placeholder="Price">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Stock:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="number" value="" placeholder="000000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Model:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" value="" placeholder="Model">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Color:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" value="" placeholder="Color">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Size:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" value="" placeholder="Size">
+                    </div>
+                </div>
+              
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Brand:</label>
+                    <div class="col-lg-8">
+                        <div class="ui-select">
+                            <select id="brand_id_selector" class="form-control">
+                                <option selected>Select a Brand</option>
+                                <option value="Nike">Nike</option>
+                                <option value="Adidas">Adidas</option>
+                                <option value="New Balance">New Balance</option>
+                                <option value="Project Rock">Project Rock</option>
+                                <option value="Sperry">Sperry</option>
+                                <option value="Puma">Puma</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-primary btn-lg">Save</button>
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                        <button type="reset" class="btn btn-danger btn-lg">Clear</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -34,24 +34,24 @@ namespace Aplicacion.Controllers
             }
         }
 
-        public ActionResult ViewBrandById(int Id)
+        public ActionResult ViewBrandById()
         {
-            return null;
+            return View();
         }
 
-        public ActionResult InsertBrand(Brand brand)
+        public ActionResult InsertBrand()
         {
-            return null;
+            return View();
         }
 
-        public ActionResult EditBrand(Brand brand)
+        public ActionResult EditBrand()
         {
-            return null;
+            return View();
         }
 
-        public ActionResult DeleteBrand(int Id)
+        public ActionResult DeleteBrand()
         {
-            return null;
+            return View();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuestaPerson(1, "OK", false, null, model.viewPersons());
+                return respuesta.ArmarRespuestaPerson(1, "OK", false, null, model.ViewPersons());
             }
             catch(Exception ex)
             {

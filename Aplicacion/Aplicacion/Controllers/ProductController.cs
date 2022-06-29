@@ -37,14 +37,14 @@ namespace Aplicacion.Controllers
 
         [HttpGet]
         [Route("ViewProductById")]
-
-        public ActionResult ViewProductById(int Id)
+        public ActionResult ViewProductById(int? Id)
         {
             try
             {
-                var datos = model.ViewProductById(Id);
 
-                if (datos.Id == 0)
+                //var datos = model.ViewProductById((int)Id);
+
+                if (Id == null)
                 {
                     return View();
                 }
@@ -59,38 +59,23 @@ namespace Aplicacion.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("InsertProduct")]
         public ActionResult InsertProduct(Product Product)
         {
-            try
-            {
-                var datos = model.InsertProduct(Product);
-                if(datos != null)
-                {
-                    return View();
-                }
-                else
-                {
-                    return View("Error");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return View();
         }
 
-        [HttpPut]
+        [HttpGet]
         [Route("EditProduct")]
         public ActionResult EditProduct(Product product)
         {
-            return null;
+            return View();
         }
 
-        [HttpDelete]
+        [HttpGet]
         [Route("DeleteProduct")]
-        public ActionResult DeleteProduct(int Id)
+        public ActionResult DeleteProduct(int? Id)
         {
             return null;
         }

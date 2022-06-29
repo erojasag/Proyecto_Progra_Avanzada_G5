@@ -121,9 +121,40 @@ namespace Aplicacion.Models
             }
         }
 
-        public Respuesta EditProduct(Product product)
+        public Respuesta EditProduct(Product Product)
         {
-            return null;
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    if(Product != null)
+                    {
+                        string api = "products/EditProduct";
+                        string route = Url + api;
+                        var content = JsonContent.Create(Product);
+                        HttpResponseMessage response = client.PutAsync(route, content).Result;
+
+                        response.EnsureSuccessStatusCode();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var responseBody = response.Content.ReadAsAsync<Respuesta>().Result;
+                            return responseBody;
+                        }
+                        else
+                        {
+                            throw new Exception("Error");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Porfavor ingrese los datos a modificar");
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
 
         public Respuesta DeleteProduct(int Id)

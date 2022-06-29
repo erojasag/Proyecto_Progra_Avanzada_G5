@@ -22,7 +22,8 @@ namespace Servicio.Models
                         brands.Add(new Brand
                         {
                             Id = brand.Id,
-                            Name = brand.Name
+                            Name = brand.Name,
+                            Photo = brand.Photo
                         });                           
                     }
                     return brands;
@@ -47,6 +48,7 @@ namespace Servicio.Models
                     {
                         brand.Id = tbrand.Id;
                         brand.Name = tbrand.Name;
+                        brand.Photo = tbrand.Photo;
                         return brand;
                     }
                     else
@@ -95,6 +97,7 @@ namespace Servicio.Models
 
                         Brand tbrand = new Brand();
                         tbrand.Name = brand.Name;
+                        tbrand.Photo = brand.Photo;
                         db.Brand.Add(tbrand);
                         db.SaveChanges();
                         return true;

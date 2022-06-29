@@ -11,6 +11,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -49,7 +50,7 @@
           <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="shoeSize" Type="varchar" MaxLength="2" Nullable="false" />
-          <Property Name="Photo" Type="varchar" MaxLength="50" />
+          <Property Name="Photo" Type="varchar(max)" />
           <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Modification_date" Type="datetime2" Precision="7" />
         </EntityType>
@@ -95,7 +96,7 @@
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="User_type" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Photo" Type="varchar" MaxLength="50" />
+          <Property Name="Photo" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_Brand_Id">
           <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
@@ -205,7 +206,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="view_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Find_product_By_Search_Word" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchWord" Type="varchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -263,6 +266,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Brand_Id" FromRole="Brand" ToRole="Product" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
@@ -305,7 +309,7 @@
           <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="shoeSize" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Modification_date" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Brand_Id" FromRole="Product" ToRole="Brand" />
@@ -360,7 +364,7 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="User_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User_Id" FromRole="Users" ToRole="Orders" />
           <NavigationProperty Name="Person" Relationship="Self.FK_User_Id" FromRole="Users" ToRole="Person" />
           <NavigationProperty Name="Shipments" Relationship="Self.fk_shipment_customer_id" FromRole="Users" ToRole="Shipments" />
@@ -519,26 +523,21 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="ShoppingCart" EntitySet="ShoppingCart" />
           </AssociationSet>
-          <FunctionImport Name="view_users" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_users_Result)" />
+          <FunctionImport Name="Find_product_By_Search_Word" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.Find_product_By_Search_Word_Result)">
+          <Parameter Name="searchWord" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="view_users_Result">
+        <ComplexType Name="Find_product_By_Search_Word_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="First_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Second_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Identification" Nullable="false" MaxLength="9" />
-          <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Brand_Id" Nullable="true" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="Int32" Name="Stock" Nullable="false" />
+          <Property Type="String" Name="Model" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="shoeSize" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Photo" Nullable="true" />
           <Property Type="DateTime" Name="Registration_date" Nullable="false" />
           <Property Type="DateTime" Name="Modification_date" Nullable="true" />
-          <Property Type="DateTime" Name="Birth_date" Nullable="false" />
-          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="User_Id" Nullable="true" />
-          <Property Type="Int32" Name="Id1" Nullable="false" />
-          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="User_type" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Photo" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -549,6 +548,7 @@
           <EntitySetMapping Name="Brand">
             <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Brand">
               <MappingFragment StoreEntitySet="Brand">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -646,26 +646,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="view_users" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_users">
+          <FunctionImportMapping FunctionImportName="Find_product_By_Search_Word" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.Find_product_By_Search_Word">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_users_Result">
+              <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Find_product_By_Search_Word_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
-                <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
-                <ScalarProperty Name="Identification" ColumnName="Identification" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="shoeSize" ColumnName="shoeSize" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
                 <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
-                <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="Id1" ColumnName="Id1" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="User_type" ColumnName="User_type" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

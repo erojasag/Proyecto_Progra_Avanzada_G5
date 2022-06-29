@@ -27,7 +27,7 @@ CREATE TABLE Person(
     First_last_name varchar(50) NOT NULL,
     Second_last_name varchar(50) NOT NULL,
     Identification varchar(9) NOT NULL,
-    Phone varchar(50) NOT NULL,
+    Phone varchar(max) NOT NULL,
     Email varchar(50) NOT NULL,
     Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Modification_date DATETIME2 NULL,
@@ -81,14 +81,14 @@ VALUES('Nike');
 
 
 CREATE TABLE Product(
-    Id INT NOT NULL,
+    Id INT(5) NOT NULL,
     Brand_Id INT,
     Price DECIMAL(10,2) NOT NULL,
     Stock INT NOT NULL,
     Model varchar(50) not null,
     Color Varchar(50) not null,
     shoeSize varchar(2) not null,
-    Photo varchar(50),
+    Photo varchar(max),
     Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Modification_date DATETIME2 NULL,
     CONSTRAINT PK_Product_Id PRIMARY KEY (id),
@@ -103,6 +103,10 @@ INNER JOIN Brand b
 ON p.Brand_Id = b.Id 
 DELETE FROM Product WHERE Brand_Id = '1';
 
+
+UPDATE Product
+SET Id = 6
+WHERE Id = 0;
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------PRODUCT TABLE--------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
