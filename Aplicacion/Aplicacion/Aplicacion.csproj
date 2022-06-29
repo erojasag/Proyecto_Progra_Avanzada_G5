@@ -185,8 +185,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\Orders.cs" />
@@ -2135,6 +2137,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\templates.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -2421,6 +2424,10 @@
     <Content Include="Views\Product\EditProduct.cshtml" />
     <Content Include="Views\Product\DeleteProduct.cshtml" />
     <Content Include="Views\Product\InsertProduct.cshtml" />
+    <Content Include="Views\ShoppingCart\ViewShoppingCart.cshtml" />
+    <Content Include="Views\ShoppingCart\GoToCheckOut.cshtml" />
+    <Content Include="Views\Orders\ViewOrders.cshtml" />
+    <Content Include="Views\Orders\OrderConfirmation.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

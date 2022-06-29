@@ -29,19 +29,6 @@ namespace Servicio.Controllers
             }
         }
 
-        /*[HttpGet]
-        [Route("person/ViewPersonById")]
-        public Respuesta ViewPersonById(int Id)
-        {
-            try
-            {
-                return respuesta.ArmarRespuestaPerson(1, "OK", true, model.ViewPersonById(Id), null);
-            }
-            catch (Exception ex)
-            {
-                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
-            }
-        }*/
 
         [HttpGet]
         [Route("persons/ViewPersonsWithUsers")]
@@ -71,21 +58,6 @@ namespace Servicio.Controllers
             }
         }
 
-        /*[HttpPost]
-        [Route("persons/InsertPerson")]
-        public Respuesta InsertPerson(Person Person)
-        {
-            try
-            {
-                return respuesta.ArmarRespuestaPerson(1, "OK", model.InsertPerson(Person), null, null);
-            }
-            catch (Exception ex)
-            {
-                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
-            }
-        }*/
-
-
         [HttpPost]
         [Route("persons/InsertPersonWithUser")]
         public Respuesta InsertPersonWithUser(UserPerson UserPerson)
@@ -101,20 +73,6 @@ namespace Servicio.Controllers
         }
 
 
-        /*[HttpPut]
-        [Route("persons/EditPerson")]
-        public Respuesta EditPerson(Person Person)
-        {
-            try
-            {
-                return respuesta.ArmarRespuestaPerson(1, "OK", model.EditPerson(Person), null, null);
-            }
-            catch (Exception ex)
-            {
-                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
-            }
-        }*/
-
         [HttpPut]
         [Route("persons/EditUserPerson")]
         public Respuesta EditUserPerson(UserPerson UserPerson)
@@ -128,20 +86,6 @@ namespace Servicio.Controllers
                 return respuesta.ArmarRespuestaUserPerson(-1, ex.Message, false, null, null);
             }
         }
-
-        /*[HttpDelete]
-        [Route("persons/DeletePerson")]
-        public Respuesta DeletePerson(int Id)
-        {
-            try
-            {
-                return respuesta.ArmarRespuestaPerson(1, "OK", model.DeletePerson(Id), null, null);
-            }
-            catch (Exception ex)
-            {
-                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
-            }
-        }*/
 
         [HttpDelete]
         [Route("persons/DeletePersonAndUserById")]

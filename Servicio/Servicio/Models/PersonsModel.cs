@@ -1,7 +1,10 @@
 ﻿using Servicio.Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 
 namespace Servicio.Models
@@ -33,6 +36,7 @@ namespace Servicio.Models
                                 Birth_date = new DateTime(),
                                 Address = tPerson.Address,
                                 User_Id = tPerson.User_Id,
+                                Email_Verification = tPerson.Email_Verification
                             });
                         }
                     }
@@ -51,35 +55,6 @@ namespace Servicio.Models
             }
         }
 
-        /*public Person ViewPersonById(int Id)
-        {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    var tPerson = db.Person.Find(Id);
-                    Person Person = new Person();
-                    if (tPerson != null)
-                    {
-                        Person.Name = tPerson.Name;
-                        Person.First_last_name = tPerson.First_last_name;
-                        Person.Second_last_name = tPerson.Second_last_name;
-                        Person.Identification = tPerson.Identification;
-                        Person.Phone = tPerson.Phone;
-                        Person.Email = tPerson.Email;
-                        Person.Registration_date = DateTime.Now;
-                        Person.Birth_date = new DateTime();
-                        Person.Address = tPerson.Address;
-                    }
-                    return Person;
-                }
-                catch(Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }*/
 
         public List<UserPerson> ViewPersonsWithUsers()
         {
@@ -105,6 +80,7 @@ namespace Servicio.Models
                             person.Birth_date = tPerson.Birth_date;
                             person.Address = tPerson.Address;
                             person.Registration_date = tPerson.Registration_date;
+                            person.Email_Verification = tPerson.Email_Verification;
 
                             var tUser = db.Users.Find(tPerson.User_Id);
                             Users user = new Users();
@@ -155,6 +131,7 @@ namespace Servicio.Models
                         person.Registration_date = tperson.Registration_date;
                         person.Birth_date = tperson.Birth_date;
                         person.Address = tperson.Address;
+                        person.Email_Verification = tperson.Email_Verification;
 
                         user.Username = tuser.Username;
                         user.User_type = tuser.User_type;
@@ -178,42 +155,13 @@ namespace Servicio.Models
         }
 
 
-        /*public bool InsertPerson(Person Person)
-        {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    if (Person != null)
-                    {
-                        Person tPerson = new Person();
-                        tPerson.Name = Person.Name;
-                        tPerson.First_last_name = Person.First_last_name;
-                        tPerson.Second_last_name = Person.Second_last_name;
-                        tPerson.Identification = Person.Identification;
-                        tPerson.Phone = Person.Phone;
-                        tPerson.Email = Person.Email;
-                        tPerson.Registration_date = DateTime.Now;
-                        tPerson.Birth_date = new DateTime();
-                        tPerson.Address = Person.Address;
-                        tPerson.Users = Person.Users;
-                    }
-                    return true;
-                }
-                catch(Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }*/
-
         public bool InsertPersonWithUser(UserPerson UserPerson)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
+                    
                     var checkPerson = db.Person.ToList();
                     List<Person> persons = new List<Person>();
                     var checkUsers = db.Users.ToList();
@@ -231,7 +179,8 @@ namespace Servicio.Models
                                 Identification = cperson.Identification,
                                 Phone = cperson.Phone,
                                 Email = cperson.Email,
-                                Address = cperson.Address
+                                Address = cperson.Address,
+                                Email_Verification = cperson.Email_Verification
                             });
                         };
                         foreach (var cuser in checkUsers)
@@ -280,9 +229,21 @@ namespace Servicio.Models
                         tPerson.Birth_date = UserPerson.Person.Birth_date;
                         tPerson.Address = UserPerson.Person.Address;
                         tPerson.User_Id = user.Id;
+                        tPerson.Email_Verification = true;
+                        tPerson.Activation_Code = Guid.NewGuid();
                         db.Person.Add(tPerson);
-                        db.SaveChanges();
-                        return true;
+                        int i = db.SaveChanges();
+
+                        if(i > 0)
+                        {
+                            ShoeCorpModel email = new ShoeCorpModel();
+                            email.SendVerificationLinkEmail(tPerson.Email, tPerson.Activation_Code.ToString());
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
@@ -297,62 +258,6 @@ namespace Servicio.Models
             }
         }
 
-        /*public bool EditPerson(Person Person)
-        {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    var tperson = db.Person.Find(Person.Id);
-                    if (tperson != null)
-                    {
-                        tperson.Id = Person.Id;
-                        if (Person.Name != null)
-                        {
-                            tperson.Name = Person.Name;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.First_last_name != null)
-                        {
-                            tperson.First_last_name = Person.First_last_name;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Second_last_name != null)
-                        {
-                            tperson.Second_last_name = Person.Second_last_name;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Phone != null)
-                        {
-                            tperson.Phone = Person.Phone;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Email != null)
-                        {
-                            tperson.Email = Person.Email;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Birth_date != null)
-                        {
-                            tperson.Birth_date = Person.Birth_date;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Address != null)
-                        {
-                            tperson.Address = Person.Address;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        db.SaveChanges();
-                    }
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }*/
 
         //Edit UserPerson
         public bool EditUserPerson(UserPerson UserPerson)
@@ -441,35 +346,7 @@ namespace Servicio.Models
                 }
             }
         }
-        
 
-        /*public bool DeletePerson(int Id)
-        {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    var tperson = db.Person.Find(Id);
-
-                    if (tperson != null)
-                    {
-                        db.Person.Remove(tperson);
-                        db.SaveChanges();
-                        return true;
-                    }
-                    else
-                    {
-                        throw new Exception("El usuario no se pudo eliminar");
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }*/
 
         public bool DeletePersonAndUserById(int Id)
         {
@@ -506,5 +383,7 @@ namespace Servicio.Models
                 }
             }
         }
+
+
     }
 }

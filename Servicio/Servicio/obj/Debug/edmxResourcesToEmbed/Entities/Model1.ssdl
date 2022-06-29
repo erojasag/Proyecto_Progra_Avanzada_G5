@@ -33,6 +33,8 @@
     <Property Name="Birth_date" Type="date" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="User_Id" Type="int" />
+    <Property Name="Email_Verification" Type="bit" />
+    <Property Name="Activation_Code" Type="uniqueidentifier" />
   </EntityType>
   <EntityType Name="Product">
     <Key>

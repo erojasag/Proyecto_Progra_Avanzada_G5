@@ -38,6 +38,8 @@
           <Property Name="Birth_date" Type="date" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="User_Id" Type="int" />
+          <Property Name="Email_Verification" Type="bit" />
+          <Property Name="Activation_Code" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -297,6 +299,8 @@
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="User_Id" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_Id" FromRole="Person" ToRole="Users" />
+          <Property Name="Email_Verification" Type="Boolean" />
+          <Property Name="Activation_Code" Type="Guid" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -567,6 +571,8 @@
           <EntitySetMapping Name="Person">
             <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Person">
               <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Activation_Code" ColumnName="Activation_Code" />
+                <ScalarProperty Name="Email_Verification" ColumnName="Email_Verification" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />

@@ -26,6 +26,8 @@ namespace Servicio.Entities
         public System.DateTime Birth_date { get; set; }
         public string Address { get; set; }
         public Nullable<int> User_Id { get; set; }
+        public Nullable<bool> Email_Verification { get; set; }
+        public Nullable<System.Guid> Activation_Code { get; set; }
     
         public virtual Users Users { get; set; }
     }

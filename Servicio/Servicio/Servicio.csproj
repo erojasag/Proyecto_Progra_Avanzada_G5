@@ -175,6 +175,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ShoeCorpController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Entities\Brand.cs">
@@ -225,6 +226,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BrandModel.cs" />
+    <Compile Include="Models\ShoeCorpModel.cs" />
     <Compile Include="Models\PersonsModel.cs" />
     <Compile Include="Models\ProductsModel.cs" />
     <Compile Include="Models\UsersModel.cs" />
@@ -300,6 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ShoeCorp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

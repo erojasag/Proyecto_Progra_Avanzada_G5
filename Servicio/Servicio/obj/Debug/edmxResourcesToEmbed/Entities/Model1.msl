@@ -23,6 +23,8 @@
     <EntitySetMapping Name="Person">
       <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Person">
         <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="Activation_Code" ColumnName="Activation_Code" />
+          <ScalarProperty Name="Email_Verification" ColumnName="Email_Verification" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />

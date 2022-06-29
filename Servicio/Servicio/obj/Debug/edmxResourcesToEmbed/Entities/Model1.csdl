@@ -38,6 +38,8 @@
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_Id" Type="Int32" />
     <NavigationProperty Name="Users" Relationship="Self.FK_User_Id" FromRole="Person" ToRole="Users" />
+    <Property Name="Email_Verification" Type="Boolean" />
+    <Property Name="Activation_Code" Type="Guid" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
