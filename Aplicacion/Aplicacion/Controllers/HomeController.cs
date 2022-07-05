@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aplicacion.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,9 +33,22 @@ namespace Aplicacion.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        [Route("UserLogIn")]
         public ActionResult UserLogIn()
         {
             return View();
         }
+
+        [HttpPost]
+        [Route("")]
+        public ActionResult UserLogIn2(Users User)
+        {
+            Session["Username"] = "";
+            Session["User_Role"] = null;
+            return View();
+        }
+
     }
 }

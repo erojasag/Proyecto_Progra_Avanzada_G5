@@ -10,7 +10,7 @@ namespace Aplicacion.Controllers
 {
     public class ProductController : Controller
     {
-        ProductModel model = new ProductModel();
+        readonly ProductModel model = new ProductModel();
 
         [HttpGet]
         [Route("ViewProducts")]
@@ -41,17 +41,19 @@ namespace Aplicacion.Controllers
         {
             try
             {
-
-                //var datos = model.ViewProductById((int)Id);
-
+                
                 if (Id == null)
                 {
                     return View();
                 }
-                else
+
+                var datos = model.ViewProductById((int)Id);
+                if (datos == null)
                 {
                     return View("Error");
                 }
+
+                return View(datos);
             }
             catch (Exception ex)
             {

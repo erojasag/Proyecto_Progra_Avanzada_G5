@@ -21,7 +21,7 @@ namespace Servicio.Models
             var verifyUrl = scheme + "://" + host + ":" + port + "/ShoeCorp/ActivateAccount/" + activationcode;
             var fromMail = new MailAddress(Url, "ShoeCorp");
             var toMail = new MailAddress(emailId);
-            string subject = "Your account is successfull created";
+            string subject = "Activate your ShoeCorp Account";
             string body = "<br/><br/>We are excited to tell you that your account is" +
               " successfully created. Please click on the below link to verify your account" +
               " <br/><br/><a href='" + verifyUrl + "'>" + verifyUrl + "</a> ";

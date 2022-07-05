@@ -10,7 +10,7 @@
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        @if (Session["Logged_In"] != null) //no estamos logueados tiene que ser == null esta es la vista general
+        @if (Session["User_Role"] == null) //no estamos logueados tiene que ser == null esta es la vista general
         {
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <ul class="navbar-nav">
@@ -93,7 +93,8 @@
                 <!-- /.sidebar -->
             </aside>
         }
-        @if (Session["Logged_In"] != null)//si estamos logueados como empleados tiene que ser != null
+
+        @if (Session["User_Role"] != null) //si estamos logueados como empleados tiene que ser != null
         {
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <ul class="navbar-nav">
@@ -258,7 +259,8 @@
                 <!-- /.sidebar -->
             </aside>
         }
-        @if (Session["Logged_In"] == null)//si estamos logueados como clientes
+
+        @if (Session["User_Role"] != null )//si estamos logueados como clientes
         {
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 <ul class="navbar-nav">

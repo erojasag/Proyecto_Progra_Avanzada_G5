@@ -30,11 +30,11 @@
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Modification_date" Type="datetime2" Precision="7" />
-    <Property Name="Birth_date" Type="date" Nullable="false" />
+    <Property Name="Birth_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="User_Id" Type="int" />
     <Property Name="Email_Verification" Type="bit" />
     <Property Name="Activation_Code" Type="uniqueidentifier" />
+    <Property Name="User_Id" Type="int" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -58,6 +58,13 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
     <Property Name="Order_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rol_Name" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Shipments">
     <Key>
@@ -92,8 +99,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="User_type" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Photo" Type="varchar(max)" />
+    <Property Name="User_Role" Type="int" Nullable="false" />
+    <Property Name="Photo" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_Brand_Id">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
@@ -140,6 +147,18 @@
       </Principal>
       <Dependent Role="Product_By_Order">
         <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Role_ID">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="User_Role" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -206,12 +225,14 @@
   <Function Name="Find_product_By_Search_Word" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="searchWord" Type="varchar(max)" Mode="In" />
   </Function>
+  <Function Name="view_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_By_Order" EntityType="Self.Product_By_Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -230,6 +251,10 @@
     <AssociationSet Name="FK_Product_Id" Association="Self.FK_Product_Id">
       <End Role="Product" EntitySet="Product" />
       <End Role="Product_By_Order" EntitySet="Product_By_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Role_ID" Association="Self.FK_Role_ID">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
     </AssociationSet>
     <AssociationSet Name="fk_shipment_customer_id" Association="Self.fk_shipment_customer_id">
       <End Role="Users" EntitySet="Users" />

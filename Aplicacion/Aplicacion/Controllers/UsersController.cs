@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Entities;
+using Aplicacion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Aplicacion.Controllers
 {
     public class UsersController : Controller
     {
+        UsersModel model = new UsersModel();
         public ActionResult ViewUsers()
         {
             return null;
@@ -32,6 +34,27 @@ namespace Aplicacion.Controllers
         public ActionResult DeleteUser(int Id)
         {
             return null;
+        }
+
+        public ActionResult ValidateUser(Users User)
+        {
+            try
+            {
+                var datos = model.ValidateUser(User);
+
+                if (datos != null)
+                {
+                    return View(datos.Products);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

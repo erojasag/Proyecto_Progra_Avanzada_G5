@@ -169,7 +169,7 @@ namespace Servicio.Models
                                 {
                                     throw new Exception("El codigo de producto que desea insertar ya existe");
                                 }
-                                if (item.shoeSize == Product.shoeSize && item.Color == Product.Color)
+                                if (item.shoeSize == Product.shoeSize && item.Color == Product.Color && item.Brand_Id == Product.Brand_Id)
                                 {
                                     throw new Exception("La talla y color ya se encuentran registrados, para anadir un producto hazlo modificando su stock");
                                 }

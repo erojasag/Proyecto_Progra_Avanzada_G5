@@ -12,5 +12,12 @@ namespace Servicio.Controllers
     public class ShoeCorpController : ApiController
     {
 
+        [HttpGet]
+        [Route("ShoeCorp/ActivateAccount")]
+
+        public void ActivateAccount()
+        {
+
+        }
     }
 }

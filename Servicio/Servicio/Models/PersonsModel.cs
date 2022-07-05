@@ -86,7 +86,7 @@ namespace Servicio.Models
                             Users user = new Users();
                             user.Id = tUser.Id;
                             user.Username = tUser.Username;
-                            user.User_type = tUser.User_type;
+                            user.User_Role = tUser.User_Role;
                             PersonUserList.Add(new UserPerson
                             {
                                 User = user,
@@ -134,7 +134,7 @@ namespace Servicio.Models
                         person.Email_Verification = tperson.Email_Verification;
 
                         user.Username = tuser.Username;
-                        user.User_type = tuser.User_type;
+                        user.User_Role = tuser.User_Role;
 
                         UserPerson.Person = person;
                         UserPerson.User = user;
@@ -161,54 +161,6 @@ namespace Servicio.Models
             {
                 try
                 {
-                    
-                    var checkPerson = db.Person.ToList();
-                    List<Person> persons = new List<Person>();
-                    var checkUsers = db.Users.ToList();
-                    List<Users> users = new List<Users>();
-
-                    if (checkPerson != null)
-                    {
-                        foreach (var cperson in checkPerson)
-                        {
-                            persons.Add(new Person
-                            {
-                                Name = cperson.Name,
-                                First_last_name = cperson.First_last_name,
-                                Second_last_name = cperson.Second_last_name,
-                                Identification = cperson.Identification,
-                                Phone = cperson.Phone,
-                                Email = cperson.Email,
-                                Address = cperson.Address,
-                                Email_Verification = cperson.Email_Verification
-                            });
-                        };
-                        foreach (var cuser in checkUsers)
-                        {
-                            users.Add(new Users
-                            {
-                                Username = cuser.Username
-                            });
-                        }
-                        foreach (var person in persons)
-                        {
-                            if (UserPerson.Person.Identification == person.Identification)
-                            {
-                                throw new Exception("Ya hay un usuario registrado con el numero de identificacion:" + " " + UserPerson.Person.Identification);
-                            }
-                            if (UserPerson.Person.Email == person.Email)
-                            {
-                                throw new Exception("El correo ingresado ya se encuentra registrado a un usuario");
-                            }
-                        };
-                        foreach(var user in users)
-                        {
-                            if (UserPerson.User.Username == user.Username)
-                            {
-                                throw new Exception("El username que intenta usar ya se encuentra registrado");
-                            }
-                        }
-                    }
 
                     if (UserPerson != null)
                     {
@@ -216,9 +168,8 @@ namespace Servicio.Models
                         Users user = new Users();
                         user.Username = UserPerson.User.Username;
                         user.Password = UserPerson.User.Password;
-                        user.User_type = UserPerson.User.User_type;
+                        user.User_Role = UserPerson.User.User_Role;
                         db.Users.Add(user);
-                        db.SaveChanges();
                         tPerson.Name = UserPerson.Person.Name;
                         tPerson.First_last_name = UserPerson.Person.First_last_name;
                         tPerson.Second_last_name = UserPerson.Person.Second_last_name;
@@ -229,7 +180,7 @@ namespace Servicio.Models
                         tPerson.Birth_date = UserPerson.Person.Birth_date;
                         tPerson.Address = UserPerson.Person.Address;
                         tPerson.User_Id = user.Id;
-                        tPerson.Email_Verification = true;
+                        tPerson.Email_Verification = false;
                         tPerson.Activation_Code = Guid.NewGuid();
                         db.Person.Add(tPerson);
                         int i = db.SaveChanges();
@@ -245,15 +196,13 @@ namespace Servicio.Models
                             return false;
                         }
                     }
-                    else
-                    {
-                        throw new Exception("El nombre de usuario que intenta registrar ya existe");
-                    }
+                    return true;
+                    
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     db.Dispose();
-                    throw ex;
+                    throw new Exception("Ya existe un usuario con los paremetros username, identification o email");
                 }
             }
         }
@@ -270,16 +219,7 @@ namespace Servicio.Models
                     var tUser = db.Users.Find(Id);
                     var tPerson = db.Person.Find(Id);
 
-                    List<Users> users = new List<Users>();
-                    var checkUsers = db.Users.ToList();
-
-                    foreach (var cuser in checkUsers)
-                    {
-                        users.Add(new Users
-                        {
-                            Username = cuser.Username
-                        });
-                    };
+                    
 
                     if (tUser != null)
                     {
@@ -303,27 +243,37 @@ namespace Servicio.Models
                             tPerson.Phone= UserPerson.Person.Phone;
                             tPerson.Modification_date = DateTime.Now;
                         }
-                        if (tPerson.Email != UserPerson.Person.Email)
+                        try
                         {
-                            tPerson.Email = UserPerson.Person.Email;
-                            tPerson.Modification_date = DateTime.Now;
+                            if (tPerson.Email != UserPerson.Person.Email)
+                            {
+                                tPerson.Email = UserPerson.Person.Email;
+                                tPerson.Modification_date = DateTime.Now;
+                            }
                         }
+                        catch (Exception) 
+                        {
+                            throw new Exception("El correo que desea ingresar se encuentra asociado a otra cuenta");
+                        }
+                        
                         if (tPerson.Address != UserPerson.Person.Address)
                         {
                             tPerson.Address = UserPerson.Person.Address;
                             tPerson.Modification_date = DateTime.Now;
                         }
-                        if (tUser.Username != UserPerson.User.Username)
+
+                        try
                         {
-                            foreach (var user in users)
+                            if (tUser.Username != UserPerson.User.Username)
                             {
-                                if (UserPerson.User.Username == user.Username)
-                                {
-                                    throw new Exception("El username que intenta usar ya se encuentra registrado");
-                                }
+                                tUser.Username = UserPerson.User.Username;
                             }
-                            tUser.Username = UserPerson.User.Username;
                         }
+                        catch (Exception)
+                        {
+                            throw new Exception("El nombre de usuario no se encuentra disponible");
+                        }
+
                         if (tUser.Password != UserPerson.User.Password)
                         {
                             tUser.Password = UserPerson.User.Password;
@@ -383,6 +333,11 @@ namespace Servicio.Models
                 }
             }
         }
+
+
+        
+
+
 
 
     }

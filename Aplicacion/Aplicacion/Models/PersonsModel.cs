@@ -11,7 +11,7 @@ namespace Aplicacion.Models
 {
     public class PersonsModel
     {
-        string Url = ConfigurationManager.AppSettings["urlServicioProyecto"].ToString();
+        readonly string Url = ConfigurationManager.AppSettings["urlServicioProyecto"].ToString();
 
         public Respuesta ViewPersonsWithUsers()
         {

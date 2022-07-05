@@ -55,9 +55,9 @@ namespace Aplicacion.Models
                     if (Id >= 0)
                     {
                         
-                        string api = "products/ViewProductById?Id=" + 2;
+                        string api = "products/ViewProductById?Id=" + Id;
                         string route = Url + api;
-
+                    
                         HttpResponseMessage response = client.GetAsync(route).Result;
 
                         response.EnsureSuccessStatusCode();
