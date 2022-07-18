@@ -164,6 +164,7 @@ namespace Servicio.Models
 
                     if (UserPerson != null)
                     {
+
                         Person tPerson = new Person();
                         Users user = new Users();
                         user.Username = UserPerson.User.Username;
@@ -187,7 +188,7 @@ namespace Servicio.Models
 
                         if(i > 0)
                         {
-                            ShoeCorpModel email = new ShoeCorpModel();
+                            EmailModel email = new EmailModel();
                             email.SendVerificationLinkEmail(tPerson.Email, tPerson.Activation_Code.ToString());
                             return true;
                         }
@@ -220,7 +221,7 @@ namespace Servicio.Models
                     var tPerson = db.Person.Find(Id);
 
                     
-
+                    //guardar el role
                     if (tUser != null)
                     {
                         if (tPerson.Name != UserPerson.Person.Name)

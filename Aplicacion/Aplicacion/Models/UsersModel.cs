@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Web;
 
 namespace Aplicacion.Models
@@ -11,30 +12,6 @@ namespace Aplicacion.Models
     public class UsersModel
     {
         readonly string Url = ConfigurationManager.AppSettings["urlServicioProyecto"].ToString();
-        public Respuesta ViewUsers()
-        {
-            return null;
-        }
-
-        public Respuesta ViewUserById(int Id)
-        {
-            return null;
-        }
-
-        public Respuesta InsertUser(Users User)
-        {
-            return null;
-        }
-
-        public Respuesta EditUser(Users User)
-        {
-            return null;
-        }
-
-        public Respuesta DeleteUser(int Id)
-        {
-            return null;
-        }
 
         public Respuesta ValidateUser(Users User)
         {
@@ -44,7 +21,8 @@ namespace Aplicacion.Models
                 {
                     string Route = "users/ValidateUser";
 
-                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
+                    var Body = JsonContent.Create(User);
+                    HttpResponseMessage response = client.PostAsync(Url + Route, Body).Result;
 
                     response.EnsureSuccessStatusCode();
                     if (response.IsSuccessStatusCode)

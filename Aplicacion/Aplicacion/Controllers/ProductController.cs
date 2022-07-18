@@ -62,11 +62,39 @@ namespace Aplicacion.Controllers
         }
 
         [HttpGet]
-        [Route("InsertProduct")]
+        
         public ActionResult InsertProduct(Product Product)
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ValidateProduct(Product product)
+        {
+            try
+            {
+                if (product != null)
+                {
+                    var datos = model.InsertProduct(product);
+
+                    if(datos != null)
+                    {
+                        return RedirectToAction("InsertProduct", "Product");
+                    }
+                }
+              
+                return View("Error");
+                
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
+
+        }
+        
+
 
         [HttpGet]
         [Route("EditProduct")]
@@ -74,6 +102,8 @@ namespace Aplicacion.Controllers
         {
             return View();
         }
+
+
 
         [HttpGet]
         [Route("DeleteProduct")]

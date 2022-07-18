@@ -1,0 +1,267 @@
+﻿@model  Aplicacion.Entities.UserPerson
+    
+@using (Html.BeginForm("InsertPersonWithUser", "Persons", FormMethod.Post))
+{
+
+
+    if (Session["User_Role"] == null)
+    {
+        <section class="vh-100 bg-image"
+                 style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+            <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="card" style="border-radius: 15px;">
+                                <div class="card-body p-5">
+                                    <h2 class="text-uppercase text-center mb-5">Register a ShoeCorp account</h2>
+                                    <form method="post" action="">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputUsername">Username</label>
+                                                @Html.TextBoxFor(Model => Model.User.Username, new { @class = "form-control", @placeholder = "Username", @id = "inputUsername" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail">Email</label>
+
+                                                @Html.TextBoxFor(Model => Model.Person.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword">Password</label>
+                                                @Html.PasswordFor(Model => Model.User.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword">Repeat your password</label>
+                                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputName">Name</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Name, new { @class = "form-control", @placeholder = "Name", @id = "inputName" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputFirstLastName">First Last Name</label>
+                                                @Html.TextBoxFor(Model => Model.Person.First_last_name, new { @class = "form-control", @placeholder = "First Last Name", @id = "inputFirstLastName" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputLastName">Last Name</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Second_last_name, new { @class = "form-control", @placeholder = "Last Name", @id = "inputLastName" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputIdentification">Identification</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Identification, new { @class = "form-control", @placeholder = "Identification", @id = "inputIdentification", @maxlength = "9" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputBirthDate">Birth Date</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPhone">Phone Number</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputAddress">Address</label>
+                                            @Html.TextBoxFor(Model => Model.Person.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St" })
+                                        </div>
+                                        <div class="form-check d-flex justify-content-center mb-5">
+                                            <label class="form-check-label" for="form2Example3g">
+                                                <input class="form-check-input center" type="checkbox" value="" id="form2Example3g" />
+                                                I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                                            </label>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit"
+                                                    class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
+                                                Register
+                                            </button>
+
+                                        </div>
+                                        <p class="text-center text-muted mt-5 mb-0">
+                                            Have already an account? <a href="@Url.Action("UserLogIn", "Home")"
+                                                                        class="fw-bold text-body"><u>Login here</u></a>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    if (Session["User_Role"] != null && Session["User_Role"].ToString() == "1")//registrar una cuenta de usuario desde un usuario admin
+    {
+        <section class="vh-100 bg-image"
+                 style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+            <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="card" style="border-radius: 15px;">
+                                <div class="card-body p-5">
+                                    <h2 class="text-uppercase text-center mb-5">Register a new Account</h2>
+                                    <form method="post" action="">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputUsername">Username</label>
+                                                @Html.TextBoxFor(Model => Model.User.Username, new { @class = "form-control", @placeholder = "Username", @id = "inputUsername" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail">Email</label>
+
+                                                @Html.TextBoxFor(Model => Model.Person.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword">Password</label>
+                                                @Html.PasswordFor(Model => Model.User.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword">Repeat your password</label>
+                                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputName">Name</label>
+
+                                                @Html.TextBoxFor(Model => Model.Person.Name, new { @class = "form-control", @placeholder = "Name", @id = "inputName" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputFirstLastName">First Last Name</label>
+                                                @Html.TextBoxFor(Model => Model.Person.First_last_name, new { @class = "form-control", @placeholder = "First Last Name", @id = "inputFirstLastName" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputLastName">Last Name</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Second_last_name, new { @class = "form-control", @placeholder = "Last Name", @id = "inputLastName" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputIdentification">Identification</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Identification, new { @class = "form-control", @placeholder = "Identification", @id = "inputIdentification", @maxlength = "9" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputBirthDate">Birth Date</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPhone">Phone Number</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputAddress">Address</label>
+                                            @Html.TextBoxFor(Model => Model.Person.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St" })
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                User Type
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" value="1">Administrator</a>
+                                                <a class="dropdown-item" value="3">Cashier</a>
+                                                <a class="dropdown-item" value="2">Customer</a>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit"
+                                                    class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
+                                                Register
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    if (Session["User_Role"] != null && Session["User_Role"].ToString() == "3")//registrar una cuenta de usuario desde un usuario cajero
+    {
+        <section class="vh-100 bg-image"
+                 style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+            <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                            <div class="card" style="border-radius: 15px;">
+                                <div class="card-body p-5">
+                                    <h2 class="text-uppercase text-center mb-5">Register a new Customer</h2>
+                                    <form method="post" action="">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputUsername">Username</label>
+                                                @Html.TextBoxFor(Model => Model.User.Username, new { @class = "form-control", @placeholder = "Username", @id = "inputUsername" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputEmail">Email</label>
+
+                                                @Html.TextBoxFor(Model => Model.Person.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword">Password</label>
+                                                @Html.PasswordFor(Model => Model.User.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPassword">Repeat your password</label>
+                                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="inputName">Name</label>
+
+                                                @Html.TextBoxFor(Model => Model.Person.Name, new { @class = "form-control", @placeholder = "Name", @id = "inputName" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputFirstLastName">First Last Name</label>
+                                                @Html.TextBoxFor(Model => Model.Person.First_last_name, new { @class = "form-control", @placeholder = "First Last Name", @id = "inputFirstLastName" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputLastName">Last Name</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Second_last_name, new { @class = "form-control", @placeholder = "Last Name", @id = "inputLastName" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputIdentification">Identification</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Identification, new { @class = "form-control", @placeholder = "Identification", @id = "inputIdentification", @maxlength = "9" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputBirthDate">Birth Date</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputPhone">Phone Number</label>
+                                                @Html.TextBoxFor(Model => Model.Person.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputAddress">Address</label>
+                                            @Html.TextBoxFor(Model => Model.Person.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St" })
+                                        </div>
+                                        <div class="form-check d-flex justify-content-center mb-5">
+                                            <label class="form-check-label" for="form2Example3g">
+                                                <input class="form-check-input center" type="checkbox" value="" id="form2Example3g" />
+                                                I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                                            </label>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit"
+                                                    class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
+                                                Register
+                                            </button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+}
+
+

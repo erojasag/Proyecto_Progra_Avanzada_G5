@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Entities;
+using Aplicacion.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Aplicacion.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
             return View();
@@ -28,27 +30,10 @@ namespace Aplicacion.Controllers
             return View();
         }
 
-        public ActionResult UserRegistration()
-        {
-            return View();
-        }
 
 
-        [HttpGet]
-        [Route("UserLogIn")]
-        public ActionResult UserLogIn()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        [Route("")]
-        public ActionResult UserLogIn2(Users User)
-        {
-            Session["Username"] = "";
-            Session["User_Role"] = null;
-            return View();
-        }
+       
 
     }
 }

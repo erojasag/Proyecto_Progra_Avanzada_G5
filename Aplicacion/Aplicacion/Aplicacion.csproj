@@ -255,11 +255,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\Orders.cs" />
     <Compile Include="Entities\Persons.cs" />
@@ -2489,8 +2489,8 @@
     <Content Include="Views\Users\EditUser.cshtml" />
     <Content Include="Views\Users\DeleteUser.cshtml" />
     <Content Include="web.config" />
-    <Content Include="Views\Home\UserRegistration.cshtml" />
-    <Content Include="Views\Home\UserLogIn.cshtml" />
+    <Content Include="Views\LogIn\UserRegistration.cshtml" />
+    <Content Include="Views\LogIn\UserLogIn.cshtml" />
     <Content Include="Views\Product\EditProduct.cshtml" />
     <Content Include="Views\Product\DeleteProduct.cshtml" />
     <Content Include="Views\Product\InsertProduct.cshtml" />
@@ -2498,6 +2498,7 @@
     <Content Include="Views\ShoppingCart\GoToCheckOut.cshtml" />
     <Content Include="Views\Orders\ViewOrders.cshtml" />
     <Content Include="Views\Orders\OrderConfirmation.cshtml" />
+    <Content Include="Views\Shared\ThankYou.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

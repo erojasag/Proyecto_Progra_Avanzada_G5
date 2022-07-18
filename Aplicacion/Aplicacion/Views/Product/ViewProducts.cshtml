@@ -5,7 +5,7 @@
 }
 
 
-@if (Session["Logged_In"] != null) //no estamos logueados
+@if (Session["Logged_In"] == null) //no estamos logueados
 {
     <div class="container">
         <table id="productsCustomer" class="table table-striped table-bordered table-sm">
@@ -50,7 +50,7 @@
 
 
 }
-@if (Session["Logged_In"] == null) //estamos logueados como empleados != not null
+@if (Session["User_Role"] != null && Session["User_Role"].ToString() == "Administrator") //estamos logueados como empleados != not null
 {
     <div class="container">
         <table id="productsCustomer" class="table table-striped table-bordered table-sm">

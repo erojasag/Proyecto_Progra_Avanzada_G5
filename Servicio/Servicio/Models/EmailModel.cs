@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Servicio.Models
 {
-    public class ShoeCorpModel
+    public class EmailModel
     {
         public void SendVerificationLinkEmail(string emailId, string activationcode)
         {

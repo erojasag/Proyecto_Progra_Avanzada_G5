@@ -176,12 +176,15 @@ namespace Servicio.Models
                                       && x.Password == User.Password
                                  select x).FirstOrDefault();
 
+                    var tRol = db.Roles.Find(tUser.User_Role);
+
+
                     if (tUser != null)
                     {
                         Users user = new Users();
                         user.Username = tUser.Username;
-                        user.Password = null;
                         user.User_Role = tUser.User_Role;
+                        user.Photo = tUser.Photo;
 
                         return user;
                     }

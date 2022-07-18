@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace Servicio.Controllers
 {
-    public class ShoeCorpController : ApiController
+    public class EmailController : ApiController
     {
 
         [HttpGet]

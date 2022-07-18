@@ -62,10 +62,14 @@ namespace Aplicacion.Controllers
         {
             try
             {
-                var datos = model.InsertPersonWithUser(UserPerson);
-                if (datos == null)
+                if(UserPerson.User.User_Role == 0)
                 {
-                    return View(datos);
+                    UserPerson.User.User_Role = 2;
+                }
+                var datos = model.InsertPersonWithUser(UserPerson);
+                if (datos != null)
+                {
+                    return View("ThankYou");
                 }
                 else
                 {
