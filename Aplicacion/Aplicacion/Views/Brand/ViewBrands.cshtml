@@ -9,7 +9,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th @Html.DisplayNameFor(model => model.Name)>Brands</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +17,8 @@
             {
                 <tr>
                     <th>@item.Name</th>
+                    <th><img src="@item.Photo"style="width: 100px; height: 100px"
+                                 class="rounded-circle"/></th>
                 </tr>
             }
 

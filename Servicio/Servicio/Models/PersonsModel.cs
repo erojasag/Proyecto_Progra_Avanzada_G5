@@ -1,14 +1,17 @@
 ﻿using Servicio.Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 
 namespace Servicio.Models
 {
     public class PersonsModel
     {
-        public List<Person> viewPersons()
+        public List<Person> ViewPersons()
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
@@ -33,6 +36,7 @@ namespace Servicio.Models
                                 Birth_date = new DateTime(),
                                 Address = tPerson.Address,
                                 User_Id = tPerson.User_Id,
+                                Email_Verification = tPerson.Email_Verification
                             });
                         }
                     }
@@ -51,35 +55,6 @@ namespace Servicio.Models
             }
         }
 
-        /*public Person ViewPersonById(int Id)
-        {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    var tPerson = db.Person.Find(Id);
-                    Person Person = new Person();
-                    if (tPerson != null)
-                    {
-                        Person.Name = tPerson.Name;
-                        Person.First_last_name = tPerson.First_last_name;
-                        Person.Second_last_name = tPerson.Second_last_name;
-                        Person.Identification = tPerson.Identification;
-                        Person.Phone = tPerson.Phone;
-                        Person.Email = tPerson.Email;
-                        Person.Registration_date = DateTime.Now;
-                        Person.Birth_date = new DateTime();
-                        Person.Address = tPerson.Address;
-                    }
-                    return Person;
-                }
-                catch(Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }*/
 
         public List<UserPerson> ViewPersonsWithUsers()
         {
@@ -105,12 +80,13 @@ namespace Servicio.Models
                             person.Birth_date = tPerson.Birth_date;
                             person.Address = tPerson.Address;
                             person.Registration_date = tPerson.Registration_date;
+                            person.Email_Verification = tPerson.Email_Verification;
 
                             var tUser = db.Users.Find(tPerson.User_Id);
                             Users user = new Users();
                             user.Id = tUser.Id;
                             user.Username = tUser.Username;
-                            user.User_type = tUser.User_type;
+                            user.User_Role = tUser.User_Role;
                             PersonUserList.Add(new UserPerson
                             {
                                 User = user,
@@ -155,9 +131,10 @@ namespace Servicio.Models
                         person.Registration_date = tperson.Registration_date;
                         person.Birth_date = tperson.Birth_date;
                         person.Address = tperson.Address;
+                        person.Email_Verification = tperson.Email_Verification;
 
                         user.Username = tuser.Username;
-                        user.User_type = tuser.User_type;
+                        user.User_Role = tuser.User_Role;
 
                         UserPerson.Person = person;
                         UserPerson.User = user;
@@ -178,98 +155,22 @@ namespace Servicio.Models
         }
 
 
-        /*public bool InsertPerson(Person Person)
-        {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    if (Person != null)
-                    {
-                        Person tPerson = new Person();
-                        tPerson.Name = Person.Name;
-                        tPerson.First_last_name = Person.First_last_name;
-                        tPerson.Second_last_name = Person.Second_last_name;
-                        tPerson.Identification = Person.Identification;
-                        tPerson.Phone = Person.Phone;
-                        tPerson.Email = Person.Email;
-                        tPerson.Registration_date = DateTime.Now;
-                        tPerson.Birth_date = new DateTime();
-                        tPerson.Address = Person.Address;
-                        tPerson.Users = Person.Users;
-                    }
-                    return true;
-                }
-                catch(Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }*/
-
         public bool InsertPersonWithUser(UserPerson UserPerson)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
             {
                 try
                 {
-                    var checkPerson = db.Person.ToList();
-                    List<Person> persons = new List<Person>();
-                    var checkUsers = db.Users.ToList();
-                    List<Users> users = new List<Users>();
-
-                    if (checkPerson != null)
-                    {
-                        foreach (var cperson in checkPerson)
-                        {
-                            persons.Add(new Person
-                            {
-                                Name = cperson.Name,
-                                First_last_name = cperson.First_last_name,
-                                Second_last_name = cperson.Second_last_name,
-                                Identification = cperson.Identification,
-                                Phone = cperson.Phone,
-                                Email = cperson.Email,
-                                Address = cperson.Address
-                            });
-                        };
-                        foreach (var cuser in checkUsers)
-                        {
-                            users.Add(new Users
-                            {
-                                Username = cuser.Username
-                            });
-                        }
-                        foreach (var person in persons)
-                        {
-                            if (UserPerson.Person.Identification == person.Identification)
-                            {
-                                throw new Exception("Ya hay un usuario registrado con el numero de identificacion:" + " " + UserPerson.Person.Identification);
-                            }
-                            if (UserPerson.Person.Email == person.Email)
-                            {
-                                throw new Exception("El correo ingresado ya se encuentra registrado a un usuario");
-                            }
-                        };
-                        foreach(var user in users)
-                        {
-                            if (UserPerson.User.Username == user.Username)
-                            {
-                                throw new Exception("El username que intenta usar ya se encuentra registrado");
-                            }
-                        }
-                    }
 
                     if (UserPerson != null)
                     {
+
                         Person tPerson = new Person();
                         Users user = new Users();
                         user.Username = UserPerson.User.Username;
                         user.Password = UserPerson.User.Password;
-                        user.User_type = UserPerson.User.User_type;
+                        user.User_Role = UserPerson.User.User_Role;
                         db.Users.Add(user);
-                        db.SaveChanges();
                         tPerson.Name = UserPerson.Person.Name;
                         tPerson.First_last_name = UserPerson.Person.First_last_name;
                         tPerson.Second_last_name = UserPerson.Person.Second_last_name;
@@ -280,79 +181,33 @@ namespace Servicio.Models
                         tPerson.Birth_date = UserPerson.Person.Birth_date;
                         tPerson.Address = UserPerson.Person.Address;
                         tPerson.User_Id = user.Id;
+                        tPerson.Email_Verification = false;
+                        tPerson.Activation_Code = Guid.NewGuid();
                         db.Person.Add(tPerson);
-                        db.SaveChanges();
-                        return true;
+                        int i = db.SaveChanges();
+
+                        if(i > 0)
+                        {
+                            EmailModel email = new EmailModel();
+                            email.SendVerificationLinkEmail(tPerson.Email, tPerson.Activation_Code.ToString());
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
-                    else
-                    {
-                        throw new Exception("El nombre de usuario que intenta registrar ya existe");
-                    }
+                    return true;
+                    
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     db.Dispose();
-                    throw ex;
+                    throw new Exception("Ya existe un usuario con los paremetros username, identification o email");
                 }
             }
         }
 
-        /*public bool EditPerson(Person Person)
-        {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    var tperson = db.Person.Find(Person.Id);
-                    if (tperson != null)
-                    {
-                        tperson.Id = Person.Id;
-                        if (Person.Name != null)
-                        {
-                            tperson.Name = Person.Name;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.First_last_name != null)
-                        {
-                            tperson.First_last_name = Person.First_last_name;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Second_last_name != null)
-                        {
-                            tperson.Second_last_name = Person.Second_last_name;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Phone != null)
-                        {
-                            tperson.Phone = Person.Phone;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Email != null)
-                        {
-                            tperson.Email = Person.Email;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Birth_date != null)
-                        {
-                            tperson.Birth_date = Person.Birth_date;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        if (Person.Address != null)
-                        {
-                            tperson.Address = Person.Address;
-                            tperson.Modification_date = DateTime.Now;
-                        }
-                        db.SaveChanges();
-                    }
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }*/
 
         //Edit UserPerson
         public bool EditUserPerson(UserPerson UserPerson)
@@ -365,17 +220,8 @@ namespace Servicio.Models
                     var tUser = db.Users.Find(Id);
                     var tPerson = db.Person.Find(Id);
 
-                    List<Users> users = new List<Users>();
-                    var checkUsers = db.Users.ToList();
-
-                    foreach (var cuser in checkUsers)
-                    {
-                        users.Add(new Users
-                        {
-                            Username = cuser.Username
-                        });
-                    };
-
+                    
+                    //guardar el role
                     if (tUser != null)
                     {
                         if (tPerson.Name != UserPerson.Person.Name)
@@ -398,27 +244,37 @@ namespace Servicio.Models
                             tPerson.Phone= UserPerson.Person.Phone;
                             tPerson.Modification_date = DateTime.Now;
                         }
-                        if (tPerson.Email != UserPerson.Person.Email)
+                        try
                         {
-                            tPerson.Email = UserPerson.Person.Email;
-                            tPerson.Modification_date = DateTime.Now;
+                            if (tPerson.Email != UserPerson.Person.Email)
+                            {
+                                tPerson.Email = UserPerson.Person.Email;
+                                tPerson.Modification_date = DateTime.Now;
+                            }
                         }
+                        catch (Exception) 
+                        {
+                            throw new Exception("El correo que desea ingresar se encuentra asociado a otra cuenta");
+                        }
+                        
                         if (tPerson.Address != UserPerson.Person.Address)
                         {
                             tPerson.Address = UserPerson.Person.Address;
                             tPerson.Modification_date = DateTime.Now;
                         }
-                        if (tUser.Username != UserPerson.User.Username)
+
+                        try
                         {
-                            foreach (var user in users)
+                            if (tUser.Username != UserPerson.User.Username)
                             {
-                                if (UserPerson.User.Username == user.Username)
-                                {
-                                    throw new Exception("El username que intenta usar ya se encuentra registrado");
-                                }
+                                tUser.Username = UserPerson.User.Username;
                             }
-                            tUser.Username = UserPerson.User.Username;
                         }
+                        catch (Exception)
+                        {
+                            throw new Exception("El nombre de usuario no se encuentra disponible");
+                        }
+
                         if (tUser.Password != UserPerson.User.Password)
                         {
                             tUser.Password = UserPerson.User.Password;
@@ -441,35 +297,7 @@ namespace Servicio.Models
                 }
             }
         }
-        
 
-        /*public bool DeletePerson(int Id)
-        {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    var tperson = db.Person.Find(Id);
-
-                    if (tperson != null)
-                    {
-                        db.Person.Remove(tperson);
-                        db.SaveChanges();
-                        return true;
-                    }
-                    else
-                    {
-                        throw new Exception("El usuario no se pudo eliminar");
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }*/
 
         public bool DeletePersonAndUserById(int Id)
         {
@@ -506,5 +334,12 @@ namespace Servicio.Models
                 }
             }
         }
+
+
+        
+
+
+
+
     }
 }

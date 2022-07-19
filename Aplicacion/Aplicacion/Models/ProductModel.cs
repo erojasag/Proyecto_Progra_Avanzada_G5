@@ -55,9 +55,9 @@ namespace Aplicacion.Models
                     if (Id >= 0)
                     {
                         
-                        string api = "products/ViewProductById?Id=" + 2;
+                        string api = "products/ViewProductById?Id=" + Id;
                         string route = Url + api;
-
+                    
                         HttpResponseMessage response = client.GetAsync(route).Result;
 
                         response.EnsureSuccessStatusCode();
@@ -121,9 +121,40 @@ namespace Aplicacion.Models
             }
         }
 
-        public Respuesta EditProduct(Product product)
+        public Respuesta EditProduct(Product Product)
         {
-            return null;
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    if(Product != null)
+                    {
+                        string api = "products/EditProduct";
+                        string route = Url + api;
+                        var content = JsonContent.Create(Product);
+                        HttpResponseMessage response = client.PutAsync(route, content).Result;
+
+                        response.EnsureSuccessStatusCode();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var responseBody = response.Content.ReadAsAsync<Respuesta>().Result;
+                            return responseBody;
+                        }
+                        else
+                        {
+                            throw new Exception("Error");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Porfavor ingrese los datos a modificar");
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
 
         public Respuesta DeleteProduct(int Id)

@@ -62,10 +62,14 @@ namespace Aplicacion.Controllers
         {
             try
             {
+                if(UserPerson.User.User_Role == 0)
+                {
+                    UserPerson.User.User_Role = 2;
+                }
                 var datos = model.InsertPersonWithUser(UserPerson);
                 if (datos != null)
                 {
-                    return View(datos);
+                    return View("ThankYou");
                 }
                 else
                 {
@@ -86,9 +90,9 @@ namespace Aplicacion.Controllers
             try
             {
                 var datos = model.EditUserPerson(UserPerson);
-                if (datos != null)
+                if (datos == null)
                 {
-                    return View(datos.UserPerson);
+                    return View();
                 }
                 else
                 {

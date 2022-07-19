@@ -42,6 +42,20 @@ namespace Servicio.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("products/SearchProductByDescription")]
+        public Respuesta SearchProductByDescription(string Description)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaProducts(1, "OK", true, null, model.SearchProductByDescription(Description));
+            }
+            catch(Exception ex)
+            {
+                return respuesta.ArmarRespuestaProducts(-1, ex.Message, false, null, null);
+            }
+        }
+
         [HttpPost]
         [Route("products/InsertProduct")]
         public Respuesta InsertProduct(Product product)

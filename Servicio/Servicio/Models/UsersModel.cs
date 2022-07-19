@@ -26,7 +26,7 @@ namespace Servicio.Models
                             Id = User.Id,
                             Username = User.Username,
                             Password = User.Password,
-                            User_type = User.User_type,
+                            User_Role = User.User_Role,
                             Photo = User.Photo
                         });
                     }
@@ -60,7 +60,7 @@ namespace Servicio.Models
                         User.Id = tusers.Id;
                         User.Username = tusers.Username;
                         User.Password = tusers.Password;
-                        User.User_type = tusers.User_type;
+                        User.User_Role = tusers.User_Role;
                         User.Photo = tusers.Photo;
                         return User;
                     }
@@ -89,7 +89,7 @@ namespace Servicio.Models
                     {
                         tusers.Username = User.Username;
                         tusers.Password = User.Password;
-                        tusers.User_type = User.User_type;
+                        tusers.User_Role = User.User_Role;
                         tusers.Photo = User.Photo;
                         db.Users.Add(tusers);
                         db.SaveChanges();
@@ -119,7 +119,7 @@ namespace Servicio.Models
                     {
                         tuser.Username = User.Username;
                         tuser.Password = User.Password;
-                        tuser.User_type = User.User_type;
+                        tuser.User_Role = User.User_Role;
                         tuser.Photo = User.Photo;
                         db.SaveChanges();
                         return true;
@@ -156,6 +156,45 @@ namespace Servicio.Models
                     }
 
                 }catch(Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
+        public Users ValidateUser(Users User)
+        {
+            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            {
+                try
+                {
+
+
+                    var tUser = (from x in db.Users
+                                 where x.Username == User.Username
+                                      && x.Password == User.Password
+                                 select x).FirstOrDefault();
+
+                    var tRol = db.Roles.Find(tUser.User_Role);
+
+
+                    if (tUser != null)
+                    {
+                        Users user = new Users();
+                        user.Username = tUser.Username;
+                        user.User_Role = tUser.User_Role;
+                        user.Photo = tUser.Photo;
+
+                        return user;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                catch (Exception ex)
                 {
                     db.Dispose();
                     throw ex;

@@ -10,7 +10,7 @@ namespace Aplicacion.Controllers
 {
     public class ProductController : Controller
     {
-        ProductModel model = new ProductModel();
+        readonly ProductModel model = new ProductModel();
 
         [HttpGet]
         [Route("ViewProducts")]
@@ -37,60 +37,77 @@ namespace Aplicacion.Controllers
 
         [HttpGet]
         [Route("ViewProductById")]
-
-        public ActionResult ViewProductById(int Id)
+        public ActionResult ViewProductById(int? Id)
         {
             try
             {
-                var datos = model.ViewProductById(Id);
-
-                if (datos.Id == 0)
+                
+                if (Id == null)
                 {
                     return View();
                 }
-                else
+
+                var datos = model.ViewProductById((int)Id);
+                if (datos == null)
                 {
                     return View("Error");
                 }
+
+                return View(datos);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        [HttpGet]
+        
+        public ActionResult InsertProduct(Product Product)
+        {
+            return View();
         }
 
         [HttpPost]
-        [Route("InsertProduct")]
-        public ActionResult InsertProduct(Product Product)
+        public ActionResult ValidateProduct(Product product)
         {
             try
             {
-                var datos = model.InsertProduct(Product);
-                if(datos != null)
+                if (product != null)
                 {
-                    return View();
+                    var datos = model.InsertProduct(product);
+
+                    if(datos != null)
+                    {
+                        return RedirectToAction("InsertProduct", "Product");
+                    }
                 }
-                else
-                {
-                    return View("Error");
-                }
+              
+                return View("Error");
+                
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 throw ex;
             }
-        }
+            
 
-        [HttpPut]
+        }
+        
+
+
+        [HttpGet]
         [Route("EditProduct")]
         public ActionResult EditProduct(Product product)
         {
-            return null;
+            return View();
         }
 
-        [HttpDelete]
+
+
+        [HttpGet]
         [Route("DeleteProduct")]
-        public ActionResult DeleteProduct(int Id)
+        public ActionResult DeleteProduct(int? Id)
         {
             return null;
         }

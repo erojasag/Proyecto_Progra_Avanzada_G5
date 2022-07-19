@@ -1,36 +1,44 @@
 ﻿using Aplicacion.Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Web;
 
 namespace Aplicacion.Models
 {
     public class UsersModel
     {
-        public Respuesta ViewUsers()
-        {
-            return null;
-        }
+        readonly string Url = ConfigurationManager.AppSettings["urlServicioProyecto"].ToString();
 
-        public Respuesta ViewUserById(int Id)
+        public Respuesta ValidateUser(Users User)
         {
-            return null;
-        }
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    string Route = "users/ValidateUser";
 
-        public Respuesta InsertUser(Users User)
-        {
-            return null;
-        }
+                    var Body = JsonContent.Create(User);
+                    HttpResponseMessage response = client.PostAsync(Url + Route, Body).Result;
 
-        public Respuesta EditUser(Users User)
-        {
-            return null;
-        }
-
-        public Respuesta DeleteUser(int Id)
-        {
-            return null;
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return response.Content.ReadAsAsync<Respuesta>().Result;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
     }
 }

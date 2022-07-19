@@ -24,11 +24,13 @@ namespace Servicio.Entities
         public Nullable<System.DateTime> Modification_date { get; set; }
         public System.DateTime Birth_date { get; set; }
         public string Address { get; set; }
+        public Nullable<bool> Email_Verification { get; set; }
+        public Nullable<System.Guid> Activation_Code { get; set; }
         public Nullable<int> User_Id { get; set; }
         public int Id1 { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string User_type { get; set; }
+        public int User_Role { get; set; }
         public string Photo { get; set; }
     }
 }
