@@ -10,7 +10,7 @@ namespace Aplicacion.Controllers
 {
     public class LogInController : Controller
     {
-        UsersModel model = new UsersModel();
+        readonly UsersModel model = new UsersModel();
 
         [HttpGet]
         public ActionResult UserLogIn(Users User)

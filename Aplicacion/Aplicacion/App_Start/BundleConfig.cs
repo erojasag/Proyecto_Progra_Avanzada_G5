@@ -20,7 +20,9 @@ namespace Aplicacion
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.bundle.min.js"));
+                      "~/Scripts/bootstrap.bundle.min.js",
+                      "~/Content/sweetalert2/sweetalert2.js",
+                       "~/Content/datatables/datatables.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -30,7 +32,9 @@ namespace Aplicacion
                       "~/Content/css/bootstrap.min.css",
                         "~/Content/css/font-awesome.min.css",
                         "~/Content/css/common.css",
-                       "~/Content/css/style.css"));
+                       "~/Content/css/style.css",
+                       "~/Content/sweetalert2/sweetalert.css",
+                       "~/Content/datatables/datatables.css"));
 
             bundles.Add(new ScriptBundle("~/adminlte/js").Include(
              "~/adminlte/js/adminlte.min.js"));
