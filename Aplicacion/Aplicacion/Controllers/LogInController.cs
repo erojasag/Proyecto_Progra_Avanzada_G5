@@ -31,13 +31,17 @@ namespace Aplicacion.Controllers
             if (User.Password != null)
             {
                 var datos = model.ValidateUser(User);
-
+                var username = datos.User.Username;
+                var role = datos.User.User_Role;
+                var photo = datos.User.Photo;
+                var Id = datos.User.Id;
                 if (datos != null)
                 {
 
-                    Session["Username"] = datos.User.Username;
-                    Session["User_Role"] = datos.User.User_Role;
-                    Session["Photo"] = datos.User.Photo;
+                    Session["Username"] = username;
+                    Session["User_Role"] = role;
+                    Session["Photo"] = photo;
+                    Session["Id"] = Id;
                     return RedirectToAction("Index", "Home");
                 }
 

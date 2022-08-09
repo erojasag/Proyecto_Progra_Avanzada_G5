@@ -98,9 +98,55 @@ namespace Aplicacion.Controllers
 
         [HttpGet]
         [Route("EditProduct")]
+        public ActionResult EditProduct(int? Id)
+        {
+            try
+            {
+                var data = model.ViewProductById((int)Id);
+
+                if (data != null)
+                {
+                    return View(data.Product);
+                }
+                return View();
+
+            }
+            catch(Exception ex)
+            {
+                return View("Error");
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [Route("EditProduct")]
         public ActionResult EditProduct(Product product)
         {
-            return View();
+            try
+            {
+                var data = model.ViewProductById((int)product.Id);
+                data.Product.Brand_Id = product.Brand_Id;
+                data.Product.Color = product.Color;
+                data.Product.Model = product.Model;
+                data.Product.shoeSize = product.shoeSize;
+                data.Product.Stock = product.Stock;
+                data.Product.Photo = product.Photo;
+
+                if(data.Transaction == true)
+                {
+                    model.EditProduct(product);
+                    return View("ProductoEditadoSatisfactoriamente");
+                }
+                else
+                {
+                    return View("ProductoNoEditado");
+                }
+            }
+            catch(Exception ex)
+            {
+                return View("Error");
+                throw ex;
+            }
         }
 
 
