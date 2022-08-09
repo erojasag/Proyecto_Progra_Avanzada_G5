@@ -82,16 +82,42 @@ namespace Aplicacion.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("EditUserPerson")]
+        public ActionResult EditUserPerson(int? Id)
+        {
+            try
+            {
+                var data = model.CheckPersonAndUserById((int)Id);
 
+                if(data != null)
+                {
+                    return View(data.UsersPersons);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch(Exception ex)
+            {
+                return View("Error");
+                throw ex;
+            }
+        }
 
+        [HttpPost]
+        [Route("EditUserPerson")]
         //Edit UserPerson
         public ActionResult EditUserPerson(UserPerson UserPerson)
         {
             try
             {
-                var datos = model.EditUserPerson(UserPerson);
-                if (datos == null)
+                var datos = model.CheckPersonAndUserById((int)UserPerson.Person.Id);
+
+                if (datos != null)
                 {
+                    model.EditUserPerson(UserPerson);
                     return View();
                 }
                 else

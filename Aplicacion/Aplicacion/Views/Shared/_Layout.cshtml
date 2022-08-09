@@ -1,10 +1,4 @@
-﻿@{       
-    ViewBag.Title = Session["User_Role"];
-}
-
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -110,7 +104,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link active">
-                            <p>@Session["Username"]</p>
+                            <p>@Session["Name"]</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -133,7 +127,7 @@
                             <img src="@Session["Photo"].ToString()" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">Emanuel Rojas</a>
+                            <a href="@Url.Action("EditUserPerson", "Persons")" class="d-block">Emanuel Rojas</a>
                         </div>
                     </div>
 
@@ -616,7 +610,7 @@
 
             <div class="float-right d-none d-sm-inline">
             </div>
-            <strong>Copyright &copy;</strong> Emanuel Rojas Aguero Grupo 5 @DateTime.Now.Year
+            <strong>Copyright &copy;</strong> @*Emanuel Rojas Aguero*@ Grupo 5 @DateTime.Now.Year
         </footer>
     </div>
 

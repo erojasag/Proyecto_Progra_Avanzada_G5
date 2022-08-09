@@ -2214,6 +2214,8 @@
     <Content Include="Content\templates.css" />
     <Content Include="favicon.ico" />
     <Content Include="Funciones\ConsultaProductos.js" />
+    <Content Include="Funciones\ConsultaUsuario.js" />
+    <Content Include="Funciones\Generales.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -2504,6 +2506,7 @@
     <Content Include="Views\Orders\ViewOrders.cshtml" />
     <Content Include="Views\Orders\OrderConfirmation.cshtml" />
     <Content Include="Views\Shared\ThankYou.cshtml" />
+    <Content Include="Views\Product\ProductoEditadoSatisfactoriamente.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

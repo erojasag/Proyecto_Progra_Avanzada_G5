@@ -1,80 +1,98 @@
-﻿
-@{
-    
-}
+﻿@model Aplicacion.Entities.UserPerson
 
-<div class="container bootstrap snippets bootdey">
-    <hr>
-    <div class="row">
-        <!-- left column -->
-        <div class="col-md-3">
-            <div class="text-center">
-                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                <h6>Upload a different photo...</h6>
 
-                <input type="file" class="form-control">
-            </div>
-        </div>
+@if (Session["User_Role"] != null)
+{
+    using (Html.BeginForm("EditUserPerson", "Persons", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-        <!-- edit form column -->
-        <div class="col-md-9 personal-info">
-            <div class="alert alert-info alert-dismissable">
-                <a class="panel-close close" data-dismiss="alert">×</a>
-                <i class="fa fa-coffee"></i>
-                This is an <strong>alert</strong> Use this to show important messages to the user.
-            </div>
-            <h3>Personal info</h3>
+        @Html.HiddenFor(Model => Model.Person.Id, new { @class = "form-control", @Id = "Id", @readonly = "readonly" })
+        <div class="container bootstrap snippets bootdey">
+            <hr>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <img src=@Html.DisplayFor(model => model.User.Photo) class="avatar img-circle img-thumbnail" alt="avatar">
+                        <h6>Upload a different photo...</h6>
+                        @Html.EditorFor(model => model.User.Photo, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                    </div>
+                </div>
 
-            <form class="form-horizontal" role="form">
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Name:</label>
-                    <div class="col-lg-8">
-                        <input class="form-control" type="text" value="">
+                <!-- edit form column -->
+                <div class="col-md-9 personal-info">
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a>
+                        <i class="fa fa-coffee"></i>
+                        This is an <strong>alert</strong> Use this to show important messages to the user.
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Name:</label>
-                    <div class="col-lg-8">
-                        <input class="form-control" type="text" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Last name:</label>
-                    <div class="col-lg-8">
-                        <input class="form-control" type="text" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Company:</label>
-                    <div class="col-lg-8">
-                        <input class="form-control" type="text" value="">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Email:</label>
-                    <div class="col-lg-8">
-                        <input class="form-control" type="text" value="janesemail@gmail.com">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Time Zone:</label>
-                    <div class="col-lg-8">
-                        <div class="ui-select">
-                            <select id="user_time_zone" class="form-control">
-                                <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                <option value="Alaska">(GMT-09:00) Alaska</option>
-                                <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                <option value="Arizona">(GMT-07:00) Arizona</option>
-                                <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                            </select>
+                    <br />
+                    <h3>Personal info</h3>
+
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Name:</label>
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Person.Name, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">First Last Name:</label>
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Person.First_last_name, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Last name:</label>
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Person.Second_last_name, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Identification:</label>
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Person.Identification, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Phone number:</label>
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Person.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Email:</label>
+                            <div class="col-lg-8">
+                                @Html.EditorFor(model => model.Person.Email, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "format@gmail.com" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Address:</label>
+                            <div class="col-lg-8">
+                                @Html.TextBoxFor(Model => Model.Person.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St", @required = "required" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">BirthDate::</label>
+                            <div class="col-lg-8">
+                                @Html.TextBoxFor(Model => Model.Person.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date", @required = "required" })
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                                <button type="reset" class="btn btn-danger">Clear</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}
+@section Scripts{
+    <script src="~/Funciones/ConsultaUsuario.js"></script>
+}

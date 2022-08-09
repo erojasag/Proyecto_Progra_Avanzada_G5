@@ -19,12 +19,12 @@
                             <p class="text-center">Please login to your account</p>
 
                             <div class="form-outline mb-4 d-flex justify-content-center">
-                                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", @placeholder = "Username" })
+                                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", @placeholder = "Username", required="required"})
                             </div>
 
 
                             <div class="form-outline mb-4 d-flex justify-content-center">
-                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password" })
+                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", required = "required" })
                             </div>
 
                             <div class="text-center pt-1 mb-5 pb-1">

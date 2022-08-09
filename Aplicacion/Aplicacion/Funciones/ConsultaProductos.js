@@ -1,3 +1,9 @@
 ﻿$(document).ready(function () {
-    $('#productsCustomer').DataTable();
+    $('#tbProducts').DataTable(
+        {
+            "bFilter": false,
+            "bInfo": false,
+            "bLengthChange": false
+        }
+    );
 });
