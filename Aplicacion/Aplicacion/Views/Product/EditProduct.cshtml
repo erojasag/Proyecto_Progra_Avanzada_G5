@@ -65,18 +65,19 @@
                                 @Html.EditorFor(model => model.shoeSize, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Size" } })
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Brand:</label>
                             <div class="col-lg-8">
                                 <div class="ui-select">
                                     <select id="brand_id_selector" class="form-control">
                                         <option selected>Select a Brand</option>
-                                        <option value=@Html.EditorFor(model => model.Brand.Id)>New balance</option>
-                                        <option value="2">Nike</option>
-                                        <option value="3">Adidas</option>
+                                        <option value="1">Nike</option>
+                                        <option value="2">Adidas</option>
+                                        <option value="3">New Balance</option>
                                         <option value="4">Project Rock</option>
-                                        <option value="5">Under Armour</option>
+                                        <option value="5">Puma</option>
+                                        <option value="6">Sperry</option>
+                                        <option value="7">Yeezy</option>
                                     </select>
                                 </div>
                             </div>
