@@ -88,7 +88,8 @@ namespace Aplicacion.Controllers
         {
             try
             {
-                var data = model.CheckPersonAndUserById((int)Id);
+                var gId = Session["Id"];
+                var data = model.CheckPersonAndUserById((int)gId);
 
                 if(data != null)
                 {
@@ -114,14 +115,26 @@ namespace Aplicacion.Controllers
             try
             {
                 var datos = model.CheckPersonAndUserById((int)UserPerson.Person.Id);
+                datos.Person.Name = UserPerson.Person.Name;
+                datos.Person.First_last_name = UserPerson.Person.First_last_name;
+                datos.Person.Second_last_name = UserPerson.Person.Second_last_name;
+                datos.Person.Identification = UserPerson.Person.Identification;
+                datos.Person.Phone = UserPerson.Person.Phone;
+                datos.Person.Email  = UserPerson.Person.Email;
+                datos.Person.Address = UserPerson.Person.Address;
+                datos.User.Username = UserPerson.User.Username;
+                datos.User.Password = UserPerson.User.Password;
 
-                if (datos != null)
+
+                if (datos.Transaction == true)
                 {
                     model.EditUserPerson(UserPerson);
+                    ViewBag.Mensaje = "User edited succesfully";
                     return View();
                 }
                 else
                 {
+                    ViewBag.Mensaje = "Product not edited";
                     return View("Error");
                 }
             }
@@ -131,13 +144,36 @@ namespace Aplicacion.Controllers
             }
         }
 
-
-
-        public ActionResult DeletePersonAndUserById(int Id)
+        [HttpGet]
+        [Route("CheckPersonById")]
+        public ActionResult CheckPersonById(int Id)
         {
             try
             {
-                var datos = model.DeletePersonAndUserById(Id);
+                var datos = model.CheckPersonById(Id);
+
+                if(datos != null)
+                {
+                    return View(datos.Person);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
+        public ActionResult DeletePersonAndUserById(int? Id)
+        {
+            try
+            {
+                var datos = model.DeletePersonAndUserById((int)Id);
                 if (datos != null)
                 {
                     return View(datos.User.Id);
@@ -149,6 +185,7 @@ namespace Aplicacion.Controllers
             }
             catch (Exception ex)
             {
+                return View("Error");
                 throw ex;
             }
         }

@@ -30,11 +30,11 @@
     <Property Name="First_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Identification" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="Modification_date" Type="DateTime" Precision="7" />
-    <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Email_Verification" Type="Boolean" />
     <Property Name="Activation_Code" Type="Guid" />
@@ -115,7 +115,7 @@
     <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_Role" Type="Int32" Nullable="false" />
-    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User_Id" FromRole="Users" ToRole="Orders" />
     <NavigationProperty Name="Person" Relationship="Self.FK_User_Id" FromRole="Users" ToRole="Person" />
     <NavigationProperty Name="Roles" Relationship="Self.FK_Role_ID" FromRole="Users" ToRole="Roles" />
@@ -292,30 +292,15 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
     </AssociationSet>
-    <FunctionImport Name="Find_product_By_Search_Word" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.Find_product_By_Search_Word_Result)">
-      <Parameter Name="searchWord" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="view_users" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_users_Result)" />
   </EntityContainer>
-  <ComplexType Name="Find_product_By_Search_Word_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Int32" Name="Brand_Id" Nullable="true" />
-    <Property Type="Decimal" Name="Price" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Int32" Name="Stock" Nullable="false" />
-    <Property Type="String" Name="Model" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="Color" Nullable="false" MaxLength="50" />
-    <Property Type="String" Name="shoeSize" Nullable="false" MaxLength="2" />
-    <Property Type="String" Name="Photo" Nullable="true" />
-    <Property Type="DateTime" Name="Registration_date" Nullable="false" />
-    <Property Type="DateTime" Name="Modification_date" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="view_users_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="First_last_name" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Second_last_name" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Identification" Nullable="false" MaxLength="9" />
-    <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Phone" Nullable="false" />
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
     <Property Type="DateTime" Name="Registration_date" Nullable="false" />
     <Property Type="DateTime" Name="Modification_date" Nullable="true" />
@@ -328,6 +313,6 @@
     <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
     <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
     <Property Type="Int32" Name="User_Role" Nullable="false" />
-    <Property Type="String" Name="Photo" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Photo" Nullable="true" />
   </ComplexType>
 </Schema>

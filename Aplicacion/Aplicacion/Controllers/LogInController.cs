@@ -11,6 +11,7 @@ namespace Aplicacion.Controllers
     public class LogInController : Controller
     {
         readonly UsersModel model = new UsersModel();
+        readonly PersonsModel pmodel = new PersonsModel();
 
         [HttpGet]
         public ActionResult UserLogIn(Users User)
@@ -27,28 +28,31 @@ namespace Aplicacion.Controllers
         [HttpPost]
         public ActionResult ValidateUser(Users User)
         {
-            ViewBag.Mensaje = string.Empty;
 
-            if (User.Password != null)
+            if (User.Password != null && User.Username != null)
             {
                 var datos = model.ValidateUser(User);
-                var username = datos.User.Username;
-                var role = datos.User.User_Role;
-                var photo = datos.User.Photo;
-                var Id = datos.User.Id;
-                if (datos != null)
+                //var getPerson = pmodel.CheckPersonById(datos.Id);
+
+                if (datos.Id != -1)
                 {
+                    var username = datos.User.Username;
+                    var role = datos.User.User_Role;
+                    var photo = datos.User.Photo;
+                    var Id = datos.User.Id;
 
-                    Session["Username"] = username;
-                    Session["User_Role"] = role;
-                    Session["Photo"] = photo;
-                    Session["Id"] = Id;
-                    return RedirectToAction("Index", "Home");
+                    if (datos != null)
+                    {
+                        Session["Username"] = username;
+                        Session["User_Role"] = role;
+                        Session["Photo"] = photo;
+                        Session["Id"] = Id;
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-
             }
-            ViewBag.Mensaje = "User incorrect, please try it again!";
-            return View("Index");
+            ViewBag.Mensaje = "User or Password Incorrect, please try again";
+            return View("UserLogIn");
         }
 
         [HttpGet]

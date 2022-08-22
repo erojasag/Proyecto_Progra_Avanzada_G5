@@ -176,7 +176,15 @@ namespace Servicio.Models
                                       && x.Password == User.Password
                                  select x).FirstOrDefault();
 
-                    var tRol = db.Roles.Find(tUser.User_Role);
+                    if (tUser != null)
+                    {
+                        var tRol = db.Roles.Find(tUser.User_Role);
+                    }
+                    else
+                    {
+                        throw new Exception("User does not exists");
+                    }
+
 
 
                     if (tUser != null)
@@ -185,6 +193,7 @@ namespace Servicio.Models
                         user.Username = tUser.Username;
                         user.User_Role = tUser.User_Role;
                         user.Photo = tUser.Photo;
+                        user.Id = tUser.Id;
 
                         return user;
                     }

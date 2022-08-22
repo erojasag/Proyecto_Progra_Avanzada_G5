@@ -154,6 +154,41 @@ namespace Servicio.Models
             }
         }
 
+        public Person CheckPersonById(int Id)
+        {
+            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            {
+                try
+                {
+                    var person = db.Person.Find(Id);
+
+                    if(person != null)
+                    {
+                        Person nPerson = new Person();
+
+                        nPerson.Name = person.Name;
+                        nPerson.First_last_name = person.First_last_name;
+                        nPerson.Second_last_name = person.Second_last_name;
+                        nPerson.Identification = person.Identification;
+                        nPerson.Phone = person.Phone;
+                        nPerson.Email = person.Email;
+                        nPerson.Address = person.Address;
+                        nPerson.User_Id = person.User_Id;
+
+                        return nPerson;
+                    }
+                    else
+                    {
+                        throw new Exception("El usuario no se encontro");
+                    }
+                }
+                catch(Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
 
         public bool InsertPersonWithUser(UserPerson UserPerson)
         {
@@ -334,12 +369,5 @@ namespace Servicio.Models
                 }
             }
         }
-
-
-        
-
-
-
-
     }
 }

@@ -3,6 +3,7 @@
 
 @if (Session["User_Role"] != null)
 {
+    @Html.Hidden("IdMsj", (string)ViewBag.Mensaje)
     using (Html.BeginForm("EditUserPerson", "Persons", FormMethod.Post))
     {
         @Html.AntiForgeryToken()

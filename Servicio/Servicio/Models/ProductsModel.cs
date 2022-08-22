@@ -100,42 +100,6 @@ namespace Servicio.Models
             }
         }
 
-        public List<Product> SearchProductByDescription(string Description)
-        {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
-            {
-                try
-                {
-                    var search = db.Find_product_By_Search_Word(Description);
-                    List<Product> products = new List<Product>();
-                    if (search != null)
-                    {
-                        foreach(var item in search)
-                        {
-                            products.Add(new Product
-                            {
-                                Id = item.Id,
-                                Brand_Id = item.Brand_Id,
-                                Price = item.Price,
-                                Stock = item.Stock,
-                                Model = item.Model,
-                                Color = item.Color,
-                                shoeSize = item.shoeSize,
-                                Photo = item.Photo
-                            });
-                        }
-
-                    }
-                    return products;
-                }
-                catch(Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }
-
         public bool InsertProduct(Product Product)
         {
             using (var db = new Proyecto_Progra_Avanzada_G5Entities())
