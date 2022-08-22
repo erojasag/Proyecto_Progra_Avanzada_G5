@@ -159,7 +159,37 @@ namespace Aplicacion.Models
 
         public Respuesta DeleteProduct(int Id)
         {
-            return null;
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    if (Id != 0)
+                    {
+                        string api = "products/DeleteProduct";
+                        string route = Url + api;
+                        HttpResponseMessage response = client.GetAsync(route).Result;
+
+                        response.EnsureSuccessStatusCode();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var responseBody = response.Content.ReadAsAsync<Respuesta>().Result;
+                            return responseBody;
+                        }
+                        else
+                        {
+                            throw new Exception("Error");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Producto No eliminado");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
     }
 }

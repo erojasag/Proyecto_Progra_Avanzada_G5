@@ -29,29 +29,30 @@ namespace Aplicacion.Controllers
         public ActionResult ValidateUser(Users User)
         {
 
-            if (User.Password != null)
+            if (User.Password != null && User.Username != null)
             {
                 var datos = model.ValidateUser(User);
                 //var getPerson = pmodel.CheckPersonById(datos.Id);
 
-
-                var username = datos.User.Username;
-                var role = datos.User.User_Role;
-                var photo = datos.User.Photo;
-                var Id = datos.User.Id;
-                
-                if (datos != null)
+                if (datos.Id != -1)
                 {
-                    Session["Username"] = username;
-                    Session["User_Role"] = role;
-                    Session["Photo"] = photo;
-                    Session["Id"] = Id;
-                    return RedirectToAction("Index", "Home");
+                    var username = datos.User.Username;
+                    var role = datos.User.User_Role;
+                    var photo = datos.User.Photo;
+                    var Id = datos.User.Id;
+
+                    if (datos != null)
+                    {
+                        Session["Username"] = username;
+                        Session["User_Role"] = role;
+                        Session["Photo"] = photo;
+                        Session["Id"] = Id;
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
-
             }
-
-            return View("Index");
+            ViewBag.Mensaje = "User or Password Incorrect, please try again";
+            return View("UserLogIn");
         }
 
         [HttpGet]

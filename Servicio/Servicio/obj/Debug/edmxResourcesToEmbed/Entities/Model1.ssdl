@@ -26,11 +26,11 @@
     <Property Name="First_last_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Second_last_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Identification" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar(max)" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Modification_date" Type="datetime2" Precision="7" />
-    <Property Name="Birth_date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Birth_date" Type="date" Nullable="false" />
     <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Email_Verification" Type="bit" />
     <Property Name="Activation_Code" Type="uniqueidentifier" />
@@ -100,7 +100,7 @@
     <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="User_Role" Type="int" Nullable="false" />
-    <Property Name="Photo" Type="varchar" MaxLength="50" />
+    <Property Name="Photo" Type="varchar(max)" />
   </EntityType>
   <Association Name="FK_Brand_Id">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
@@ -222,9 +222,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="Find_product_By_Search_Word" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="searchWord" Type="varchar(max)" Mode="In" />
-  </Function>
   <Function Name="view_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />

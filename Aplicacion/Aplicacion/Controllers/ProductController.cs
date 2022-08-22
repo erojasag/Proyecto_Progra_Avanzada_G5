@@ -139,7 +139,8 @@ namespace Aplicacion.Controllers
                 }
                 else
                 {
-                    return View("ProductoNoEditado");
+                    ViewBag.Mensaje = "Product not edited";
+                    return View("EditProduct");
                 }
             }
             catch(Exception ex)
@@ -155,7 +156,26 @@ namespace Aplicacion.Controllers
         [Route("DeleteProduct")]
         public ActionResult DeleteProduct(int? Id)
         {
-            return null;
+            try
+            {
+                var data = model.DeleteProduct((int)Id);
+
+                if(data.Transaction == true)
+                {
+                    ViewBag.Mensaje = "Product deleted properly";
+                    model.DeleteProduct((int)Id);
+                    return View();
+                }
+                else
+                {
+                    return View("ProductNotDeleted");
+                }
+            }
+            catch(Exception ex)
+            {
+                return View("Error");
+                throw ex;
+            }
         }
     }
 }

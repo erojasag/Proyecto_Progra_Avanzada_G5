@@ -33,7 +33,7 @@ namespace Aplicacion
                         "~/Content/css/font-awesome.min.css",
                         "~/Content/css/common.css",
                        "~/Content/css/style.css",
-                       "~/Content/sweetalert2/sweetalert.css",
+                       "~/Content/sweetalert2/sweetalert2.css",
                        "~/Content/datatables/datatables.css"));
 
             bundles.Add(new ScriptBundle("~/adminlte/js").Include(

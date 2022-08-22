@@ -15,11 +15,13 @@
                             <h4 class="mt-1 mb-5 pb-1">Welcome to ShoeCorp</h4>
                         </div>
 
+                        @Html.Hidden("IdMsj", (string)ViewBag.Mensaje)
+
                         <form action="~/Controllers/Users/ValidateUsers" method="post" id="LogInForm">
                             <p class="text-center">Please login to your account</p>
 
                             <div class="form-outline mb-4 d-flex justify-content-center">
-                                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", @placeholder = "Username", required="required"})
+                                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", @placeholder = "Username", required = "required" })
                             </div>
 
 
@@ -38,7 +40,7 @@
                             <div class="d-flex align-items-center justify-content-center pb-4">
                                 <p class="mb me-2">Don't have an account?</p>
                                 <a type="button" onclick="ValidarUsuario" href="@Url.Action("UserRegistration", "LogIn")" class="btn btn-outline-danger d-flex justify-content-center">Create new</a>
-                            </div>                            
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -49,7 +51,11 @@
 }
 
 
-<script src="~/Funciones/Login.js"></script>
+@section Scripts{
+    <script src="~/Funciones/Generales.js"></script>
+    <script src="~/Funciones/Login.js"></script>
+}
+
 
 
 

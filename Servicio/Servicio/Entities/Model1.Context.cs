@@ -37,15 +37,6 @@ namespace Servicio.Entities
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     
-        public virtual ObjectResult<Find_product_By_Search_Word_Result> Find_product_By_Search_Word(string searchWord)
-        {
-            var searchWordParameter = searchWord != null ?
-                new ObjectParameter("searchWord", searchWord) :
-                new ObjectParameter("searchWord", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Find_product_By_Search_Word_Result>("Find_product_By_Search_Word", searchWordParameter);
-        }
-    
         public virtual ObjectResult<view_users_Result> view_users()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_users_Result>("view_users");

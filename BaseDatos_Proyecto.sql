@@ -32,7 +32,7 @@ CREATE TABLE Users(
 	Username varchar(50) NOT NULL UNIQUE,
 	Password varchar(50) NOT NULL,
 	User_Role int NOT NULL,
-	Photo varchar(50),
+	Photo varchar(max),
 CONSTRAINT PK_User_ID PRIMARY KEY(Id),
 CONSTRAINT FK_Role_ID FOREIGN KEY (User_Role) REFERENCES Roles(Id)
 );
@@ -58,6 +58,9 @@ INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('BezosJeff', 'Ama
 INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('EmaAdmin', 'SuperAdmin2022', 1,'no photo');
 
 SELECT * FROM Users u 
+
+
+UPDATE Users SET Photo=('https://upload.wikimedia.org/wikipedia/commons/5/5f/Alberto_conversi_profile_pic.jpg') WHERE Users.Id = 10;
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------USER TABLE-----------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------

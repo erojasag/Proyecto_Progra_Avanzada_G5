@@ -112,22 +112,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="Find_product_By_Search_Word" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.Find_product_By_Search_Word">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Find_product_By_Search_Word_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Stock" ColumnName="Stock" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="Color" ColumnName="Color" />
-          <ScalarProperty Name="shoeSize" ColumnName="shoeSize" />
-          <ScalarProperty Name="Photo" ColumnName="Photo" />
-          <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
-          <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="view_users" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_users">
       <ResultMapping>
         <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_users_Result">
