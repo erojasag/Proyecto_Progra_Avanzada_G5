@@ -55,6 +55,7 @@ namespace Aplicacion.Controllers
             return View("UserLogIn");
         }
 
+        [SessionFilter]
         [HttpGet]
         public ActionResult LogOut()
         {

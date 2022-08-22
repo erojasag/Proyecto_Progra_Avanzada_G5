@@ -82,6 +82,7 @@ namespace Aplicacion.Controllers
             }
         }
 
+        [SessionFilter]
         [HttpGet]
         [Route("EditUserPerson")]
         public ActionResult EditUserPerson(int? Id)
@@ -107,6 +108,7 @@ namespace Aplicacion.Controllers
             }
         }
 
+        [SessionFilter]
         [HttpPost]
         [Route("EditUserPerson")]
         //Edit UserPerson
@@ -167,8 +169,9 @@ namespace Aplicacion.Controllers
             }
         }
 
-
-
+        [SessionFilter]
+        [HttpGet]
+        [Route("DeletePersonAndUserById")]
         public ActionResult DeletePersonAndUserById(int? Id)
         {
             try

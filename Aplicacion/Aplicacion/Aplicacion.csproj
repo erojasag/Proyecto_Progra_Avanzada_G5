@@ -275,6 +275,7 @@
     <Compile Include="Models\BrandModel.cs" />
     <Compile Include="Models\PersonsModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\SessionFilter.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

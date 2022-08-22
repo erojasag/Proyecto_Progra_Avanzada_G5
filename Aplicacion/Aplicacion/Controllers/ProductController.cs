@@ -62,7 +62,7 @@ namespace Aplicacion.Controllers
         }
 
         [HttpGet]
-        
+        [SessionFilter]
         public ActionResult InsertProduct(Product Product)
         {
             return View();
@@ -93,9 +93,9 @@ namespace Aplicacion.Controllers
             
 
         }
-        
 
 
+        [SessionFilter]
         [HttpGet]
         [Route("EditProduct")]
         public ActionResult EditProduct(int? Id)
@@ -118,6 +118,7 @@ namespace Aplicacion.Controllers
             }
         }
 
+        [SessionFilter]
         [HttpPost]
         [Route("EditProduct")]
         public ActionResult EditProduct(Product product)
@@ -151,7 +152,7 @@ namespace Aplicacion.Controllers
         }
 
 
-
+        [SessionFilter]
         [HttpGet]
         [Route("DeleteProduct")]
         public ActionResult DeleteProduct(int? Id)
