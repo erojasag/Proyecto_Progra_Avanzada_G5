@@ -27,6 +27,7 @@ namespace Aplicacion.Controllers
         [HttpPost]
         public ActionResult ValidateUser(Users User)
         {
+            ViewBag.Mensaje = string.Empty;
 
             if (User.Password != null)
             {
@@ -46,7 +47,7 @@ namespace Aplicacion.Controllers
                 }
 
             }
-
+            ViewBag.Mensaje = "User incorrect, please try it again!";
             return View("Index");
         }
 
