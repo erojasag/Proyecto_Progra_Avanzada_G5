@@ -131,6 +131,29 @@ namespace Aplicacion.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("CheckPersonById")]
+        public ActionResult CheckPersonById(int Id)
+        {
+            try
+            {
+                var datos = model.CheckPersonById(Id);
+
+                if(datos != null)
+                {
+                    return View(datos.Person);
+                }
+                else
+                {
+                    return View("Error");
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
 
         public ActionResult DeletePersonAndUserById(int Id)

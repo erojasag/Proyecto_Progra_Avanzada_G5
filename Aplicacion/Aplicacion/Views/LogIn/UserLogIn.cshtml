@@ -37,7 +37,7 @@
 
                             <div class="d-flex align-items-center justify-content-center pb-4">
                                 <p class="mb me-2">Don't have an account?</p>
-                                <a type="button" href="@Url.Action("UserRegistration", "LogIn")" class="btn btn-outline-danger d-flex justify-content-center">Create new</a>
+                                <a type="button" onclick="ValidarUsuario" href="@Url.Action("UserRegistration", "LogIn")" class="btn btn-outline-danger d-flex justify-content-center">Create new</a>
                             </div>                            
                         </form>
                     </div>
@@ -47,4 +47,9 @@
     </section>
 
 }
+
+
+<script src="~/Funciones/Login.js"></script>
+
+
 

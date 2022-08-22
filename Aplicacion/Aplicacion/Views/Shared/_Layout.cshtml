@@ -213,7 +213,7 @@
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
-                                    
+
                                     <li class="nav-item">
                                         <a href="@Url.Action("UserRegistration", "LogIn")" class="nav-link active">
                                             <i class="far fa-circle nav-icon"></i>
@@ -577,22 +577,22 @@
                     <h1 class="m-0 text-dark">@ViewBag.Title</h1>
 
                     @*<div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">@ViewBag.Title</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                @if (@ViewContext.RouteData.Values["controller"].ToString() != "Home" ||
-                                    @ViewContext.RouteData.Values["action"].ToString() != "Index")
-                                {
-                                    <li class="breadcrumb-item">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">@ViewBag.Title</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    @if (@ViewContext.RouteData.Values["controller"].ToString() != "Home" ||
+                                        @ViewContext.RouteData.Values["action"].ToString() != "Index")
+                                    {
+                                        <li class="breadcrumb-item">
 
-                                    </li>
-                                }
-                                <li class="breadcrumb-item active">@ViewBag.Title</li>
-                            </ol>
-                        </div>
-                    </div>*@
+                                        </li>
+                                    }
+                                    <li class="breadcrumb-item active">@ViewBag.Title</li>
+                                </ol>
+                            </div>
+                        </div>*@
 
                 </div>
             </div>
@@ -613,6 +613,8 @@
             <strong>Copyright &copy;</strong> @*Emanuel Rojas Aguero*@ Grupo 5 @DateTime.Now.Year
         </footer>
     </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

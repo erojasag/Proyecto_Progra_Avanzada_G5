@@ -31,7 +31,7 @@ namespace Aplicacion.Models
                     }
                     else
                     {
-                        return null;
+                        throw new Exception("El usuario no se encontro");
                     }
 
 
@@ -45,7 +45,57 @@ namespace Aplicacion.Models
         }
         public Respuesta CheckPersonAndUserById(int Id)
         {
-            return null;
+            using(var client = new HttpClient())
+            {
+                try
+                {
+                    string Route = "persons/CheckPersonAndUserById";
+
+                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
+
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseBody = response.Content.ReadAsAsync<Respuesta>().Result;
+                        return responseBody;
+                    }
+                    else
+                    {
+                        throw new Exception("El usuario no se encontro");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
+        public Respuesta CheckPersonById(int Id)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    string Route = "persons/CheckPersonById";
+                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
+
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseBody = response.Content.ReadAsAsync<Respuesta>().Result;
+                        return responseBody;
+                    }
+                    else
+                    {
+                        throw new Exception("El usuario no se encontro");
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
 
         public Respuesta InsertPersonWithUser(UserPerson UserPerson)
@@ -79,11 +129,6 @@ namespace Aplicacion.Models
 
             }
         }
-
-        /*public bool EditPerson(Person Person)
-        {
-            
-        }*/
 
         //Edit UserPerson
         public Respuesta EditUserPerson(UserPerson UserPerson)

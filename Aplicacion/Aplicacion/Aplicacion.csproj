@@ -2209,6 +2209,7 @@
     <Content Include="Content\datatables\datatables.css" />
     <Content Include="Content\datatables\datatables.js" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="Content\sweetalert2\sweetalert.css" />
     <Content Include="Content\sweetalert2\sweetalert2.js" />
     <Content Include="Content\templates.css" />
@@ -2216,6 +2217,7 @@
     <Content Include="Funciones\ConsultaProductos.js" />
     <Content Include="Funciones\ConsultaUsuario.js" />
     <Content Include="Funciones\Generales.js" />
+    <Content Include="Funciones\Login.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -2452,6 +2454,7 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\sweetalert2.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -2507,6 +2510,7 @@
     <Content Include="Views\Orders\OrderConfirmation.cshtml" />
     <Content Include="Views\Shared\ThankYou.cshtml" />
     <Content Include="Views\Product\ProductoEditadoSatisfactoriamente.cshtml" />
+    <Content Include="Views\Shared\NotificationPanel.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

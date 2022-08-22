@@ -11,6 +11,7 @@ namespace Aplicacion.Controllers
     public class LogInController : Controller
     {
         readonly UsersModel model = new UsersModel();
+        readonly PersonsModel pmodel = new PersonsModel();
 
         [HttpGet]
         public ActionResult UserLogIn(Users User)
@@ -31,13 +32,16 @@ namespace Aplicacion.Controllers
             if (User.Password != null)
             {
                 var datos = model.ValidateUser(User);
+                //var getPerson = pmodel.CheckPersonById(datos.Id);
+
+
                 var username = datos.User.Username;
                 var role = datos.User.User_Role;
                 var photo = datos.User.Photo;
                 var Id = datos.User.Id;
+                
                 if (datos != null)
                 {
-
                     Session["Username"] = username;
                     Session["User_Role"] = role;
                     Session["Photo"] = photo;

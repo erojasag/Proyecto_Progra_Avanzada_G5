@@ -58,7 +58,21 @@ namespace Servicio.Controllers
             }
         }
 
-        
+        [HttpGet]
+        [Route("persons/CheckPersonById")]
+        public Respuesta CheckPersonById(int Id)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaPerson(1, "OK", true, model.CheckPersonById(Id), null);
+            }
+            catch(Exception ex)
+            {
+                return respuesta.ArmarRespuestaPerson(-1, ex.Message, false, null, null);
+            }
+        }
+
+
 
         [HttpPost]
         [Route("persons/InsertPersonWithUser")]
