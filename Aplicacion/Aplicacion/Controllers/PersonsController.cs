@@ -89,8 +89,8 @@ namespace Aplicacion.Controllers
         {
             try
             {
-                var gId = Session["Id"];
-                var data = model.CheckPersonAndUserById((int)gId);
+                
+                var data = model.CheckPersonAndUserById((int)Id);
 
                 if(data != null)
                 {

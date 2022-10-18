@@ -144,7 +144,31 @@ namespace Aplicacion.Models
 
         public Respuesta DeletePersonAndUserById(int Id)
         {
-            return null;
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    string api = "persons/DeletePersonAndUserById";
+                    string route = Url + api;
+
+                    HttpResponseMessage response = client.GetAsync(route).Result;
+
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseBody = response.Content.ReadAsAsync<Respuesta>().Result;
+                        return responseBody;
+                    }
+                    else
+                    {
+                        throw new Exception("El usuario no se encontro");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
     }
 }

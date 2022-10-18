@@ -10,7 +10,7 @@ namespace Servicio.Models
     {
         public List<Brand> ViewBrands()
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -38,7 +38,7 @@ namespace Servicio.Models
 
         public Brand ViewBrandById(int Id)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -66,7 +66,7 @@ namespace Servicio.Models
 
         public bool InsertBrand(Brand brand)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -118,7 +118,7 @@ namespace Servicio.Models
 
         public bool EditBrand(Brand brand)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -143,7 +143,7 @@ namespace Servicio.Models
 
         public bool DeleteBrand(int Id)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {

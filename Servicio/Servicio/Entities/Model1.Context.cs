@@ -12,13 +12,11 @@ namespace Servicio.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
-    public partial class Proyecto_Progra_Avanzada_G5Entities : DbContext
+    public partial class SHOECORP_BDEntities : DbContext
     {
-        public Proyecto_Progra_Avanzada_G5Entities()
-            : base("name=Proyecto_Progra_Avanzada_G5Entities")
+        public SHOECORP_BDEntities()
+            : base("name=SHOECORP_BDEntities")
         {
         }
     
@@ -36,10 +34,5 @@ namespace Servicio.Entities
         public virtual DbSet<Shipments> Shipments { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCart { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-    
-        public virtual ObjectResult<view_users_Result> view_users()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<view_users_Result>("view_users");
-        }
     }
 }

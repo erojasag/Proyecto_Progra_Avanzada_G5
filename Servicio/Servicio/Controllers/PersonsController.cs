@@ -103,7 +103,7 @@ namespace Servicio.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpGet]
         [Route("persons/DeletePersonAndUserById")]
         public Respuesta DeletePersonAndUserById(int Id)
         {

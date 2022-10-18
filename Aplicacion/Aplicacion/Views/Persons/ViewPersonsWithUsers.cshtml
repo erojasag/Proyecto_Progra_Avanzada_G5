@@ -45,10 +45,10 @@
                         <td>@item.Person.Registration_date</td>
                         <td>@item.User.Username</td>
                         <td>
-                            @Html.ActionLink("Delete", "DeleteUser", "Persons", new { Id = item.User.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "DeletePersonAndUserById", "Persons", new { Id = item.Person.Id }, new { @class = "btn btn-primary" })
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "EditUserPerson", "Persons", new { Id = item.User.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Edit", "EditUserPerson", "Persons", new { Id = item.Person.Id }, new { @class = "btn btn-primary" })
                         </td>
                     </tr>
                 }

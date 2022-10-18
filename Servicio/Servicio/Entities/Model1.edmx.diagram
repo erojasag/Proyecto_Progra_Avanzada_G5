@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="06ea5aba3d6e40018a73c4015ff40b5f" Name="Diagram1">
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Brand" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Orders" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Person" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Product" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Product_By_Order" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Roles" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Shipments" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.ShoppingCart" Width="1.5" PointX="10.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Proyecto_Progra_Avanzada_G5Model.Users" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_Brand_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_Order_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_Order_User_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.fk_shipment_order_id" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_User_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_Product_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_shoppingCart_Product_id" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_Role_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.fk_shipment_customer_id" ManuallyRouted="false" />
-        <AssociationConnector Association="Proyecto_Progra_Avanzada_G5Model.FK_shoppingCart_User_id" ManuallyRouted="false" />
+      <Diagram DiagramId="443d7390c1804c3e87c6891589beaaf0" Name="Diagram1">
+        <EntityTypeShape EntityType="SHOECORP_BDModel.Brand" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SHOECORP_BDModel.Orders" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SHOECORP_BDModel.Person" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SHOECORP_BDModel.Product" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SHOECORP_BDModel.Product_By_Order" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SHOECORP_BDModel.Roles" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="SHOECORP_BDModel.Shipments" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SHOECORP_BDModel.ShoppingCart" Width="1.5" PointX="10.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SHOECORP_BDModel.Users" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="SHOECORP_BDModel.FK_Brand_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SHOECORP_BDModel.FK_Order_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SHOECORP_BDModel.FK_Order_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SHOECORP_BDModel.fk_shipment_order_id" ManuallyRouted="false" />
+        <AssociationConnector Association="SHOECORP_BDModel.FK_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SHOECORP_BDModel.FK_Product_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="SHOECORP_BDModel.FK_shoppingCart_Product_id" ManuallyRouted="false" />
+        <AssociationConnector Association="SHOECORP_BDModel.FK_Role_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="SHOECORP_BDModel.fk_shipment_customer_id" ManuallyRouted="false" />
+        <AssociationConnector Association="SHOECORP_BDModel.FK_shoppingCart_User_id" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

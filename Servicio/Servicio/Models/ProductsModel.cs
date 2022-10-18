@@ -10,7 +10,7 @@ namespace Servicio.Models
     {
         public List<Product> ViewProducts()
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -63,7 +63,7 @@ namespace Servicio.Models
 
         public Product ViewProductById(int Id)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -102,7 +102,7 @@ namespace Servicio.Models
 
         public bool InsertProduct(Product Product)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -182,7 +182,7 @@ namespace Servicio.Models
 
         public bool EditProduct(Product product)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -261,7 +261,7 @@ namespace Servicio.Models
 
         public bool DeleteProduct(int Id)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
