@@ -13,7 +13,7 @@ namespace Servicio.Models
     {
         public List<Person> ViewPersons()
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -58,7 +58,7 @@ namespace Servicio.Models
 
         public List<UserPerson> ViewPersonsWithUsers()
         {
-            using(var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using(var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -109,7 +109,7 @@ namespace Servicio.Models
         }
         public UserPerson CheckPersonAndUserById(int Id)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -156,7 +156,7 @@ namespace Servicio.Models
 
         public Person CheckPersonById(int Id)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -192,7 +192,7 @@ namespace Servicio.Models
 
         public bool InsertPersonWithUser(UserPerson UserPerson)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -200,12 +200,13 @@ namespace Servicio.Models
                     if (UserPerson != null)
                     {
 
-                        Person tPerson = new Person();
+                        
                         Users user = new Users();
                         user.Username = UserPerson.User.Username;
                         user.Password = UserPerson.User.Password;
                         user.User_Role = UserPerson.User.User_Role;
                         db.Users.Add(user);
+                        Person tPerson = new Person();
                         tPerson.Name = UserPerson.Person.Name;
                         tPerson.First_last_name = UserPerson.Person.First_last_name;
                         tPerson.Second_last_name = UserPerson.Person.Second_last_name;
@@ -247,7 +248,7 @@ namespace Servicio.Models
         //Edit UserPerson
         public bool EditUserPerson(UserPerson UserPerson)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -336,7 +337,7 @@ namespace Servicio.Models
 
         public bool DeletePersonAndUserById(int Id)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {

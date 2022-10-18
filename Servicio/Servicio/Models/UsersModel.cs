@@ -12,7 +12,7 @@ namespace Servicio.Models
         //logica para ver todos los usuarios en la db
         public List<Users>  ViewUsers()
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -49,7 +49,7 @@ namespace Servicio.Models
 
         public Users ViewUserById(int Id)
         {
-            using(var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using(var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -80,7 +80,7 @@ namespace Servicio.Models
 
         public bool InsertUser(Users User)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -110,7 +110,7 @@ namespace Servicio.Models
 
         public bool EditUser(Users User)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -138,7 +138,7 @@ namespace Servicio.Models
 
         public bool DeleteUser(int Id)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -165,7 +165,7 @@ namespace Servicio.Models
 
         public Users ValidateUser(Users User)
         {
-            using (var db = new Proyecto_Progra_Avanzada_G5Entities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {

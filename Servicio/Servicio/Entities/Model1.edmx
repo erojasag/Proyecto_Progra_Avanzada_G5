@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Proyecto_Progra_Avanzada_G5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SHOECORP_BDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="Id" />
@@ -227,8 +227,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="view_users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="Proyecto_Progra_Avanzada_G5ModelStoreContainer">
+        <EntityContainer Name="SHOECORP_BDModelStoreContainer">
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
@@ -283,7 +282,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Proyecto_Progra_Avanzada_G5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SHOECORP_BDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="Id" />
@@ -526,7 +525,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Proyecto_Progra_Avanzada_G5Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SHOECORP_BDEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Brand" EntityType="Self.Brand" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="Person" EntityType="Self.Person" />
@@ -576,37 +575,15 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="ShoppingCart" EntitySet="ShoppingCart" />
           </AssociationSet>
-          <FunctionImport Name="view_users" ReturnType="Collection(Proyecto_Progra_Avanzada_G5Model.view_users_Result)" />
         </EntityContainer>
-        <ComplexType Name="view_users_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="First_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Second_last_name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Identification" Nullable="false" MaxLength="9" />
-          <Property Type="String" Name="Phone" Nullable="false" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="Registration_date" Nullable="false" />
-          <Property Type="DateTime" Name="Modification_date" Nullable="true" />
-          <Property Type="DateTime" Name="Birth_date" Nullable="false" />
-          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" />
-          <Property Type="Boolean" Name="Email_Verification" Nullable="true" />
-          <Property Type="Guid" Name="Activation_Code" Nullable="true" />
-          <Property Type="Int32" Name="User_Id" Nullable="true" />
-          <Property Type="Int32" Name="Id1" Nullable="false" />
-          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="User_Role" Nullable="false" />
-          <Property Type="String" Name="Photo" Nullable="true" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Proyecto_Progra_Avanzada_G5ModelStoreContainer" CdmEntityContainer="Proyecto_Progra_Avanzada_G5Entities">
+        <EntityContainerMapping StorageEntityContainer="SHOECORP_BDModelStoreContainer" CdmEntityContainer="SHOECORP_BDEntities">
           <EntitySetMapping Name="Brand">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Brand">
+            <EntityTypeMapping TypeName="SHOECORP_BDModel.Brand">
               <MappingFragment StoreEntitySet="Brand">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -615,7 +592,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Orders">
+            <EntityTypeMapping TypeName="SHOECORP_BDModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
@@ -625,7 +602,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Person">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Person">
+            <EntityTypeMapping TypeName="SHOECORP_BDModel.Person">
               <MappingFragment StoreEntitySet="Person">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -645,7 +622,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Product">
+            <EntityTypeMapping TypeName="SHOECORP_BDModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
@@ -661,7 +638,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product_By_Order">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Product_By_Order">
+            <EntityTypeMapping TypeName="SHOECORP_BDModel.Product_By_Order">
               <MappingFragment StoreEntitySet="Product_By_Order">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
@@ -670,7 +647,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Roles">
+            <EntityTypeMapping TypeName="SHOECORP_BDModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Rol_Name" ColumnName="Rol_Name" />
@@ -678,7 +655,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Shipments">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Shipments">
+            <EntityTypeMapping TypeName="SHOECORP_BDModel.Shipments">
               <MappingFragment StoreEntitySet="Shipments">
                 <ScalarProperty Name="shipment_id" ColumnName="shipment_id" />
                 <ScalarProperty Name="shipment_order_id" ColumnName="shipment_order_id" />
@@ -696,7 +673,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ShoppingCart">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.ShoppingCart">
+            <EntityTypeMapping TypeName="SHOECORP_BDModel.ShoppingCart">
               <MappingFragment StoreEntitySet="ShoppingCart">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
@@ -706,7 +683,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.Users">
+            <EntityTypeMapping TypeName="SHOECORP_BDModel.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -716,31 +693,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="view_users" FunctionName="Proyecto_Progra_Avanzada_G5Model.Store.view_users">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Proyecto_Progra_Avanzada_G5Model.view_users_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
-                <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
-                <ScalarProperty Name="Identification" ColumnName="Identification" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
-                <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
-                <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Email_Verification" ColumnName="Email_Verification" />
-                <ScalarProperty Name="Activation_Code" ColumnName="Activation_Code" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-                <ScalarProperty Name="Id1" ColumnName="Id1" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="User_Role" ColumnName="User_Role" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
