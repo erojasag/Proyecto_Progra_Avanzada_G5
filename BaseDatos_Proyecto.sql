@@ -1,142 +1,66 @@
-CREATE DATABASE Proyecto_Progra_Avanzada_G5;
+CREATE DATABASE SHOECORP_BD;
 
 
-USE Proyecto_Progra_Avanzada_G5;
------------------------------------------------------------------------------------------------------------------------------------------------------------
+USE SHOECORP_BD;
+
+--------------------------------------ERRORES-----------------------------------------------------------------
+CREATE TABLE ERRORES(
+	ID_ERROR INT IDENTITY(1,1) NOT NULL,
+	ERROR_NUMBER INT NOT NULL,
+	ERROR_STATE INT NOT NULL,
+	ERROR_SEVERITY INT NOT NULL,
+	ERROR_LINE INT NOT NULL,
+	ERROR_PROCEDURE varchar(max) NOT NULL,
+	ERROR_MESSAGE varchar (max) NOT NULL,
+	ERROR_DATETIME datetime NOT NULL)
+
+--------------------------------------END OF ERRORES------------------------------------------------------------
+
+
 --------------------------------------ROLES TABLE----------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE Roles(
 	Id int IDENTITY(1,1),
 	Rol_Name varchar(max),
 CONSTRAINT PK_Role_ID PRIMARY KEY(Id)
 );
 
+--INSERT
 INSERT INTO Roles(Rol_Name) VALUES('Administrator');
-
 INSERT INTO Roles(Rol_Name) VALUES('Cashier');
-
 INSERT INTO Roles(Rol_Name) VALUES('Customer');
 
-SELECT * FROM ROLES;
+--------------------------------------END OF ROLES TABLE----------------------------------------------------------------------------------------------------------
 
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------ROLES TABLE----------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------USER TABLE-----------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE Users(
-	Id int IDENTITY(1,1),
-	Username varchar(50) NOT NULL UNIQUE,
-	Password varchar(50) NOT NULL,
-	User_Role int NOT NULL,
-	Photo varchar(max),
-CONSTRAINT PK_User_ID PRIMARY KEY(Id),
-CONSTRAINT FK_Role_ID FOREIGN KEY (User_Role) REFERENCES Roles(Id)
-);
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('erojasag', 'Cliente123', 3,'no photo');
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('ximrojas', 'Corah2022*', 3,'no photo');
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('ironTony', 'mundo123', 3,'no photo');
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('ikerCasillas', 'realmadrid', 3,'no photo');
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('comeGalletas', 'justoOrozco', 3,'no photo');
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('blacky', 'tintin888', 3,'no photo');
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('JesusCaja', 'cajero123', 2,'no photo');
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('MariaJCaja', 'mariacajera', 2,'no photo');
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('BezosJeff', 'Amazon23', 3,'no photo');
-
-INSERT INTO Users(Username, Password, User_Role, Photo) VALUES('EmaAdmin', 'SuperAdmin2022', 1,'no photo');
-
-SELECT * FROM Users u 
-
-
-UPDATE Users SET Photo=('https://upload.wikimedia.org/wikipedia/commons/5/5f/Alberto_conversi_profile_pic.jpg') WHERE Users.Id = 10;
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------USER TABLE-----------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------PERSON TABLE---------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE TABLE Person(
-    Id INT IDENTITY(1,1) NOT NULL,
-    Name varchar(50) NOT NULL,
+	Id uniqueidentifier,
+	Identification varchar(9) NOT NULL UNIQUE,
+	Name varchar(50) NOT NULL,
     First_last_name varchar(50) NOT NULL,
     Second_last_name varchar(50) NOT NULL,
-    Identification varchar(9) NOT NULL UNIQUE,
-    Phone varchar(max) NOT NULL,
-    Email varchar(50) NOT NULL UNIQUE,
-    Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Modification_date DATETIME2 NULL,
+	User_Role int NOT NULL,
+	Username varchar(50) NOT NULL UNIQUE,
+	Password varbinary(max) NOT NULL,
     Birth_date DATE NOT NULL,
-    Address varchar(50) NOT NULL,
-    Email_Verification bit,
+    Phone varchar(20) NOT NULL,
+    Email varchar(50) NOT NULL UNIQUE,
+    Registration_date DATETIME NOT NULL DEFAULT GETDATE(),
+	Photo varchar(max),
+    Modification_date DATETIME NULL,
+    Address varchar(100) NOT NULL,
+    Email_Verification DEFAULT 0,
     Activation_Code uniqueidentifier,
-    User_Id int,
-CONSTRAINT PK_Person_Id  PRIMARY KEY (Id),
-CONSTRAINT FK_User_Id FOREIGN KEY (User_Id) REFERENCES Users(Id)
+	CONSTRAINT PK_User_ID PRIMARY KEY(Id),
+	CONSTRAINT FK_Role_ID FOREIGN KEY (User_Role) REFERENCES Roles(Id)
 );
 
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Emanuel', 'Rojas', 'Cliente', '117250521', '88667456', 'eroaguero01@gmail.com', '01-11-1998', 'Alajuela',1);
+--------------------------------------END OF USER TABLE-----------------------------------------------------------------------------------------------------------
 
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Ximena', 'Rojas', 'Aguero', '117250522', '88667457', 'ximenara@gmail.com', '01-11-1998', 'San Jose',2);
 
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Anthony', 'Arce', 'Rodriguez', '117250523', '88667458', 'ironTony@protonmail.com', '01-11-1998', 'Limon',3);
-
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Iker', 'Casillas', 'Morales', '117250524', '88667459', 'ikerCasillas@hotmail.com', '01-11-1998', 'Alajuela',4);
-
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Justo', 'Orozco', 'Orozco', '117250525', '88667460', 'justoOrozcoPresidente@gmail.com', '01-11-1998', 'Heredia',5);
-
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Joel', 'Martin', 'Segura', '117250526', '88667461', 'JoelMartin@gmail.com', '01-11-1998', 'Alajuela',6);
-
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Jesus', 'Morales', 'Segura', '117250527', '88667462', 'jesusMorales@shoeCorp.com', '01-11-1998', 'Alajuela',7);
-
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Maria Jesus', 'Castillo', 'Torres', '117250528', '88667463', 'mariaJesus@shoeCorp.com', '01-11-1998', 'Heredia',8);
-
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Jeff', 'Bezos', 'Bezos', '117250529', '88667464', 'jeffBezos@amazon.com', '01-11-1998', 'Guanacaste',9);
-
-INSERT INTO Person(Name, First_last_name, Second_last_name, Identification, Phone, Email, Birth_date, Address, User_Id)
-VALUES('Emanuel', 'Rojas', 'Aguero', '117250530', '88667465', 'emanuelRojas@shoeCorp.com', '01-11-1998', 'Alajuela', 10);
-
-CREATE OR ALTER PROCEDURE view_users
-AS 
-BEGIN 
-	SELECT * FROM Person p, Users u
-	WHERE u.Id = p.User_Id;
-END
-
-EXEC view_users
-
-SELECT * FROM Person p
-where p.User_Id = 4
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------PERSON TABLE---------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------BRAND TABLE----------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 CREATE TABLE Brand(
 	Id INT IDENTITY(1,1),
@@ -145,6 +69,7 @@ CREATE TABLE Brand(
 CONSTRAINT PK_Brand_Id PRIMARY KEY (Id)
 );
 
+--INSERT
 INSERT INTO Brand(Name, Photo)
 VALUES('Nike', 'https://w7.pngwing.com/pngs/224/696/png-transparent-nike-logo-movement-brands-black.png');
 
@@ -167,16 +92,9 @@ INSERT INTO Brand(Name, Photo)
 VALUES('Yeezy', 'https://w0.peakpx.com/wallpaper/311/742/HD-wallpaper-yeezy-adidas-logo-originals.jpg');
 
 
-SELECT * FROM Brand;
+--------------------------------------END OF BRAND TABLE----------------------------------------------------------------------------------------------------------
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------BRAND TABLE----------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------PRODUCT TABLE--------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 CREATE TABLE Product(
@@ -188,13 +106,12 @@ CREATE TABLE Product(
     Color Varchar(50) not null,
     shoeSize varchar(2) not null,
     Photo varchar(max),
-    Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Modification_date DATETIME2 NULL,
+    Registration_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Modification_date DATETIME NULL,
     CONSTRAINT PK_Product_Id PRIMARY KEY (id),
     CONSTRAINT FK_Brand_Id FOREIGN KEY (Brand_Id) REFERENCES Brand(Id),
 ); 
 
-SELECT * FROM Product 
 ----------------------------------INSERT NIKE------------------------------
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
 VALUES(0001,1,119000,3,'Dunk Low','Red',40, 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/f2da5e21-59d9-41e9-bb39-76e2e57b25db/calzado-dunk-low-disrupt-2-zz6jpt.png');
@@ -261,43 +178,34 @@ VALUES(0026,6,45000,5,'Authentic Original Boat','Brown',39, 'https://m.media-ama
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
 VALUES(0027,6,45000,2,'Authentic Original Boat','White',42, 'https://m.media-amazon.com/images/I/810nvVwNztL._AC_UX395_.jpg');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0027,6,45000,8,'Authentic Original Boat','Blue',38, 'https://m.media-amazon.com/images/I/810nvVwNztL._AC_UX395_.jpg');
+VALUES(0028,6,45000,8,'Authentic Original Boat','Blue',38, 'https://m.media-amazon.com/images/I/810nvVwNztL._AC_UX395_.jpg');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0028,6,45000,15,'Authentic Original Boat','Grey',43, 'https://m.media-amazon.com/images/I/810nvVwNztL._AC_UX395_.jpg');
+VALUES(0029,6,45000,15,'Authentic Original Boat','Grey',43, 'https://m.media-amazon.com/images/I/810nvVwNztL._AC_UX395_.jpg');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0029,6,45000,2,'Authentic Original Boat','Red',41, 'https://m.media-amazon.com/images/I/810nvVwNztL._AC_UX395_.jpg');
+VALUES(0030,6,45000,2,'Authentic Original Boat','Red',41, 'https://m.media-amazon.com/images/I/810nvVwNztL._AC_UX395_.jpg');
 
 ----------------------------------INSERT Yeezy------------------------------
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0030,7,119000,14,'Boost 350 V2','Black',37, 'https://3app.kicksonfire.com/kofapp/upload/events_master_images/iphone_adidas-yeezy-boost-350-v2-red.jpg');
+VALUES(0031,7,119000,14,'Boost 350 V2','Black',37, 'https://3app.kicksonfire.com/kofapp/upload/events_master_images/iphone_adidas-yeezy-boost-350-v2-red.jpg');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0031,7,119000,3,'Boost 350 V2','White',39, 'https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-yeezy-boost-350-v2-sand-taupe-adidas-kikikickz-868725_800x.progressive.jpg');
+VALUES(0032,7,119000,3,'Boost 350 V2','White',39, 'https://cdn.shopify.com/s/files/1/0496/4325/8009/products/baskets-yeezy-boost-350-v2-sand-taupe-adidas-kikikickz-868725_800x.progressive.jpg');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0032,7,119000,1,'Boost 350 V2','Beige',42, 'https://www.cdiscount.com/pdt2/9/7/8/1/300x300/mp57405978/rw/baskets-decontractees-pour-hommes-et-femmes.jpg');
+VALUES(0033,7,119000,1,'Boost 350 V2','Beige',42, 'https://www.cdiscount.com/pdt2/9/7/8/1/300x300/mp57405978/rw/baskets-decontractees-pour-hommes-et-femmes.jpg');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0033,7,119000,12,'Boost 350 V2','Black',43, 'https://2app.kicksonfire.com/kofapp/upload/events_master_images/ipad_adidas-yeezy-boost-350-v2-black-white.jpg');
+VALUES(0034,7,119000,12,'Boost 350 V2','Black',43, 'https://2app.kicksonfire.com/kofapp/upload/events_master_images/ipad_adidas-yeezy-boost-350-v2-black-white.jpg');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0034,7,119000,8,'Boost 350 V2','Grey',38, 'https://cdn-images.farfetch-contents.com/15/79/86/13/15798613_28931498_600.jpg');
+VALUES(0035,7,119000,8,'Boost 350 V2','Grey',38, 'https://cdn-images.farfetch-contents.com/15/79/86/13/15798613_28931498_600.jpg');
 
 
-SELECT * FROM Product p
-INNER JOIN Brand b 
-ON p.Brand_Id = b.Id;
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------PRODUCT TABLE--------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------END OF PRODUCT TABLE--------------------------------------------------------------------------------------------------------
 
-
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------SHOPPING_CART TABLE--------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 CREATE TABLE ShoppingCart(
     Id INT NOT NULL IDENTITY(1,1),
 	Quantity INT NOT NULL,
-	User_Id INT NOT NULL,
+	User_Id uniqueidentifier NOT NULL,
 	Product_Id INT NOT NULL,
 	CONSTRAINT PK_ShoppingCart_Id PRIMARY KEY (Id),
     CONSTRAINT FK_shoppingCart_User_id FOREIGN KEY (User_Id) REFERENCES Users(Id),
@@ -305,35 +213,25 @@ CREATE TABLE ShoppingCart(
 );
 
 
+--------------------------------------END OF SHOPPING_CART TABLE--------------------------------------------------------------------------------------------------
 
-SELECT * FROM ShoppingCart sc ;
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------SHOPPING_CART TABLE--------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------ORDERS TABLE---------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 CREATE TABLE Orders(
     Id INT NOT NULL IDENTITY(1,1),
-    Order_User_Id INT NOT NULL,
-    Order_date TIMESTAMP NOT NULL,
+    Order_User_Id uniqueidentifier NOT NULL,
+    Order_date DATE NOT NULL,
     Order_total DECIMAL(10,2) NOT NULL
     CONSTRAINT PK_Order_Id PRIMARY KEY (Id),
     CONSTRAINT FK_Order_User_Id FOREIGN KEY (Order_User_Id) REFERENCES Users(Id)
 );
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------ORDERS TABLE---------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------END OF ORDERS TABLE---------------------------------------------------------------------------------------------------------
+
 --------------------------------------PRODUCT_BY_ORDER TABLE-----------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 CREATE TABLE Product_By_Order(
 	Id INT NOT NULL IDENTITY(1,1),
@@ -344,20 +242,17 @@ CREATE TABLE Product_By_Order(
 	CONSTRAINT FK_Order_Id FOREIGN KEY (Order_Id) REFERENCES Orders(Id)
 );
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------PRODUCT_BY_ORDER TABLE-----------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------END OF PRODUCT_BY_ORDER TABLE-----------------------------------------------------------------------------------------------
 
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------SHIPMENTS TABLE------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 CREATE TABLE Shipments(
     shipment_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     shipment_order_id INT NOT NULL,
-    shipment_date TIMESTAMP NOT NULL,
+    shipment_date DATE NOT NULL,
     shipment_status varchar(50) NOT NULL,
     shipment_address varchar(50) NOT NULL,
     shipment_city varchar(50) NOT NULL,
@@ -366,11 +261,200 @@ CREATE TABLE Shipments(
     shipment_country varchar(50) NOT NULL,
     shipment_phone varchar(50) NOT NULL,
     shipment_email varchar(50) NOT NULL,
-    shipment_customer_id INT NOT NULL,
+    shipment_customer_id uniqueidentifier NOT NULL,
     CONSTRAINT fk_shipment_order_id FOREIGN KEY (shipment_order_id) REFERENCES Orders(id),
     CONSTRAINT fk_shipment_customer_id FOREIGN KEY (shipment_customer_id) REFERENCES Users(Id)
 );
 
------------------------------------------------------------------------------------------------------------------------------------------------------------
---------------------------------------SHIPMENTS TABLE------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------END OF SHIPMENTS TABLE------------------------------------------------------------------------------------------------------
+
+
+----------------------------------------PROCEDIMIENTOS ALMACENADOS----------------------------------------------
+
+---INSERTAR USUARIO Y HASHEAR CONTRASEÑA
+
+GO
+CREATE PROCEDURE REGISTRAR_USUARIO (
+	@V_CED VARCHAR(9),
+	@V_NAME VARCHAR(50),
+	@V_FLASTNAME VARCHAR(50),
+	@V_SLASTNAME VARCHAR(50),
+	@ID_ROL INT,
+	@V_USER VARCHAR(50),
+	@PASSWORD VARCHAR(MAX),
+	@DOB DATE,
+	@TEL VARCHAR(20),
+	@V_EMAIL VARCHAR(50),
+	@V_PHOTO VARCHAR(MAX),
+	@V_ADRESS VARCHAR(100))
+	AS
+	DECLARE
+	@NEWPASSWORD VARBINARY(MAX)
+	BEGIN TRY 
+		SET @NEWPASSWORD = (ENCRYPTBYPASSPHRASE ('ENCRIPTACION', @PASSWORD));
+		INSERT INTO Users(Id, Identification, Name, First_last_name, Second_last_name, User_Role, Username, Password, Birth_date, Phone, Email, Registration_date, Photo, Adress, Activation_Code)
+		VALUES (NEWID(), @V_CED, @V_NAME, @V_FLASTNAME, @V_SLASTNAME, @ID_ROL, @V_USER, @NEWPASSWORD, @DOB, @TEL, @V_EMAIL, GETDATE(), @V_PHOTO, @V_ADRESS, NEWID());
+	END TRY
+	BEGIN CATCH
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
+		INSERT INTO ERRORES
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+END CATCH;
+GO
+
+USE SHOECORP_BD
+--DESENCRIPTAR CONTRASENIA
+GO
+CREATE PROCEDURE DESENCRIPTAR_CONTRA (
+@V_USER VARCHAR(50),
+@PASSWORD VARCHAR(MAX))
+
+AS 
+	BEGIN TRY
+		SELECT * FROM Users WHERE USERNAME = @V_USER AND CONVERT(VARCHAR(MAX), DECRYPTBYPASSPHRASE('ENCRIPTACION', PASSWORD)) = @PASSWORD
+	END TRY
+	BEGIN CATCH
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
+		INSERT INTO ERRORES
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+END CATCH;
+GO
+
+--TEST
+
+EXECUTE REGISTRAR_USUARIO @V_CED = '117250521', @V_NAME = 'Emanuel', @V_FLASTNAME = 'Rojas', @V_SLASTNAME = 'Cliente'
+	, @ID_ROL = 3, @V_USER = 'erojasag', @PASSWORD = 'Cliente123', @DOB = '1998-01-11', @TEL = '88667456'
+	, @V_EMAIL = 'eroaguero01@gmail.com', @V_PHOTO = 'no photo', @V_ADRESS = 'Alajuela';
+
+	
+EXECUTE REGISTRAR_USUARIO @V_CED = '117250527', @V_NAME = 'Jesus', @V_FLASTNAME = 'Morales', @V_SLASTNAME = 'Segura'
+	, @ID_ROL = 2, @V_USER = 'JesusCaja', @PASSWORD = 'JesusCaja', @DOB = '1998-01-11', @TEL = '88667456'
+	, @V_EMAIL = 'jesusMorales@shoeCorp.com', @V_PHOTO = 'no photo', @V_ADRESS = 'Alajuela';
+
+	
+EXECUTE REGISTRAR_USUARIO @V_CED = '117250521', @V_NAME = 'Emanuel', @V_FLASTNAME = 'Rojas', @V_SLASTNAME = 'Aguero'
+	, @ID_ROL = 3, @V_USER = 'EmaAdmin', @PASSWORD = 'SuperAdmin2022', @DOB = '1998-01-11', @TEL = '88667465'
+	, @V_EMAIL = 'eroaguero01@gmail.com', @V_PHOTO = 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Alberto_conversi_profile_pic.jpg', @V_ADRESS = 'Alajuela';
+
+	
+EXECUTE REGISTRAR_USUARIO @V_CED = '117660786', @V_NAME = 'Elisama', @V_FLASTNAME = 'Cubillo', @V_SLASTNAME = 'Vargas'
+	, @ID_ROL = 3, @V_USER = 'EliCubillo', @PASSWORD = 'EliShoeCorp', @DOB = '2000-01-15', @TEL = '86755378'
+	, @V_EMAIL = 'elicubillo@shoeCorp.com', @V_PHOTO = 'no photo', @V_ADRESS = 'San Jose';
+
+
+EXECUTE DESENCRIPTAR_CONTRA @V_USER = 'EliCubillo', @PASSWORD = 'EliShoeCorp'
+
+
+
+--VER ORDENES CON DETALLE DEL CLIENTE
+
+GO
+CREATE PROCEDURE MOSTRAR_ORDENES
+	AS 
+	BEGIN TRY
+	--MUESTRA INFORMACION DE LAS ORDENES Y SUS COMPRADORES
+		SELECT A.Id,
+		A.Order_User_Id,
+		CONCAT(B.Name,' ', B.First_last_name,' ', B.Second_last_name) NOMBRE_COMPLETO,
+		A.Order_date,
+		A.Order_total
+		
+		
+		FROM Orders A, Person B
+		WHERE A.Order_User_Id = B.User_Id 
+
+	END TRY
+	BEGIN CATCH
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
+		INSERT INTO ERRORES
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+END CATCH;
+GO
+
+--VER ORDENES POR ID CON SU DETALLE DE CLIENTE
+GO
+CREATE   PROCEDURE MOSTRAR_ORDEN_PORID (@V_ID_ORDEN INT)
+	AS 
+	BEGIN TRY
+		SELECT A.Id,
+		A.Order_User_Id,
+		CONCAT(B.Name,' ', B.First_last_name,' ', B.Second_last_name) NOMBRE_COMPLETO,
+		A.Order_date,
+		A.Order_total
+		
+		FROM Orders A, Person B
+		WHERE A.Order_User_Id = B.User_Id 
+		AND A.Id = @V_ID_ORDEN
+
+	END TRY
+	BEGIN CATCH
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
+		INSERT INTO ERRORES
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+END CATCH;
+GO
+
+--SP PARA REGISTRAR UNA ORDEN
+
+GO
+CREATE PROCEDURE REGISTRAR_ORDEN (
+-- INSERTA UNA ORDEN
+	@V_ID_USUARIO UNIQUEIDENTIFIER,
+	@V_MONTO DECIMAL(10,2))
+	AS	
+	BEGIN TRY 
+		INSERT INTO Orders(Order_User_Id, Order_date, Order_total)
+		VALUES (@V_ID_USUARIO, GETDATE(), @V_MONTO);
+	END TRY
+	BEGIN CATCH
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
+		INSERT INTO ERRORES
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+END CATCH;
+GO
+

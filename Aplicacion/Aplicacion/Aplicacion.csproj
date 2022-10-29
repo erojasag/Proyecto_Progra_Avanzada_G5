@@ -257,23 +257,20 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Entities\Brand.cs" />
     <Compile Include="Entities\Orders.cs" />
-    <Compile Include="Entities\Persons.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Product_By_Order.cs" />
     <Compile Include="Entities\Respuesta.cs" />
     <Compile Include="Entities\ShoppingCart.cs" />
-    <Compile Include="Entities\UserPerson.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BrandModel.cs" />
-    <Compile Include="Models\PersonsModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\SessionFilter.cs" />
     <Compile Include="Models\UsersModel.cs" />
@@ -2519,6 +2516,8 @@
     <Content Include="Views\Product\ProductoEditadoSatisfactoriamente.cshtml" />
     <Content Include="Views\Shared\NotificationPanel.cshtml" />
     <Content Include="Views\Product\ProductNotDeleted.cshtml" />
+    <Content Include="Views\Users\UserSuccessfullyEdited.cshtml" />
+    <Content Include="Views\Users\UserNotDeleted.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

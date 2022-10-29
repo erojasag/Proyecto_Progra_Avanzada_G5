@@ -72,7 +72,7 @@ namespace Servicio.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpDelete]
         [Route("products/DeleteProduct")]
 
         public Respuesta DeleteProduct(int Id)
