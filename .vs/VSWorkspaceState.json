@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Servicio",
+    "\\Servicio\\Servicio",
+    "\\Servicio\\Servicio\\Models"
   ],
+  "SelectedNode": "\\Servicio\\Servicio\\Models\\BrandModel.cs",
   "PreviewInSolutionExplorer": false
 }

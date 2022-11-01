@@ -1,6 +1,6 @@
-﻿@model  Aplicacion.Entities.UserPerson
+﻿@model  Aplicacion.Entities.Users
     
-@using (Html.BeginForm("InsertPersonWithUser", "Persons", FormMethod.Post))
+@using (Html.BeginForm("ValidateUser", "Users", FormMethod.Post))
 {
 
 
@@ -16,18 +16,20 @@
                                 <div class="card-body p-5">
                                     <h2 class="text-uppercase text-center mb-5">Register a ShoeCorp account</h2>
                                     <form method="post" action="">
+                                        
+                                        @Html.HiddenFor(Model => Model.User_Role, new { Value = "3", @class = "form-control", @id = "inputRol"})
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="inputUsername">Username</label>
-                                                @Html.TextBoxFor(Model => Model.User.Username, new { @class = "form-control", @placeholder = "Username", @id = "inputUsername", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", @placeholder = "Username", @id = "inputUsername", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail">Email</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword">Password</label>
-                                                @Html.PasswordFor(Model => Model.User.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword", @required = "required" })
+                                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword", @required = "required" })
                                                 <i class="far fa-eye" id="togglePassword" onclick="TogglePass()"></i>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -37,37 +39,46 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
+                                                <label for="inputIdentification">Identification</label>
+                                                @Html.TextBoxFor(Model => Model.Identification, new { @class = "form-control", @placeholder = "Identification", @id = "inputIdentification", @maxlength = "9", @required = "required" })
+                                            </div>
+                                            <div class="form-group col-md-6">
                                                 <label for="inputName">Name</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Name, new { @class = "form-control", @placeholder = "Name", @id = "inputName", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Name, new { @class = "form-control", @placeholder = "Name", @id = "inputName", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputFirstLastName">First Last Name</label>
-                                                @Html.TextBoxFor(Model => Model.Person.First_last_name, new { @class = "form-control", @placeholder = "First Last Name", @id = "inputFirstLastName", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.First_last_name, new { @class = "form-control", @placeholder = "First Last Name", @id = "inputFirstLastName", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputLastName">Last Name</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Second_last_name, new { @class = "form-control", @placeholder = "Last Name", @id = "inputLastName", @required = "required" })
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="inputIdentification">Identification</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Identification, new { @class = "form-control", @placeholder = "Identification", @id = "inputIdentification", @maxlength = "9", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Second_last_name, new { @class = "form-control", @placeholder = "Last Name", @id = "inputLastName", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputBirthDate">Birth Date</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPhone">Phone Number</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", @required = "required" })
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputAddress">Address</label>
-                                            @Html.TextBoxFor(Model => Model.Person.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St", @required = "required" })
+                                            @Html.TextBoxFor(Model => Model.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St", @required = "required" })
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="foto">Foto de Perfil:</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPrepend"></span>
+                                                @Html.TextBoxFor(Model => Model.Photo, new { @type = "file", @class = "form-control", required = "required" })
+                                            </div>
+                                        </div>
+                                        <br />
                                         <div class="form-check d-flex justify-content-center mb-5">
                                             <label class="form-check-label" for="form2Example3g">
-                                                <input class="form-check-input center" type="checkbox" value="" id="form2Example3g" required/>
+                                                <input class="form-check-input center" type="checkbox" value="" id="form2Example3g" required />
                                                 I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
                                             </label>
                                         </div>
@@ -106,16 +117,16 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="inputUsername">Username</label>
-                                                @Html.TextBoxFor(Model => Model.User.Username, new { @class = "form-control", @placeholder = "Username", @id = "inputUsername", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", @placeholder = "Username", @id = "inputUsername", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail">Email</label>
 
-                                                @Html.TextBoxFor(Model => Model.Person.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword">Password</label>
-                                                @Html.PasswordFor(Model => Model.User.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword", @required = "required" })
+                                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword", @required = "required" })
                                                 <i class="far fa-eye" id="togglePassword" onclick="TogglePass()"></i>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -127,32 +138,32 @@
                                             <div class="form-group col-md-6">
                                                 <label for="inputName">Name</label>
 
-                                                @Html.TextBoxFor(Model => Model.Person.Name, new { @class = "form-control", @placeholder = "Name", @id = "inputName", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Name, new { @class = "form-control", @placeholder = "Name", @id = "inputName", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputFirstLastName">First Last Name</label>
-                                                @Html.TextBoxFor(Model => Model.Person.First_last_name, new { @class = "form-control", @placeholder = "First Last Name", @id = "inputFirstLastName", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.First_last_name, new { @class = "form-control", @placeholder = "First Last Name", @id = "inputFirstLastName", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputLastName">Last Name</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Second_last_name, new { @class = "form-control", @placeholder = "Last Name", @id = "inputLastName", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Second_last_name, new { @class = "form-control", @placeholder = "Last Name", @id = "inputLastName", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputIdentification">Identification</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Identification, new { @class = "form-control", @placeholder = "Identification", @id = "inputIdentification", @maxlength = "9", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Identification, new { @class = "form-control", @placeholder = "Identification", @id = "inputIdentification", @maxlength = "9", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputBirthDate">Birth Date</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPhone">Phone Number</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", @required = "required" })
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputAddress">Address</label>
-                                            @Html.TextBoxFor(Model => Model.Person.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St", @required = "required" })
+                                            @Html.TextBoxFor(Model => Model.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St", @required = "required" })
                                         </div>
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -194,16 +205,16 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="inputUsername">Username</label>
-                                                @Html.TextBoxFor(Model => Model.User.Username, new { @class = "form-control", @placeholder = "Username", @id = "inputUsername", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", @placeholder = "Username", @id = "inputUsername", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail">Email</label>
 
-                                                @Html.TextBoxFor(Model => Model.Person.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword">Password</label>
-                                                @Html.PasswordFor(Model => Model.User.Password, new { @class = "form-control", @placeholder = "Password", id = "inputPassword", required = "required" })
+                                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", id = "inputPassword", required = "required" })
                                                 <i class="far fa-eye" id="togglePassword" onclick="TogglePass()"></i>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -215,32 +226,32 @@
                                             <div class="form-group col-md-6">
                                                 <label for="inputName">Name</label>
 
-                                                @Html.TextBoxFor(Model => Model.Person.Name, new { @class = "form-control", @placeholder = "Name", @id = "inputName", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Name, new { @class = "form-control", @placeholder = "Name", @id = "inputName", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputFirstLastName">First Last Name</label>
-                                                @Html.TextBoxFor(Model => Model.Person.First_last_name, new { @class = "form-control", @placeholder = "First Last Name", @id = "inputFirstLastName", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.First_last_name, new { @class = "form-control", @placeholder = "First Last Name", @id = "inputFirstLastName", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputLastName">Last Name</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Second_last_name, new { @class = "form-control", @placeholder = "Last Name", @id = "inputLastName", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Second_last_name, new { @class = "form-control", @placeholder = "Last Name", @id = "inputLastName", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputIdentification">Identification</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Identification, new { @class = "form-control", @placeholder = "Identification", @id = "inputIdentification", @maxlength = "9", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Identification, new { @class = "form-control", @placeholder = "Identification", @id = "inputIdentification", @maxlength = "9", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputBirthDate">Birth Date</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date", @required = "required" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPhone">Phone Number</label>
-                                                @Html.TextBoxFor(Model => Model.Person.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", @required = "required" })
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="inputAddress">Address</label>
-                                            @Html.TextBoxFor(Model => Model.Person.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St", @required="required"})
+                                            @Html.TextBoxFor(Model => Model.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St", @required="required"})
                                         </div>
                                         <div class="form-check d-flex justify-content-center mb-5">
                                             <label class="form-check-label" for="form2Example3g">
