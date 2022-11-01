@@ -10,7 +10,7 @@ namespace Servicio.Models
     {
 
         //logica para ver todos los usuarios en la db
-        public List<Users>  ViewUsers()
+        public List<Users> ViewUsers()
         {
             using (var db = new SHOECORP_BDEntities())
             {
@@ -24,10 +24,19 @@ namespace Servicio.Models
                         Users.Add(new Users
                         {
                             Id = User.Id,
-                            Username = User.Username,
-                            Password = User.Password,
+                            Identification = User.Identification,
+                            Name= User.Name,
+                            First_last_name= User.First_last_name,
+                            Second_last_name = User.Second_last_name,
                             User_Role = User.User_Role,
-                            Photo = User.Photo
+                            Username = User.Username,
+                            Birth_date = User.Birth_date,
+                            Phone = User.Phone,
+                            Email = User.Email,
+                            Registration_date = User.Registration_date,
+                            Photo = User.Photo,
+                            Modification_date = User.Modification_date,
+                            Address = User.Address
                         });
                     }
 
@@ -39,7 +48,8 @@ namespace Servicio.Models
                     {
                         return Users;
                     }
-                }catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     db.Dispose();
                     throw ex;
@@ -47,9 +57,9 @@ namespace Servicio.Models
             }
         }
 
-        public Users ViewUserById(int Id)
+        public Users ViewUserById(Guid Id)
         {
-            using(var db = new SHOECORP_BDEntities())
+            using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
@@ -58,9 +68,15 @@ namespace Servicio.Models
                     if (tusers != null)
                     {
                         User.Id = tusers.Id;
-                        User.Username = tusers.Username;
-                        User.Password = tusers.Password;
+                        User.Identification = tusers.Identification;
+                        User.Name = tusers.Name;
+                        User.First_last_name = tusers.First_last_name;
+                        User.Second_last_name = tusers.Second_last_name;
                         User.User_Role = tusers.User_Role;
+                        User.Username = tusers.Username;
+                        User.Birth_date = tusers.Birth_date;
+                        User.Phone = tusers.Phone;
+                        User.Email = tusers.Email;
                         User.Photo = tusers.Photo;
                         return User;
                     }
@@ -78,29 +94,20 @@ namespace Servicio.Models
             }
         }
 
-        public bool InsertUser(Users User)
+
+        public bool InsertUser(Usuario User)
         {
             using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
-                    Users tusers = new Users();
-                    if (User != null)
-                    {
-                        tusers.Username = User.Username;
-                        tusers.Password = User.Password;
-                        tusers.User_Role = User.User_Role;
-                        tusers.Photo = User.Photo;
-                        db.Users.Add(tusers);
-                        db.SaveChanges();
-                        return true;
-                    }
-                    else
-                    {
-                        throw new Exception("Ingrese los parametros necesarios");
-                    }
 
-                }catch (Exception ex)
+                    db.REGISTRAR_USUARIO(User.Identification, User.Name, User.First_last_name, User.Second_last_name, User.User_Role,
+                        User.Username, User.Password, User.Birth_date, User.Phone, User.Email, User.Photo, User.Address);
+                    return true;
+
+                }
+                catch (Exception ex)
                 {
                     db.Dispose();
                     throw ex;
@@ -108,27 +115,26 @@ namespace Servicio.Models
             }
         }
 
-        public bool EditUser(Users User)
+        public bool EditUser(Usuario User)
         {
             using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
-                    var tuser = db.Users.Find(User.Id);
-                    if(tuser != null)
+                    if (ViewUserById(User.Id) == null)
                     {
-                        tuser.Username = User.Username;
-                        tuser.Password = User.Password;
-                        tuser.User_Role = User.User_Role;
-                        tuser.Photo = User.Photo;
-                        db.SaveChanges();
-                        return true;
+                        return false;
                     }
                     else
                     {
-                        throw new Exception("Error al editar usuario");
+                        db.ACTUALIZAR_USUARIO(User.Id, User.Name, User.First_last_name, User.Second_last_name, User.User_Role, User.Password,
+                            User.Phone, User.Email, User.Photo, User.Address);
+                        return true;
                     }
-                }catch(Exception ex)
+
+
+                }
+                catch (Exception ex)
                 {
                     db.Dispose();
                     throw ex;
@@ -136,7 +142,7 @@ namespace Servicio.Models
             }
         }
 
-        public bool DeleteUser(int Id)
+        public bool DeleteUser(Guid Id)
         {
             using (var db = new SHOECORP_BDEntities())
             {
@@ -144,7 +150,7 @@ namespace Servicio.Models
                 {
                     var tuser = db.Users.Find(Id);
 
-                    if(tuser != null)
+                    if (tuser != null)
                     {
                         db.Users.Remove(tuser);
                         db.SaveChanges();
@@ -155,53 +161,6 @@ namespace Servicio.Models
                         throw new Exception("El usuario no se pudo eliminar");
                     }
 
-                }catch(Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }
-
-        public Users ValidateUser(Users User)
-        {
-            using (var db = new SHOECORP_BDEntities())
-            {
-                try
-                {
-
-
-                    var tUser = (from x in db.Users
-                                 where x.Username == User.Username
-                                      && x.Password == User.Password
-                                 select x).FirstOrDefault();
-
-                    if (tUser != null)
-                    {
-                        var tRol = db.Roles.Find(tUser.User_Role);
-                    }
-                    else
-                    {
-                        throw new Exception("User does not exists");
-                    }
-
-
-
-                    if (tUser != null)
-                    {
-                        Users user = new Users();
-                        user.Username = tUser.Username;
-                        user.User_Role = tUser.User_Role;
-                        user.Photo = tUser.Photo;
-                        user.Id = tUser.Id;
-
-                        return user;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-
                 }
                 catch (Exception ex)
                 {
@@ -210,5 +169,65 @@ namespace Servicio.Models
                 }
             }
         }
+
+        public Usuario ValidateUser(Usuario User)
+        {
+            using (var db = new SHOECORP_BDEntities())
+            {
+                try
+                {
+
+                   var datos = db.DESENCRIPTAR_CONTRA(User.Username, User.Password).FirstOrDefault();
+
+                    if (datos != null)
+                    {
+                        User = new Usuario();
+                        User.Username = datos.Username;
+                        User.User_Role = datos.User_Role;
+                        User.Photo = datos.Photo;
+
+                        return User;
+                    }
+                    else
+                    {
+                        return null;
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
+       public string ActualizarContraseña(Usuario obj)
+        {
+            using (var contexto = new SHOECORP_BDEntities())
+            {
+
+                try
+                {
+                    if (ViewUserById(obj.Id) == null)
+                    {
+                        return "No se puede cambiar contraseña porque el usuario no existe.";
+                    }
+                    else
+                    {
+                        contexto.ACTUALIZAR_CONTRASENIA(obj.Id, obj.Password);
+                        return "Cambio de contraseña satisfactorio";
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    contexto.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
     }
 }

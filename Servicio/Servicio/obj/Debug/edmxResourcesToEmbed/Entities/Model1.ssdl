@@ -8,33 +8,36 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Photo" Type="varchar(max)" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ERRORES">
+    <Key>
+      <PropertyRef Name="ID_ERROR" />
+      <PropertyRef Name="ERROR_NUMBER" />
+      <PropertyRef Name="ERROR_STATE" />
+      <PropertyRef Name="ERROR_SEVERITY" />
+      <PropertyRef Name="ERROR_LINE" />
+      <PropertyRef Name="ERROR_PROCEDURE" />
+      <PropertyRef Name="ERROR_MESSAGE" />
+      <PropertyRef Name="ERROR_DATETIME" />
+    </Key>
+    <Property Name="ID_ERROR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ERROR_NUMBER" Type="int" Nullable="false" />
+    <Property Name="ERROR_STATE" Type="int" Nullable="false" />
+    <Property Name="ERROR_SEVERITY" Type="int" Nullable="false" />
+    <Property Name="ERROR_LINE" Type="int" Nullable="false" />
+    <Property Name="ERROR_PROCEDURE" Type="varchar(max)" Nullable="false" />
+    <Property Name="ERROR_MESSAGE" Type="varchar(max)" Nullable="false" />
+    <Property Name="ERROR_DATETIME" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="Orders">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Order_User_Id" Type="int" Nullable="false" />
-    <Property Name="Order_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Order_User_Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Order_date" Type="date" Nullable="false" />
     <Property Name="Order_total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Person">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="First_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Second_last_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Identification" Type="varchar" MaxLength="9" Nullable="false" />
-    <Property Name="Phone" Type="varchar(max)" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="Modification_date" Type="datetime2" Precision="7" />
-    <Property Name="Birth_date" Type="date" Nullable="false" />
-    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Email_Verification" Type="bit" />
-    <Property Name="Activation_Code" Type="uniqueidentifier" />
-    <Property Name="User_Id" Type="int" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -48,8 +51,8 @@
     <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="shoeSize" Type="varchar" MaxLength="2" Nullable="false" />
     <Property Name="Photo" Type="varchar(max)" />
-    <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="Modification_date" Type="datetime2" Precision="7" />
+    <Property Name="Registration_date" Type="datetime" Nullable="false" />
+    <Property Name="Modification_date" Type="datetime" />
   </EntityType>
   <EntityType Name="Product_By_Order">
     <Key>
@@ -72,7 +75,7 @@
     </Key>
     <Property Name="shipment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="shipment_order_id" Type="int" Nullable="false" />
-    <Property Name="shipment_date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="shipment_date" Type="date" Nullable="false" />
     <Property Name="shipment_status" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="shipment_address" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="shipment_city" Type="varchar" MaxLength="50" Nullable="false" />
@@ -81,7 +84,7 @@
     <Property Name="shipment_country" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="shipment_phone" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="shipment_email" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="shipment_customer_id" Type="int" Nullable="false" />
+    <Property Name="shipment_customer_id" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="ShoppingCart">
     <Key>
@@ -89,18 +92,30 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
-    <Property Name="User_Id" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Product_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Identification" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="First_last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Second_last_name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="User_Role" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Birth_date" Type="date" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Registration_date" Type="datetime" Nullable="false" />
     <Property Name="Photo" Type="varchar(max)" />
+    <Property Name="Modification_date" Type="datetime" />
+    <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email_Verification" Type="bit" />
+    <Property Name="Activation_Code" Type="uniqueidentifier" />
   </EntityType>
   <Association Name="FK_Brand_Id">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
@@ -210,28 +225,69 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_User_Id">
-    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-    <End Role="Person" Type="Self.Person" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Person">
-        <PropertyRef Name="User_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <Function Name="ACTUALIZAR_CONTRASENIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="V_ID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="ACTUALIZAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="V_ID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="V_NAME" Type="varchar" Mode="In" />
+    <Parameter Name="V_FLASTNAME" Type="varchar" Mode="In" />
+    <Parameter Name="V_SLASTNAME" Type="varchar" Mode="In" />
+    <Parameter Name="ID_ROL" Type="int" Mode="In" />
+    <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
+    <Parameter Name="TEL" Type="varchar" Mode="In" />
+    <Parameter Name="V_EMAIL" Type="varchar" Mode="In" />
+    <Parameter Name="V_PHOTO" Type="varchar(max)" Mode="In" />
+    <Parameter Name="V_ADRESS" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DESENCRIPTAR_CONTRA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="V_USER" Type="varchar" Mode="In" />
+    <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="MOSTRAR_ORDEN_PORID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="V_ID_ORDEN" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MOSTRAR_ORDENES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="REGISTRAR_ORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="V_ID_USUARIO" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="V_MONTO" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="REGISTRAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="V_CED" Type="varchar" Mode="In" />
+    <Parameter Name="V_NAME" Type="varchar" Mode="In" />
+    <Parameter Name="V_FLASTNAME" Type="varchar" Mode="In" />
+    <Parameter Name="V_SLASTNAME" Type="varchar" Mode="In" />
+    <Parameter Name="ID_ROL" Type="int" Mode="In" />
+    <Parameter Name="V_USER" Type="varchar" Mode="In" />
+    <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
+    <Parameter Name="DOB" Type="date" Mode="In" />
+    <Parameter Name="TEL" Type="varchar" Mode="In" />
+    <Parameter Name="V_EMAIL" Type="varchar" Mode="In" />
+    <Parameter Name="V_PHOTO" Type="varchar(max)" Mode="In" />
+    <Parameter Name="V_ADRESS" Type="varchar" Mode="In" />
+  </Function>
   <EntityContainer Name="SHOECORP_BDModelStoreContainer">
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product_By_Order" EntityType="Self.Product_By_Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ERRORES" EntityType="Self.ERRORES" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ERRORES].[ID_ERROR] AS [ID_ERROR], 
+    [ERRORES].[ERROR_NUMBER] AS [ERROR_NUMBER], 
+    [ERRORES].[ERROR_STATE] AS [ERROR_STATE], 
+    [ERRORES].[ERROR_SEVERITY] AS [ERROR_SEVERITY], 
+    [ERRORES].[ERROR_LINE] AS [ERROR_LINE], 
+    [ERRORES].[ERROR_PROCEDURE] AS [ERROR_PROCEDURE], 
+    [ERRORES].[ERROR_MESSAGE] AS [ERROR_MESSAGE], 
+    [ERRORES].[ERROR_DATETIME] AS [ERROR_DATETIME]
+    FROM [dbo].[ERRORES] AS [ERRORES]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_Brand_Id" Association="Self.FK_Brand_Id">
       <End Role="Brand" EntitySet="Brand" />
       <End Role="Product" EntitySet="Product" />
@@ -267,10 +323,6 @@
     <AssociationSet Name="FK_shoppingCart_User_id" Association="Self.FK_shoppingCart_User_id">
       <End Role="Users" EntitySet="Users" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
-    </AssociationSet>
-    <AssociationSet Name="FK_User_Id" Association="Self.FK_User_Id">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Person" EntitySet="Person" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

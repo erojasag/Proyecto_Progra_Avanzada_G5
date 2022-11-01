@@ -20,26 +20,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Person">
-      <EntityTypeMapping TypeName="SHOECORP_BDModel.Person">
-        <MappingFragment StoreEntitySet="Person">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
-          <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
-          <ScalarProperty Name="Identification" ColumnName="Identification" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
-          <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
-          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Email_Verification" ColumnName="Email_Verification" />
-          <ScalarProperty Name="Activation_Code" ColumnName="Activation_Code" />
-          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="SHOECORP_BDModel.Product">
         <MappingFragment StoreEntitySet="Product">
@@ -105,12 +85,87 @@
       <EntityTypeMapping TypeName="SHOECORP_BDModel.Users">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Identification" ColumnName="Identification" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
+          <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
+          <ScalarProperty Name="User_Role" ColumnName="User_Role" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="User_Role" ColumnName="User_Role" />
+          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email_Verification" ColumnName="Email_Verification" />
+          <ScalarProperty Name="Activation_Code" ColumnName="Activation_Code" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ERRORES">
+      <EntityTypeMapping TypeName="SHOECORP_BDModel.ERRORES">
+        <MappingFragment StoreEntitySet="ERRORES">
+          <ScalarProperty Name="ID_ERROR" ColumnName="ID_ERROR" />
+          <ScalarProperty Name="ERROR_NUMBER" ColumnName="ERROR_NUMBER" />
+          <ScalarProperty Name="ERROR_STATE" ColumnName="ERROR_STATE" />
+          <ScalarProperty Name="ERROR_SEVERITY" ColumnName="ERROR_SEVERITY" />
+          <ScalarProperty Name="ERROR_LINE" ColumnName="ERROR_LINE" />
+          <ScalarProperty Name="ERROR_PROCEDURE" ColumnName="ERROR_PROCEDURE" />
+          <ScalarProperty Name="ERROR_MESSAGE" ColumnName="ERROR_MESSAGE" />
+          <ScalarProperty Name="ERROR_DATETIME" ColumnName="ERROR_DATETIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_CONTRASENIA" FunctionName="SHOECORP_BDModel.Store.ACTUALIZAR_CONTRASENIA" />
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_USUARIO" FunctionName="SHOECORP_BDModel.Store.ACTUALIZAR_USUARIO" />
+    <FunctionImportMapping FunctionImportName="DESENCRIPTAR_CONTRA" FunctionName="SHOECORP_BDModel.Store.DESENCRIPTAR_CONTRA">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SHOECORP_BDModel.DESENCRIPTAR_CONTRA_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Identification" ColumnName="Identification" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="First_last_name" ColumnName="First_last_name" />
+          <ScalarProperty Name="Second_last_name" ColumnName="Second_last_name" />
+          <ScalarProperty Name="User_Role" ColumnName="User_Role" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Birth_date" ColumnName="Birth_date" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Modification_date" ColumnName="Modification_date" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Email_Verification" ColumnName="Email_Verification" />
+          <ScalarProperty Name="Activation_Code" ColumnName="Activation_Code" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MOSTRAR_ORDEN_PORID" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDEN_PORID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SHOECORP_BDModel.MOSTRAR_ORDEN_PORID_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
+          <ScalarProperty Name="NOMBRE_COMPLETO" ColumnName="NOMBRE_COMPLETO" />
+          <ScalarProperty Name="Order_date" ColumnName="Order_date" />
+          <ScalarProperty Name="Order_total" ColumnName="Order_total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MOSTRAR_ORDENES" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDENES">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SHOECORP_BDModel.MOSTRAR_ORDENES_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
+          <ScalarProperty Name="NOMBRE_COMPLETO" ColumnName="NOMBRE_COMPLETO" />
+          <ScalarProperty Name="Order_date" ColumnName="Order_date" />
+          <ScalarProperty Name="Order_total" ColumnName="Order_total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="REGISTRAR_ORDEN" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_ORDEN" />
+    <FunctionImportMapping FunctionImportName="REGISTRAR_USUARIO" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_USUARIO" />
   </EntityContainerMapping>
 </Mapping>

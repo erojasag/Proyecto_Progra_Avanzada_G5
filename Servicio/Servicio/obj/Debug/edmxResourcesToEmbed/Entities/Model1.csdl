@@ -14,32 +14,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Order_User_Id" Type="Int32" Nullable="false" />
-    <Property Name="Order_date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Order_User_Id" Type="Guid" Nullable="false" />
+    <Property Name="Order_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Order_total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
     <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Order_Id" FromRole="Orders" ToRole="Product_By_Order" />
     <NavigationProperty Name="Users" Relationship="Self.FK_Order_User_Id" FromRole="Orders" ToRole="Users" />
     <NavigationProperty Name="Shipments" Relationship="Self.fk_shipment_order_id" FromRole="Orders" ToRole="Shipments" />
-  </EntityType>
-  <EntityType Name="Person">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="First_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Identification" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Modification_date" Type="DateTime" Precision="7" />
-    <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Email_Verification" Type="Boolean" />
-    <Property Name="Activation_Code" Type="Guid" />
-    <Property Name="User_Id" Type="Int32" />
-    <NavigationProperty Name="Users" Relationship="Self.FK_User_Id" FromRole="Person" ToRole="Users" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -53,8 +33,8 @@
     <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="shoeSize" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Modification_date" Type="DateTime" Precision="7" />
+    <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modification_date" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Brand" Relationship="Self.FK_Brand_Id" FromRole="Product" ToRole="Brand" />
     <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Product_Id" FromRole="Product" ToRole="Product_By_Order" />
     <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_Product_id" FromRole="Product" ToRole="ShoppingCart" />
@@ -83,7 +63,7 @@
     </Key>
     <Property Name="shipment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="shipment_order_id" Type="Int32" Nullable="false" />
-    <Property Name="shipment_date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="shipment_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="shipment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="shipment_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="shipment_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -92,7 +72,7 @@
     <Property Name="shipment_country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="shipment_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="shipment_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="shipment_customer_id" Type="Int32" Nullable="false" />
+    <Property Name="shipment_customer_id" Type="Guid" Nullable="false" />
     <NavigationProperty Name="Orders" Relationship="Self.fk_shipment_order_id" FromRole="Shipments" ToRole="Orders" />
     <NavigationProperty Name="Users" Relationship="Self.fk_shipment_customer_id" FromRole="Shipments" ToRole="Users" />
   </EntityType>
@@ -102,7 +82,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <Property Name="User_Id" Type="Int32" Nullable="false" />
+    <Property Name="User_Id" Type="Guid" Nullable="false" />
     <Property Name="Product_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Product" Relationship="Self.FK_shoppingCart_Product_id" FromRole="ShoppingCart" ToRole="Product" />
     <NavigationProperty Name="Users" Relationship="Self.FK_shoppingCart_User_id" FromRole="ShoppingCart" ToRole="Users" />
@@ -111,16 +91,47 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Id" Type="Guid" Nullable="false" />
+    <Property Name="Identification" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="First_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Second_last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="User_Role" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Modification_date" Type="DateTime" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email_Verification" Type="Boolean" />
+    <Property Name="Activation_Code" Type="Guid" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User_Id" FromRole="Users" ToRole="Orders" />
-    <NavigationProperty Name="Person" Relationship="Self.FK_User_Id" FromRole="Users" ToRole="Person" />
     <NavigationProperty Name="Roles" Relationship="Self.FK_Role_ID" FromRole="Users" ToRole="Roles" />
     <NavigationProperty Name="Shipments" Relationship="Self.fk_shipment_customer_id" FromRole="Users" ToRole="Shipments" />
     <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_User_id" FromRole="Users" ToRole="ShoppingCart" />
+  </EntityType>
+  <EntityType Name="ERRORES">
+    <Key>
+      <PropertyRef Name="ID_ERROR" />
+      <PropertyRef Name="ERROR_NUMBER" />
+      <PropertyRef Name="ERROR_STATE" />
+      <PropertyRef Name="ERROR_SEVERITY" />
+      <PropertyRef Name="ERROR_LINE" />
+      <PropertyRef Name="ERROR_PROCEDURE" />
+      <PropertyRef Name="ERROR_MESSAGE" />
+      <PropertyRef Name="ERROR_DATETIME" />
+    </Key>
+    <Property Name="ID_ERROR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ERROR_NUMBER" Type="Int32" Nullable="false" />
+    <Property Name="ERROR_STATE" Type="Int32" Nullable="false" />
+    <Property Name="ERROR_SEVERITY" Type="Int32" Nullable="false" />
+    <Property Name="ERROR_LINE" Type="Int32" Nullable="false" />
+    <Property Name="ERROR_PROCEDURE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ERROR_MESSAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ERROR_DATETIME" Type="DateTime" Nullable="false" Precision="3" />
   </EntityType>
   <Association Name="FK_Brand_Id">
     <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
@@ -167,18 +178,6 @@
       </Principal>
       <Dependent Role="Shipments">
         <PropertyRef Name="shipment_order_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_User_Id">
-    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-    <End Role="Person" Type="Self.Person" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Person">
-        <PropertyRef Name="User_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -245,13 +244,13 @@
   <EntityContainer Name="SHOECORP_BDEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Brand" EntityType="Self.Brand" />
     <EntitySet Name="Orders" EntityType="Self.Orders" />
-    <EntitySet Name="Person" EntityType="Self.Person" />
     <EntitySet Name="Product" EntityType="Self.Product" />
     <EntitySet Name="Product_By_Order" EntityType="Self.Product_By_Order" />
     <EntitySet Name="Roles" EntityType="Self.Roles" />
     <EntitySet Name="Shipments" EntityType="Self.Shipments" />
     <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" />
     <EntitySet Name="Users" EntityType="Self.Users" />
+    <EntitySet Name="ERRORES" EntityType="Self.ERRORES" />
     <AssociationSet Name="FK_Brand_Id" Association="Self.FK_Brand_Id">
       <End Role="Brand" EntitySet="Brand" />
       <End Role="Product" EntitySet="Product" />
@@ -267,10 +266,6 @@
     <AssociationSet Name="fk_shipment_order_id" Association="Self.fk_shipment_order_id">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="Shipments" EntitySet="Shipments" />
-    </AssociationSet>
-    <AssociationSet Name="FK_User_Id" Association="Self.FK_User_Id">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Person" EntitySet="Person" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_Id" Association="Self.FK_Product_Id">
       <End Role="Product" EntitySet="Product" />
@@ -292,5 +287,80 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
     </AssociationSet>
+    <FunctionImport Name="ACTUALIZAR_CONTRASENIA">
+      <Parameter Name="V_ID" Mode="In" Type="Guid" />
+      <Parameter Name="PASSWORD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ACTUALIZAR_USUARIO">
+      <Parameter Name="V_ID" Mode="In" Type="Guid" />
+      <Parameter Name="V_NAME" Mode="In" Type="String" />
+      <Parameter Name="V_FLASTNAME" Mode="In" Type="String" />
+      <Parameter Name="V_SLASTNAME" Mode="In" Type="String" />
+      <Parameter Name="ID_ROL" Mode="In" Type="Int32" />
+      <Parameter Name="PASSWORD" Mode="In" Type="String" />
+      <Parameter Name="TEL" Mode="In" Type="String" />
+      <Parameter Name="V_EMAIL" Mode="In" Type="String" />
+      <Parameter Name="V_PHOTO" Mode="In" Type="String" />
+      <Parameter Name="V_ADRESS" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DESENCRIPTAR_CONTRA" ReturnType="Collection(SHOECORP_BDModel.DESENCRIPTAR_CONTRA_Result)">
+      <Parameter Name="V_USER" Mode="In" Type="String" />
+      <Parameter Name="PASSWORD" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="MOSTRAR_ORDEN_PORID" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDEN_PORID_Result)">
+      <Parameter Name="V_ID_ORDEN" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="MOSTRAR_ORDENES" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDENES_Result)" />
+    <FunctionImport Name="REGISTRAR_ORDEN">
+      <Parameter Name="V_ID_USUARIO" Mode="In" Type="Guid" />
+      <Parameter Name="V_MONTO" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="REGISTRAR_USUARIO">
+      <Parameter Name="V_CED" Mode="In" Type="String" />
+      <Parameter Name="V_NAME" Mode="In" Type="String" />
+      <Parameter Name="V_FLASTNAME" Mode="In" Type="String" />
+      <Parameter Name="V_SLASTNAME" Mode="In" Type="String" />
+      <Parameter Name="ID_ROL" Mode="In" Type="Int32" />
+      <Parameter Name="V_USER" Mode="In" Type="String" />
+      <Parameter Name="PASSWORD" Mode="In" Type="String" />
+      <Parameter Name="DOB" Mode="In" Type="DateTime" />
+      <Parameter Name="TEL" Mode="In" Type="String" />
+      <Parameter Name="V_EMAIL" Mode="In" Type="String" />
+      <Parameter Name="V_PHOTO" Mode="In" Type="String" />
+      <Parameter Name="V_ADRESS" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="DESENCRIPTAR_CONTRA_Result">
+    <Property Type="Guid" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Identification" Nullable="false" MaxLength="9" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="First_last_name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Second_last_name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="User_Role" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="Binary" Name="Password" Nullable="false" />
+    <Property Type="DateTime" Name="Birth_date" Nullable="false" />
+    <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="Registration_date" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="DateTime" Name="Modification_date" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="Email_Verification" Nullable="true" />
+    <Property Type="Guid" Name="Activation_Code" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="MOSTRAR_ORDEN_PORID_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="Order_User_Id" Nullable="false" />
+    <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
+    <Property Type="DateTime" Name="Order_date" Nullable="false" />
+    <Property Type="Decimal" Name="Order_total" Nullable="false" Precision="10" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="MOSTRAR_ORDENES_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="Order_User_Id" Nullable="false" />
+    <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
+    <Property Type="DateTime" Name="Order_date" Nullable="false" />
+    <Property Type="Decimal" Name="Order_total" Nullable="false" Precision="10" Scale="2" />
+  </ComplexType>
 </Schema>
