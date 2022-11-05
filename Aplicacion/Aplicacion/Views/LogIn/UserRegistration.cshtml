@@ -25,11 +25,11 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail">Email</label>
-                                                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required", type="Email" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword">Password</label>
-                                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword", @required = "required" })
+                                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword", @required = "required", @minlength = "8" })
                                                 <i class="far fa-eye" id="togglePassword" onclick="TogglePass()"></i>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -60,7 +60,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPhone">Phone Number</label>
-                                                @Html.TextBoxFor(Model => Model.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", type="tel", @required = "required" })
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -79,7 +79,7 @@
                                         <div class="form-check d-flex justify-content-center mb-5">
                                             <label class="form-check-label" for="form2Example3g">
                                                 <input class="form-check-input center" type="checkbox" value="" id="form2Example3g" required />
-                                                I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                                                I agree all statements in <a href="@Url.Action("Terms", "LogIn")" class="text-body"><u>Terms of service</u></a>
                                             </label>
                                         </div>
                                         <div class="d-flex justify-content-center">
@@ -122,11 +122,11 @@
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail">Email</label>
 
-                                                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required", type="Email" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword">Password</label>
-                                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword", @required = "required" })
+                                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", @id = "inputPassword", @required = "required", @minlength = "8" })
                                                 <i class="far fa-eye" id="togglePassword" onclick="TogglePass()"></i>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -158,7 +158,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPhone">Phone Number</label>
-                                                @Html.TextBoxFor(Model => Model.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", type="tel", @required = "required" })
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -210,11 +210,11 @@
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail">Email</label>
 
-                                                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Email", @id = "inputEmail", @required = "required", type="Email" })
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword">Password</label>
-                                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", id = "inputPassword", required = "required" })
+                                                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Password", id = "inputPassword", required = "required", @minlength = "8" })
                                                 <i class="far fa-eye" id="togglePassword" onclick="TogglePass()"></i>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -246,7 +246,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPhone">Phone Number</label>
-                                                @Html.TextBoxFor(Model => Model.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", @required = "required" })
+                                                @Html.TextBoxFor(Model => Model.Phone, new { @class = "form-control", @id = "inputPhone", @maxlength = "8", @placeholder = "Phone Number", type="tel", @required = "required" })
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -256,7 +256,7 @@
                                         <div class="form-check d-flex justify-content-center mb-5">
                                             <label class="form-check-label" for="form2Example3g">
                                                 <input class="form-check-input center" type="checkbox" value="" id="form2Example3g" required/>
-                                                I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+                                                I agree all statements in <a href="@Url.Action("LogIn", "Terms")" class="text-body"><u>Terms of service</u></a>
                                             </label>
                                         </div>
                                         <div class="d-flex justify-content-center">

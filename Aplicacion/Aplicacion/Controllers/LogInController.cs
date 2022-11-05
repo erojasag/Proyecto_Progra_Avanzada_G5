@@ -23,6 +23,11 @@ namespace Aplicacion.Controllers
         {
             return View(new Users());
         }
+        
+        public ActionResult Terms()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult ValidateUser(Users User)
