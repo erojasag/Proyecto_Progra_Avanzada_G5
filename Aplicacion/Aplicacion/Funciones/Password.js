@@ -1,7 +1,11 @@
-﻿
-
-const togglePassword = document.querySelector('#togglePassword');
+﻿const togglePassword = document.querySelector('#togglePassword');
 const password = document.querySelector('#inputPassword');
+const form = document.getElementById('formulario');
+const inputs = document.querySelectorAll('#formulario input');
+
+formulario.addEventListener('submit', function(e) {
+    e.preventDefault();
+});
 
 togglePassword.addEventListener('click', function (e) {
     // toggle the type attribute
@@ -19,3 +23,13 @@ togglePassword.addEventListener('click', function (e) {
         x.type = "password";
     }
 }*/
+
+function matchPassword() {
+    var pw1 = document.getElementById('inputPassword');
+    var pw2 = document.getElementById('inputPassword1');
+    if (pw1 !== pw2) {
+        alert("Passwords did not match");
+    } if (pw1 === pw2) {
+        alert("Passwords match");
+    }
+}  
