@@ -176,6 +176,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\ShipmentController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Entities\Brand.cs">
@@ -239,6 +240,7 @@
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\ProductsModel.cs" />
+    <Compile Include="Models\ShipmentsModel.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -313,6 +315,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Order\" />
+    <Folder Include="Views\Shipment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
