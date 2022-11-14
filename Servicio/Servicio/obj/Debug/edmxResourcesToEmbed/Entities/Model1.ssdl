@@ -8,8 +8,8 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Photo" Type="varchar(max)" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'SHOECORP_BD.dbo.ERRORES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ERRORES">
     <Key>
       <PropertyRef Name="ID_ERROR" />
@@ -225,22 +225,6 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="ACTUALIZAR_CONTRASENIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="V_ID" Type="uniqueidentifier" Mode="In" />
-    <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
-  </Function>
-  <Function Name="ACTUALIZAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="V_ID" Type="uniqueidentifier" Mode="In" />
-    <Parameter Name="V_NAME" Type="varchar" Mode="In" />
-    <Parameter Name="V_FLASTNAME" Type="varchar" Mode="In" />
-    <Parameter Name="V_SLASTNAME" Type="varchar" Mode="In" />
-    <Parameter Name="ID_ROL" Type="int" Mode="In" />
-    <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
-    <Parameter Name="TEL" Type="varchar" Mode="In" />
-    <Parameter Name="V_EMAIL" Type="varchar" Mode="In" />
-    <Parameter Name="V_PHOTO" Type="varchar(max)" Mode="In" />
-    <Parameter Name="V_ADRESS" Type="varchar" Mode="In" />
-  </Function>
   <Function Name="DESENCRIPTAR_CONTRA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="V_USER" Type="varchar" Mode="In" />
     <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />

@@ -287,30 +287,14 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="ShoppingCart" EntitySet="ShoppingCart" />
     </AssociationSet>
-    <FunctionImport Name="ACTUALIZAR_CONTRASENIA">
-      <Parameter Name="V_ID" Mode="In" Type="Guid" />
-      <Parameter Name="PASSWORD" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="ACTUALIZAR_USUARIO">
-      <Parameter Name="V_ID" Mode="In" Type="Guid" />
-      <Parameter Name="V_NAME" Mode="In" Type="String" />
-      <Parameter Name="V_FLASTNAME" Mode="In" Type="String" />
-      <Parameter Name="V_SLASTNAME" Mode="In" Type="String" />
-      <Parameter Name="ID_ROL" Mode="In" Type="Int32" />
-      <Parameter Name="PASSWORD" Mode="In" Type="String" />
-      <Parameter Name="TEL" Mode="In" Type="String" />
-      <Parameter Name="V_EMAIL" Mode="In" Type="String" />
-      <Parameter Name="V_PHOTO" Mode="In" Type="String" />
-      <Parameter Name="V_ADRESS" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="DESENCRIPTAR_CONTRA" ReturnType="Collection(SHOECORP_BDModel.DESENCRIPTAR_CONTRA_Result)">
       <Parameter Name="V_USER" Mode="In" Type="String" />
       <Parameter Name="PASSWORD" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="MOSTRAR_ORDEN_PORID" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDEN_PORID_Result)">
+    <FunctionImport Name="MOSTRAR_ORDEN_PORID">
       <Parameter Name="V_ID_ORDEN" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="MOSTRAR_ORDENES" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDENES_Result)" />
+    <FunctionImport Name="MOSTRAR_ORDENES" />
     <FunctionImport Name="REGISTRAR_ORDEN">
       <Parameter Name="V_ID_USUARIO" Mode="In" Type="Guid" />
       <Parameter Name="V_MONTO" Mode="In" Type="Decimal" />
@@ -348,19 +332,5 @@
     <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
     <Property Type="Boolean" Name="Email_Verification" Nullable="true" />
     <Property Type="Guid" Name="Activation_Code" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="MOSTRAR_ORDEN_PORID_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="Order_User_Id" Nullable="false" />
-    <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
-    <Property Type="DateTime" Name="Order_date" Nullable="false" />
-    <Property Type="Decimal" Name="Order_total" Nullable="false" Precision="10" Scale="2" />
-  </ComplexType>
-  <ComplexType Name="MOSTRAR_ORDENES_Result">
-    <Property Type="Int32" Name="Id" Nullable="false" />
-    <Property Type="Guid" Name="Order_User_Id" Nullable="false" />
-    <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
-    <Property Type="DateTime" Name="Order_date" Nullable="false" />
-    <Property Type="Decimal" Name="Order_total" Nullable="false" Precision="10" Scale="2" />
   </ComplexType>
 </Schema>

@@ -45,6 +45,21 @@ namespace Servicio.Models
                 smtp.Send(message);
         }
 
+        public void ChangePasswordEmail(string correo, string newPassword, string newPassword2)
+        {
+
+            try
+            {
+
+            }
+            catch
+            {
+
+
+            }
+
+        }
+
 
     }
 }
