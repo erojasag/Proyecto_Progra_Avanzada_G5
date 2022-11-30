@@ -103,7 +103,7 @@
     <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="Modification_date" Type="DateTime" Precision="3" />
     <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Email_Verification" Type="Boolean" />
@@ -300,7 +300,7 @@
       <Parameter Name="PASSWORD" Mode="In" Type="String" />
       <Parameter Name="TEL" Mode="In" Type="String" />
       <Parameter Name="V_EMAIL" Mode="In" Type="String" />
-      <Parameter Name="V_PHOTO" Mode="In" Type="String" />
+      <Parameter Name="V_PHOTO" Mode="In" Type="Binary" />
       <Parameter Name="V_ADRESS" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="DESENCRIPTAR_CONTRA" ReturnType="Collection(SHOECORP_BDModel.DESENCRIPTAR_CONTRA_Result)">
@@ -326,7 +326,7 @@
       <Parameter Name="DOB" Mode="In" Type="DateTime" />
       <Parameter Name="TEL" Mode="In" Type="String" />
       <Parameter Name="V_EMAIL" Mode="In" Type="String" />
-      <Parameter Name="V_PHOTO" Mode="In" Type="String" />
+      <Parameter Name="V_PHOTO" Mode="In" Type="Binary" />
       <Parameter Name="V_ADRESS" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
@@ -343,7 +343,7 @@
     <Property Type="String" Name="Phone" Nullable="false" MaxLength="20" />
     <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
     <Property Type="DateTime" Name="Registration_date" Nullable="false" Precision="23" />
-    <Property Type="String" Name="Photo" Nullable="true" />
+    <Property Type="Binary" Name="Photo" Nullable="true" />
     <Property Type="DateTime" Name="Modification_date" Nullable="true" Precision="23" />
     <Property Type="String" Name="Address" Nullable="false" MaxLength="100" />
     <Property Type="Boolean" Name="Email_Verification" Nullable="true" />

@@ -50,7 +50,7 @@ namespace Servicio.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACTUALIZAR_CONTRASENIA", v_IDParameter, pASSWORDParameter);
         }
     
-        public virtual int ACTUALIZAR_USUARIO(Nullable<System.Guid> v_ID, string v_NAME, string v_FLASTNAME, string v_SLASTNAME, Nullable<int> iD_ROL, string pASSWORD, string tEL, string v_EMAIL, string v_PHOTO, string v_ADRESS)
+        public virtual int ACTUALIZAR_USUARIO(Nullable<System.Guid> v_ID, string v_NAME, string v_FLASTNAME, string v_SLASTNAME, Nullable<int> iD_ROL, string pASSWORD, string tEL, string v_EMAIL, byte[] v_PHOTO, string v_ADRESS)
         {
             var v_IDParameter = v_ID.HasValue ?
                 new ObjectParameter("V_ID", v_ID) :
@@ -86,7 +86,7 @@ namespace Servicio.Entities
     
             var v_PHOTOParameter = v_PHOTO != null ?
                 new ObjectParameter("V_PHOTO", v_PHOTO) :
-                new ObjectParameter("V_PHOTO", typeof(string));
+                new ObjectParameter("V_PHOTO", typeof(byte[]));
     
             var v_ADRESSParameter = v_ADRESS != null ?
                 new ObjectParameter("V_ADRESS", v_ADRESS) :
@@ -135,7 +135,7 @@ namespace Servicio.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("REGISTRAR_ORDEN", v_ID_USUARIOParameter, v_MONTOParameter);
         }
     
-        public virtual int REGISTRAR_USUARIO(string v_CED, string v_NAME, string v_FLASTNAME, string v_SLASTNAME, Nullable<int> iD_ROL, string v_USER, string pASSWORD, Nullable<System.DateTime> dOB, string tEL, string v_EMAIL, string v_PHOTO, string v_ADRESS)
+        public virtual int REGISTRAR_USUARIO(string v_CED, string v_NAME, string v_FLASTNAME, string v_SLASTNAME, Nullable<int> iD_ROL, string v_USER, string pASSWORD, Nullable<System.DateTime> dOB, string tEL, string v_EMAIL, byte[] v_PHOTO, string v_ADRESS)
         {
             var v_CEDParameter = v_CED != null ?
                 new ObjectParameter("V_CED", v_CED) :
@@ -179,7 +179,7 @@ namespace Servicio.Entities
     
             var v_PHOTOParameter = v_PHOTO != null ?
                 new ObjectParameter("V_PHOTO", v_PHOTO) :
-                new ObjectParameter("V_PHOTO", typeof(string));
+                new ObjectParameter("V_PHOTO", typeof(byte[]));
     
             var v_ADRESSParameter = v_ADRESS != null ?
                 new ObjectParameter("V_ADRESS", v_ADRESS) :

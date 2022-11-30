@@ -66,51 +66,21 @@ namespace Servicio.Models
 
         public bool InsertBrand(Brand brand)
         {
-            using (var db = new SHOECORP_BDEntities())
+            using (var contexto = new SHOECORP_BDEntities())
             {
                 try
                 {
-                    if (brand != null)
-                    {
-                        var checkBrand = db.Brand.ToList();
-                        List<Brand> brands = new List<Brand>();
+                    Brand TablaBrand = new Brand();
+                    TablaBrand.Name = brand.Name;
+                    TablaBrand.Photo = brand.Photo;
 
-                        if (checkBrand != null)
-                        {
-                            foreach (var cbrand in checkBrand)
-                            {
-                                brands.Add(new Brand
-                                {
-                                    Id = cbrand.Id,
-                                    Name = cbrand.Name
-                                });
-                            };
-                        }
-
-                        foreach(var lbrand in brands)
-                        {
-                            while(brand.Name == lbrand.Name)
-                            {
-                                throw new Exception("La marca que desea insertar ya existe");
-                            }
-                        };
-
-                        Brand tbrand = new Brand();
-                        tbrand.Name = brand.Name;
-                        tbrand.Photo = brand.Photo;
-                        db.Brand.Add(tbrand);
-                        db.SaveChanges();
-                        return true;
-                    }
-                    else
-                    {
-                        throw new Exception("No hay marcas registradas");
-                    }
-    
+                    contexto.Brand.Add(TablaBrand);
+                    contexto.SaveChanges();
+                    return true;
                 }
                 catch (Exception ex)
                 {
-                    db.Dispose();
+                    contexto.Dispose();
                     throw ex;
                 }
             }
@@ -122,43 +92,19 @@ namespace Servicio.Models
             {
                 try
                 {
-                    var tbrand = db.Brand.Find(brand.Id);
-                    if (tbrand != null)
-                    {
-                        if (brand.Name != null)
-                        {
-                            tbrand.Name = brand.Name;
-                        }
-                    }
-                    db.SaveChanges();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    db.Dispose();
-                    throw ex;
-                }
-            }
-        }
+                    var TablaBrand = (from x in db.Brand
+                                      where x.Id == brand.Id
+                                      select x).FirstOrDefault();
 
-        public bool DeleteBrand(int Id)
-        {
-            using (var db = new SHOECORP_BDEntities())
-            {
-                try
-                {
-                    var tbrand = db.Brand.Find(Id);
-
-                    if (tbrand != null)
+                    if (TablaBrand != null)
                     {
-                        db.Brand.Remove(tbrand);
+                        TablaBrand.Name = brand.Name;
+                        TablaBrand.Photo = brand.Photo;
                         db.SaveChanges();
                         return true;
                     }
                     else
-                    {
-                        throw new Exception("No se pudo eliminar la marca");
-                    }
+                        throw new Exception("This brand does not exist");
                 }
                 catch (Exception ex)
                 {
@@ -167,5 +113,33 @@ namespace Servicio.Models
                 }
             }
         }
+        public bool DeleteBrand(int Id)
+        {
+            using (var db = new SHOECORP_BDEntities())
+            {
+
+                try
+                {
+                    var TablaBrand = (from x in db.Brand
+                                      where x.Id == Id
+                                      select x).FirstOrDefault();
+
+                    if (TablaBrand != null)
+                    {
+                        db.Brand.Remove(TablaBrand);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                        throw new Exception("The brand does not exist");
+                }
+                catch (Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
     }
 }
