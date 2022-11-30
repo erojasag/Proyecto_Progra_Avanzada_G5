@@ -31,7 +31,7 @@ namespace Servicio.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        
         [Route("brands/ViewBrandById")]
         public Respuesta ViewBrandById(int Id)
         {
@@ -46,7 +46,7 @@ namespace Servicio.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        
         [Route("brands/InsertBrand")]
         public Respuesta InsertBrand(Brand Brand)
         {
@@ -61,7 +61,7 @@ namespace Servicio.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        
         [Route("brands/EditBrand")]
         public Respuesta EditBrand(Brand Brand)
         {
@@ -76,7 +76,7 @@ namespace Servicio.Controllers
         }
 
         [HttpDelete]
-        [Authorize]
+        
         [Route("brands/DeleteBrand")]
         public Respuesta DeleteBrand(int Id)
         {

@@ -2497,10 +2497,7 @@
     <Content Include="Views\Brand\EditBrand.cshtml" />
     <Content Include="Views\Brand\DeleteBrand.cshtml" />
     <Content Include="Views\Persons\ViewPersonsWithUsers.cshtml" />
-    <Content Include="Views\Persons\CheckPersonAndUserById.cshtml" />
-    <Content Include="Views\Persons\InsertPersonWithUser.cshtml" />
     <Content Include="Views\Persons\EditUserPerson.cshtml" />
-    <Content Include="Views\Persons\DeletePersonAndUserById.cshtml" />
     <Content Include="Views\Users\ViewUsers.cshtml" />
     <Content Include="Views\Users\ViewUserById.cshtml" />
     <Content Include="Views\Users\InsertUser.cshtml" />
