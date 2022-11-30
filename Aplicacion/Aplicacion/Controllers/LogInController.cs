@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Aplicacion.Controllers
 {
-    public class LogInController : Controller
+    public class LogInController : BaseController
     {
         readonly UsersModel model = new UsersModel();
 
@@ -34,10 +34,9 @@ namespace Aplicacion.Controllers
 
                 if (datos != null)
                 {
-                    Session["Id"] = datos.Id;
-                    Session["Username"] = datos.Username;
-                    Session["User_Role"] = datos.User_Role;
-                    Session["Photo"] = datos.Photo;
+
+                    Users usuario = new Users();
+                    Session["User"] = datos;
                     return RedirectToAction("Index", "Home");
                 }
                 else

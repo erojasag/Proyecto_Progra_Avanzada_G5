@@ -253,6 +253,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
@@ -272,6 +274,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BrandModel.cs" />
+    <Compile Include="Models\Enum.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\SessionFilter.cs" />
     <Compile Include="Models\UsersModel.cs" />
@@ -2207,7 +2210,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\datatables\datatables.css" />
     <Content Include="Content\datatables\datatables.js" />
-    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\ShoeCorp.jpeg" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\sweetalert2\sweetalert2.all.js" />
     <Content Include="Content\sweetalert2\sweetalert2.all.min.js" />
@@ -2515,10 +2518,11 @@
     <Content Include="Views\Orders\OrderConfirmation.cshtml" />
     <Content Include="Views\Shared\ThankYou.cshtml" />
     <Content Include="Views\Product\ProductoEditadoSatisfactoriamente.cshtml" />
-    <Content Include="Views\Shared\NotificationPanel.cshtml" />
+    <Content Include="Views\Shared\_NotificationPanel.cshtml" />
     <Content Include="Views\Product\ProductNotDeleted.cshtml" />
     <Content Include="Views\Users\UserSuccessfullyEdited.cshtml" />
     <Content Include="Views\Users\UserNotDeleted.cshtml" />
+    <Content Include="Views\Alert\ShowAlert.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -2528,6 +2532,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Password\" />
     <Folder Include="Views\ShoeCorp\" />
   </ItemGroup>

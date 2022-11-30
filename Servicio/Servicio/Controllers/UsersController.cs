@@ -19,10 +19,12 @@ namespace Servicio.Controllers
         public Usuario ValidateUser(Usuario User)
         {
 
+
             return model.ValidateUser(User);
         }
 
         [HttpGet]
+        
         [Route("Users/ViewUsers")]
         public Respuesta ViewUsers()
         {
@@ -37,6 +39,7 @@ namespace Servicio.Controllers
         }
 
         [HttpGet]
+        
         [Route("Users/ViewUserById")]
         public Respuesta ViewUserById(Guid Id)
         {
@@ -51,6 +54,7 @@ namespace Servicio.Controllers
         }
 
         [HttpPost]
+
         [Route("Users/UserRegistration")]
         public Respuesta InsertUser(Usuario user)
         {
@@ -65,8 +69,9 @@ namespace Servicio.Controllers
         }
 
         [HttpPut]
+        
         [Route("Users/EditUser")]
-        public Respuesta EditUser(Usuario user)
+        public Respuesta EditUser(Users user)
         {
             try
             {
@@ -79,6 +84,7 @@ namespace Servicio.Controllers
         }
 
         [HttpDelete]
+        
         [Route("Users/DeleteUser")]
         public Respuesta DeleteUser(Guid Id)
         {
@@ -94,6 +100,7 @@ namespace Servicio.Controllers
 
         //ACTUALIZAR CONTRASEÑA
         [HttpPut]
+        
         [Route("Users/ActualizarContraseña")]
         public string ActualizarContraseña(Usuario obj)
         {

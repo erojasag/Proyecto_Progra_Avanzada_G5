@@ -118,6 +118,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_CONTRASENIA" FunctionName="SHOECORP_BDModel.Store.ACTUALIZAR_CONTRASENIA" />
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_USUARIO" FunctionName="SHOECORP_BDModel.Store.ACTUALIZAR_USUARIO" />
     <FunctionImportMapping FunctionImportName="DESENCRIPTAR_CONTRA" FunctionName="SHOECORP_BDModel.Store.DESENCRIPTAR_CONTRA">
       <ResultMapping>
         <ComplexTypeMapping TypeName="SHOECORP_BDModel.DESENCRIPTAR_CONTRA_Result">
@@ -141,8 +143,28 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="MOSTRAR_ORDEN_PORID" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDEN_PORID" />
-    <FunctionImportMapping FunctionImportName="MOSTRAR_ORDENES" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDENES" />
+    <FunctionImportMapping FunctionImportName="MOSTRAR_ORDEN_PORID" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDEN_PORID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SHOECORP_BDModel.MOSTRAR_ORDEN_PORID_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
+          <ScalarProperty Name="NOMBRE_COMPLETO" ColumnName="NOMBRE_COMPLETO" />
+          <ScalarProperty Name="Order_date" ColumnName="Order_date" />
+          <ScalarProperty Name="Order_total" ColumnName="Order_total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MOSTRAR_ORDENES" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDENES">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SHOECORP_BDModel.MOSTRAR_ORDENES_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
+          <ScalarProperty Name="NOMBRE_COMPLETO" ColumnName="NOMBRE_COMPLETO" />
+          <ScalarProperty Name="Order_date" ColumnName="Order_date" />
+          <ScalarProperty Name="Order_total" ColumnName="Order_total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="REGISTRAR_ORDEN" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_ORDEN" />
     <FunctionImportMapping FunctionImportName="REGISTRAR_USUARIO" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_USUARIO" />
   </EntityContainerMapping>

@@ -28,7 +28,9 @@ namespace Servicio.Controllers
             }
         }
 
+        
         [HttpGet]
+        [Authorize]
         [Route("products/ViewProductById")]
         public Respuesta ViewProductById(int Id) 
         {
@@ -45,6 +47,7 @@ namespace Servicio.Controllers
 
 
         [HttpPost]
+        [Authorize]
         [Route("products/InsertProduct")]
         public Respuesta InsertProduct(Product product)
         {
@@ -59,6 +62,7 @@ namespace Servicio.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("products/EditProduct")]
         public Respuesta EditProduct(Product product)
         {
@@ -73,6 +77,7 @@ namespace Servicio.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("products/DeleteProduct")]
 
         public Respuesta DeleteProduct(int Id)

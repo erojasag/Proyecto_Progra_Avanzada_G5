@@ -14,6 +14,7 @@ namespace Servicio.Controllers
         readonly ShipmentsModel model = new ShipmentsModel();
 
         [HttpGet]
+        [Authorize]
         [Route("shipments/ViewShipments")]
         public Respuesta ViewShipments()
         {
@@ -28,6 +29,7 @@ namespace Servicio.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("shipments/ViewShipmentsById")]
         public Respuesta ViewShipmentsById(int Id)
         {
@@ -42,6 +44,7 @@ namespace Servicio.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("shipments/InsertShipment")]
         public Respuesta InsertShipment(Shipments shipments)
         {
@@ -56,6 +59,7 @@ namespace Servicio.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("shipments/EditShipments")]
         public Respuesta EditShipments(Shipments shipments)
         {
@@ -70,6 +74,7 @@ namespace Servicio.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("shipments/DeleteShipment")]
         public Respuesta DeleteShipment(int Id)
         {

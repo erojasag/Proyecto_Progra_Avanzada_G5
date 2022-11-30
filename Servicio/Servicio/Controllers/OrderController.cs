@@ -14,6 +14,7 @@ namespace Servicio.Controllers
         readonly OrderModel model = new OrderModel();
 
         [HttpGet]
+        [Authorize]
         [Route("Orders/ViewOrders")]
         public Respuesta ViewOrders()
         {
@@ -28,6 +29,7 @@ namespace Servicio.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("Orders/ViewOrderById")]
         public Respuesta ViewOrderById(int Id)
         {
@@ -42,6 +44,7 @@ namespace Servicio.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("Orders/InsertOrder")]
         public string InsertOrder(Orders order)
         {
@@ -57,6 +60,7 @@ namespace Servicio.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("Orders/EditOrder")]
         public Respuesta EditOrder(Orders Order)
         {
@@ -71,6 +75,7 @@ namespace Servicio.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("Orders/DeleteOrder")]
         public Respuesta DeleteOrder(int Id)
         {

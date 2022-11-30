@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Aplicacion.Controllers
 {
-    public class PasswordController : Controller
+    public class PasswordController : BaseController
     {
         // GET: Password
         public ActionResult Index()

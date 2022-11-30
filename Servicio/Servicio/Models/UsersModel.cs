@@ -1,7 +1,12 @@
-﻿using Servicio.Entities;
+﻿using Microsoft.IdentityModel.Tokens;
+using Servicio.Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Web;
 
 namespace Servicio.Models
@@ -115,19 +120,25 @@ namespace Servicio.Models
             }
         }
 
-        public bool EditUser(Usuario User)
+        public bool EditUser(Users User)
         {
             using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
-                    if (ViewUserById(User.Id) == null)
+                    Usuario u1= new Usuario();
+
+                    var encryptedPassword = Encoding.UTF8.GetString(User.Password);
+
+                    u1.Password = encryptedPassword;
+                    
+                    if (User.Id == null)
                     {
                         return false;
                     }
                     else
                     {
-                        db.ACTUALIZAR_USUARIO(User.Id, User.Name, User.First_last_name, User.Second_last_name, User.User_Role, User.Password,
+                        db.ACTUALIZAR_USUARIO(User.Id, User.Name, User.First_last_name, User.Second_last_name, User.User_Role, u1.Password,
                             User.Phone, User.Email, User.Photo, User.Address);
                         return true;
                     }
@@ -177,16 +188,21 @@ namespace Servicio.Models
                 try
                 {
 
-                   var datos = db.DESENCRIPTAR_CONTRA(User.Username, User.Password).FirstOrDefault();
+
+                    var datos = db.DESENCRIPTAR_CONTRA(User.Username, User.Password).FirstOrDefault();
 
                     if (datos != null)
                     {
-                        User = new Usuario();
-                        User.Username = datos.Username;
-                        User.User_Role = datos.User_Role;
-                        User.Photo = datos.Photo;
+                        var token = GetToken(datos.Id);
 
-                        return User;
+                        Usuario u1 = new Usuario();
+                        u1.Id = datos.Id;
+                        u1.Username = datos.Username;
+                        u1.Name= datos.Name;
+                        u1.User_Role = datos.User_Role;
+                        u1.Photo = datos.Photo;
+                        u1.Token = token;
+                        return u1;
                     }
                     else
                     {
@@ -200,6 +216,38 @@ namespace Servicio.Models
                     throw ex;
                 }
             }
+        }
+
+        public string GetToken(Guid Id)
+        {
+            try
+            {
+                var key = ConfigurationManager.AppSettings["JwtKey"];
+
+                var issuer = ConfigurationManager.AppSettings["JwtIssuer"];
+
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+                var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+                //Create a List of Claims, Keep claims name short    
+                var permClaims = new List<Claim>();
+                permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+                permClaims.Add(new Claim("userid", "Id"));
+
+                //Create Security Token object by giving required parameters    
+                var token = new JwtSecurityToken(issuer, //Issure    
+                                issuer,  //Audience    
+                                permClaims,
+                                expires: DateTime.Now.AddDays(1),
+                                signingCredentials: credentials);
+                var jwt_token = new JwtSecurityTokenHandler().WriteToken(token);
+                return jwt_token;
+            }
+            catch(Exception ex)
+            {
+                return string.Empty;
+            }
+
         }
 
        public string ActualizarContraseña(Usuario obj)

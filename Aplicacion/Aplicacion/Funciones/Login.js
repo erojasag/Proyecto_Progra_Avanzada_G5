@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     let msj = $("#IdMsj").val();
-    if (msj != "") {
+    if (msj == isEmpty) {
         MostrarAlerta(msj, "error");
     }
 

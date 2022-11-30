@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Aplicacion.Controllers
 {
-    public class ShoppingCartController : Controller
+    public class ShoppingCartController : BaseController
     {
         // GET: ShoppingCart
         public ActionResult ViewShoppingCart()
