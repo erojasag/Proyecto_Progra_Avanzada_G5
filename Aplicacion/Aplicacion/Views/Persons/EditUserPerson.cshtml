@@ -1,23 +1,27 @@
-﻿@model Aplicacion.Entities.UserPerson
+﻿@model Aplicacion.Entities.Users
+@using Aplicacion.Entities
 
+@{
+    var sesion = ((Users)Session["User"]);
+}
 
-@if (Session["User_Role"] != null)
+@if (sesion != null)
 {
     @Html.Hidden("IdMsj", (string)ViewBag.Mensaje)
-    using (Html.BeginForm("EditUserPerson", "Persons", FormMethod.Post))
+    using (Html.BeginForm("EditUser", "Users", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
-        @Html.HiddenFor(Model => Model.Person.Id, new { @class = "form-control", @Id = "Id", @readonly = "readonly" })
+        @Html.HiddenFor(Model => Model.Id, new { @class = "form-control", @Id = "Id", @readonly = "readonly" })
         <div class="container bootstrap snippets bootdey">
             <hr>
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-3">
                     <div class="text-center">
-                        <img src=@Html.DisplayFor(model => model.User.Photo) class="avatar img-circle img-thumbnail" alt="avatar">
+                        <img src=@Html.DisplayFor(model => model.Photo) class="avatar img-circle img-thumbnail" alt="avatar">
                         <h6>Upload a different photo...</h6>
-                        @Html.EditorFor(model => model.User.Photo, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.EditorFor(model => model.Photo, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
                     </div>
                 </div>
 
@@ -35,49 +39,49 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Name:</label>
                             <div class="col-lg-8">
-                                @Html.EditorFor(model => model.Person.Name, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">First Last Name:</label>
                             <div class="col-lg-8">
-                                @Html.EditorFor(model => model.Person.First_last_name, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                @Html.EditorFor(model => model.First_last_name, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Last name:</label>
                             <div class="col-lg-8">
-                                @Html.EditorFor(model => model.Person.Second_last_name, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                @Html.EditorFor(model => model.Second_last_name, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Identification:</label>
                             <div class="col-lg-8">
-                                @Html.EditorFor(model => model.Person.Identification, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                @Html.EditorFor(model => model.Identification, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Phone number:</label>
                             <div class="col-lg-8">
-                                @Html.EditorFor(model => model.Person.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email:</label>
                             <div class="col-lg-8">
-                                @Html.EditorFor(model => model.Person.Email, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "format@gmail.com" } })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "format@gmail.com" } })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Address:</label>
                             <div class="col-lg-8">
-                                @Html.TextBoxFor(Model => Model.Person.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St", @required = "required" })
+                                @Html.TextBoxFor(Model => Model.Address, new { @class = "form-control", @id = "inputAddress", @placeholder = "1234 Main St", @required = "required" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">BirthDate::</label>
                             <div class="col-lg-8">
-                                @Html.TextBoxFor(Model => Model.Person.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date", @required = "required" })
+                                @Html.TextBoxFor(Model => Model.Birth_date, new { @class = "form-control", @id = "inputBirthDate", @type = "date", @required = "required" })
                             </div>
                         </div>
 

@@ -1,4 +1,9 @@
 ﻿@model  Aplicacion.Entities.Users
+@using Aplicacion.Entities
+
+@{
+    var sesion = ((Users)Session["User"]);
+}
 
 @using (Html.BeginForm("ValidateUser", "LogIn", FormMethod.Post))
 {
@@ -10,7 +15,7 @@
                     <div class="card-body p-md-5 mx-md-4">
 
                         <div class="text-center">
-                            <img src="~/Content/Images/logo.png"
+                            <img src="~/Content/Images/ShoeCorp.jpeg"
                                  style="width: 185px;" alt="logo" class="brand-image img-circle elevation-3" />
                             <h4 class="mt-1 mb-5 pb-1">Welcome to ShoeCorp</h4>
                         </div>
@@ -40,7 +45,7 @@
 
                             <div class="d-flex align-items-center justify-content-center pb-4">
                                 <p class="mb me-2">Don't have an account?</p>
-                                <a type="button" onclick="ValidarUsuario" href="@Url.Action("UserRegistration", "LogIn")" class="btn btn-outline-danger d-flex justify-content-center">Create new</a>
+                                <a type="button" onclick="ValidarUsuario()" href="@Url.Action("UserRegistration", "LogIn")" class="btn btn-outline-danger d-flex justify-content-center">Create new</a>
                             </div>
                         </form>
                     </div>
@@ -48,7 +53,6 @@
             </div>
         </div>
     </section>
-
 }
 
 

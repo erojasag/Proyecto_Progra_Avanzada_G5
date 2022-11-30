@@ -41,6 +41,8 @@ namespace Aplicacion.Models
             }
         }
 
+        
+
 
         public Respuesta ViewUsers()
         {
@@ -214,14 +216,23 @@ namespace Aplicacion.Models
             }
         }
 
-        public Respuesta ActualizarUsuario(Users obj)
+        public Respuesta ActualizarUsuario(Users user)
         {
             string ruta = ConfigurationManager.AppSettings["urlServicioProyecto"];
             using (var client = new HttpClient())
             {
-                JsonContent body = JsonContent.Create(obj);
-                string metodo = "Users/ActualizarContraseña";
-                HttpResponseMessage respuesta = client.PutAsync(ruta + metodo, body).Result;
+                JsonContent body = JsonContent.Create(user);
+
+                if(user.Password != null) {
+                    string routePassword = "Users/ActualizarContraseña";
+                    HttpResponseMessage respuestaPassword = client.PutAsync(ruta + routePassword, body).Result;
+
+                    return respuestaPassword.Content.ReadAsAsync<Respuesta>().Result;
+                }
+
+                string route = "Users/EditUser";
+                HttpResponseMessage respuesta = client.PutAsync(ruta + route, body).Result;
+
                 if (respuesta.IsSuccessStatusCode)
                 {
                     return respuesta.Content.ReadAsAsync<Respuesta>().Result;

@@ -48,7 +48,11 @@ CREATE TABLE Users(
     Phone varchar(20) NOT NULL,
     Email varchar(50) NOT NULL UNIQUE,
     Registration_date DATETIME NOT NULL DEFAULT GETDATE(),
+<<<<<<< HEAD
 	Photo VARBINARY(max) NULL,
+=======
+	Photo varchar(max) NULL,
+>>>>>>> v2.0.0-emanuel
     Modification_date DATETIME NULL,
     Address varchar(100) NOT NULL,
     Email_Verification bit DEFAULT 0,
@@ -161,7 +165,7 @@ VALUES(0018,4,165000,5,'UA Charged Pursuit 3','Black',43, '');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
 VALUES(0019,4,165000,9,'Curry Flow 9','Blue',38, '');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0020,4,165000,16,'UA HOVR™ Machina 3','Beige',36, '');
+VALUES(0020,4,165000,16,'UA HOVRï¿½ Machina 3','Beige',36, '');
 
 ----------------------------------INSERT Puma------------------------------
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
@@ -274,7 +278,11 @@ CREATE TABLE Shipments(
 
 ----------------------------------------PROCEDIMIENTOS ALMACENADOS----------------------------------------------
 --------------------------------------------USUARIOS--------------------------------------------------------
+<<<<<<< HEAD
 ---INSERTAR USUARIO Y HASHEAR CONTRASEÑA
+=======
+---INSERTAR USUARIO Y HASHEAR CONTRASEï¿½A
+>>>>>>> v2.0.0-emanuel
 
 GO
 CREATE PROCEDURE REGISTRAR_USUARIO (
@@ -378,7 +386,11 @@ CREATE   PROCEDURE ACTUALIZAR_USUARIO
 	@PASSWORD VARCHAR(MAX),
 	@TEL VARCHAR(20),
 	@V_EMAIL VARCHAR(50),
+<<<<<<< HEAD
 	@V_PHOTO VARBINARY(MAX),
+=======
+	@V_PHOTO VARCHAR(MAX),
+>>>>>>> v2.0.0-emanuel
 	@V_ADRESS VARCHAR(100))
 
 AS

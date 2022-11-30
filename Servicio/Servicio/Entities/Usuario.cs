@@ -8,6 +8,7 @@ namespace Servicio.Entities
     public class Usuario
     {
 
+<<<<<<< HEAD
     public Guid Id { get; set; }
     public string Identification { get; set; }
     public string Name { get; set; }
@@ -23,7 +24,25 @@ namespace Servicio.Entities
     public byte[] Photo { get; set; }
     public Nullable<System.DateTime> Modification_date { get; set; }
     public string Address { get; set; }
+=======
+        public Guid Id { get; set; }
+        public string Identification { get; set; }
+        public string Name { get; set; }
+        public string First_last_name { get; set; }
+        public string Second_last_name { get; set; }
+        public int User_Role { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public System.DateTime Birth_date { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public System.DateTime Registration_date { get; set; }
+        public byte[] Photo { get; set; }
+        public Nullable<System.DateTime> Modification_date { get; set; }
+        public string Address { get; set; }
+        public string Token { get; set; }
+>>>>>>> v2.0.0-emanuel
 
-}
+    }
 
 }

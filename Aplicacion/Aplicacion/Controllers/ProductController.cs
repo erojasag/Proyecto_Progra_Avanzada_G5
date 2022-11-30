@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Aplicacion.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         readonly ProductModel model = new ProductModel();
 
@@ -35,6 +35,8 @@ namespace Aplicacion.Controllers
             }
         }
 
+        [Authorize]
+        [SessionFilter]
         [HttpGet]
         [Route("ViewProductById")]
         public ActionResult ViewProductById(int? Id)
@@ -61,6 +63,8 @@ namespace Aplicacion.Controllers
             }
         }
 
+
+        [Authorize]
         [HttpGet]
         [SessionFilter]
         public ActionResult InsertProduct(Product product)
@@ -68,6 +72,8 @@ namespace Aplicacion.Controllers
             return View();
         }
 
+        [Authorize]
+        [SessionFilter]
         [HttpPost]
         public ActionResult ValidateProduct(Product product)
         {
@@ -94,7 +100,7 @@ namespace Aplicacion.Controllers
 
         }
 
-
+        [Authorize]
         [SessionFilter]
         [HttpGet]
         [Route("EditProduct")]
@@ -118,6 +124,7 @@ namespace Aplicacion.Controllers
             }
         }
 
+        [Authorize]
         [SessionFilter]
         [HttpPost]
         [Route("EditProduct")]
@@ -151,7 +158,7 @@ namespace Aplicacion.Controllers
             }
         }
 
-
+        [Authorize]
         [SessionFilter]
         [HttpGet]
         [Route("DeleteProduct")]

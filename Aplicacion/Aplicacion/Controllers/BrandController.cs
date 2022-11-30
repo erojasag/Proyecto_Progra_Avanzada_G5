@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Aplicacion.Controllers
 {
-    public class BrandController : Controller
+    public class BrandController : BaseController
     {
         readonly BrandModel model = new BrandModel();
 

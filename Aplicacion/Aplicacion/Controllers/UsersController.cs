@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Aplicacion.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
 
             readonly UsersModel model = new UsersModel();
@@ -126,17 +126,7 @@ namespace Aplicacion.Controllers
             {
                 try
                 {
-                    var data = model.ViewUserById((Guid)user.Id);
-                    data.User.Name = user.Name;
-                    data.User.First_last_name = user.First_last_name;
-                    data.User.Second_last_name = user.Second_last_name;
-                    data.User.User_Role = user.User_Role;
-                    data.User.Password = user.Password;
-                    data.User.Phone = user.Phone;
-                    data.User.Email = user.Email;
-                    data.User.Photo = user.Photo;
-                    data.User.Address = user.Address;
-
+                    var data = model.ActualizarUsuario(user);
 
                     if (data.Transaction == true)
                     {
