@@ -42,7 +42,7 @@ namespace Aplicacion.Controllers
             try
             {
 
-                if (Id == null)
+                if (Id == 0)
                 {
                     return View();
                 }
