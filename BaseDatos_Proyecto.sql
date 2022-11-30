@@ -48,14 +48,17 @@ CREATE TABLE Users(
     Phone varchar(20) NOT NULL,
     Email varchar(50) NOT NULL UNIQUE,
     Registration_date DATETIME NOT NULL DEFAULT GETDATE(),
-	Photo varchar(max),
+	Photo VARBINARY(max) NULL,
     Modification_date DATETIME NULL,
     Address varchar(100) NOT NULL,
-    Email_Verification DEFAULT 0,
+    Email_Verification bit DEFAULT 0,
     Activation_Code uniqueidentifier,
 	CONSTRAINT PK_User_ID PRIMARY KEY(Id),
 	CONSTRAINT FK_Role_ID FOREIGN KEY (User_Role) REFERENCES Roles(Id)
 );
+
+Alter table Users
+Alter column Photo varchar(max) null
 
 --------------------------------------END OF USER TABLE-----------------------------------------------------------------------------------------------------------
 
@@ -270,7 +273,7 @@ CREATE TABLE Shipments(
 
 
 ----------------------------------------PROCEDIMIENTOS ALMACENADOS----------------------------------------------
-
+--------------------------------------------USUARIOS--------------------------------------------------------
 ---INSERTAR USUARIO Y HASHEAR CONTRASEÑA
 
 GO
@@ -285,14 +288,14 @@ CREATE PROCEDURE REGISTRAR_USUARIO (
 	@DOB DATE,
 	@TEL VARCHAR(20),
 	@V_EMAIL VARCHAR(50),
-	@V_PHOTO VARCHAR(MAX),
+	@V_PHOTO VARBINARY(MAX),
 	@V_ADRESS VARCHAR(100))
 	AS
 	DECLARE
 	@NEWPASSWORD VARBINARY(MAX)
 	BEGIN TRY 
 		SET @NEWPASSWORD = (ENCRYPTBYPASSPHRASE ('ENCRIPTACION', @PASSWORD));
-		INSERT INTO Users(Id, Identification, Name, First_last_name, Second_last_name, User_Role, Username, Password, Birth_date, Phone, Email, Registration_date, Photo, Adress, Activation_Code)
+		INSERT INTO Users(Id, Identification, Name, First_last_name, Second_last_name, User_Role, Username, Password, Birth_date, Phone, Email, Registration_date, Photo, Address, Activation_Code)
 		VALUES (NEWID(), @V_CED, @V_NAME, @V_FLASTNAME, @V_SLASTNAME, @ID_ROL, @V_USER, @NEWPASSWORD, @DOB, @TEL, @V_EMAIL, GETDATE(), @V_PHOTO, @V_ADRESS, NEWID());
 	END TRY
 	BEGIN CATCH
@@ -362,10 +365,116 @@ EXECUTE REGISTRAR_USUARIO @V_CED = '117660786', @V_NAME = 'Elisama', @V_FLASTNAM
 
 EXECUTE DESENCRIPTAR_CONTRA @V_USER = 'EliCubillo', @PASSWORD = 'EliShoeCorp'
 
+-----------------------------------------------------------------------------------------------------
+--ACTUALIZAR USUARIO Y QUE LA CONTRA SE ENCRIPTE
+GO
+CREATE   PROCEDURE ACTUALIZAR_USUARIO
+
+	(@V_ID uniqueidentifier,
+	@V_NAME VARCHAR(50),
+	@V_FLASTNAME VARCHAR(50),
+	@V_SLASTNAME VARCHAR(50),
+	@ID_ROL INT,
+	@PASSWORD VARCHAR(MAX),
+	@TEL VARCHAR(20),
+	@V_EMAIL VARCHAR(50),
+	@V_PHOTO VARBINARY(MAX),
+	@V_ADRESS VARCHAR(100))
+
+AS
+DECLARE
+	@NEWPASSWORD VARBINARY(MAX)
+	BEGIN TRY
+		SET @NEWPASSWORD = (ENCRYPTBYPASSPHRASE ('ENCRIPTACION', @PASSWORD));
+		UPDATE Users SET Name = @V_NAME, First_last_name = @V_FLASTNAME, Second_last_name = @V_SLASTNAME,
+		User_Role = @ID_ROL, Password = @NEWPASSWORD, Phone = @TEL, Email = @V_EMAIL, Photo = @V_PHOTO, Address = @V_ADRESS, Modification_date = GETDATE()
+		WHERE Id = @V_ID
+
+	END TRY
+	BEGIN CATCH
+-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORS"
+		INSERT INTO ERRORES
+				VALUES
+				(
+				   ERROR_NUMBER(),
+				   ERROR_STATE(),
+				   ERROR_SEVERITY(),
+				   ERROR_LINE(),
+				   ERROR_PROCEDURE(),
+				   ERROR_MESSAGE(),
+				   GETDATE()
+				);
+    END CATCH
+GO
+
+
+--ACTUALIZAR CONTRASENIA
+use SHOECORP_BD
+GO
+CREATE   PROCEDURE ACTUALIZAR_CONTRASENIA
+
+	(@V_ID uniqueidentifier,
+	@PASSWORD VARCHAR(MAX))
+
+AS
+DECLARE
+	@NEWPASSWORD VARBINARY(MAX)
+	BEGIN TRY
+		SET @NEWPASSWORD = (ENCRYPTBYPASSPHRASE ('ENCRIPTACION', @PASSWORD));
+		UPDATE Users SET Password = @NEWPASSWORD
+		WHERE Id = @V_ID
+
+	END TRY
+	BEGIN CATCH
+-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORS"
+		INSERT INTO ERRORES
+				VALUES
+				(
+				   ERROR_NUMBER(),
+				   ERROR_STATE(),
+				   ERROR_SEVERITY(),
+				   ERROR_LINE(),
+				   ERROR_PROCEDURE(),
+				   ERROR_MESSAGE(),
+				   GETDATE()
+				);
+    END CATCH
+GO
+
+execute ACTUALIZAR_CONTRASENIA @V_ID = '0EB540F3-AC21-4465-8C07-05128630DFCD', @PASSWORD = 'Perritos2022'
+------------------------------------------------------------------------------------------------------
+-------------------------------------------ORDENES----------------------------------------------------
+--SP PARA REGISTRAR UNA ORDEN
+
+GO
+CREATE PROCEDURE REGISTRAR_ORDEN (
+-- INSERTA UNA ORDEN
+	@V_ID_USUARIO UNIQUEIDENTIFIER,
+	@V_MONTO DECIMAL(10,2))
+	AS	
+
+	BEGIN TRY 
+		INSERT INTO Orders(Order_User_Id, Order_date, Order_total)
+		VALUES (@V_ID_USUARIO, GETDATE(), @V_MONTO);
+	END TRY
+	BEGIN CATCH
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
+		INSERT INTO ERRORES
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+END CATCH;
+GO
 
 
 --VER ORDENES CON DETALLE DEL CLIENTE
-
 GO
 CREATE PROCEDURE MOSTRAR_ORDENES
 	AS 
@@ -378,8 +487,8 @@ CREATE PROCEDURE MOSTRAR_ORDENES
 		A.Order_total
 		
 		
-		FROM Orders A, Person B
-		WHERE A.Order_User_Id = B.User_Id 
+		FROM Orders A, Users B
+		WHERE A.Order_User_Id = B.Id 
 
 	END TRY
 	BEGIN CATCH
@@ -409,8 +518,8 @@ CREATE   PROCEDURE MOSTRAR_ORDEN_PORID (@V_ID_ORDEN INT)
 		A.Order_date,
 		A.Order_total
 		
-		FROM Orders A, Person B
-		WHERE A.Order_User_Id = B.User_Id 
+		FROM Orders A, Users B
+		WHERE A.Order_User_Id = B.Id 
 		AND A.Id = @V_ID_ORDEN
 
 	END TRY
@@ -430,33 +539,6 @@ CREATE   PROCEDURE MOSTRAR_ORDEN_PORID (@V_ID_ORDEN INT)
 END CATCH;
 GO
 
---SP PARA REGISTRAR UNA ORDEN
-
-GO
-CREATE PROCEDURE REGISTRAR_ORDEN (
--- INSERTA UNA ORDEN
-	@V_ID_USUARIO UNIQUEIDENTIFIER,
-	@V_MONTO DECIMAL(10,2))
-	AS	
-	BEGIN TRY 
-		INSERT INTO Orders(Order_User_Id, Order_date, Order_total)
-		VALUES (@V_ID_USUARIO, GETDATE(), @V_MONTO);
-	END TRY
-	BEGIN CATCH
-	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
-		INSERT INTO ERRORES
-		VALUES
-		(
-		   ERROR_NUMBER(),
-		   ERROR_STATE(),
-		   ERROR_SEVERITY(),
-		   ERROR_LINE(),
-		   ERROR_PROCEDURE(),
-		   ERROR_MESSAGE(),
-		   GETDATE()
-		);
-END CATCH;
-GO
 
 ----ACTUALIZAR STOCK
 USE SHOECORP_BD
@@ -470,6 +552,3 @@ AS
 	 FROM Product P, inserted I
 	 WHERE P.Id = I.Product_Id;
 GO
-
---TEST
-   INSERT INTO ShoppingCart (Quantity, User_Id, Product_Id) VALUES (2, '0EB540F3-AC21-4465-8C07-05128630DFCD', 1)

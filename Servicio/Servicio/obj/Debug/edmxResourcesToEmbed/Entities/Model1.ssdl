@@ -111,7 +111,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
     <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Registration_date" Type="datetime" Nullable="false" />
-    <Property Name="Photo" Type="varchar(max)" />
+    <Property Name="Photo" Type="varbinary(max)" />
     <Property Name="Modification_date" Type="datetime" />
     <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Email_Verification" Type="bit" />
@@ -238,7 +238,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
     <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
     <Parameter Name="TEL" Type="varchar" Mode="In" />
     <Parameter Name="V_EMAIL" Type="varchar" Mode="In" />
-    <Parameter Name="V_PHOTO" Type="varchar(max)" Mode="In" />
+    <Parameter Name="V_PHOTO" Type="varbinary(max)" Mode="In" />
     <Parameter Name="V_ADRESS" Type="varchar" Mode="In" />
   </Function>
   <Function Name="DESENCRIPTAR_CONTRA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -264,7 +264,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
     <Parameter Name="DOB" Type="date" Mode="In" />
     <Parameter Name="TEL" Type="varchar" Mode="In" />
     <Parameter Name="V_EMAIL" Type="varchar" Mode="In" />
-    <Parameter Name="V_PHOTO" Type="varchar(max)" Mode="In" />
+    <Parameter Name="V_PHOTO" Type="varbinary(max)" Mode="In" />
     <Parameter Name="V_ADRESS" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="SHOECORP_BDModelStoreContainer">

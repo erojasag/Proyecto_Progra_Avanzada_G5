@@ -25,7 +25,7 @@ namespace Servicio.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
         public System.DateTime Registration_date { get; set; }
-        public string Photo { get; set; }
+        public byte[] Photo { get; set; }
         public Nullable<System.DateTime> Modification_date { get; set; }
         public string Address { get; set; }
         public Nullable<bool> Email_Verification { get; set; }

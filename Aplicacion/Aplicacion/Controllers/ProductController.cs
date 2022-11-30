@@ -63,7 +63,7 @@ namespace Aplicacion.Controllers
 
         [HttpGet]
         [SessionFilter]
-        public ActionResult InsertProduct(Product Product)
+        public ActionResult InsertProduct(Product product)
         {
             return View();
         }
