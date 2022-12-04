@@ -81,6 +81,12 @@
                                                 <p>Add Product</p>
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("EditProduct", "Product")" class="nav-link active">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Edit Product</p>
+                                            </a>
+                                        </li>
                                         <li class="nav-item menu">
                                             <a href="#" class="nav-link active">
                                                 <i class="nav-icon fas fa-broom"></i>
@@ -102,54 +108,66 @@
                                                         <p>Add Brand</p>
                                                     </a>
                                                 </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="nav-item menu">
+                                            <a href="#" class="nav-link active">
+                                                <i class="nav-icon fas fa-shipping-fast"></i>
+                                                <p>
+                                                    Shipping
+                                                    <i class="right fas fa-angle-left"></i>
+                                                </p>
+                                            </a>
+                                            <ul class="nav nav-treeview">
                                                 <li class="nav-item">
-                                                    <a href="@Url.Action("EditBrand", "Brand")" class="nav-link active">
+                                                    <a href="@Url.Action("ViewShipments", "Shipment")" class="nav-link active">
                                                         <i class="far fa-circle nav-icon"></i>
-                                                        <p>Edit Brand</p>
+                                                        <p>Shipping List</p>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a href="@Url.Action("DeleteBrand", "Brand")" class="nav-link active">
+                                                    <a href="@Url.Action("InsertShipment", "Shipment")" class="nav-link active">
                                                         <i class="far fa-circle nav-icon"></i>
-                                                        <p>Delete Brand</p>
+                                                        <p>Add Shipping</p>
                                                     </a>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
-
-                                <li class="nav-item menu">
-                                    <a href="#" class="nav-link active">
-                                        <i class="nav-icon fas fa-user-alt"></i>
-                                        <p>
-                                            Users
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("UserRegistration", "LogIn")" class="nav-link active">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Insert user</p>
-                                            </a>
                                         </li>
 
+                                        <li class="nav-item menu">
+                                            <a href="#" class="nav-link active">
+                                                <i class="nav-icon fas fa-user-alt"></i>
+                                                <p>
+                                                    Users
+                                                    <i class="right fas fa-angle-left"></i>
+                                                </p>
+                                            </a>
+                                            <ul class="nav nav-treeview">
+
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("UserRegistration", "LogIn")" class="nav-link active">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Insert user</p>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("Contact", "Home")" class="nav-link active">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Contact</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("LogOut", "LogIn")" class="nav-link active">
+                                                <i class="fa fa-sign-out-alt nav-icon" aria-hidden="true"></i><p>Log Out</p>
+                                            </a>
+                                        </li>
                                     </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Contact", "Home")" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Contact</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("LogOut", "LogIn")" class="nav-link active">
-                                        <i class="fa fa-sign-out-alt nav-icon" aria-hidden="true"></i><p>Log Out</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </nav>
                         <!-- /.sidebar-menu -->
                     </div>
@@ -213,6 +231,12 @@
                                                 <p>Add Product</p>
                                             </a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a href="@Url.Action("EditProduct", "Product")" class="nav-link active">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Edit Product</p>
+                                            </a>
+                                        </li>
                                         <li class="nav-item menu">
                                             <a href="#" class="nav-link active">
                                                 <i class="nav-icon fas fa-broom"></i>
@@ -232,6 +256,29 @@
                                                     <a href="@Url.Action("InsertBrand", "Brand")" class="nav-link active">
                                                         <i class="far fa-circle nav-icon"></i>
                                                         <p>Add Brand</p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item menu">
+                                            <a class="nav-link active">
+                                                <i class="nav-icon fas fa-shipping-fast" aria-hidden="true"></i>
+                                                <p>
+                                                    Shipping
+                                                    <i class="right fas fa-angle-left"></i>
+                                                </p>
+                                            </a>
+                                            <ul class="nav nav-treeview">
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("ViewShipments", "Shipment")" class="nav-link active">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Shipping List</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("InsertShipment", "Shipment")" class="nav-link active">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>Add Shipping</p>
                                                     </a>
                                                 </li>
                                             </ul>

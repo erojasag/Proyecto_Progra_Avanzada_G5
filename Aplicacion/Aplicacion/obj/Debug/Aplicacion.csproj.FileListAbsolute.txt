@@ -482,3 +482,6 @@ C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicac
 C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\obj\Debug\Aplicacion.csproj.CopyComplete
 C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\obj\Debug\Aplicacion.dll
 C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\obj\Debug\Aplicacion.pdb
+C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\bin\System.Web.Http.dll
+C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\bin\System.Net.Http.Formatting.xml
+C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\bin\System.Web.Http.xml

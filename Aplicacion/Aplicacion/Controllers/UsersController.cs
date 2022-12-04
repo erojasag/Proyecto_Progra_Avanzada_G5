@@ -38,31 +38,26 @@ namespace Aplicacion.Controllers
 
             [HttpGet]
             [Route("ViewUserById")]
-            public ActionResult ViewUserById(Guid? Id)
+            public ActionResult ViewUserById(Guid Id)
             {
-                try
+            try
+            {
+                var datos = model.ViewUserById(Id);
+                if (datos == null)
                 {
-
-                    if (Id == null)
-                    {
-                        return View();
-                    }
-
-                    var datos = model.ViewUserById((Guid)Id);
-                    if (datos == null)
-                    {
-                        return View("Error");
-                    }
-
-                    return View(datos);
+                    return View("Error");
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+
+                return View(datos);
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-            [HttpGet]
+
+        [HttpGet]
             [SessionFilter]
             public ActionResult UserRegistration(Users user)
             {
@@ -99,11 +94,11 @@ namespace Aplicacion.Controllers
             [SessionFilter]
             [HttpGet]
             [Route("EditUser")]
-            public ActionResult EditUser(Guid? Id)
+            public ActionResult EditUser(Guid Id)
             {
                 try
                 {
-                    var data = model.ViewUserById((Guid)Id);
+                    var data = model.ViewUserById(Id);
 
                     if (data != null)
                     {
@@ -126,12 +121,13 @@ namespace Aplicacion.Controllers
             {
                 try
                 {
-                    var data = model.ActualizarUsuario(user);
+                    var data = model.EditUser(user);
 
-                    if (data.Transaction == true)
+                    if (data.Transaction)
                     {
-                        model.EditUser(user);
-                        return View("UserSuccessfullyEdited");
+
+                    ViewBag.Mensaje = "The brand was successfully modified";
+                    return RedirectToAction("ViewUsers", "Users");
                     }
                     else
                     {
@@ -150,11 +146,11 @@ namespace Aplicacion.Controllers
             [SessionFilter]
             [HttpGet]
             [Route("DeleteUser")]
-            public ActionResult DeleteUser(Guid? Id)
+            public ActionResult DeleteUser(Guid Id)
             {
                 try
                 {
-                    var data = model.DeleteUser((Guid)Id);
+                    var data = model.DeleteUser(Id);
 
                     if (data.Transaction == true)
                     {

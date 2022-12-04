@@ -130,8 +130,8 @@ namespace Aplicacion.Controllers
 
                 if (data.Transaction)
                 {
-                    ViewBag.Mensaje = "The brand was successfully modified";
-                    return RedirectToAction("ViewBrands", "Brand");
+                    ViewBag.Mensaje = "The user was successfully modified";
+                    return RedirectToAction("ViewBrands", "Users");
                 }
                 else
                 {

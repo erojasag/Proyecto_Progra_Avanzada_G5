@@ -1,0 +1,130 @@
+﻿@model  IEnumerable<Aplicacion.Entities.Shipments>
+
+<h2 class="title" style="color:darkblue;"> Shipping Details </h2>
+
+<div class="container">
+    <table id="tbBrands" class="table table-striped table-bordered table-sm">
+        <thead>
+            <tr>
+                <th @Html.DisplayNameFor(model => model.Id)>Id</th>
+                <th @Html.DisplayNameFor(model => model.Order_Id)>Order number</th>
+                <th @Html.DisplayNameFor(model => model.Date)>Shipping Date</th>
+                <th @Html.DisplayNameFor(model => model.status)>Shipping Status</th>
+                <th @Html.DisplayNameFor(model => model.Address)>Address</th>
+                <th @Html.DisplayNameFor(model => model.City)>City</th>
+                <th @Html.DisplayNameFor(model => model.State)>State</th>
+                <th @Html.DisplayNameFor(model => model.Zip_code)>Zip code</th>
+                <th @Html.DisplayNameFor(model => model.Country)>Country</th>
+                <th @Html.DisplayNameFor(model => model.Phone)>Phone</th>
+                <th @Html.DisplayNameFor(model => model.Email)>Email</th>
+                <th @Html.DisplayNameFor(model => model.Customer_id)>Customer Id</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <p class="text-muted mb-0">@item.Id</p>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.Order_Id</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.Date</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.status</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.Address</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.City</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.State</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.Zip_code</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.Country</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.Phone</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.Email</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1">@item.Customer_id</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditShipments", new { Id = item.Id }, new { @class = "btn btn-primary" })
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
