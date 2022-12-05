@@ -21,6 +21,7 @@ namespace Aplicacion.Controllers
         [HttpGet]
         public ActionResult UserRegistration(Users user)
         {
+            
             return View(new Users());
         }
 

@@ -108,6 +108,15 @@ namespace Servicio.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DESENCRIPTAR_CONTRA_Result>("DESENCRIPTAR_CONTRA", v_USERParameter, pASSWORDParameter);
         }
     
+        public virtual int FORGOT_PASS(string eMAIL)
+        {
+            var eMAILParameter = eMAIL != null ?
+                new ObjectParameter("EMAIL", eMAIL) :
+                new ObjectParameter("EMAIL", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FORGOT_PASS", eMAILParameter);
+        }
+    
         public virtual ObjectResult<MOSTRAR_ORDEN_PORID_Result> MOSTRAR_ORDEN_PORID(Nullable<int> v_ID_ORDEN)
         {
             var v_ID_ORDENParameter = v_ID_ORDEN.HasValue ?

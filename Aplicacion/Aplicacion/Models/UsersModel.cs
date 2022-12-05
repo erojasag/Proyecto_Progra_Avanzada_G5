@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
+
 
 namespace Aplicacion.Models
 {
@@ -46,14 +48,23 @@ namespace Aplicacion.Models
 
         public Respuesta ViewUsers()
         {
-            string Url = ConfigurationManager.AppSettings["urlServicioProyecto"];
+            string url = ConfigurationManager.AppSettings["urlServicioProyecto"];
             using (var client = new HttpClient())
             {
                 try
                 {
-                    string Route = "Users/ViewUsers";
 
-                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
+                    
+                    string api = "Users/ViewUsers";
+                    string route = url + api;
+
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Token);
+
+                    //string headers = client.DefaultRequestHeaders.Add("Authorization", "Bearer" + Token);
+
+                    HttpResponseMessage response = client.GetAsync(route).Result;
 
                     response.EnsureSuccessStatusCode();
                     if (response.IsSuccessStatusCode)
@@ -145,33 +156,44 @@ namespace Aplicacion.Models
 
         public Respuesta EditUser(Users user)
         {
-            string Url = ConfigurationManager.AppSettings["urlServicioProyecto"];
+            string host = ConfigurationManager.AppSettings["urlServicioProyecto"];
+            string api = "Users/EditUser";
+            string route = host + api;
             using (var client = new HttpClient())
             {
                 try
                 {
-                    if (user != null)
-                    {
-                        string api = "Users/EditUser";
-                        string route = Url + api;
-                        var content = JsonContent.Create(user);
-                        HttpResponseMessage response = client.PutAsync(route, content).Result;
+                    JsonContent body = JsonContent.Create(user);
 
-                        response.EnsureSuccessStatusCode();
-                        if (response.IsSuccessStatusCode)
+                    if (user != null && user.Password == null)
+                    {
+
+
+                        HttpResponseMessage respuesta = client.PutAsync(route, body).Result;
+                        if (respuesta.IsSuccessStatusCode)
                         {
-                            var responseBody = response.Content.ReadAsAsync<Respuesta>().Result;
-                            return responseBody;
+                            return respuesta.Content.ReadAsAsync<Respuesta>().Result;
                         }
-                        else
-                        {
-                            throw new Exception("Error");
-                        }
+
+                    }
+                    else if (user != null && user.Password != null)
+                    {
+
+
+                        HttpResponseMessage respuesta = client.PutAsync(route, body).Result;
+
+
+                        return respuesta.Content.ReadAsAsync<Respuesta>().Result;
+
                     }
                     else
                     {
-                        throw new Exception("Porfavor ingrese los datos a modificar");
+                        return null;
                     }
+
+                    throw new Exception("El usuario no existe");
+
+
                 }
                 catch (Exception ex)
                 {
@@ -216,33 +238,5 @@ namespace Aplicacion.Models
             }
         }
 
-        public Respuesta ActualizarUsuario(Users user)
-        {
-            string ruta = ConfigurationManager.AppSettings["urlServicioProyecto"];
-            using (var client = new HttpClient())
-            {
-                JsonContent body = JsonContent.Create(user);
-
-                if(user.Password != null) {
-                    string routePassword = "Users/ActualizarContraseña";
-                    HttpResponseMessage respuestaPassword = client.PutAsync(ruta + routePassword, body).Result;
-
-                    return respuestaPassword.Content.ReadAsAsync<Respuesta>().Result;
-                }
-
-                string route = "Users/EditUser";
-                HttpResponseMessage respuesta = client.PutAsync(ruta + route, body).Result;
-
-                if (respuesta.IsSuccessStatusCode)
-                {
-                    return respuesta.Content.ReadAsAsync<Respuesta>().Result;
-                }
-                else
-                {
-                    return null;
-                }
-
-            }
-        }
     }
 }

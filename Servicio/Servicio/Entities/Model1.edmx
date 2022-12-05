@@ -250,10 +250,16 @@ warning 6002: The table/view 'SHOECORP_BD.dbo.ERRORES' does not have a primary k
           <Parameter Name="V_USER" Type="varchar" Mode="In" />
           <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
         </Function>
+        <Function Name="FORGOT_PASS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EMAIL" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="MOSTRAR_ORDEN_PORID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="V_ID_ORDEN" Type="int" Mode="In" />
         </Function>
         <Function Name="MOSTRAR_ORDENES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="RANDOM_PASS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="PasswordLength" Type="int" Mode="In" />
+        </Function>
         <Function Name="REGISTRAR_ORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="V_ID_USUARIO" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="V_MONTO" Type="decimal" Mode="In" />
@@ -642,6 +648,9 @@ warning 6002: The table/view 'SHOECORP_BD.dbo.ERRORES' does not have a primary k
             <Parameter Name="V_USER" Mode="In" Type="String" />
             <Parameter Name="PASSWORD" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="FORGOT_PASS">
+            <Parameter Name="EMAIL" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="MOSTRAR_ORDEN_PORID" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDEN_PORID_Result)">
             <Parameter Name="V_ID_ORDEN" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -846,6 +855,7 @@ warning 6002: The table/view 'SHOECORP_BD.dbo.ERRORES' does not have a primary k
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FORGOT_PASS" FunctionName="SHOECORP_BDModel.Store.FORGOT_PASS" />
           <FunctionImportMapping FunctionImportName="MOSTRAR_ORDEN_PORID" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDEN_PORID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SHOECORP_BDModel.MOSTRAR_ORDEN_PORID_Result">
