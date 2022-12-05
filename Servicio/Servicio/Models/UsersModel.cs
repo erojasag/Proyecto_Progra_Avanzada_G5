@@ -2,6 +2,7 @@
 using Servicio.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -151,6 +152,41 @@ namespace Servicio.Models
                 }
             }
         }
+<<<<<<< HEAD
+
+        public bool ForgotPassword(Users User)
+        {
+            using(var db = new SHOECORP_BDEntities())
+            {
+                try
+                {
+                    var Id = User.Id;
+                    var datos = db.Users.Find(Id);
+
+                    if(datos != null)
+                    {
+                        if (datos.Password == null)
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+
+                    }
+                    return false;
+                }catch(Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+
+                }
+            }
+        }
+
+=======
+>>>>>>> main
         public bool DeleteUser(Guid Id)
         {
             using (var db = new SHOECORP_BDEntities())
@@ -167,7 +203,9 @@ namespace Servicio.Models
                     }
                     else
                     {
+                        db.Dispose();
                         throw new Exception("El usuario no se pudo eliminar");
+                        
                     }
 
                 }

@@ -11,44 +11,24 @@ namespace Aplicacion.Controllers
     public class UsersController : BaseController
     {
 
-            readonly UsersModel model = new UsersModel();
+        readonly UsersModel model = new UsersModel();
 
-            [HttpGet]
-            [Route("ViewUsers")]
-            public ActionResult ViewUsers()
-            {
-                try
-                {
-                    var datos = model.ViewUsers();
-
-                    if (datos != null)
-                    {
-                        return View(datos.Users);
-                    }
-                    else
-                    {
-                        return View("Error");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-
-            [HttpGet]
-            [Route("ViewUserById")]
-            public ActionResult ViewUserById(Guid Id)
-            {
+        [HttpGet]
+        [Route("ViewUsers")]
+        public ActionResult ViewUsers()
+        {
             try
             {
-                var datos = model.ViewUserById(Id);
-                if (datos == null)
+                var datos = model.ViewUsers();
+
+                if (datos != null)
+                {
+                    return View(datos.Users);
+                }
+                else
                 {
                     return View("Error");
                 }
-
-                return View(datos);
             }
             catch (Exception ex)
             {
@@ -56,63 +36,88 @@ namespace Aplicacion.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ViewUserById")]
+        public ActionResult ViewUserById(Guid? Id)
+        {
+            try
+            {
+            try
+            {
+                var datos = model.ViewUserById(Id);
+                if (datos == null)
+                {
+                    return View();
+                }
+
+                var datos = model.ViewUserById((Guid)Id);
+                if (datos == null)
+                {
+                    return View("Error");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
 
         [HttpGet]
-            [SessionFilter]
-            public ActionResult UserRegistration(Users user)
-            {
-                return View();
-            }
-
-            [HttpPost]
-            public ActionResult ValidateUser(Users user)
+        [SessionFilter]
+        public ActionResult UserRegistration(Users user)
         {
-                try
-                {
-                    if (user != null)
-                    {
-                        var datos = model.UserRegistration(user);
+            return View();
+        }
 
-                        if (datos != null)
-                        {
-                            return RedirectToAction("UserRegistration", "Users");
-                        }
-                    }
-
-                    return View("Error");
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-
-
-            }
-
-
-            [SessionFilter]
-            [HttpGet]
-            [Route("EditUser")]
-            public ActionResult EditUser(Guid Id)
+        [HttpPost]
+        public ActionResult ValidateUser(Users user)
+        {
+            try
             {
-                try
+                if (user != null)
                 {
-                    var data = model.ViewUserById(Id);
+                    var datos = model.UserRegistration(user);
 
-                    if (data != null)
+                    if (datos != null)
                     {
-                        return View(data.Users);
+                        return RedirectToAction("UserRegistration", "Users");
                     }
-                    return View();
+                }
 
-                }
-                catch (Exception ex)
-                {
-                    return View("Error");
-                    throw ex;
-                }
+                return View("Error");
+
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+        }
+
+
+        [SessionFilter]
+        [HttpGet]
+        [Route("EditUser")]
+        public ActionResult EditUser(Guid? Id)
+        {
+            try
+            {
+                var data = model.ViewUserById((Guid)Id);
+
+                if (data != null)
+                {
+                    return View(data.Users);
+                }
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+                throw ex;
+            }
+        }
 
             [SessionFilter]
             [HttpPost]
@@ -135,39 +140,45 @@ namespace Aplicacion.Controllers
                         return View("EditUser");
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    return View("Error");
-                    throw ex;
+                    return View();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+                throw ex;
+            }
+        }
+
+
+        [SessionFilter]
+        [HttpGet]
+        [Route("DeleteUser")]
+        public ActionResult DeleteUser(Guid? Id)
+        {
+            try
+            {
+                var data = model.DeleteUser((Guid)Id);
+
+                if (data.Transaction == true)
+                {
+                    ViewBag.Mensaje = "User properly deleted";
+                    model.DeleteUser((Guid)Id);
+                    return View();
+                }
+                else
+                {
+                    return View("UserNotDeleted");
                 }
             }
-
-
-            [SessionFilter]
-            [HttpGet]
-            [Route("DeleteUser")]
-            public ActionResult DeleteUser(Guid Id)
+            catch (Exception ex)
             {
-                try
-                {
-                    var data = model.DeleteUser(Id);
-
-                    if (data.Transaction == true)
-                    {
-                        ViewBag.Mensaje = "User properly deleted";
-                        model.DeleteUser((Guid)Id);
-                        return View();
-                    }
-                    else
-                    {
-                        return View("UserNotDeleted");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return View("Error");
-                    throw ex;
-                }
+                return View("Error");
+                throw ex;
             }
         }
     }
+}

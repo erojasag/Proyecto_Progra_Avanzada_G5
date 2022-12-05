@@ -1,10 +1,13 @@
-﻿var x = $('#myHiddenVar').val();
-$('#displayname').val(x.toString());
+﻿function ConsultaUsuario() {
+    var x = $('#myHiddenVar').val();
 
-$(document).ready(function () {
-    let msj = $("#IdMsj").val();
-    if (msj != "") {
-        MostrarAlerta(msj, "error");
-    }
+    $('#displayname').val(x.toString());
 
-});
+    $(document).ready(function () {
+        let msj = $("#IdMsj").val();
+        if (msj != "") {
+            MostrarAlerta(msj, "error");
+        }
+
+    });
+}
