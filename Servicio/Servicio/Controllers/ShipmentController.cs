@@ -3,18 +3,20 @@ using Servicio.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.ModelBinding;
 
 namespace Servicio.Controllers
 {
-    public class ShipmentController : Controller
+    public class ShipmentController : ApiController
     {
         readonly Respuesta respuesta = new Respuesta();
         readonly ShipmentsModel model = new ShipmentsModel();
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Route("shipments/ViewShipments")]
         public Respuesta ViewShipments()
         {
@@ -29,7 +31,7 @@ namespace Servicio.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Route("shipments/ViewShipmentsById")]
         public Respuesta ViewShipmentsById(int Id)
         {
@@ -44,7 +46,7 @@ namespace Servicio.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         [Route("shipments/InsertShipment")]
         public Respuesta InsertShipment(Shipments shipments)
         {

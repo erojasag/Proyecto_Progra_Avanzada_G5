@@ -297,7 +297,6 @@
       <Parameter Name="V_FLASTNAME" Mode="In" Type="String" />
       <Parameter Name="V_SLASTNAME" Mode="In" Type="String" />
       <Parameter Name="ID_ROL" Mode="In" Type="Int32" />
-      <Parameter Name="PASSWORD" Mode="In" Type="String" />
       <Parameter Name="TEL" Mode="In" Type="String" />
       <Parameter Name="V_EMAIL" Mode="In" Type="String" />
       <Parameter Name="V_PHOTO" Mode="In" Type="Binary" />

@@ -31,7 +31,6 @@
                     <th @Html.DisplayNameFor(model => model.Registration_date)>Reg Date</th>
                     <th @Html.DisplayNameFor(model => model.Username)>Username</th>
                     <th>Action</th>
-                    <th>Edit</th>
 
                 </tr>
             </thead>
@@ -50,9 +49,7 @@
                         <td>@item.Address</td>
                         <td>@item.Registration_date</td>
                         <td>@item.Username</td>
-                        <td>
-                            @Html.ActionLink("Delete", "DeleteUser", "Users", new { Id = item.Id }, new { @class = "btn btn-primary" })
-                        </td>
+                    
                         <td>
                             @Html.ActionLink("Edit", "EditUser", "Users", new { Id = item.Id }, new { @class = "btn btn-primary" })
                         </td>
