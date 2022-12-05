@@ -37,7 +37,15 @@ namespace Servicio.Models
 
                         });
                     }
-                    return shipments;
+
+                    if (shipments.Count == 0)
+                    {
+                        throw new Exception("No shipping found");
+                    }
+                    else
+                    {
+                        return shipments;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -92,7 +100,6 @@ namespace Servicio.Models
                 try
                 {
                     Shipments TablaShipments = new Shipments();
-                    TablaShipments.shipment_id = shipment.shipment_id;
                     TablaShipments.shipment_order_id = shipment.shipment_order_id;
                     TablaShipments.shipment_date = shipment.shipment_date;
                     TablaShipments.shipment_status = shipment.shipment_status;
@@ -123,11 +130,12 @@ namespace Servicio.Models
             {
                 try
                 {
-                    var tshipment = db.Shipments.Find(shipment.shipment_id);
+                    var tshipment = (from x in db.Shipments
+                                      where x.shipment_id == shipment.shipment_id
+                                     select x).FirstOrDefault();
+
                     if (tshipment != null)
                     {
-                        if (tshipment != null)
-                        {
                             tshipment.shipment_order_id = shipment.shipment_order_id;
                             tshipment.shipment_date = shipment.shipment_date;
                             tshipment.shipment_status = shipment.shipment_status;
@@ -139,11 +147,12 @@ namespace Servicio.Models
                             tshipment.shipment_phone = shipment.shipment_phone;
                             tshipment.shipment_email = shipment.shipment_email;
                             tshipment.shipment_customer_id = shipment.shipment_customer_id;
+                            db.SaveChanges();
+                            return true;
                         }
+                        else
+                            throw new Exception("This does not exist");
                     }
-                    db.SaveChanges();
-                    return true;
-                }
                 catch (Exception ex)
                 {
                     db.Dispose();
@@ -158,7 +167,9 @@ namespace Servicio.Models
             {
                 try
                 {
-                    var tshipment = db.Shipments.Find(Id);
+                    var tshipment = (from x in db.Shipments
+                                     where x.shipment_id == Id
+                                     select x).FirstOrDefault();
 
                     if (tshipment != null)
                     {

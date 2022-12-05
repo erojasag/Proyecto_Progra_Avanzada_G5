@@ -136,8 +136,8 @@
     <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.Json.6.0.0\lib\net461\System.Net.Http.Json.dll</HintPath>
@@ -213,6 +213,9 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
@@ -253,6 +256,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
@@ -261,6 +265,7 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PasswordController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ShipmentController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Entities\Brand.cs" />
@@ -268,6 +273,7 @@
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Product_By_Order.cs" />
     <Compile Include="Entities\Respuesta.cs" />
+    <Compile Include="Entities\Shipments.cs" />
     <Compile Include="Entities\ShoppingCart.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="Global.asax.cs">
@@ -277,6 +283,7 @@
     <Compile Include="Models\Enum.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\SessionFilter.cs" />
+    <Compile Include="Models\ShipmentModel.cs" />
     <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2496,14 +2503,10 @@
     <Content Include="Views\Brand\ViewBrands.cshtml" />
     <Content Include="Views\Brand\InsertBrand.cshtml" />
     <Content Include="Views\Brand\EditBrand.cshtml" />
-    <Content Include="Views\Brand\DeleteBrand.cshtml" />
     <Content Include="Views\Persons\ViewPersonsWithUsers.cshtml" />
     <Content Include="Views\Persons\EditUserPerson.cshtml" />
     <Content Include="Views\Users\ViewUsers.cshtml" />
-    <Content Include="Views\Users\ViewUserById.cshtml" />
-    <Content Include="Views\Users\InsertUser.cshtml" />
     <Content Include="Views\Users\EditUser.cshtml" />
-    <Content Include="Views\Users\DeleteUser.cshtml" />
     <Content Include="web.config" />
     <Content Include="Views\LogIn\UserRegistration.cshtml" />
     <Content Include="Views\LogIn\UserLogIn.cshtml" />
@@ -2521,6 +2524,9 @@
     <Content Include="Views\Users\UserSuccessfullyEdited.cshtml" />
     <Content Include="Views\Users\UserNotDeleted.cshtml" />
     <Content Include="Views\Alert\ShowAlert.cshtml" />
+    <Content Include="Views\Shipment\ViewShipments.cshtml" />
+    <Content Include="Views\Shipment\EditShipments.cshtml" />
+    <Content Include="Views\Shipment\InsertShipment.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -2531,6 +2537,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Default\" />
     <Folder Include="Views\Password\" />
     <Folder Include="Views\ShoeCorp\" />
   </ItemGroup>

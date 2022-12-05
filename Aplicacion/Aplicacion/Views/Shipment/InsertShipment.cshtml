@@ -1,0 +1,157 @@
+﻿@model  Aplicacion.Entities.Shipment
+
+@{
+    ViewBag.Title = "InsertShipment";
+}
+
+@using (Html.BeginForm("ValidateShipment", "Shipment", FormMethod.Post))
+{
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Add new Shipping Details</p>
+                                    <form class="mx-1 mx-md-4">
+
+
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="SOId">Order number</label>
+                                                @Html.EditorFor(model => model.Order_Id, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Order_Id, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="Sdate">Shipping Date</label>
+                                                @Html.EditorFor(Model => Model.Date, new { @type = "date", @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                @{
+                                                    List<SelectListItem> listaStatus = new List<SelectListItem>();
+                                                    listaStatus.Add(new SelectListItem
+                                                    {
+                                                        Text = "--Select--",
+                                                        Value = "",
+                                                        Selected = true
+                                                    });
+                                                    listaStatus.Add(new SelectListItem
+                                                    {
+                                                        Text = "In progress",
+                                                        Value = "In progress"
+                                                    });
+                                                    listaStatus.Add(new SelectListItem
+                                                    {
+                                                        Text = "Delivered",
+                                                        Value = "Delivered"
+                                                    });
+                                                    listaStatus.Add(new SelectListItem
+                                                    {
+                                                        Text = "Pending",
+                                                        Value = "Pending"
+                                                    });
+                                                }
+                                                <label class="form-label" for="Sstatus">Status</label>
+                                                @Html.DropDownListFor(model => model.status, listaStatus, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="SAddress">Address</label>
+                                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="SCity">City</label>
+                                                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="SState">State</label>
+                                                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="SZip">Zip Code</label>
+                                                @Html.EditorFor(model => model.Zip_code, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Zip_code, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="SCountry">Country</label>
+                                                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="SPhone">Phone</label>
+                                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="SEmail">Email</label>
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <div class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="SCusId">Customer Id</label>
+                                                @Html.EditorFor(model => model.Customer_id, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Customer_id, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                                <div class="btn-group mr-2" role="group" aria-label="First group">
+                                                    <button type="submit" class="btn btn-primary btn-lg">Add</button>
+                                                </div>
+                                                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                                    <button type="reset" class="btn btn-danger btn-lg">Clear</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </section>
+}
+

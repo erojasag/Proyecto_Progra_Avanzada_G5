@@ -69,8 +69,9 @@ namespace Servicio.Models
             {
                 try
                 {
-                    Users User = new Users();
                     var tusers = db.Users.Find(Id);
+                    Users User = new Users();
+
                     if (tusers != null)
                     {
                         User.Id = tusers.Id;
@@ -83,6 +84,7 @@ namespace Servicio.Models
                         User.Birth_date = tusers.Birth_date;
                         User.Phone = tusers.Phone;
                         User.Email = tusers.Email;
+                        User.Address = tusers.Address;
                         User.Photo = tusers.Photo;
                         return User;
                     }
@@ -127,24 +129,21 @@ namespace Servicio.Models
             {
                 try
                 {
-                    Usuario u1= new Usuario();
+                    var TablaUser = (from x in db.Users
+                                      where x.Id == User.Id
+                                      select x).FirstOrDefault();
 
-                    var encryptedPassword = Encoding.UTF8.GetString(User.Password);
-
-                    u1.Password = encryptedPassword;
-                    
-                    if (User.Id == null)
+                    if (TablaUser != null)
                     {
-                        return false;
-                    }
-                    else
-                    {
-                        db.ACTUALIZAR_USUARIO(User.Id, User.Name, User.First_last_name, User.Second_last_name, User.User_Role, u1.Password,
+                        // Usuario u1= new Usuario();
+                        // var encryptedPassword = Encoding.UTF8.GetString(User.Password);
+                        // u1.Password = encryptedPassword;
+                        db.ACTUALIZAR_USUARIO(User.Id, User.Name, User.First_last_name, User.Second_last_name, User.User_Role,
                             User.Phone, User.Email, User.Photo, User.Address);
                         return true;
                     }
-
-
+                    else
+                        throw new Exception("The user does not exist");
                 }
                 catch (Exception ex)
                 {
@@ -153,6 +152,7 @@ namespace Servicio.Models
                 }
             }
         }
+<<<<<<< HEAD
 
         public bool ForgotPassword(Users User)
         {
@@ -185,6 +185,8 @@ namespace Servicio.Models
             }
         }
 
+=======
+>>>>>>> main
         public bool DeleteUser(Guid Id)
         {
             using (var db = new SHOECORP_BDEntities())

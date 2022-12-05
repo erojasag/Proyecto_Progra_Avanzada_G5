@@ -1,8 +1,15 @@
 ﻿@model  Aplicacion.Entities.Brand
 
+@using Aplicacion.Entities
+
+@{
+    var sesion = ((Users)Session["User"]);
+}
+
 @using (Html.BeginForm("EditBrand", "Brand", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
+<<<<<<< HEAD
         <div class="container bootstrap snippets bootdey">
             <h1 class="text-primary">Edit Brand</h1>
             <hr>
@@ -57,7 +64,63 @@
                             </div>
                         </div>
                     </form>
+=======
+    <div class="container bootstrap snippets bootdey">
+        <h1 class="text-primary">Edit Brand</h1>
+        <hr>
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <img src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/0a685517-4392-4fb0-a596-a2eee41f0e12/air-jordan-1-retro-high-og-shoes-a7Zzxm.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                    <h6>Upload a different photo...</h6>
+                    @Html.TextBoxFor(Model => Model.Photo, new { @class = "form-control", @type = "file" })
+>>>>>>> main
                 </div>
             </div>
+            @Html.Hidden("IdMsj", (string)ViewBag.Mensaje)
+            <!-- edit form column -->
+            <div class="col-md-9 personal-info">
+                <div class="alert alert-info alert-dismissable">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <i class="fa fa-coffee"></i> Please make sure you fill in all the fields.
+                </div>
+                <h3>Brand info</h3>
+
+                <form class="form-horizontal" role="form">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="form3Example1c">Brand Name</label>
+                            @Html.TextBoxFor(Model => Model.Name, new { @class = "form-control", @placeholder = "Brand name" })
+                            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="Second group">
+                            <button type="reset" class="btn btn-warning btn-lg">Clear</button>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="Second group">
+                            @Html.ActionLink("Delete", "DeleteBrand", "Brand", new { Id = sesion.Id, @class = "btn btn-danger btn-lg" })
+
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
 }

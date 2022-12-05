@@ -7,6 +7,7 @@ namespace Aplicacion.Entities
 {
     public class ShoppingCart
     {
+
         public int Id { get; set; }
         public int Quantity { get; set; }
         public int User_Id { get; set; }

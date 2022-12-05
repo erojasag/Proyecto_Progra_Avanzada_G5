@@ -97,7 +97,7 @@ namespace Servicio.Entities
             return respuesta;
         }
 
-        public Respuesta ArmarRespuestaShipment(int Id, string Message, bool Transaction, Shipments Shipment, List<Shipments> shipments)
+        public Respuesta ArmarRespuestaShipment(int Id, string Message, bool Transaction, Shipments Shipment, List<Shipments> Shipments)
         {
             Respuesta respuesta = new Respuesta();
             respuesta.Id = Id;

@@ -42,8 +42,10 @@ namespace Aplicacion.Controllers
         {
             try
             {
-
-                if (Id == null)
+            try
+            {
+                var datos = model.ViewUserById(Id);
+                if (datos == null)
                 {
                     return View();
                 }
@@ -53,12 +55,10 @@ namespace Aplicacion.Controllers
                 {
                     return View("Error");
                 }
-
-                return View(datos);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
 
@@ -119,19 +119,20 @@ namespace Aplicacion.Controllers
             }
         }
 
-        [SessionFilter]
-        [HttpPost]
-        [Route("EditUser")]
-        public ActionResult EditUser(Users user)
-        {
-            try
-            { 
-                if (user != null) {
+            [SessionFilter]
+            [HttpPost]
+            [Route("EditUser")]
+            public ActionResult EditUser(Users user)
+            {
+                try
+                {
                     var data = model.EditUser(user);
 
-                    if (data.Transaction == true)
+                    if (data.Transaction)
                     {
-                        return View("UserSuccessfullyEdited");
+
+                    ViewBag.Mensaje = "The brand was successfully modified";
+                    return RedirectToAction("ViewUsers", "Users");
                     }
                     else
                     {
