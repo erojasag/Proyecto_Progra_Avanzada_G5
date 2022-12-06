@@ -1,7 +1,105 @@
 ﻿@model  IEnumerable<Aplicacion.Entities.Brand>
+@using Aplicacion.Entities
+
+@{
+    var sesion = ((Users)Session["User"]);
+}
+
 
 <h2 class="title" style="color:darkblue;"> Our Brands</h2>
+@if (sesion != null)
+{
+    if (sesion.User_Role != 0 && sesion.User_Role == 2)//cajero
+    {
+        <div class="container">
+            <table id="tbShipments" class="table table-striped table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th @Html.DisplayNameFor(model => model.Id)>ID</th>
+                        <th @Html.DisplayNameFor(model => model.Name)>Brand</th>
+                        <th @Html.DisplayNameFor(model => model.Photo)>Photo</th>
+                        <th>Action</th>
 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <p class="text-muted mb-0">@item.Id</p>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">@item.Name</p>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <img src="@item.Photo"
+                                     style="width: 65px; height: 65px"
+                                     class="rounded-circle" />
+                            </td>     
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    if (sesion.User_Role != 0 && sesion.User_Role == 3)//admin
+    {
+        <div class="container">
+            <table id="tbShipments" class="table table-striped table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th @Html.DisplayNameFor(model => model.Id)>ID</th>
+                        <th @Html.DisplayNameFor(model => model.Name)>Brand</th>
+                        <th @Html.DisplayNameFor(model => model.Photo)>Photo</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <p class="text-muted mb-0">@item.Id</p>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">@item.Name</p>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <img src="@item.Photo"
+                                     style="width: 65px; height: 65px"
+                                     class="rounded-circle" />
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditBrand", new { Id = item.Id }, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Delete", "DeleteBrand", new { Id = item.Id }, new { @class = "btn btn-primary" })
+                            </td>
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+    }
+}
+else
+{
     <div class="container">
         <table id="tbShipments" class="table table-striped table-bordered table-sm">
             <thead>
@@ -9,8 +107,7 @@
                     <th @Html.DisplayNameFor(model => model.Id)>ID</th>
                     <th @Html.DisplayNameFor(model => model.Name)>Brand</th>
                     <th @Html.DisplayNameFor(model => model.Photo)>Photo</th>
-                    <th>Action</th>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -34,13 +131,12 @@
                                  style="width: 65px; height: 65px"
                                  class="rounded-circle" />
                         </td>
-                        <td>
-                            @Html.ActionLink("Edit", "EditBrand", new { Id = item.Id }, new { @class = "btn btn-primary" })
-                            @Html.ActionLink("Delete", "DeleteBrand", new { Id = item.Id }, new { @class = "btn btn-primary" })
-                        </td>
                     </tr>
                 }
 
             </tbody>
         </table>
     </div>
+}
+
+

@@ -13,7 +13,6 @@ namespace Aplicacion.Models
         
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            
 
             if (filterContext.HttpContext.Session["User"] == null)
             {

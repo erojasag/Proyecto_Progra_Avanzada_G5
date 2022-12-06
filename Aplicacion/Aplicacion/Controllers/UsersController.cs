@@ -2,6 +2,7 @@
 using Aplicacion.Models;
 using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -92,6 +93,45 @@ namespace Aplicacion.Controllers
 
         }
 
+        [HttpGet]
+        [Route("ForgotPassword")]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public ActionResult ForgotPassword(Users user)
+        {
+            try
+            {
+                var checkUser = model.ViewUserByEmail(user.Email);
+
+                if(checkUser.Transaction != false) 
+                {
+                    var data = model.ForgotPassword(user);
+
+                    if (data != null)
+                    {
+                        return View("ForgotPasswordSuccessful");
+                    }
+                    else
+                    {
+                        return View("ForgotPasswordNotSuccessful");
+                    }
+
+                }
+                else
+                {
+                    return View("ForgotPasswordNotSuccessful");
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         [SessionFilter]
         [HttpGet]
@@ -106,7 +146,11 @@ namespace Aplicacion.Controllers
                 {
                     return View(data.User);
                 }
-                return View();
+                else
+                {
+                    return View();
+                }
+                
 
             }
             catch (Exception ex)

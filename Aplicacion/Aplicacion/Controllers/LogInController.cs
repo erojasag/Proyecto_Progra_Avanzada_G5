@@ -18,7 +18,7 @@ namespace Aplicacion.Controllers
             return View(new Users());
         }
 
-        [SessionFilter]
+        
         [HttpGet]
         public ActionResult UserRegistration(Users user)
         {

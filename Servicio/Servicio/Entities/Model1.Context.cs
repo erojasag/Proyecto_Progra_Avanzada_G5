@@ -183,5 +183,23 @@ namespace Servicio.Entities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("REGISTRAR_USUARIO", v_CEDParameter, v_NAMEParameter, v_FLASTNAMEParameter, v_SLASTNAMEParameter, iD_ROLParameter, v_USERParameter, pASSWORDParameter, dOBParameter, tELParameter, v_EMAILParameter, v_PHOTOParameter, v_ADRESSParameter);
         }
+    
+        public virtual int FORGOT_PASS(string eMAIL)
+        {
+            var eMAILParameter = eMAIL != null ?
+                new ObjectParameter("EMAIL", eMAIL) :
+                new ObjectParameter("EMAIL", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FORGOT_PASS", eMAILParameter);
+        }
+    
+        public virtual ObjectResult<string> SEE_TEMPASSWORD(string eMAIL)
+        {
+            var eMAILParameter = eMAIL != null ?
+                new ObjectParameter("EMAIL", eMAIL) :
+                new ObjectParameter("EMAIL", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SEE_TEMPASSWORD", eMAILParameter);
+        }
     }
 }

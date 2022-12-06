@@ -24,7 +24,6 @@ namespace Servicio.Controllers
         }
 
         [HttpGet]
-        
         [Route("Users/ViewUsers")]
         public Respuesta ViewUsers()
         {
@@ -54,13 +53,12 @@ namespace Servicio.Controllers
         }
 
         [HttpPost]
-
         [Route("Users/UserRegistration")]
-        public Respuesta InsertUser(Usuario user)
+        public Respuesta UserRegistration(Users user)
         {
             try
             {
-                return respuesta.ArmarRespuestaUsers(1, "OK", model.InsertUser(user), null, null);
+                return respuesta.ArmarRespuestaUsers(1, "OK", model.UserRegistration(user), null, null);
             }
             catch (Exception ex)
             {
@@ -82,8 +80,7 @@ namespace Servicio.Controllers
             }
         }
 
-        [HttpDelete]
-        
+        [HttpGet]
         [Route("Users/DeleteUser")]
         public Respuesta DeleteUser(Guid Id)
         {
@@ -98,18 +95,46 @@ namespace Servicio.Controllers
         }
 
         //ACTUALIZAR CONTRASEÑA
-        [HttpPut]
-        
+        [HttpPost]
         [Route("Users/ActualizarContraseña")]
-        public string ActualizarContraseña(Usuario obj)
+        public Respuesta ActualizarContraseña(Users user)
         {
             try
             {
-                return model.ActualizarContraseña(obj);
+                return respuesta.ArmarRespuestaUsers(1, "OK",model.ActualizarContraseña(user), null, null);
             }
             catch (Exception ex)
             {
-                return "Error al Cambiar Contraseña";
+                return respuesta.ArmarRespuestaUsers(0, ex.Message, model.ActualizarContraseña(user), null, null);
+            }
+        }
+
+        [HttpPost]
+        [Route("Users/ForgotPassword")]
+        public Respuesta ForgotPassword(Users user)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaUsers(1, "OK", model.ForgotPassword(user), null, null);
+
+            }
+            catch (Exception ex)
+            {
+                return respuesta.ArmarRespuestaUsers(0, ex.Message, false, null, null);
+            }
+        }
+
+        [HttpGet]
+        [Route("Users/ViewUserByEmail")]
+        public Respuesta ViewUserByEmail(string email)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaUsers(1, "OK", model.ViewUserByEmail(email), null, null);
+            }
+            catch(Exception ex)
+            {
+                return respuesta.ArmarRespuestaUsers(0, ex.Message, false, null, null);
             }
         }
 

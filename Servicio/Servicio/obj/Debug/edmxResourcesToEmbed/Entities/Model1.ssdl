@@ -51,7 +51,7 @@ warning 6002: The table/view 'SHOECORP_BD.dbo.ERRORES' does not have a primary k
     <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="shoeSize" Type="varchar" MaxLength="2" Nullable="false" />
     <Property Name="Photo" Type="varchar(max)" />
-    <Property Name="Registration_date" Type="datetime" Nullable="false" />
+    <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="Modification_date" Type="datetime2" Precision="7" />
   </EntityType>
   <EntityType Name="Product_By_Order">
@@ -244,6 +244,9 @@ warning 6002: The table/view 'SHOECORP_BD.dbo.ERRORES' does not have a primary k
     <Parameter Name="V_USER" Type="varchar" Mode="In" />
     <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
   </Function>
+  <Function Name="FORGOT_PASS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EMAIL" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="MOSTRAR_ORDEN_PORID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="V_ID_ORDEN" Type="int" Mode="In" />
   </Function>
@@ -265,6 +268,9 @@ warning 6002: The table/view 'SHOECORP_BD.dbo.ERRORES' does not have a primary k
     <Parameter Name="V_EMAIL" Type="varchar" Mode="In" />
     <Parameter Name="V_PHOTO" Type="varbinary(max)" Mode="In" />
     <Parameter Name="V_ADRESS" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SEE_TEMPASSWORD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EMAIL" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="SHOECORP_BDModelStoreContainer">
     <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />

@@ -167,5 +167,7 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="REGISTRAR_ORDEN" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_ORDEN" />
     <FunctionImportMapping FunctionImportName="REGISTRAR_USUARIO" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_USUARIO" />
+    <FunctionImportMapping FunctionImportName="FORGOT_PASS" FunctionName="SHOECORP_BDModel.Store.FORGOT_PASS" />
+    <FunctionImportMapping FunctionImportName="SEE_TEMPASSWORD" FunctionName="SHOECORP_BDModel.Store.SEE_TEMPASSWORD" />
   </EntityContainerMapping>
 </Mapping>

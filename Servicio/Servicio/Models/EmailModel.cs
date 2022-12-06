@@ -55,8 +55,9 @@ namespace Servicio.Models
                 var fromMail = new MailAddress(Url, "ShoeCorp");
                 var toMail = new MailAddress(correo);
                 string subject = "Reset ShoeCorp Account Password";
-                string body = "<br/><br/>Please find below your new Shoe Corp Account Password" +
-                  newPassword + " <br/><br/>";
+                string body = "<br/><br/>Please find below your new Shoe Corp Account Password" + " " +
+                  newPassword + " " + " <br/><br/>" +
+                  "Remember to change your password the next time you log in";
 
                 var smtp = new SmtpClient
                 {
