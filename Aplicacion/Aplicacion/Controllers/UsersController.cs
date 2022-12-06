@@ -133,6 +133,44 @@ namespace Aplicacion.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ActivateAccount")]
+        public ActionResult ActivateAccount()
+        {
+            try
+            {
+                return View("ActivateAccount");
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+
+        [HttpPost]
+        [Route("ActivateAccount")]
+        public ActionResult ActivateAccount(Users User)
+        {
+            try
+            {
+                var activate = model.ActivateAccount((Guid)User.Activation_Code);
+
+                if (activate.Transaction == true)
+                {
+                    return View("AccountActivated");
+                }
+                else
+                {
+                    return View("AccountNotActivated");
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         [SessionFilter]
         [HttpGet]
         [Route("EditUser")]

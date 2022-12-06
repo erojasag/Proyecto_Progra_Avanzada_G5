@@ -66,6 +66,20 @@ namespace Servicio.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Users/ActivateAccount")]
+        public Respuesta ActivateAccount(Guid activationCode)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaUsers(1, "OK", model.ActivateAccount(activationCode), null, null);
+            }
+            catch(Exception ex)
+            {
+                return respuesta.ArmarRespuestaUsers(0, ex.Message, false, null, null);
+            }
+        }
+
         [HttpPost]
         [Route("Users/EditUser")]
         public Respuesta EditUser(Users user)

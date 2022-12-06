@@ -143,10 +143,47 @@ namespace Servicio.Models
 
                     db.REGISTRAR_USUARIO(User.Identification, User.Name, User.First_last_name, User.Second_last_name, User.User_Role,
                         User.Username, User.noHashPass, User.Birth_date, User.Phone, User.Email, User.Photo, User.Address);
+
+                    var getActivationCode = (from x in db.Users
+                                            where x.Email == User.Email
+                                            select x).FirstOrDefault();
+
+                    emailModel.SendVerificationLinkEmail(User.Email, getActivationCode.Activation_Code);
                     return true;
 
                 }
                 catch (Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
+        public bool ActivateAccount(Guid? activationCode)
+        {
+            using(var db = new SHOECORP_BDEntities())
+            {
+                try
+                {
+                    var activateAccount = (from x in db.Users
+                                           where x.Activation_Code == activationCode
+                                           select x).FirstOrDefault();
+
+                    if(activateAccount != null && activateAccount.Activation_Code == activationCode)
+                    {
+                        activateAccount.Email_Verification = true;
+                        emailModel.SendActivationConfirmationEmail(activateAccount.Email);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        db.Dispose();
+                        return false;
+                    }
+                }
+                catch(Exception ex)
                 {
                     db.Dispose();
                     throw ex;
@@ -259,7 +296,7 @@ namespace Servicio.Models
 
                     var datos = db.DESENCRIPTAR_CONTRA(User.Username, User.Password).FirstOrDefault();
 
-                    if (datos != null)
+                    if (datos != null && datos.Email_Verification == true)
                     {
                         var token = GetToken(datos.Id);
 
@@ -272,9 +309,14 @@ namespace Servicio.Models
                         u1.Token = token;
                         return u1;
                     }
+                    if(datos != null && datos.Email_Verification == false)
+                    {
+                        throw new Exception("El usuario aun no se encuentra activo," +
+                            "por favor refierase a su correo de activacion");
+                    }
                     else
                     {
-                        return null;
+                        throw new Exception("El usuario y contrasena no matchean");
 
                     }
                 }

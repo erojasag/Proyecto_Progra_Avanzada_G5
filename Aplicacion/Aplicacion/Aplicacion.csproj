@@ -2534,6 +2534,9 @@
     <Content Include="Views\Users\ForgotPassword.cshtml" />
     <Content Include="Views\Users\ForgotPasswordSuccessful.cshtml" />
     <Content Include="Views\Users\ForgotPasswordNotSuccessful.cshtml" />
+    <Content Include="Views\Users\ActivateAccount.cshtml" />
+    <Content Include="Views\Users\AccountNotActivated.cshtml" />
+    <Content Include="Views\Users\AccountActivated.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

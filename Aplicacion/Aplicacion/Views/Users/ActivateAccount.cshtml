@@ -1,0 +1,29 @@
+﻿@model  Aplicacion.Entities.Users
+@using Aplicacion.Entities
+
+@{
+    var sesion = ((Users)Session["User"]);
+}
+
+@using (Html.BeginForm("ActivateAccount", "Users", FormMethod.Post))
+{
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="card text-center " style="width: 300px;">
+            <div class="card-header h5 text-white bg-primary">Account Activation</div>
+            <div class="card-body px-5">
+                <p class="card-text py-2">
+                    Enter your activation code.
+                </p>
+                <div class="form-outline">
+                    @Html.TextBoxFor(Model => Model.Activation_Code, new { @class = "form-control my-3", @placeholder = "Enter your Email", @id = "activationCode", @required = "required", @type = "text" })
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Activate</button>
+                <div class="d-flex justify-content-between mt-4">
+                    <a class="" href="@Url.Action("UserLogIn", "LogIn")">Login</a>
+                    <a class="" href="@Url.Action("UserRegistration", "LogIn")">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

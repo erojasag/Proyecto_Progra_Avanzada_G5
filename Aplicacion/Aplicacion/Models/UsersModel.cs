@@ -214,6 +214,33 @@ namespace Aplicacion.Models
 
         }
 
+        public Respuesta ActivateAccount(Guid activationCode)
+        {
+            string api = "Users/ActivateAccount?activationCode=" + activationCode;
+            string route = Url + api;
+
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage respuesta = client.GetAsync(route).Result;
+                    if (respuesta.IsSuccessStatusCode)
+                    {
+                        return respuesta.Content.ReadAsAsync<Respuesta>().Result;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+        }
+
         public Respuesta EditUser(Users user)
         {
             
