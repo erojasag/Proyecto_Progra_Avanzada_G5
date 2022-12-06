@@ -17,7 +17,7 @@
         <div class="row">
 
             @Html.Hidden("IdMsj", (string)ViewBag.Mensaje)
-
+         
             <!-- edit form column -->
             <div class="col-md-9 personal-info">
 
@@ -29,91 +29,92 @@
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
-                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-                            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                            @Html.LabelFor(model => model.shipment_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.EditorFor(model => model.shipment_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.shipment_id, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="SOId">Order number</label>
-                            @Html.EditorFor(model => model.Order_Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                            @Html.ValidationMessageFor(model => model.Order_Id, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.shipment_order_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.shipment_order_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <div class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="SCusId">Customer Id</label>
+                            @Html.EditorFor(model => model.shipment_customer_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.shipment_customer_id, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="Sdate">Shipping Date</label>
-                            @Html.EditorFor(Model => Model.Date, new { @class = "form - control datepicker" })
-                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(Model => Model.shipment_date, new { @class = "form - control datepicker", @type = "date" })
+                            @Html.ValidationMessageFor(model => model.shipment_date, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="SAddress">Address</label>
-                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.shipment_address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.shipment_address, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="SCity">City</label>
-                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.shipment_city, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.shipment_city, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="SState">State</label>
-                            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.shipment_state, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.shipment_state, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="SZip">Zip Code</label>
-                            @Html.EditorFor(model => model.Zip_code, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Zip_code, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.shipment_zip_code, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.shipment_zip_code, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="SCountry">Country</label>
-                            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.shipment_country, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.shipment_country, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="SPhone">Phone</label>
-                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.shipment_phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.shipment_phone, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <div class="form-outline flex-fill mb-0">
                             <label class="form-label" for="SEmail">Email</label>
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.shipment_email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.shipment_email, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="d-flex flex-row align-items-center mb-4">
-                        <div class="form-outline flex-fill mb-0">
-                            <label class="form-label" for="SCusId">Customer Id</label>
-                            @Html.EditorFor(model => model.Customer_id, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Customer_id, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+
 
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <div class="btn-group mr-2" role="group" aria-label="First group">
@@ -123,7 +124,7 @@
                             <button type="reset" class="btn btn-warning btn-lg">Clear</button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="Second group">
-                            @Html.ActionLink("Delete", "DeleteShipment", "Shipment", new { Id = sesion.Id, @class = "btn btn-danger btn-lg" })
+                            @Html.ActionLink("Delete", "DeleteShipment", "Shipments", new { shipment_id = Model.shipment_id, @class = "btn btn-danger btn-lg" })
 
                         </div>
                     </div>

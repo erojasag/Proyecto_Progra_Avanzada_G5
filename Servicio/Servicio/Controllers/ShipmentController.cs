@@ -22,7 +22,7 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuestaShipment(1, "OK", false, null, model.ViewShipments());
+                return respuesta.ArmarRespuestaShipment(1, "OK", true, null, model.ViewShipments());
             }
             catch (Exception ex)
             {

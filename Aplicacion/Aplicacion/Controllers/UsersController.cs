@@ -40,25 +40,22 @@ namespace Aplicacion.Controllers
         [Route("ViewUserById")]
         public ActionResult ViewUserById(Guid? Id)
         {
-            try
-            {
-            try
-            {
-                var datos = model.ViewUserById(Id);
-                if (datos == null)
-                {
-                    return View();
-                }
 
+            try
+            { 
                 var datos = model.ViewUserById((Guid)Id);
                 if (datos == null)
                 {
                     return View("Error");
                 }
-                catch (Exception ex)
+                else
                 {
-                    throw ex;
+                    return View(datos);
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
@@ -107,7 +104,7 @@ namespace Aplicacion.Controllers
 
                 if (data != null)
                 {
-                    return View(data.Users);
+                    return View(data.User);
                 }
                 return View();
 
@@ -119,37 +116,29 @@ namespace Aplicacion.Controllers
             }
         }
 
-            [SessionFilter]
-            [HttpPost]
-            [Route("EditUser")]
-            public ActionResult EditUser(Users user)
+        [SessionFilter]
+        [HttpPost]
+        [Route("EditUser")]
+        public ActionResult EditUser(Users user)
+        {
+            try
             {
-                try
-                {
-                    var data = model.EditUser(user);
+                var data = model.EditUser(user);
 
-                    if (data.Transaction)
-                    {
+                if (data.Transaction == true)
+                {
 
                     ViewBag.Mensaje = "The brand was successfully modified";
                     return RedirectToAction("ViewUsers", "Users");
-                    }
-                    else
-                    {
-                        ViewBag.Mensaje = "User not edited";
-                        return View("EditUser");
-                    }
                 }
                 else
                 {
-                    return View();
+                    ViewBag.Mensaje = "User not edited";
+                    return View("EditUser");
                 }
-                
-            }
-            catch (Exception ex)
-            {
+
+            }catch (Exception ex){
                 return View("Error");
-                throw ex;
             }
         }
 

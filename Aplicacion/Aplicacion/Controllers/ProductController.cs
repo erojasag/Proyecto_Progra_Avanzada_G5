@@ -11,6 +11,7 @@ namespace Aplicacion.Controllers
     public class ProductController : BaseController
     {
         readonly ProductModel model = new ProductModel();
+        readonly BrandModel brandModel= new BrandModel();
 
         [HttpGet]
         [Route("ViewProducts")]
@@ -35,8 +36,8 @@ namespace Aplicacion.Controllers
             }
         }
 
-        [Authorize]
-        [SessionFilter]
+
+
         [HttpGet]
         [Route("ViewProductById")]
         public ActionResult ViewProductById(int? Id)
@@ -64,7 +65,7 @@ namespace Aplicacion.Controllers
         }
 
 
-        [Authorize]
+ 
         [HttpGet]
         [SessionFilter]
         public ActionResult InsertProduct(Product product)
@@ -72,7 +73,7 @@ namespace Aplicacion.Controllers
             return View();
         }
 
-        [Authorize]
+
         [SessionFilter]
         [HttpPost]
         public ActionResult ValidateProduct(Product product)
@@ -100,7 +101,7 @@ namespace Aplicacion.Controllers
 
         }
 
-        [Authorize]
+        
         [SessionFilter]
         [HttpGet]
         [Route("EditProduct")]
@@ -109,6 +110,7 @@ namespace Aplicacion.Controllers
             try
             {
                 var data = model.ViewProductById((int)Id);
+                
 
                 if (data != null)
                 {
@@ -124,7 +126,7 @@ namespace Aplicacion.Controllers
             }
         }
 
-        [Authorize]
+        
         [SessionFilter]
         [HttpPost]
         [Route("EditProduct")]
@@ -158,7 +160,7 @@ namespace Aplicacion.Controllers
             }
         }
 
-        [Authorize]
+        
         [SessionFilter]
         [HttpGet]
         [Route("DeleteProduct")]

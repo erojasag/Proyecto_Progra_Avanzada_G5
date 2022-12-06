@@ -10,6 +10,7 @@
                     <th @Html.DisplayNameFor(model => model.Name)>Brand</th>
                     <th @Html.DisplayNameFor(model => model.Photo)>Photo</th>
                     <th>Action</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -35,8 +36,8 @@
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "EditBrand", new { Id = item.Id }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "DeleteBrand", new { Id = item.Id }, new { @class = "btn btn-primary" })
                         </td>
-                      
                     </tr>
                 }
 
