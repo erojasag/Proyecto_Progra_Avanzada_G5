@@ -1,7 +1,9 @@
-﻿
-@{
-    ViewBag.Title = "DeleteProduct";
-}
+﻿<marquee behavior="alternate" direction="up" width="80%">
+    <marquee direction="right" behavior="alternate" scrollamount="10">
+        <h2>El product ha sido eliminado exitosamente</h2>
+    </marquee>
+</marquee>
 
-<h2>DeleteProduct</h2>
-
+<p>
+    @Html.ActionLink("Volver a la tabla", "ViewProducts", "Products", new { @class = "btn btn-primary" })
+</p>

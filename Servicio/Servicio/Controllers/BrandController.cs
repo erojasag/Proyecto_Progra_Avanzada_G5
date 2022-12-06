@@ -75,8 +75,7 @@ namespace Servicio.Controllers
             }
         }
 
-        [HttpDelete]
-        
+        [HttpGet]
         [Route("brands/DeleteBrand")]
         public Respuesta DeleteBrand(int Id)
         {

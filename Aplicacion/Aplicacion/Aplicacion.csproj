@@ -2227,6 +2227,7 @@
     <Content Include="Content\sweetalert2\sweetalert2.min.js" />
     <Content Include="Content\templates.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Funciones\ConsultaPassword.js" />
     <Content Include="Funciones\ConsultaProductos.js" />
     <Content Include="Funciones\ConsultaUsuario.js" />
     <Content Include="Funciones\DeleteProduct.js" />
@@ -2526,6 +2527,10 @@
     <Content Include="Views\Shipment\ViewShipments.cshtml" />
     <Content Include="Views\Shipment\EditShipments.cshtml" />
     <Content Include="Views\Shipment\InsertShipment.cshtml" />
+    <Content Include="Views\Brand\DeleteBrand.cshtml" />
+    <Content Include="Views\Brand\NoSeBorroLaMarca.cshtml" />
+    <Content Include="Views\Users\ChangePassword.cshtml" />
+    <Content Include="Views\Shipment\NoShippings.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

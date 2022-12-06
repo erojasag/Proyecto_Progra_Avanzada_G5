@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace Servicio.Models
 {
@@ -126,9 +127,18 @@ namespace Servicio.Models
 
                     if (TablaBrand != null)
                     {
-                        db.Brand.Remove(TablaBrand);
-                        db.SaveChanges();
-                        return true;
+                        if(TablaBrand.Product.Count == 0)
+                        {
+                            db.Brand.Remove(TablaBrand);
+                            db.SaveChanges();
+                            return true;
+                        }
+                        else
+                        {
+                            throw new Exception("The brand cannot be removed because it has" +
+                                "associated products");
+                        }
+                        
                     }
                     else
                         throw new Exception("The brand does not exist");

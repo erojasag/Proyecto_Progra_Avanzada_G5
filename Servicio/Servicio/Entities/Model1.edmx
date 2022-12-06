@@ -13,8 +13,8 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Photo" Type="varchar(max)" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SHOECORP_BD.dbo.ERRORES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ERRORES">
           <Key>
             <PropertyRef Name="ID_ERROR" />
@@ -57,7 +57,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <Property Name="shoeSize" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Photo" Type="varchar(max)" />
           <Property Name="Registration_date" Type="datetime" Nullable="false" />
-          <Property Name="Modification_date" Type="datetime" />
+          <Property Name="Modification_date" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="Product_By_Order">
           <Key>
@@ -367,7 +367,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <Property Name="shoeSize" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modification_date" Type="DateTime" Precision="3" />
+          <Property Name="Modification_date" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Brand_Id" FromRole="Product" ToRole="Brand" />
           <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Product_Id" FromRole="Product" ToRole="Product_By_Order" />
           <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_Product_id" FromRole="Product" ToRole="ShoppingCart" />
@@ -884,7 +884,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

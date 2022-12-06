@@ -2,6 +2,7 @@
 using Servicio.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -134,9 +135,7 @@ namespace Servicio.Models
 
                     if (TablaUser != null)
                     {
-                        // Usuario u1= new Usuario();
-                        // var encryptedPassword = Encoding.UTF8.GetString(User.Password);
-                        // u1.Password = encryptedPassword;
+
                         db.ACTUALIZAR_USUARIO(User.Id, User.Name, User.First_last_name, User.Second_last_name, User.User_Role,
                             User.Phone, User.Email, User.Photo, User.Address);
                         return true;
@@ -151,6 +150,38 @@ namespace Servicio.Models
                 }
             }
         }
+        public bool ForgotPassword(Users User)
+        {
+            using(var db = new SHOECORP_BDEntities())
+            {
+                try
+                {
+                    var Id = User.Id;
+                    var datos = db.Users.Find(Id);
+
+                    if(datos != null)
+                    {
+                        if (datos.Password == null)
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+
+                    }
+                    return false;
+                }catch(Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+
+                }
+            }
+        }
+
+
         public bool DeleteUser(Guid Id)
         {
             using (var db = new SHOECORP_BDEntities())
@@ -167,7 +198,9 @@ namespace Servicio.Models
                     }
                     else
                     {
+                        db.Dispose();
                         throw new Exception("El usuario no se pudo eliminar");
+                        
                     }
 
                 }
@@ -248,7 +281,7 @@ namespace Servicio.Models
 
         }
 
-       public string ActualizarContraseña(Usuario obj)
+        public string ActualizarContraseña(Usuario obj)
         {
             using (var contexto = new SHOECORP_BDEntities())
             {

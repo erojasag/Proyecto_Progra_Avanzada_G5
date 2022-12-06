@@ -62,7 +62,6 @@ namespace Aplicacion.Controllers
         }
 
         [HttpGet]
-        [SessionFilter]
         public ActionResult InsertBrand(Brand Brand)
         {
             return View();
@@ -95,7 +94,7 @@ namespace Aplicacion.Controllers
         }
 
 
-        [SessionFilter]
+        
         [HttpGet]
         [Route("EditBrand")]
         public ActionResult EditBrand(int Id)
@@ -118,7 +117,7 @@ namespace Aplicacion.Controllers
             }
         }
 
-        [SessionFilter]
+
         [HttpPost]
         [Route("EditBrand")]
         public ActionResult EditBrand(Brand brand)
@@ -147,17 +146,17 @@ namespace Aplicacion.Controllers
         }
 
 
-        [SessionFilter]
+
         [HttpGet]
         [Route("DeleteBrand")]
         public ActionResult DeleteBrand(int Id)
         {
             try
             {
-                var respuesta = model.ViewBrandById(Id);
+                var respuesta = model.DeleteBrand(Id);
 
-                if (respuesta == null || respuesta.Id != 0)
-                    return View("Error");
+                if (respuesta.Transaction == false)
+                    return View("NoSeBorroLaMarca");
                 else
                     return View(respuesta.Brand);
             }
@@ -167,7 +166,7 @@ namespace Aplicacion.Controllers
             }
         }
 
-        [SessionFilter]
+
         [HttpPost]
         [Route("DeleteBrand")]
         public ActionResult DeleteBrand(Brand brand)

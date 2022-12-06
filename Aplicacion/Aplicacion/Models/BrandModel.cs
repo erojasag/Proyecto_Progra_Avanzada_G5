@@ -128,7 +128,7 @@ namespace Aplicacion.Models
 
                 string metodo = "brands/EditBrand";
                 string route = Url + metodo;
-                HttpResponseMessage respuesta = client.PutAsync(route, body).Result;
+                HttpResponseMessage respuesta = client.PostAsync(route, body).Result;
 
                 if (respuesta.IsSuccessStatusCode)
                 {

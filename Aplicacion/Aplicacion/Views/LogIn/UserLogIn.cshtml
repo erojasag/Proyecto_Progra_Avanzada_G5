@@ -26,7 +26,7 @@
                             <p class="text-center">Please login to your account</p>
 
                             <div class="form-outline mb-4 d-flex justify-content-center">
-                                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", @placeholder = "Username", required = "required" })
+                                @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", @placeholder = "Username", required = "required", id="inputUsername" })
                             </div>
 
 
@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="text-center pt-1 mb-5 pb-1">
-                                <button class="btn btn-primary btn-lg fa-lg gradient-custom-2 mb-3" type="submit">
+                                <button onclick="ValidarUsuario()" class="btn btn-primary btn-lg fa-lg gradient-custom-2 mb-3" type="submit">
                                     Log
                                     in
                                 </button>
@@ -45,7 +45,7 @@
 
                             <div class="d-flex align-items-center justify-content-center pb-4">
                                 <p class="mb me-2">Don't have an account?</p>
-                                <a type="button" onclick="ValidarUsuario()" href="@Url.Action("UserRegistration", "LogIn")" class="btn btn-outline-danger d-flex justify-content-center">Create new</a>
+                                <a type="button" onclick="" href="@Url.Action("UserRegistration", "LogIn")" class="btn btn-outline-danger d-flex justify-content-center">Create new account</a>
                             </div>
                         </form>
                     </div>

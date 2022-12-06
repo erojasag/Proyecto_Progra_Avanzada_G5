@@ -17,7 +17,6 @@ namespace Servicio.Models
                 {
                     var tshipments = db.Shipments.ToList();
                     List<Shipments> shipments = new List<Shipments>();
-
                     foreach (var shipment in tshipments)
                     {
                         shipments.Add(new Shipments
@@ -36,15 +35,18 @@ namespace Servicio.Models
                             shipment_customer_id = shipment.shipment_customer_id
 
                         });
-                    }
 
+                        return shipments;
+                    }
                     if (shipments.Count == 0)
                     {
                         throw new Exception("No shipping found");
                     }
                     else
                     {
+
                         return shipments;
+
                     }
                 }
                 catch (Exception ex)

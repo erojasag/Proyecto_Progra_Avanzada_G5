@@ -109,12 +109,15 @@ CREATE TABLE Product(
     Color Varchar(50) not null,
     shoeSize varchar(2) not null,
     Photo varchar(max),
-    Registration_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Modification_date DATETIME NULL,
+    Registration_date DATETIME2 NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Modification_date DATETIME2 NULL,
     CONSTRAINT PK_Product_Id PRIMARY KEY (id),
     CONSTRAINT FK_Brand_Id FOREIGN KEY (Brand_Id) REFERENCES Brand(Id),
 ); 
 
+
+ALTER table PRODUCT
+Alter column Modification_date DATETIME2 null
 ----------------------------------INSERT NIKE------------------------------
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
 VALUES(0001,1,119000,3,'Dunk Low','Red',40, 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/f2da5e21-59d9-41e9-bb39-76e2e57b25db/calzado-dunk-low-disrupt-2-zz6jpt.png');
@@ -161,7 +164,7 @@ VALUES(0018,4,165000,5,'UA Charged Pursuit 3','Black',43, '');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
 VALUES(0019,4,165000,9,'Curry Flow 9','Blue',38, '');
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
-VALUES(0020,4,165000,16,'UA HOVR™ Machina 3','Beige',36, '');
+VALUES(0020,4,165000,16,'UA HOVRï¿½ Machina 3','Beige',36, '');
 
 ----------------------------------INSERT Puma------------------------------
 INSERT INTO Product(Id,Brand_Id,Price, Stock, Model, Color, shoeSize, Photo)
@@ -269,12 +272,16 @@ CREATE TABLE Shipments(
     CONSTRAINT fk_shipment_customer_id FOREIGN KEY (shipment_customer_id) REFERENCES Users(Id)
 );
 
+
+insert into Orders values ('4CAF1FC2-6AF2-4FA4-A243-A9E5740744C4', '2022-12-5', 3000.00)
+insert into Shipments values (2,'2022-12-06', 'in progress', 'Av 89', 'Desamparados', 'SJ', '10302', 'CR', '88888888', 'hola@gmail.com', '4CAF1FC2-6AF2-4FA4-A243-A9E5740744C4')
+
 --------------------------------------END OF SHIPMENTS TABLE------------------------------------------------------------------------------------------------------
 
 
 ----------------------------------------PROCEDIMIENTOS ALMACENADOS----------------------------------------------
 --------------------------------------------USUARIOS--------------------------------------------------------
----INSERTAR USUARIO Y HASHEAR CONTRASEÑA
+---INSERTAR USUARIO Y HASHEAR CONTRASEï¿½A
 
 GO
 CREATE PROCEDURE REGISTRAR_USUARIO (
@@ -345,22 +352,22 @@ GO
 
 EXECUTE REGISTRAR_USUARIO @V_CED = '117250521', @V_NAME = 'Emanuel', @V_FLASTNAME = 'Rojas', @V_SLASTNAME = 'Cliente'
 	, @ID_ROL = 3, @V_USER = 'erojasag', @PASSWORD = 'Cliente123', @DOB = '1998-01-11', @TEL = '88667456'
-	, @V_EMAIL = 'eroaguero01@gmail.com', @V_PHOTO = 'no photo', @V_ADRESS = 'Alajuela';
+	, @V_EMAIL = 'eroaguero01@gmail.com', @V_PHOTO = null, @V_ADRESS = 'Alajuela';
 
 	
 EXECUTE REGISTRAR_USUARIO @V_CED = '117250527', @V_NAME = 'Jesus', @V_FLASTNAME = 'Morales', @V_SLASTNAME = 'Segura'
 	, @ID_ROL = 2, @V_USER = 'JesusCaja', @PASSWORD = 'JesusCaja', @DOB = '1998-01-11', @TEL = '88667456'
-	, @V_EMAIL = 'jesusMorales@shoeCorp.com', @V_PHOTO = 'no photo', @V_ADRESS = 'Alajuela';
+	, @V_EMAIL = 'jesusMorales@shoeCorp.com', @V_PHOTO = null, @V_ADRESS = 'Alajuela';
 
 	
-EXECUTE REGISTRAR_USUARIO @V_CED = '117250521', @V_NAME = 'Emanuel', @V_FLASTNAME = 'Rojas', @V_SLASTNAME = 'Aguero'
-	, @ID_ROL = 3, @V_USER = 'EmaAdmin', @PASSWORD = 'SuperAdmin2022', @DOB = '1998-01-11', @TEL = '88667465'
-	, @V_EMAIL = 'eroaguero01@gmail.com', @V_PHOTO = 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Alberto_conversi_profile_pic.jpg', @V_ADRESS = 'Alajuela';
+EXECUTE REGISTRAR_USUARIO @V_CED = '117250530', @V_NAME = 'Emanuel', @V_FLASTNAME = 'Rojas', @V_SLASTNAME = 'Aguero'
+	, @ID_ROL = 1, @V_USER = 'EmaAdmin', @PASSWORD = 'SuperAdmin2022', @DOB = '1998-01-11', @TEL = '88667465'
+	, @V_EMAIL = 'eroaguero02@gmail.com', @V_PHOTO = null, @V_ADRESS = 'Alajuela';
 
 	
 EXECUTE REGISTRAR_USUARIO @V_CED = '117660786', @V_NAME = 'Elisama', @V_FLASTNAME = 'Cubillo', @V_SLASTNAME = 'Vargas'
 	, @ID_ROL = 3, @V_USER = 'EliCubillo', @PASSWORD = 'EliShoeCorp', @DOB = '2000-01-15', @TEL = '86755378'
-	, @V_EMAIL = 'elicubillo@shoeCorp.com', @V_PHOTO = 'no photo', @V_ADRESS = 'San Jose';
+	, @V_EMAIL = 'elicubillo@shoeCorp.com', @V_PHOTO = null, @V_ADRESS = 'San Jose';
 
 
 EXECUTE DESENCRIPTAR_CONTRA @V_USER = 'EliCubillo', @PASSWORD = 'EliShoeCorp'
@@ -375,7 +382,6 @@ CREATE   PROCEDURE ACTUALIZAR_USUARIO
 	@V_FLASTNAME VARCHAR(50),
 	@V_SLASTNAME VARCHAR(50),
 	@ID_ROL INT,
-	@PASSWORD VARCHAR(MAX),
 	@TEL VARCHAR(20),
 	@V_EMAIL VARCHAR(50),
 	@V_PHOTO VARBINARY(MAX),
@@ -385,9 +391,9 @@ AS
 DECLARE
 	@NEWPASSWORD VARBINARY(MAX)
 	BEGIN TRY
-		SET @NEWPASSWORD = (ENCRYPTBYPASSPHRASE ('ENCRIPTACION', @PASSWORD));
+		
 		UPDATE Users SET Name = @V_NAME, First_last_name = @V_FLASTNAME, Second_last_name = @V_SLASTNAME,
-		User_Role = @ID_ROL, Password = @NEWPASSWORD, Phone = @TEL, Email = @V_EMAIL, Photo = @V_PHOTO, Address = @V_ADRESS, Modification_date = GETDATE()
+		User_Role = @ID_ROL, Phone = @TEL, Email = @V_EMAIL, Photo = @V_PHOTO, Address = @V_ADRESS, Modification_date = GETDATE()
 		WHERE Id = @V_ID
 
 	END TRY
@@ -552,3 +558,63 @@ AS
 	 FROM Product P, inserted I
 	 WHERE P.Id = I.Product_Id;
 GO
+
+
+
+-----------------GENERATE RANDOM PASS
+CREATE   FUNCTION [dbo].[RANDOM_PASS] (@PasswordLength INT )
+	RETURNS VARCHAR(20)
+	AS
+	BEGIN
+		DECLARE @Password     VARCHAR(20)
+		DECLARE @ValidCharacters   VARCHAR(100)
+		DECLARE @PasswordIndex    INT
+		DECLARE @CharacterLocation   INT
+
+		SET @ValidCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890'
+		SET @PasswordIndex = 1
+		SET @Password = ''
+
+
+		WHILE @PasswordIndex <= @PasswordLength
+		BEGIN
+		 SELECT @CharacterLocation = ABS(CAST(CAST(NEW_ID AS VARBINARY) AS INT)) % 
+		LEN(@ValidCharacters) + 1
+		 FROM RANDOM_ID
+
+		 SET @Password = @Password + SUBSTRING(@ValidCharacters, @CharacterLocation, 1)
+		 SET @PasswordIndex = @PasswordIndex + 1
+		END
+		RETURN @Password
+END
+
+
+
+
+----------------------FORGOT PASSWORD
+CREATE   PROCEDURE [dbo].[FORGOT_PASS]
+-- SP QUE REESTABLECE UNA CONTRASEÃ‘A NUEVA
+	@EMAIL VARCHAR(50)
+	AS
+	BEGIN TRY
+	-- LLAMA A LA FUNCION "RANDOM_PASS" ESA FUNCION SE GUARDA EN LA VARIABLE "@TEMP_PASS"
+	--Y LA SETEA EN EL CAMPO "PASSWORD" DONDE EL EMAIL COINCIDA CON EL QUE EL USUARIO DIGITE
+	DECLARE @TEMP_PASS VARCHAR(8)
+	SELECT @TEMP_PASS = [dbo].RANDOM_PASS (8)
+	UPDATE Users SET PASSWORD = @TEMP_PASS WHERE EMAIL = @EMAIL
+	END TRY
+	BEGIN CATCH 
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORS"
+		INSERT INTO ERRORES 
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+	ENDÂ CATCH
+

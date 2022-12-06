@@ -45,21 +45,43 @@ namespace Servicio.Models
                 smtp.Send(message);
         }
 
-        public void ChangePasswordEmail(string correo, string newPassword, string newPassword2)
+        public void ForgotPasswordEmail(string correo, string newPassword)
         {
-
             try
             {
 
+                string Url = ConfigurationManager.AppSettings["email"].ToString();
+                string password = ConfigurationManager.AppSettings["password"].ToString();
+                var fromMail = new MailAddress(Url, "ShoeCorp");
+                var toMail = new MailAddress(correo);
+                string subject = "Reset ShoeCorp Account Password";
+                string body = "<br/><br/>Please find below your new Shoe Corp Account Password" +
+                  newPassword + " <br/><br/>";
+
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(Url, password)
+
+                };
+                using (var message = new MailMessage(fromMail, toMail)
+                {
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
+                })
+                    smtp.Send(message);
+
             }
-            catch
+            catch(Exception ex)
             {
-
+                throw ex;
 
             }
-
         }
-
-
     }
 }
