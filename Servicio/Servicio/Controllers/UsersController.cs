@@ -16,11 +16,18 @@ namespace Servicio.Controllers
 
         [HttpPost]
         [Route("Users/ValidateUser")]
-        public Usuario ValidateUser(Usuario User)
+        public Respuesta ValidateUser(Users User)
         {
+            try
+            {
+                return respuesta.ArmarRespuestaUsers(1, "OK", true, model.ValidateUser(User), null);
+            }
+            catch(Exception ex)
+            {
+                return respuesta.ArmarRespuestaUsers(0, ex.Message, false, model.ValidateUser(User), null);
+            }
 
-
-            return model.ValidateUser(User);
+            
         }
 
         [HttpGet]
@@ -93,6 +100,7 @@ namespace Servicio.Controllers
                 return respuesta.ArmarRespuestaUsers(-1, ex.Message, false, null, null);
             }
         }
+
 
         [HttpGet]
         [Route("Users/DeleteUser")]

@@ -14,7 +14,7 @@ namespace Aplicacion.Models
     public class UsersModel
     {
         string Url = ConfigurationManager.AppSettings["urlServicioProyecto"];
-        public Users ValidateUser(Users User)
+        public Respuesta ValidateUser(Users User)
         {
             
             using (var client = new HttpClient())
@@ -29,7 +29,7 @@ namespace Aplicacion.Models
 
                     if (response.IsSuccessStatusCode)
                     {
-                        return response.Content.ReadAsAsync<Users>().Result;
+                        return response.Content.ReadAsAsync<Respuesta>().Result;
                     }
                     else
                     {

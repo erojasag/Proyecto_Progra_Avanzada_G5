@@ -286,7 +286,7 @@ namespace Servicio.Models
             }
         }
 
-        public Usuario ValidateUser(Usuario User)
+        public Users ValidateUser(Users User)
         {
             using (var db = new SHOECORP_BDEntities())
             {
@@ -294,19 +294,21 @@ namespace Servicio.Models
                 {
 
 
-                    var datos = db.DESENCRIPTAR_CONTRA(User.Username, User.Password).FirstOrDefault();
+                    var datos = db.DESENCRIPTAR_CONTRA(User.Username, User.noHashPass).FirstOrDefault();
 
                     if (datos != null && datos.Email_Verification == true)
                     {
                         var token = GetToken(datos.Id);
 
-                        Usuario u1 = new Usuario();
+                        Users u1 = new Users();
                         u1.Id = datos.Id;
                         u1.Username = datos.Username;
                         u1.Name= datos.Name;
                         u1.User_Role = datos.User_Role;
                         u1.Photo = datos.Photo;
                         u1.Token = token;
+                        u1.Email_Verification = true;
+
                         return u1;
                     }
                     if(datos != null && datos.Email_Verification == false)
