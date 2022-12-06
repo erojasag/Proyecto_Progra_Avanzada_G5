@@ -132,7 +132,7 @@ namespace Aplicacion.Models
                         string api = "products/EditProduct";
                         string route = Url + api;
                         var content = JsonContent.Create(Product);
-                        HttpResponseMessage response = client.PutAsync(route, content).Result;
+                        HttpResponseMessage response = client.PostAsync(route, content).Result;
 
                         response.EnsureSuccessStatusCode();
                         if (response.IsSuccessStatusCode)
@@ -165,7 +165,7 @@ namespace Aplicacion.Models
                 {
                     if (Id != 0)
                     {
-                        string api = "products/DeleteProduct";
+                        string api = "products/DeleteProduct?Id=" + Id;
                         string route = Url + api;
                         HttpResponseMessage response = client.GetAsync(route).Result;
 

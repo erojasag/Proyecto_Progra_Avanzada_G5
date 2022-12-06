@@ -1,6 +1,7 @@
 ﻿using Servicio.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 
@@ -186,64 +187,21 @@ namespace Servicio.Models
             {
                 try
                 {
-                    var tproduct = db.Product.Find(product.Id);
-                    if (tproduct != null)
-                    {
-                        if (product.Price != 0)
-                        {
-                            tproduct.Price = product.Price;
-                            tproduct.Modification_date = DateTime.Now;
-                        }
-                        if (product.Stock != 0)
-                        {
-                            tproduct.Stock = product.Stock;
-                            tproduct.Modification_date = DateTime.Now;
-                        }
-                        if (product.Model != null)
-                        {
-                            tproduct.Model = product.Model;
-                            tproduct.Modification_date = DateTime.Now;
-                        }
-                        if (product.Color != null)
-                        {
-                            tproduct.Color = product.Color;
-                            tproduct.Modification_date = DateTime.Now;   
-                        }
-                        if (product.shoeSize != null)
-                        {
-                            var checkProduct = db.Product.ToList();
-                            List<Product> products = new List<Product>();
-                            if (checkProduct.Count > 0)
-                            {
-                                foreach (var item in checkProduct)
-                                {
-                                    products.Add(new Product
-                                    {
-                                        shoeSize = item.shoeSize,
-                                    });
-                                }
-                                foreach (var item in products)
-                                {
 
-                                    if (item.shoeSize == product.shoeSize)
-                                    {
-                                        throw new Exception("La talla ya se encuentra registrada, para anadir un producto hazlo modificando su stock");
-                                    }
-                                };
-                                tproduct.shoeSize = product.shoeSize;
-                                tproduct.Modification_date = DateTime.Now;
-                            }
-                        }
-                        if (product.Photo != null)
-                        {
-                            tproduct.Photo = product.Photo;
-                            tproduct.Modification_date = DateTime.Now;
-                        }
-                        if (product.Brand_Id != 0)
-                        {
-                            tproduct.Brand_Id = product.Brand_Id;
-                            tproduct.Modification_date = DateTime.Now;
-                        }
+                    var products = (from x in db.Product
+                                    where x.Id == product.Id
+                                      select x).FirstOrDefault();
+
+                    if (products != null)
+                    {
+                        products.Brand_Id = product.Brand_Id;
+                        products.Price = product.Price;
+                        products.Stock = product.Stock;
+                        products.Model = product.Model;
+                        products.Color = product.Color;
+                        products.shoeSize = product.shoeSize;
+                        products.Photo = product.Photo;
+                        product.Modification_date= DateTime.Now;
                         db.SaveChanges();
                         return true;
                     }
@@ -269,6 +227,7 @@ namespace Servicio.Models
 
                     if (tproduct != null)
                     {
+                        
                         db.Product.Remove(tproduct);
                         db.SaveChanges();
                         return true;

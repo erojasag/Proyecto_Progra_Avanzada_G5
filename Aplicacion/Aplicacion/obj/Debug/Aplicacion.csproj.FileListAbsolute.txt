@@ -485,3 +485,6 @@ C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicac
 C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\bin\System.Web.Http.dll
 C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\bin\System.Net.Http.Formatting.xml
 C:\Users\Administrador\source\repos\erojasag\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\bin\System.Web.Http.xml
+E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\bin\System.Web.Http.dll
+E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\bin\System.Net.Http.Formatting.xml
+E:\Carrera en Sistemas\2022\Segundo Cuatrimestre\Programacion Avanzada\Proyecto_Progra_Avanzada_G5\Aplicacion\Aplicacion\bin\System.Web.Http.xml

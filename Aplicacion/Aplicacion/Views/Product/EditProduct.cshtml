@@ -1,6 +1,12 @@
 ﻿@model Aplicacion.Entities.Product
 
-@if (Session["User_Role"] != null) //estamos logueados como empleados != not null
+@using Aplicacion.Entities
+
+@{
+    var sesion = ((Users)Session["User"]);
+}
+
+@if (sesion.User_Role != 0) //estamos logueados como empleados != not null
 {
 
     using (Html.BeginForm("EditProduct", "Product", FormMethod.Post))
@@ -32,7 +38,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Product ID:</label>
                             <div class="col-lg-8">
-                                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Product ID" } })
+                                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Product ID", @readonly = "readonly"} })
                             </div>
                         </div>
                         <div class="form-group">
@@ -66,21 +72,53 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-3 control-label">Brand:</label>
-                            <div class="col-lg-8">
-                                <div class="ui-select">
-                                    <select id="brand_id_selector" class="form-control">
-                                        <option selected>Select a Brand</option>
-                                        <option value="1">Nike</option>
-                                        <option value="2">Adidas</option>
-                                        <option value="3">New Balance</option>
-                                        <option value="4">Project Rock</option>
-                                        <option value="5">Puma</option>
-                                        <option value="6">Sperry</option>
-                                        <option value="7">Yeezy</option>
-                                    </select>
-                                </div>
-                            </div>
+
+                            @{
+                                List<SelectListItem> listaBrands = new List<SelectListItem>();
+                                listaBrands.Add(new SelectListItem
+                                {
+                                    Text = "--Select--",
+                                    Value = "",
+                                    Selected = true
+                                });
+                                listaBrands.Add(new SelectListItem
+                                {
+                                    Text = "Nike",
+                                    Value = "1"
+                                });
+                                listaBrands.Add(new SelectListItem
+                                {
+                                    Text = "Adidas",
+                                    Value = "2"
+                                });
+                                listaBrands.Add(new SelectListItem
+                                {
+                                    Text = "New Balance",
+                                    Value = "3"
+                                });
+                                listaBrands.Add(new SelectListItem
+                                {
+                                    Text = "Project Rock",
+                                    Value = "4"
+                                });
+                                listaBrands.Add(new SelectListItem
+                                {
+                                    Text = "Puma",
+                                    Value = "5"
+                                });
+                                listaBrands.Add(new SelectListItem
+                                {
+                                    Text = "Sperry",
+                                    Value = "6"
+                                });
+                                listaBrands.Add(new SelectListItem
+                                {
+                                    Text = "Yeezy",
+                                    Value = "7"
+                                });
+                            }
+                            <label class="col-lg-3 control-label">Rol:</label>
+                            @Html.DropDownListFor(model => model.Brand_Id, listaBrands, new { @class = "form-control" })
                         </div>
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                             <div class="btn-group mr-2" role="group" aria-label="First group">

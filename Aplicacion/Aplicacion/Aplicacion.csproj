@@ -2527,6 +2527,10 @@
     <Content Include="Views\Shipment\ViewShipments.cshtml" />
     <Content Include="Views\Shipment\EditShipments.cshtml" />
     <Content Include="Views\Shipment\InsertShipment.cshtml" />
+    <Content Include="Views\Brand\DeleteBrand.cshtml" />
+    <Content Include="Views\Brand\NoSeBorroLaMarca.cshtml" />
+    <Content Include="Views\Users\ChangePassword.cshtml" />
+    <Content Include="Views\Shipment\NoShippings.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

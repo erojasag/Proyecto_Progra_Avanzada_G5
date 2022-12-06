@@ -68,8 +68,7 @@ namespace Servicio.Controllers
             }
         }
 
-        [HttpPut]
-        
+        [HttpPost]
         [Route("Users/EditUser")]
         public Respuesta EditUser(Users user)
         {

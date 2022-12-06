@@ -8,18 +8,21 @@ namespace Aplicacion.Entities
     public class Shipments
     {
 
-        public int Id { get; set; }
-        public int Order_Id { get; set; }
-        public DateTime Date { get; set; }
-        public string status { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Zip_code { get; set; }
-        public string Country { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public Guid Customer_id { get; set; }
+        public int shipment_id { get; set; }
+        public int shipment_order_id { get; set; }
+        public System.DateTime shipment_date { get; set; }
+        public string shipment_status { get; set; }
+        public string shipment_address { get; set; }
+        public string shipment_city { get; set; }
+        public string shipment_state { get; set; }
+        public string shipment_zip_code { get; set; }
+        public string shipment_country { get; set; }
+        public string shipment_phone { get; set; }
+        public string shipment_email { get; set; }
+        public System.Guid shipment_customer_id { get; set; }
+
+        public virtual Orders Orders { get; set; }
+        public virtual Users Users { get; set; }
 
     }
 }

@@ -135,9 +135,7 @@ namespace Servicio.Models
 
                     if (TablaUser != null)
                     {
-                        // Usuario u1= new Usuario();
-                        // var encryptedPassword = Encoding.UTF8.GetString(User.Password);
-                        // u1.Password = encryptedPassword;
+
                         db.ACTUALIZAR_USUARIO(User.Id, User.Name, User.First_last_name, User.Second_last_name, User.User_Role,
                             User.Phone, User.Email, User.Photo, User.Address);
                         return true;
@@ -152,8 +150,6 @@ namespace Servicio.Models
                 }
             }
         }
-<<<<<<< HEAD
-
         public bool ForgotPassword(Users User)
         {
             using(var db = new SHOECORP_BDEntities())
@@ -185,8 +181,7 @@ namespace Servicio.Models
             }
         }
 
-=======
->>>>>>> main
+
         public bool DeleteUser(Guid Id)
         {
             using (var db = new SHOECORP_BDEntities())
@@ -286,7 +281,7 @@ namespace Servicio.Models
 
         }
 
-       public string ActualizarContraseña(Usuario obj)
+        public string ActualizarContraseña(Usuario obj)
         {
             using (var contexto = new SHOECORP_BDEntities())
             {

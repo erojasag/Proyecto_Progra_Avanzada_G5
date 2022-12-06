@@ -20,9 +20,13 @@ namespace Aplicacion.Controllers
             {
                 var datos = model.ViewShipments();
 
-                if (datos != null)
+                if (datos.Transaction == true)
                 {
                     return View(datos.Shipments);
+                }
+                if(datos.Transaction == false)
+                {
+                    return View("NoShippings");
                 }
                 else
                 {
@@ -62,6 +66,7 @@ namespace Aplicacion.Controllers
         }
 
         [HttpGet]
+        [Route("InsertShipments")]
         [SessionFilter]
         public ActionResult InsertShipment(Shipments Shipment)
         {
@@ -150,11 +155,11 @@ namespace Aplicacion.Controllers
         [SessionFilter]
         [HttpGet]
         [Route("DeleteShipment")]
-        public ActionResult DeleteShipment(int Id)
+        public ActionResult DeleteShipment(int? Id)
         {
             try
             {
-                var respuesta = model.ViewShipmentsById(Id);
+                var respuesta = model.DeleteShipment((int)Id);
 
                 if (respuesta == null || respuesta.Id != 0)
                     return View("Error");
@@ -174,7 +179,7 @@ namespace Aplicacion.Controllers
         {
             try
             {
-                var respuesta = model.DeleteShipment(shipment.Id);
+                var respuesta = model.DeleteShipment(shipment.shipment_id);
 
                 if (respuesta.Transaction == true)
                     return RedirectToAction("ViewShipments", "Shipment");
