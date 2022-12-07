@@ -2531,6 +2531,7 @@
     <Content Include="Views\Brand\NoSeBorroLaMarca.cshtml" />
     <Content Include="Views\Users\ChangePassword.cshtml" />
     <Content Include="Views\Shipment\NoShippings.cshtml" />
+    <Content Include="Views\LogIn\Terms.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

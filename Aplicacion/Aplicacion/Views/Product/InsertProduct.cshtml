@@ -34,7 +34,7 @@
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="form-outline flex-fill mb-0">
-                                                @Html.TextBoxFor(Model => Model.Price, new { @class = "form-control", @placeholder = "Price" })
+                                                @Html.TextBoxFor(Model => Model.Price, new { @class = "form-control", @placeholder = "Price", @required = "required" })
                                                 <label class="form-label" for="form3Example4c">Price</label>
                                             </div>
                                         </div>
@@ -43,7 +43,7 @@
 
                                             <div class="form-outline flex-fill mb-0">
                                                 
-                                                @Html.TextBoxFor(Model => Model.Stock, new { @class = "form-control", @placeholder = "Stock", @type="number" })
+                                                @Html.TextBoxFor(Model => Model.Stock, new { @class = "form-control", @placeholder = "Stock", @type="number", @required = "required" })
                                                 <label class="form-label" for="form3Example4cd">Stock</label>
                                             </div>
                                         </div>
@@ -51,7 +51,7 @@
 
                                             <div class="form-outline flex-fill mb-0">
                                                 
-                                                @Html.TextBoxFor(Model => Model.Model, new { @class = "form-control", @placeholder = "Model" })
+                                                @Html.TextBoxFor(Model => Model.Model, new { @class = "form-control", @placeholder = "Model", @required = "required" })
                                                 <label class="form-label" for="form3Example4cd">Model</label>
                                             </div>
                                         </div>
@@ -59,7 +59,7 @@
 
                                             <div class="form-outline flex-fill mb-0">
                                                 
-                                                @Html.TextBoxFor(Model => Model.Color, new { @class = "form-control", @placeholder = "Color" })
+                                                @Html.TextBoxFor(Model => Model.Color, new { @class = "form-control", @placeholder = "Color", @required = "required" })
                                                 <label class="form-label" for="form3Example4cd">Color</label>
                                             </div>
                                         </div>
@@ -67,14 +67,14 @@
 
                                             <div class="form-outline flex-fill mb-0">
                                                 
-                                                @Html.TextBoxFor(Model => Model.shoeSize, new { @class = "form-control", @placeholder = "Size" })
+                                                @Html.TextBoxFor(Model => Model.shoeSize, new { @class = "form-control", @placeholder = "Size", @required = "required" })
                                                 <label class="form-label" for="form3Example4cd">Size</label>
                                             </div>
                                         </div>
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="form-outline flex-fill mb-0">
                                                 
-                                                @Html.TextBoxFor(Model => Model.Photo, new { @class = "form-control", @type="file" })
+                                                @Html.TextBoxFor(Model => Model.Photo, new { @class = "form-control", @type="file", @required = "required" })
                                                 <label class="form-label" for="customFile">Photo</label>
                                             </div>
                                         </div>

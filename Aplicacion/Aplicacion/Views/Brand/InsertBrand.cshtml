@@ -18,7 +18,7 @@
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="form-outline flex-fill mb-0">
-                                                @Html.TextBoxFor(Model => Model.Name, new { @class = "form-control", @placeholder = "Brand name" })
+                                                @Html.TextBoxFor(Model => Model.Name, new { @class = "form-control", @placeholder = "Brand name", @required = "required" })
                                                 <label class="form-label" for="form3Example1c">Brand Name</label>
                                             </div>
                                         </div>
@@ -29,7 +29,7 @@
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="form-outline flex-fill mb-0">
-                                                @Html.TextBoxFor(Model => Model.Photo, new { @class = "form-control", @type = "file" })
+                                                @Html.TextBoxFor(Model => Model.Photo, new { @class = "form-control", @type = "file", @required = "required" })
                                                 <label class="form-label" for="customFile">Photo</label>
                                             </div>
                                         </div>
@@ -40,7 +40,7 @@
                                                     <button type="submit" class="btn btn-primary btn-lg">Add Brand</button>
                                                 </div>
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-                                                    <button type="reset" class="btn btn-danger btn-lg">Clear</button>
+                                                    <button type="reset" class="btn btn-danger btn-lg">Clear the Brand</button>
                                                 </div>
 
                                             </div>

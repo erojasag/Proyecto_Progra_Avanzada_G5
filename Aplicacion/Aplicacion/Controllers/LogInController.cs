@@ -18,6 +18,11 @@ namespace Aplicacion.Controllers
             return View(new Users());
         }
 
+        public ActionResult Terms()
+        {
+            return View();
+        }
+
         [SessionFilter]
         [HttpGet]
         public ActionResult UserRegistration(Users user)

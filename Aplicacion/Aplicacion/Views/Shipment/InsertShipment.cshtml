@@ -31,7 +31,7 @@
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="form-outline flex-fill mb-0">
                                                 <label class="form-label" for="Sdate">Shipping Date</label>
-                                                @Html.TextBoxFor(Model => Model.shipment_date, new {  @class = "form-control", @type = "date" })
+                                                @Html.TextBoxFor(Model => Model.shipment_date, new {  @class = "form-control", @type = "date", @required = "required" })
                                                 @Html.ValidationMessageFor(model => model.shipment_date, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@
                                         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                             <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                                                    <button type="submit" class="btn btn-primary btn-lg">Add</button>
+                                                    <button type="submit" class="btn btn-primary btn-lg">Add an Shipment</button>
                                                 </div>
                                                 <div class="btn-group mr-2" role="group" aria-label="Second group">
                                                     <button type="reset" class="btn btn-danger btn-lg">Clear</button>
