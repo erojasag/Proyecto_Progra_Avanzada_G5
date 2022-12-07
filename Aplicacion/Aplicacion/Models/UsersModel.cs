@@ -7,16 +7,16 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
-
+using System.Web.WebPages;
 
 namespace Aplicacion.Models
 {
     public class UsersModel
     {
-      
-        public Users ValidateUser(Users User)
+        string Url = ConfigurationManager.AppSettings["urlServicioProyecto"];
+        public Respuesta ValidateUser(Users User)
         {
-            string Url = ConfigurationManager.AppSettings["urlServicioProyecto"];
+            
             using (var client = new HttpClient())
             {
                 try
@@ -29,7 +29,7 @@ namespace Aplicacion.Models
 
                     if (response.IsSuccessStatusCode)
                     {
-                        return response.Content.ReadAsAsync<Users>().Result;
+                        return response.Content.ReadAsAsync<Respuesta>().Result;
                     }
                     else
                     {
@@ -48,7 +48,7 @@ namespace Aplicacion.Models
 
         public Respuesta ViewUsers()
         {
-            string url = ConfigurationManager.AppSettings["urlServicioProyecto"];
+            
             using (var client = new HttpClient())
             {
                 try
@@ -56,7 +56,7 @@ namespace Aplicacion.Models
 
                     
                     string api = "Users/ViewUsers";
-                    string route = url + api;
+                    string route = Url + api;
 
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -88,7 +88,7 @@ namespace Aplicacion.Models
 
         public Respuesta ViewUserById(Guid Id)
         {
-            string Url = ConfigurationManager.AppSettings["urlServicioProyecto"];
+            
             using (var client = new HttpClient())
             {
                 try
@@ -119,7 +119,7 @@ namespace Aplicacion.Models
 
         public Respuesta UserRegistration(Users user)
         {
-            string Url = ConfigurationManager.AppSettings["urlServicioProyecto"];
+            
             using (var client = new HttpClient())
             {
                 try
@@ -154,15 +154,103 @@ namespace Aplicacion.Models
             }
         }
 
-        public Respuesta EditUser(Users user)
+        public Respuesta ViewUserByEmail(string email)
         {
-            string host = ConfigurationManager.AppSettings["urlServicioProyecto"];
-            string api = "Users/EditUser";
-            string route = host + api;
+            string api = "Users/ViewUserByEmail?email=" + email;
+            string route = Url + api;
+
             using (var client = new HttpClient())
             {
                 try
                 {
+                    HttpResponseMessage respuesta = client.GetAsync(route).Result;
+                    if (respuesta.IsSuccessStatusCode)
+                    {
+                        return respuesta.Content.ReadAsAsync<Respuesta>().Result;
+                    }
+                    else
+                    {
+                        throw new Exception("error");
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
+        public Respuesta ForgotPassword(Users user)
+        {
+            string api = "Users/ForgotPassword";
+            string route = Url + api;
+
+            using(var client = new HttpClient())
+            {
+                try
+                {
+                    JsonContent body = JsonContent.Create(user);
+
+                    if (user.Email.IsEmpty())
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        HttpResponseMessage respuesta = client.PostAsync(route, body).Result;
+                        if (respuesta.IsSuccessStatusCode)
+                        {
+                            return respuesta.Content.ReadAsAsync<Respuesta>().Result;
+                        }
+                    }
+
+                    return null;
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+        }
+
+        public Respuesta ActivateAccount(Guid activationCode)
+        {
+            string api = "Users/ActivateAccount?activationCode=" + activationCode;
+            string route = Url + api;
+
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage respuesta = client.GetAsync(route).Result;
+                    if (respuesta.IsSuccessStatusCode)
+                    {
+                        return respuesta.Content.ReadAsAsync<Respuesta>().Result;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+        }
+
+        public Respuesta EditUser(Users user)
+        {
+            
+            string api = "Users/EditUser";
+            string route = Url + api;
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    
                     JsonContent body = JsonContent.Create(user);
 
                     if (user != null && user.Password == null)
@@ -180,7 +268,7 @@ namespace Aplicacion.Models
                     {
 
 
-                        HttpResponseMessage respuesta = client.PutAsync(route, body).Result;
+                        HttpResponseMessage respuesta = client.PostAsync(route, body).Result;
 
 
                         return respuesta.Content.ReadAsAsync<Respuesta>().Result;
@@ -204,7 +292,7 @@ namespace Aplicacion.Models
 
         public Respuesta DeleteUser(Guid Id)
         {
-            string Url = ConfigurationManager.AppSettings["urlServicioProyecto"];
+            
             using (var client = new HttpClient())
             {
                 try

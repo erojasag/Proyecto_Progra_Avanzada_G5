@@ -18,7 +18,7 @@ namespace Aplicacion.Controllers
             return View(new Users());
         }
 
-        [SessionFilter]
+        
         [HttpGet]
         public ActionResult UserRegistration(Users user)
         {
@@ -30,15 +30,17 @@ namespace Aplicacion.Controllers
         public ActionResult ValidateUser(Users User)
         {
 
-            if (User.Password != null && User.Username != null)
+            if (User.noHashPass != null && User.Username != null)
             {
                 var datos = model.ValidateUser(User);
+
+                var tok = datos.User;
 
                 if (datos != null)
                 {
 
-                    Users usuario = new Users();
-                    Session["User"] = datos;
+                    
+                    Session["User"] = datos.User;
                     return RedirectToAction("Index", "Home");
                 }
                 else

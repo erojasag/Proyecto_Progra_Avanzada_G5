@@ -30,9 +30,11 @@ namespace Servicio.Entities
         public int User_Role { get; set; }
         public string Username { get; set; }
         public byte[] Password { get; set; }
+        public string noHashPass { get; set; }
         public System.DateTime Birth_date { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string Token { get; set; }
         public System.DateTime Registration_date { get; set; }
         public byte[] Photo { get; set; }
         public Nullable<System.DateTime> Modification_date { get; set; }

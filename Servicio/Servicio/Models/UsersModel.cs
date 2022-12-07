@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using System.Data.Entity.Core.Objects;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -14,6 +15,8 @@ namespace Servicio.Models
 {
     public class UsersModel
     {
+
+        readonly EmailModel emailModel = new EmailModel();
 
         //logica para ver todos los usuarios en la db
         public List<Users> ViewUsers()
@@ -101,21 +104,86 @@ namespace Servicio.Models
                 }
             }
         }
-
-
-        public bool InsertUser(Usuario User)
+        public bool ViewUserByEmail(string email)
         {
             using (var db = new SHOECORP_BDEntities())
             {
                 try
                 {
+                    var TablaUser = (from x in db.Users
+                                     where x.Email == email
+                                     select x).FirstOrDefault();
+
+                    if(TablaUser != null)
+                    {
+                        return true;
+                    }
+
+                    else
+                    {
+                        throw new Exception("El usuario no existe");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
+
+        public bool UserRegistration(Users User)
+        {
+            using (var db = new SHOECORP_BDEntities())
+            {
+                try
+                {
+                    
 
                     db.REGISTRAR_USUARIO(User.Identification, User.Name, User.First_last_name, User.Second_last_name, User.User_Role,
-                        User.Username, User.Password, User.Birth_date, User.Phone, User.Email, User.Photo, User.Address);
+                        User.Username, User.noHashPass, User.Birth_date, User.Phone, User.Email, User.Photo, User.Address);
+
+                    var getActivationCode = (from x in db.Users
+                                            where x.Email == User.Email
+                                            select x).FirstOrDefault();
+
+                    emailModel.SendVerificationLinkEmail(User.Email, getActivationCode.Activation_Code);
                     return true;
 
                 }
                 catch (Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
+        public bool ActivateAccount(Guid? activationCode)
+        {
+            using(var db = new SHOECORP_BDEntities())
+            {
+                try
+                {
+                    var activateAccount = (from x in db.Users
+                                           where x.Activation_Code == activationCode
+                                           select x).FirstOrDefault();
+
+                    if(activateAccount != null && activateAccount.Activation_Code == activationCode)
+                    {
+                        activateAccount.Email_Verification = true;
+                        emailModel.SendActivationConfirmationEmail(activateAccount.Email);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        db.Dispose();
+                        return false;
+                    }
+                }
+                catch(Exception ex)
                 {
                     db.Dispose();
                     throw ex;
@@ -156,22 +224,28 @@ namespace Servicio.Models
             {
                 try
                 {
-                    var Id = User.Id;
-                    var datos = db.Users.Find(Id);
+                    var datos = (from x in db.Users
+                                 where x.Email == User.Email
+                                 select x).FirstOrDefault();
 
                     if(datos != null)
                     {
-                        if (datos.Password == null)
-                        {
-                            return true;
-                        }
+                        var generateRandomPassword = db.FORGOT_PASS(User.Email);
+
+                        ObjectResult<string> getTempPassword = db.SEE_TEMPASSWORD(User.Email);
+
+                        var tempPassword = getTempPassword.FirstOrDefault();
+                        
+
+                        emailModel.ForgotPasswordEmail(User.Email, tempPassword);
+
+                        return true;
                     }
                     else
                     {
                         return false;
 
                     }
-                    return false;
                 }catch(Exception ex)
                 {
                     db.Dispose();
@@ -212,7 +286,7 @@ namespace Servicio.Models
             }
         }
 
-        public Usuario ValidateUser(Usuario User)
+        public Users ValidateUser(Users User)
         {
             using (var db = new SHOECORP_BDEntities())
             {
@@ -220,24 +294,31 @@ namespace Servicio.Models
                 {
 
 
-                    var datos = db.DESENCRIPTAR_CONTRA(User.Username, User.Password).FirstOrDefault();
+                    var datos = db.DESENCRIPTAR_CONTRA(User.Username, User.noHashPass).FirstOrDefault();
 
-                    if (datos != null)
+                    if (datos != null && datos.Email_Verification == true)
                     {
                         var token = GetToken(datos.Id);
 
-                        Usuario u1 = new Usuario();
+                        Users u1 = new Users();
                         u1.Id = datos.Id;
                         u1.Username = datos.Username;
                         u1.Name= datos.Name;
                         u1.User_Role = datos.User_Role;
                         u1.Photo = datos.Photo;
                         u1.Token = token;
+                        u1.Email_Verification = true;
+
                         return u1;
+                    }
+                    if(datos != null && datos.Email_Verification == false)
+                    {
+                        throw new Exception("El usuario aun no se encuentra activo," +
+                            "por favor refierase a su correo de activacion");
                     }
                     else
                     {
-                        return null;
+                        throw new Exception("El usuario y contrasena no matchean");
 
                     }
                 }
@@ -281,21 +362,29 @@ namespace Servicio.Models
 
         }
 
-        public string ActualizarContraseña(Usuario obj)
+        public bool ActualizarContraseña(Users user)
         {
             using (var contexto = new SHOECORP_BDEntities())
             {
 
                 try
                 {
-                    if (ViewUserById(obj.Id) == null)
+                    if (ViewUserById(user.Id) == null)
                     {
-                        return "No se puede cambiar contraseña porque el usuario no existe.";
+                        return false;
                     }
                     else
                     {
-                        contexto.ACTUALIZAR_CONTRASENIA(obj.Id, obj.Password);
-                        return "Cambio de contraseña satisfactorio";
+                        var updatePassword = contexto.ACTUALIZAR_CONTRASENIA(user.Id, user.noHashPass);
+
+                        if(updatePassword == 0)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
                     }
 
 
