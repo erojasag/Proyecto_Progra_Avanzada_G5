@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ShoeCorp</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -80,7 +82,7 @@
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Add Product</p>
                                             </a>
-                                        </li>                             
+                                        </li>
                                         <li class="nav-item menu">
                                             <a href="#" class="nav-link active">
                                                 <i class="nav-icon fas fa-broom"></i>
@@ -129,39 +131,39 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                        </li>
+                                </li>
 
-                                        <li class="nav-item menu">
-                                            <a href="#" class="nav-link active">
-                                                <i class="nav-icon fas fa-user-alt"></i>
-                                                <p>
-                                                    Users
-                                                    <i class="right fas fa-angle-left"></i>
-                                                </p>
-                                            </a>
-                                            <ul class="nav nav-treeview">
+                                <li class="nav-item menu">
+                                    <a href="#" class="nav-link active">
+                                        <i class="nav-icon fas fa-user-alt"></i>
+                                        <p>
+                                            Users
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
 
-                                                <li class="nav-item">
-                                                    <a href="@Url.Action("UserRegistration", "LogIn")" class="nav-link active">
-                                                        <i class="far fa-circle nav-icon"></i>
-                                                        <p>Insert user</p>
-                                                    </a>
-                                                </li>
-
-                                            </ul>
-                                        </li>
                                         <li class="nav-item">
-                                            <a href="@Url.Action("Contact", "Home")" class="nav-link active">
+                                            <a href="@Url.Action("UserRegistration", "LogIn")" class="nav-link active">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Contact</p>
+                                                <p>Insert user</p>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a href="@Url.Action("LogOut", "LogIn")" class="nav-link active">
-                                                <i class="fa fa-sign-out-alt nav-icon" aria-hidden="true"></i><p>Log Out</p>
-                                            </a>
-                                        </li>
+
                                     </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Contact", "Home")" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Contact</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("LogOut", "LogIn")" class="nav-link active">
+                                        <i class="fa fa-sign-out-alt nav-icon" aria-hidden="true"></i><p>Log Out</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </nav>
                         <!-- /.sidebar-menu -->
                     </div>
@@ -224,7 +226,24 @@
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Add Product</p>
                                             </a>
-                                        </li>                                    
+                                        </li>
+                                        <li class="nav-item menu">
+                                            <a href="#" class="nav-link active">
+                                                <i class="nav-icon fas fa-broom"></i>
+                                                <p>
+                                                    Orders
+                                                    <i class="right fas fa-angle-left"></i>
+                                                </p>
+                                            </a>
+                                            <ul class="nav nav-treeview">
+                                                <li class="nav-item">
+                                                    <a href="@Url.Action("ViewOrders", "Orders")" class="nav-link active">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>All Orders</p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
                                         <li class="nav-item menu">
                                             <a href="#" class="nav-link active">
                                                 <i class="nav-icon fas fa-broom"></i>
@@ -434,12 +453,11 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="@Url.Action("ViewOrders", "Orders")" class="nav-link active">
+                                            <a href="@Url.Action("ViewCustomersOrders", "Orders", new { Id = sesion.Id })" class="d-block">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>View My Orders</p>
                                             </a>
                                         </li>
-
                                     </ul>
                                 </li>
 
@@ -594,6 +612,8 @@
 
     <link href="~/Content/sweetalert2.css" rel="stylesheet" />
     <script src="~/Scripts/sweetalert2.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

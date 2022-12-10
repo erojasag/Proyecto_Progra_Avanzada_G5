@@ -17,8 +17,6 @@ namespace Servicio.Models
                 try
                 {
 
-
-
                     var datos = db.MOSTRAR_ORDENES().ToList();
 
                     foreach (var item in datos)
@@ -28,6 +26,7 @@ namespace Servicio.Models
                             Id = item.Id,
                             UserId = item.Order_User_Id,
                             NombreCompleto = item.NOMBRE_COMPLETO,
+                            Producto = item.Product,
                             Order_date = item.Order_date,
                             Order_total = item.Order_total
 
@@ -66,6 +65,38 @@ namespace Servicio.Models
                     {
                         return null;
                     }
+                }
+                catch (Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
+        public List<OrdenDetallada> ViewCustomersOrders(Guid Id)
+        {
+            List<OrdenDetallada> orders = new List<OrdenDetallada>();
+            using (var db = new SHOECORP_BDEntities())
+            {
+                try
+                {
+                    var datos = db.MOSTRAR_ORDENES_CLIENTE(Id).ToList();
+
+                    foreach (var item in datos)
+                    {
+                        orders.Add(new OrdenDetallada
+                        {
+                            Id = item.Id,
+                            UserId = item.Order_User_Id,
+                            NombreCompleto = item.NOMBRE_COMPLETO,
+                            Producto = item.Product,
+                            Order_date = item.Order_date,
+                            Order_total = item.Order_total
+
+                        });
+                    }
+                    return orders;
                 }
                 catch (Exception ex)
                 {

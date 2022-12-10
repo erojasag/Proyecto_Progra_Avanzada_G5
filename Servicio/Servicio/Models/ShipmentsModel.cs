@@ -95,6 +95,48 @@ namespace Servicio.Models
             }
         }
 
+
+        //A diferencia del anterior este no recibe Id de envio si no # de orden y retorna sus detalles
+        public Shipments ViewOrderStatus(int Id)
+        {
+            using (var db = new SHOECORP_BDEntities())
+            {
+                try
+                {
+                    var tshipments = db.Shipments.Find(Id);
+                    Shipments shipment = new Shipments();
+                    if (tshipments != null)
+                    {
+                        shipment.shipment_id = tshipments.shipment_id;
+                        shipment.shipment_order_id = tshipments.shipment_order_id;
+                        shipment.shipment_date = tshipments.shipment_date;
+                        shipment.shipment_status = tshipments.shipment_status;
+                        shipment.shipment_address = tshipments.shipment_address;
+                        shipment.shipment_city = tshipments.shipment_city;
+                        shipment.shipment_state = tshipments.shipment_state;
+                        shipment.shipment_zip_code = tshipments.shipment_zip_code;
+                        shipment.shipment_country = tshipments.shipment_country;
+                        shipment.shipment_phone = tshipments.shipment_phone;
+                        shipment.shipment_email = tshipments.shipment_email;
+                        shipment.shipment_customer_id = tshipments.shipment_customer_id;
+
+                        return shipment;
+                    }
+                    else
+                    {
+                        throw new Exception("No se han encontrado registros con el id" + " " + Id);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    db.Dispose();
+                    throw ex;
+                }
+            }
+        }
+
+
+
         public bool InsertShipment(Shipments shipment)
         {
             using (var db = new SHOECORP_BDEntities())

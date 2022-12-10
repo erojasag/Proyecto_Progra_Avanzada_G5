@@ -33,8 +33,8 @@
     <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="shoeSize" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="Modification_date" Type="DateTime" Precision="7" />
+    <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modification_date" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Brand" Relationship="Self.FK_Brand_Id" FromRole="Product" ToRole="Brand" />
     <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Product_Id" FromRole="Product" ToRole="Product_By_Order" />
     <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_Product_id" FromRole="Product" ToRole="ShoppingCart" />
@@ -334,6 +334,40 @@
     <FunctionImport Name="SEE_TEMPASSWORD" ReturnType="Collection(String)">
       <Parameter Name="EMAIL" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="sysdiagrams" EntityType="SHOECORP_BDModel.sysdiagrams" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SHOECORP_BDModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SHOECORP_BDModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="MOSTRAR_ORDENES_CLIENTE" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDENES_CLIENTE_Result)">
+      <Parameter Name="V_ID" Mode="In" Type="Guid" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="DESENCRIPTAR_CONTRA_Result">
     <Property Type="Guid" Name="Id" Nullable="false" />
@@ -365,6 +399,35 @@
     <Property Type="Int32" Name="Id" Nullable="false" />
     <Property Type="Guid" Name="Order_User_Id" Nullable="false" />
     <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
+    <Property Type="DateTime" Name="Order_date" Nullable="false" />
+    <Property Type="Decimal" Name="Order_total" Nullable="false" Precision="10" Scale="2" />
+  </ComplexType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="MOSTRAR_ORDENES_CLIENTE_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Guid" Name="Order_User_Id" Nullable="false" />
+    <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
+    <Property Type="String" Name="Product" Nullable="false" MaxLength="50" />
     <Property Type="DateTime" Name="Order_date" Nullable="false" />
     <Property Type="Decimal" Name="Order_total" Nullable="false" Precision="10" Scale="2" />
   </ComplexType>
