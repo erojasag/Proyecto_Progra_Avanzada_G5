@@ -15,6 +15,8 @@ namespace Aplicacion.Entities
 
         public int Id { get; set; }
         public int Order_User_Id { get; set; }
+        public string NombreCompleto { get; set; }
+        public string Product { get; set; }
         public byte[] Order_date { get; set; }
         public decimal Order_total { get; set; }
 

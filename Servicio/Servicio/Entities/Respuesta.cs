@@ -25,8 +25,6 @@ namespace Servicio.Entities
         public List<Shipments> Shipments { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
         public List<ShoppingCart> ShoppingCarts { get; set; }
-        public Usuario Usuario { get; set; }
-        public List<Usuario> Usuarios { get; set; }
 
 
 
@@ -38,18 +36,6 @@ namespace Servicio.Entities
             respuesta.Transaction = Transaction;
             respuesta.User = User;
             respuesta.Users = Users;
-            return respuesta;
-        }
-
-
-        public Respuesta ArmarRespuestaUsuarios(int Id, string Message, bool Transaction, Usuario Usuario, List<Usuario> Usuarios)
-        {
-            Respuesta respuesta = new Respuesta();
-            respuesta.Id = Id;
-            respuesta.Message = Message;
-            respuesta.Transaction = Transaction;
-            respuesta.Usuario = Usuario;
-            respuesta.Usuarios = Usuarios;
             return respuesta;
         }
 
