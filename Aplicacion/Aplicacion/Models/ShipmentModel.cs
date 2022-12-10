@@ -83,6 +83,46 @@ namespace Aplicacion.Models
             }
         }
 
+        public Respuesta ViewOrderStatus(int Id)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    if (Id >= 0)
+                    {
+                        string api = "shipments/ViewOrderStatus?Id=" + Id;
+                        string route = Url + api;
+
+                        HttpResponseMessage response = client.GetAsync(route).Result;
+
+                        response.EnsureSuccessStatusCode();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var responseBody = response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
+                            return responseBody;
+                        }
+                        else
+                        {
+                            throw new Exception("Could not find any shipment results under Order Id:" + " " + Id);
+                        }
+
+                    }
+                    else
+                    {
+                        throw new Exception("The order Id must be higher than 0");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+        }
+
+
+
         public Respuesta InsertShipment(Shipments shipment)
         {
             using (var client = new HttpClient())

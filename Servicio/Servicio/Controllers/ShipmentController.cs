@@ -45,6 +45,22 @@ namespace Servicio.Controllers
             }
         }
 
+        [HttpGet]
+        //[Authorize]
+        [Route("shipments/ViewOrderStatus")]
+        public Respuesta ViewOrderStatus(int Id)
+        {
+            try
+            {
+                return respuesta.ArmarRespuestaShipment(1, "OK", false, model.ViewOrderStatus(Id), null);
+            }
+            catch (Exception ex)
+            {
+                return respuesta.ArmarRespuestaShipment(-1, ex.Message, false, null, null);
+            }
+        }
+
+
         [HttpPost]
         //[Authorize]
         [Route("shipments/InsertShipment")]
