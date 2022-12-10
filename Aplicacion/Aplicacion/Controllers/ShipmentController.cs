@@ -66,6 +66,32 @@ namespace Aplicacion.Controllers
         }
 
         [HttpGet]
+        [Route("ViewOrderStatus")]
+        public ActionResult ViewOrderStatus(int Id)
+        {
+            try
+            {
+
+                if (Id == 0)
+                {
+                    return View();
+                }
+
+                var datos = model.ViewOrderStatus(Id);
+                if (datos == null)
+                {
+                    return View("Error");
+                }
+
+                return View(datos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
         [Route("InsertShipments")]
         [SessionFilter]
         public ActionResult InsertShipment(Shipments Shipment)
