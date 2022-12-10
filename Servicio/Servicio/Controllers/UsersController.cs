@@ -118,16 +118,16 @@ namespace Servicio.Controllers
 
         //ACTUALIZAR CONTRASEÑA
         [HttpPost]
-        [Route("Users/ActualizarContraseña")]
-        public Respuesta ActualizarContraseña(Users user)
+        [Route("Users/UpdatePassword")]
+        public Respuesta UpdatePassword(Users user)
         {
             try
             {
-                return respuesta.ArmarRespuestaUsers(1, "OK",model.ActualizarContraseña(user), null, null);
+                return respuesta.ArmarRespuestaUsers(1, "OK",model.UpdatePassword(user), null, null);
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuestaUsers(0, ex.Message, model.ActualizarContraseña(user), null, null);
+                return respuesta.ArmarRespuestaUsers(0, ex.Message, model.UpdatePassword(user), null, null);
             }
         }
 

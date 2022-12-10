@@ -2544,7 +2544,6 @@
     <Content Include="Views\Shipment\InsertShipment.cshtml" />
     <Content Include="Views\Brand\DeleteBrand.cshtml" />
     <Content Include="Views\Brand\NoSeBorroLaMarca.cshtml" />
-    <Content Include="Views\Users\ChangePassword.cshtml" />
     <Content Include="Views\Shipment\NoShippings.cshtml" />
     <Content Include="Views\Users\ForgotPassword.cshtml" />
     <Content Include="Views\Users\ForgotPasswordSuccessful.cshtml" />
@@ -2552,6 +2551,7 @@
     <Content Include="Views\Users\ActivateAccount.cshtml" />
     <Content Include="Views\Users\AccountNotActivated.cshtml" />
     <Content Include="Views\Users\AccountActivated.cshtml" />
+    <Content Include="Views\Users\UpdatePassword.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

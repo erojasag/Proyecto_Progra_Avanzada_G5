@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Entities;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.WebPages;
 
 namespace Aplicacion.Models
@@ -93,21 +95,25 @@ namespace Aplicacion.Models
             {
                 try
                 {
-                        string api = "Users/ViewUserById?Id=" + Id;
-                        string route = Url + api;
+                    object sesion = new Users();
+                    sesion = HttpContext.Current.Session["User"];
 
-                        HttpResponseMessage response = client.GetAsync(route).Result;
 
-                        response.EnsureSuccessStatusCode();
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var responseBody = response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
-                            return responseBody;
-                        }
-                        else
-                        {
-                            throw new Exception("No se encontro un usuario existente bajo el Id:" + " " + Id);
-                        }
+                    string api = "Users/ViewUserById?Id=" + Id;
+                    string route = Url + api;
+
+                    HttpResponseMessage response = client.GetAsync(route).Result;
+
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseBody = response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
+                        return responseBody;
+                    }
+                    else
+                    {
+                        throw new Exception("No se encontro un usuario existente bajo el Id:" + " " + Id);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -180,6 +186,33 @@ namespace Aplicacion.Models
             }
         }
 
+        public Respuesta UpdatePassword(Users user)
+        {
+            using(var client = new HttpClient())
+            {
+                string api = "Users/UpdatePassword";
+                string route = Url + api;
+                try
+                {
+                    JsonContent body = JsonContent.Create(user);
+                    HttpResponseMessage respuesta = client.PostAsync(route, body).Result;
+                    if (respuesta.IsSuccessStatusCode)
+                    {
+                        return respuesta.Content.ReadAsAsync<Respuesta>().Result;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                    
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
         public Respuesta ForgotPassword(Users user)
         {
             string api = "Users/ForgotPassword";
@@ -244,8 +277,7 @@ namespace Aplicacion.Models
         public Respuesta EditUser(Users user)
         {
             
-            string api = "Users/EditUser";
-            string route = Url + api;
+     
             using (var client = new HttpClient())
             {
                 try
@@ -253,10 +285,11 @@ namespace Aplicacion.Models
                     
                     JsonContent body = JsonContent.Create(user);
 
-                    if (user != null && user.Password == null)
+                    if (user != null && (user.newPassword == null && user.newPassword2 == null))
                     {
 
-
+                        string api = "Users/EditUser";
+                        string route = Url + api;
                         HttpResponseMessage respuesta = client.PostAsync(route, body).Result;
                         if (respuesta.IsSuccessStatusCode)
                         {
@@ -264,9 +297,10 @@ namespace Aplicacion.Models
                         }
 
                     }
-                    else if (user != null && user.Password != null)
+                    else if (user != null && (user.newPassword != null && user.newPassword2 != null))
                     {
-
+                        string api = "Users/UpdatePassword";
+                        string route = Url + api;
 
                         HttpResponseMessage respuesta = client.PostAsync(route, body).Result;
 

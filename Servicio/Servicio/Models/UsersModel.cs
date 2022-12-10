@@ -362,7 +362,7 @@ namespace Servicio.Models
 
         }
 
-        public bool ActualizarContraseña(Users user)
+        public bool UpdatePassword(Users user)
         {
             using (var contexto = new SHOECORP_BDEntities())
             {

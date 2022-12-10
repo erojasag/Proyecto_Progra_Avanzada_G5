@@ -39,13 +39,13 @@ namespace Aplicacion.Controllers
                 if (datos != null)
                 {
 
-                    
+                    Session["User"] = new Users();
                     Session["User"] = datos.User;
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    return View("UserLogIn");
+                    return ViewBag.Msj = "¡ERROR! El usuario o la contraseña son incorrectos. Por favor intente de nuevo."; ;
                 }
             }
             else
