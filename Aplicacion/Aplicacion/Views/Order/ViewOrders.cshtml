@@ -1,0 +1,60 @@
+﻿@model  IEnumerable<Aplicacion.Entities.Orders>
+
+@using Aplicacion.Entities
+
+@{
+    var sesion = ((Users)Session["User"]);
+}
+
+@{
+    ViewBag.Title = "ViewOrders";
+
+
+}
+
+
+@if (sesion.User_Role != 0)
+{
+    <div class="wraping">
+        <div class="container">
+            <h2 class="title" style="color:darkblue;"> Orders </h2>
+            <br />
+            <div class="table-responsive">
+                <table id="OrdersTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th @Html.DisplayNameFor(model => model.Id)>Order ID</th>
+                            <th @Html.DisplayNameFor(model => model.NombreCompleto)>Customer Name</th>
+                            <th @Html.DisplayNameFor(model => model.Product)>First Product</th>
+                            <th @Html.DisplayNameFor(model => model.Order_date)>Order Date</th>
+                            <th @Html.DisplayNameFor(model => model.Order_total)>Order Amount</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.NombreCompleto</td>
+                                <td>@item.Product</td>
+                                <td>@item.Order_date</td>
+                                <td>@item.Order_total</td>
+
+                                <td>
+                                    @Html.ActionLink("Edit", "EditOrder", "Orders", new { Id = item.Id }, new { @class = "btn btn-primary" })
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script src="~/Funciones/Tablas.js"></script>
+    }

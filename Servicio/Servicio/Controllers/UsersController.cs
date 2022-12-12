@@ -36,11 +36,25 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuestaUsers(1, "OK", false, null, model.ViewUsers());
+                return respuesta.ArmarRespuestaUsers(1, "OK", true, null, model.ViewUsers());
             }
             catch (Exception ex)
             {
                 return respuesta.ArmarRespuestaUsers(-1, ex.Message, false, null, null);
+            }
+        }
+
+        [HttpGet]
+        [Route("Users/GetToken")]
+        public string GetToken(Guid Id)
+        {
+            try
+            {
+                return model.GetToken(Id);
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
 
@@ -51,7 +65,7 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuestaUsers(1, "OK", false, model.ViewUserById(Id), null);
+                return respuesta.ArmarRespuestaUsers(1, "OK", true, model.ViewUserById(Id), null);
             }
             catch (Exception ex)
             {
@@ -118,16 +132,16 @@ namespace Servicio.Controllers
 
         //ACTUALIZAR CONTRASEÑA
         [HttpPost]
-        [Route("Users/ActualizarContraseña")]
-        public Respuesta ActualizarContraseña(Users user)
+        [Route("Users/UpdatePassword")]
+        public Respuesta UpdatePassword(Users user)
         {
             try
             {
-                return respuesta.ArmarRespuestaUsers(1, "OK",model.ActualizarContraseña(user), null, null);
+                return respuesta.ArmarRespuestaUsers(1, "OK",model.UpdatePassword(user), null, null);
             }
             catch (Exception ex)
             {
-                return respuesta.ArmarRespuestaUsers(0, ex.Message, model.ActualizarContraseña(user), null, null);
+                return respuesta.ArmarRespuestaUsers(0, ex.Message, model.UpdatePassword(user), null, null);
             }
         }
 

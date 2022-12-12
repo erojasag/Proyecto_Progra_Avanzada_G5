@@ -11,8 +11,6 @@ namespace Servicio.Entities
         public int Id { get; set; }
         public string Message { get; set; }
         public bool Transaction { get; set; }
-        public OrdenDetallada DetailedOrder { get; private set; }
-        public List<OrdenDetallada> DetailedOrders { get; private set; }
         public Users User { get; set; }
         public List<Users> Users { get; set; }
         public Product Product { get; set; }
@@ -72,16 +70,6 @@ namespace Servicio.Entities
             return respuesta;
         }
 
-        public Respuesta ArmarRespuestaOrdenDetallada(int Id, string Message, bool Transaction, OrdenDetallada DetailedOrder, List<OrdenDetallada> DetailedOrders)
-        {
-            Respuesta respuesta = new Respuesta();
-            respuesta.Id = Id;
-            respuesta.Message = Message;
-            respuesta.Transaction = Transaction;
-            respuesta.DetailedOrder = DetailedOrder;
-            respuesta.DetailedOrders = DetailedOrders;
-            return respuesta;
-        }
 
         public Respuesta ArmarRespuestaShipment(int Id, string Message, bool Transaction, Shipments Shipment, List<Shipments> Shipments)
         {

@@ -173,6 +173,50 @@ namespace Aplicacion.Controllers
 
         [SessionFilter]
         [HttpGet]
+        [Route("UpdatePassword")]
+        public ActionResult UpdatePassword(Users user)
+        {
+            try
+            {
+                var data = model.ViewUserById((Guid)user.Id);
+
+                if (data != null)
+                {
+                    return View("UpdatePassword");
+                }
+                else
+                {
+                    return View();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return View("Error");
+                throw ex;
+            }
+        }
+
+        [SessionFilter]
+        [HttpPost]
+        [Route("UpdatePassword")]
+        public ActionResult UpdatePasswordPost(Users user)
+        {
+            try
+            {
+                return null;
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        [SessionFilter]
+        [HttpGet]
         [Route("EditUser")]
         public ActionResult EditUser(Guid? Id)
         {
@@ -210,7 +254,7 @@ namespace Aplicacion.Controllers
                 if (data.Transaction == true)
                 {
 
-                    ViewBag.Mensaje = "The brand was successfully modified";
+                    ViewBag.Mensaje = "The User was successfully modified";
                     return RedirectToAction("ViewUsers", "Users");
                 }
                 else

@@ -14,6 +14,7 @@ namespace Servicio.Controllers
         readonly Respuesta respuesta = new Respuesta();
         readonly ProductsModel model = new ProductsModel();
 
+        
         [HttpGet]
         [Route("products/ViewProducts")]
         public Respuesta ViewProducts()

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SHOECORP_BDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SHOECORP_BDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,8 +13,8 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Photo" Type="varchar(max)" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SHOECORP_BD.dbo.ERRORES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ERRORES">
           <Key>
             <PropertyRef Name="ID_ERROR" />
@@ -39,10 +39,13 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Order_User_Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Order_date" Type="date" Nullable="false" />
-          <Property Name="Order_total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Order_User_Id" Type="uniqueidentifier" />
+          <Property Name="NombreCompleto" Type="varchar(max)" />
+          <Property Name="Product" Type="varchar(max)" />
+          <Property Name="Order_date" Type="date" />
+          <Property Name="Order_total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -56,8 +59,8 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="shoeSize" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="Photo" Type="varchar(max)" />
-          <Property Name="Registration_date" Type="datetime" Nullable="false" />
-          <Property Name="Modification_date" Type="datetime" />
+          <Property Name="Registration_date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Modification_date" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="Product_By_Order">
           <Key>
@@ -65,7 +68,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Product_Id" Type="int" Nullable="false" />
-          <Property Name="Order_Id" Type="int" Nullable="false" />
+          <Property Name="Order_Id" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -79,7 +82,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
             <PropertyRef Name="shipment_id" />
           </Key>
           <Property Name="shipment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="shipment_order_id" Type="int" Nullable="false" />
+          <Property Name="shipment_order_id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="shipment_date" Type="date" Nullable="false" />
           <Property Name="shipment_status" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="shipment_address" Type="varchar" MaxLength="50" Nullable="false" />
@@ -99,16 +102,6 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="User_Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Product_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -157,7 +150,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_User_Id">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -259,12 +252,14 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <Parameter Name="V_USER" Type="varchar" Mode="In" />
           <Parameter Name="PASSWORD" Type="varchar(max)" Mode="In" />
         </Function>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="FORGOT_PASS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EMAIL" Type="varchar" Mode="In" />
         </Function>
         <Function Name="MOSTRAR_ORDEN_PORID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="V_ID_ORDEN" Type="int" Mode="In" />
+          <Parameter Name="V_ID_ORDEN" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="MOSTRAR_ORDEN_Y_ENVIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="V_ID" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="MOSTRAR_ORDENES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="MOSTRAR_ORDENES_CLIENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -276,6 +271,8 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
         <Function Name="REGISTRAR_ORDEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="V_ID_USUARIO" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="V_MONTO" Type="decimal" Mode="In" />
+          <Parameter Name="V_Nombre" Type="varchar(max)" Mode="In" />
+          <Parameter Name="V_Product" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="REGISTRAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="V_CED" Type="varchar" Mode="In" />
@@ -294,36 +291,6 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
         <Function Name="SEE_TEMPASSWORD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EMAIL" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="SHOECORP_BDModelStoreContainer">
           <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -332,7 +299,6 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shipments" EntityType="Self.Shipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ERRORES" EntityType="Self.ERRORES" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -383,7 +349,8 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
             <End Role="ShoppingCart" EntitySet="ShoppingCart" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SHOECORP_BDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -400,10 +367,13 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Order_User_Id" Type="Guid" Nullable="false" />
-          <Property Name="Order_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Order_total" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Order_User_Id" Type="Guid" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Product" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Order_date" Type="DateTime" Precision="0" />
+          <Property Name="Order_total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Status" Type="Boolean" />
           <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Order_Id" FromRole="Orders" ToRole="Product_By_Order" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Order_User_Id" FromRole="Orders" ToRole="Users" />
           <NavigationProperty Name="Shipments" Relationship="Self.fk_shipment_order_id" FromRole="Orders" ToRole="Shipments" />
@@ -420,8 +390,8 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="shoeSize" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Modification_date" Type="DateTime" Precision="3" />
+          <Property Name="Registration_date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Modification_date" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Brand_Id" FromRole="Product" ToRole="Brand" />
           <NavigationProperty Name="Product_By_Order" Relationship="Self.FK_Product_Id" FromRole="Product" ToRole="Product_By_Order" />
           <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_shoppingCart_Product_id" FromRole="Product" ToRole="ShoppingCart" />
@@ -432,7 +402,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Product_Id" Type="Int32" Nullable="false" />
-          <Property Name="Order_Id" Type="Int32" Nullable="false" />
+          <Property Name="Order_Id" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Id" FromRole="Product_By_Order" ToRole="Orders" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Product_Id" FromRole="Product_By_Order" ToRole="Product" />
         </EntityType>
@@ -449,7 +419,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
             <PropertyRef Name="shipment_id" />
           </Key>
           <Property Name="shipment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="shipment_order_id" Type="Int32" Nullable="false" />
+          <Property Name="shipment_order_id" Type="Guid" Nullable="false" />
           <Property Name="shipment_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="shipment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="shipment_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -545,7 +515,7 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_User_Id">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -693,13 +663,24 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
             <Parameter Name="V_USER" Mode="In" Type="String" />
             <Parameter Name="PASSWORD" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="FORGOT_PASS">
+            <Parameter Name="EMAIL" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="MOSTRAR_ORDEN_PORID" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDEN_PORID_Result)">
-          <Parameter Name="V_ID_ORDEN" Mode="In" Type="Int32" />
+            <Parameter Name="V_ID_ORDEN" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="MOSTRAR_ORDEN_Y_ENVIO" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDEN_Y_ENVIO_Result)">
+            <Parameter Name="V_ID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="MOSTRAR_ORDENES" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDENES_Result)" />
+          <FunctionImport Name="MOSTRAR_ORDENES_CLIENTE" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDENES_CLIENTE_Result)">
+            <Parameter Name="V_ID" Mode="In" Type="Guid" />
+          </FunctionImport>
           <FunctionImport Name="REGISTRAR_ORDEN">
             <Parameter Name="V_ID_USUARIO" Mode="In" Type="Guid" />
             <Parameter Name="V_MONTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_Nombre" Mode="In" Type="String" />
+            <Parameter Name="V_Product" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="REGISTRAR_USUARIO">
             <Parameter Name="V_CED" Mode="In" Type="String" />
@@ -715,45 +696,8 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
             <Parameter Name="V_PHOTO" Mode="In" Type="Binary" />
             <Parameter Name="V_ADRESS" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="FORGOT_PASS">
-          <Parameter Name="EMAIL" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="SEE_TEMPASSWORD" ReturnType="Collection(String)">
-          <Parameter Name="EMAIL" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="sysdiagrams" EntityType="SHOECORP_BDModel.sysdiagrams" />
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SHOECORP_BDModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SHOECORP_BDModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="MOSTRAR_ORDENES_CLIENTE" ReturnType="Collection(SHOECORP_BDModel.MOSTRAR_ORDENES_CLIENTE_Result)">
-            <Parameter Name="V_ID" Mode="In" Type="Guid" />
+            <Parameter Name="EMAIL" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="DESENCRIPTAR_CONTRA_Result">
@@ -776,47 +720,38 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
           <Property Type="Guid" Name="Activation_Code" Nullable="true" />
         </ComplexType>
         <ComplexType Name="MOSTRAR_ORDEN_PORID_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Guid" Name="Order_User_Id" Nullable="false" />
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="Order_User_Id" Nullable="true" />
           <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
-          <Property Type="DateTime" Name="Order_date" Nullable="false" />
-          <Property Type="Decimal" Name="Order_total" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="String" Name="Product" Nullable="true" />
+          <Property Type="DateTime" Name="Order_date" Nullable="true" />
+          <Property Type="Decimal" Name="Order_total" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="MOSTRAR_ORDEN_Y_ENVIO_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="Order_User_Id" Nullable="true" />
+          <Property Type="String" Name="shipment_status" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="shipment_date" Nullable="false" />
+          <Property Type="String" Name="Product" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Order_date" Nullable="true" />
+          <Property Type="Decimal" Name="Order_total" Nullable="true" Precision="10" Scale="2" />
         </ComplexType>
         <ComplexType Name="MOSTRAR_ORDENES_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Guid" Name="Order_User_Id" Nullable="false" />
-          <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
-          <Property Type="DateTime" Name="Order_date" Nullable="false" />
-          <Property Type="Decimal" Name="Order_total" Nullable="false" Precision="10" Scale="2" />
-        </ComplexType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="MOSTRAR_ORDENES_CLIENTE_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Guid" Name="Order_User_Id" Nullable="false" />
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="Order_User_Id" Nullable="true" />
           <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
           <Property Type="String" Name="Product" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="Order_date" Nullable="false" />
-          <Property Type="Decimal" Name="Order_total" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="DateTime" Name="Order_date" Nullable="true" />
+          <Property Type="Decimal" Name="Order_total" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="MOSTRAR_ORDENES_CLIENTE_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="Order_User_Id" Nullable="true" />
+          <Property Type="String" Name="NOMBRE_COMPLETO" Nullable="false" MaxLength="152" />
+          <Property Type="String" Name="Product" Nullable="true" />
+          <Property Type="Boolean" Name="Status" Nullable="true" />
+          <Property Type="DateTime" Name="Order_date" Nullable="true" />
+          <Property Type="Decimal" Name="Order_total" Nullable="true" Precision="10" Scale="2" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -838,8 +773,11 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
                 <ScalarProperty Name="Order_date" ColumnName="Order_date" />
                 <ScalarProperty Name="Order_total" ColumnName="Order_total" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -966,12 +904,27 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FORGOT_PASS" FunctionName="SHOECORP_BDModel.Store.FORGOT_PASS" />
           <FunctionImportMapping FunctionImportName="MOSTRAR_ORDEN_PORID" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDEN_PORID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SHOECORP_BDModel.MOSTRAR_ORDEN_PORID_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
                 <ScalarProperty Name="NOMBRE_COMPLETO" ColumnName="NOMBRE_COMPLETO" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Order_date" ColumnName="Order_date" />
+                <ScalarProperty Name="Order_total" ColumnName="Order_total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MOSTRAR_ORDEN_Y_ENVIO" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDEN_Y_ENVIO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SHOECORP_BDModel.MOSTRAR_ORDEN_Y_ENVIO_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
+                <ScalarProperty Name="shipment_status" ColumnName="shipment_status" />
+                <ScalarProperty Name="shipment_date" ColumnName="shipment_date" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
                 <ScalarProperty Name="Order_date" ColumnName="Order_date" />
                 <ScalarProperty Name="Order_total" ColumnName="Order_total" />
               </ComplexTypeMapping>
@@ -983,50 +936,12 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
                 <ScalarProperty Name="NOMBRE_COMPLETO" ColumnName="NOMBRE_COMPLETO" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
                 <ScalarProperty Name="Order_date" ColumnName="Order_date" />
                 <ScalarProperty Name="Order_total" ColumnName="Order_total" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="REGISTRAR_ORDEN" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_ORDEN" />
-          <FunctionImportMapping FunctionImportName="REGISTRAR_USUARIO" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_USUARIO" />
-          <FunctionImportMapping FunctionImportName="FORGOT_PASS" FunctionName="SHOECORP_BDModel.Store.FORGOT_PASS" />
-          <FunctionImportMapping FunctionImportName="SEE_TEMPASSWORD" FunctionName="SHOECORP_BDModel.Store.SEE_TEMPASSWORD" />
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="SHOECORP_BDModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SHOECORP_BDModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SHOECORP_BDModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SHOECORP_BDModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SHOECORP_BDModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SHOECORP_BDModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SHOECORP_BDModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SHOECORP_BDModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SHOECORP_BDModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SHOECORP_BDModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="MOSTRAR_ORDENES_CLIENTE" FunctionName="SHOECORP_BDModel.Store.MOSTRAR_ORDENES_CLIENTE">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SHOECORP_BDModel.MOSTRAR_ORDENES_CLIENTE_Result">
@@ -1034,11 +949,15 @@ advertencia 6002: La tabla o vista 'SHOECORP_BD.dbo.ERRORES' no tiene definida n
                 <ScalarProperty Name="Order_User_Id" ColumnName="Order_User_Id" />
                 <ScalarProperty Name="NOMBRE_COMPLETO" ColumnName="NOMBRE_COMPLETO" />
                 <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Order_date" ColumnName="Order_date" />
                 <ScalarProperty Name="Order_total" ColumnName="Order_total" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="REGISTRAR_ORDEN" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_ORDEN" />
+          <FunctionImportMapping FunctionImportName="REGISTRAR_USUARIO" FunctionName="SHOECORP_BDModel.Store.REGISTRAR_USUARIO" />
+          <FunctionImportMapping FunctionImportName="SEE_TEMPASSWORD" FunctionName="SHOECORP_BDModel.Store.SEE_TEMPASSWORD" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
