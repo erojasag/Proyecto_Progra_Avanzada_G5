@@ -18,7 +18,12 @@ namespace Aplicacion.Controllers
             return View(new Users());
         }
 
-        
+        [HttpGet]
+        public ActionResult Terms()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult UserRegistration(Users user)
         {

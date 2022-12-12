@@ -2564,6 +2564,7 @@
     <Content Include="Views\Order\OrderNotDeleted.cshtml" />
     <Content Include="Views\ShoppingCart\Create.cshtml" />
     <Content Include="Views\Order\ViewDetailedOrders.cshtml" />
+    <Content Include="Views\LogIn\Terms.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
