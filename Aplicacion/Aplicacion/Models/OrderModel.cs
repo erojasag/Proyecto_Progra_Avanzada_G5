@@ -89,7 +89,7 @@ namespace Aplicacion.Models
             {
                 try
                 {
-                    string Route = "OrdenDetallada/ViewDetailedOrders";
+                    string Route = "Order/ViewDetailedOrders";
 
                     HttpResponseMessage response = client.GetAsync(Url + Route).Result;
 

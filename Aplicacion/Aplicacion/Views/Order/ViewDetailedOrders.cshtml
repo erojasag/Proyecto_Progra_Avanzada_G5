@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Aplicacion.Entities.Orders>
+@using Aplicacion.Entities
+@{
+    var sesion = ((Users)Session["User"]);
+}
+<h2>My Orders</h2>
+
+
+@if (sesion.User_Role != 0)
+{
+    <p>
+        @Html.ActionLink("Insert New Order", "InsertOrder")
+    </p>
+    <table class="table">
+        <tr>
+            <th @Html.DisplayNameFor(model => model.Order_User_Id)>
+                ID
+            </th>
+            <th @Html.DisplayNameFor(model => model.NombreCompleto)>
+                Nombre Completo
+            </th>
+            <th @Html.DisplayNameFor(model => model.Product)>
+                Productos
+            </th>
+            <th @Html.DisplayNameFor(model => model.Order_total)>
+                Total
+            </th>
+            <th @Html.DisplayNameFor(model => model.Order_date)>
+                Fecha
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_User_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_total)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_date)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditOrder", new { id = item.Id }) |
+                    @Html.ActionLink("Cancel", "CancelOrder", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+

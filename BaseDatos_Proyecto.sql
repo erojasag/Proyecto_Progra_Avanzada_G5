@@ -675,20 +675,21 @@ EXECUTE SEE_TEMPASSWORD @EMAIL = 'eroaguero01@gmail.com'
 
 --ALTERAR EL SIGUIENTE SP PARA AGREGARLE NOMBRE DEL PRODUCTO
 GO
-ALTER PROCEDURE [dbo].[MOSTRAR_ORDENES]
+CREATE OR ALTER PROCEDURE [dbo].[MOSTRAR_ORDENES]
 	AS 
 	BEGIN TRY
 		SELECT A.Id,
 		A.Order_User_Id,
 		CONCAT(B.Name,' ', B.First_last_name,' ', B.Second_last_name) NOMBRE_COMPLETO,
-		P.Model AS Product,
+		Product,
 		A.Order_date,
+		A.Status,
 		A.Order_total
 		
 		
-		FROM Orders A, Users B, Product_By_Order OP, Product P
+		FROM Orders A, Users B
 		WHERE A.Order_User_Id = B.Id 
-		AND OP.Product_Id = P.Id
+
 
 	END TRY
 	BEGIN CATCH
@@ -798,4 +799,4 @@ EXECUTE MOSTRAR_ORDENES_CLIENTE @V_ID = 'D6F26A93-20D5-4DAB-96F9-1E4EFCBFDAEB'
 
 
 
-
+EXECUTE MOSTRAR_ORDENES 
