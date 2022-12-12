@@ -225,8 +225,10 @@ CREATE TABLE ShoppingCart(
 
 
 CREATE TABLE Orders(
-    Id INT NOT NULL IDENTITY(1,1),
+    Id uniqueidentifier,
     Order_User_Id uniqueidentifier NOT NULL,
+    NombreCompleto varchar(max),
+    Product varchar(max),
     Order_date DATE NOT NULL,
     Order_total DECIMAL(10,2) NOT NULL
     CONSTRAINT PK_Order_Id PRIMARY KEY (Id),
@@ -234,6 +236,8 @@ CREATE TABLE Orders(
 );
 
 
+ALTER table Orders
+Add Status bit default 1
 --------------------------------------END OF ORDERS TABLE---------------------------------------------------------------------------------------------------------
 
 --------------------------------------PRODUCT_BY_ORDER TABLE-----------------------------------------------------------------------------------------------
@@ -242,7 +246,7 @@ CREATE TABLE Orders(
 CREATE TABLE Product_By_Order(
 	Id INT NOT NULL IDENTITY(1,1),
 	Product_Id INT NOT NULL,
-	Order_Id INT NOT NULL
+	Order_Id uniqueidentifier NOT NULL
 	CONSTRAINT PK_Product_By_Order_Id PRIMARY KEY(Id),
 	CONSTRAINT FK_Product_Id FOREIGN KEY (Product_Id) REFERENCES Product(Id),
 	CONSTRAINT FK_Order_Id FOREIGN KEY (Order_Id) REFERENCES Orders(Id)
@@ -257,7 +261,7 @@ CREATE TABLE Product_By_Order(
 
 CREATE TABLE Shipments(
     shipment_id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    shipment_order_id INT NOT NULL,
+    shipment_order_id uniqueidentifier NOT NULL,
     shipment_date DATE NOT NULL,
     shipment_status varchar(50) NOT NULL,
     shipment_address varchar(50) NOT NULL,
@@ -273,8 +277,8 @@ CREATE TABLE Shipments(
 );
 
 
-insert into Orders values ('4CAF1FC2-6AF2-4FA4-A243-A9E5740744C4', '2022-12-5', 3000.00)
-insert into Shipments values (2,'2022-12-06', 'in progress', 'Av 89', 'Desamparados', 'SJ', '10302', 'CR', '88888888', 'hola@gmail.com', '4CAF1FC2-6AF2-4FA4-A243-A9E5740744C4')
+insert into Orders values (NEWID(), 'D6F26A93-20D5-4DAB-96F9-1E4EFCBFDAEB', 'Emanuel Rojas','p1','2022-12-5', 3000.00)
+insert into Shipments values ('75AAF0D1-A824-457D-8FDB-BA3D0FCA8B99','2022-12-06', 'in progress', 'Av 89', 'Desamparados', 'SJ', '10302', 'CR', '88888888', 'hola@gmail.com', 'D6F26A93-20D5-4DAB-96F9-1E4EFCBFDAEB')
 
 --------------------------------------END OF SHIPMENTS TABLE------------------------------------------------------------------------------------------------------
 
@@ -456,12 +460,14 @@ GO
 CREATE PROCEDURE REGISTRAR_ORDEN (
 -- INSERTA UNA ORDEN
 	@V_ID_USUARIO UNIQUEIDENTIFIER,
-	@V_MONTO DECIMAL(10,2))
+	@V_MONTO DECIMAL(10,2),
+	@V_Nombre VARCHAR(MAX),
+	@V_Product VARCHAR(MAX))
 	AS	
 
 	BEGIN TRY 
-		INSERT INTO Orders(Order_User_Id, Order_date, Order_total)
-		VALUES (@V_ID_USUARIO, GETDATE(), @V_MONTO);
+		INSERT INTO Orders(Id, Order_User_Id, NombreCompleto, Product, Order_date, Order_total)
+		VALUES (NEWID(),@V_ID_USUARIO, @V_Nombre, @V_Product, GETDATE(), @V_MONTO);
 	END TRY
 	BEGIN CATCH
 	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
@@ -489,6 +495,7 @@ CREATE PROCEDURE MOSTRAR_ORDENES
 		SELECT A.Id,
 		A.Order_User_Id,
 		CONCAT(B.Name,' ', B.First_last_name,' ', B.Second_last_name) NOMBRE_COMPLETO,
+		A.Product,
 		A.Order_date,
 		A.Order_total
 		
@@ -513,14 +520,16 @@ CREATE PROCEDURE MOSTRAR_ORDENES
 END CATCH;
 GO
 
+EXECUTE MOSTRAR_ORDENES
 --VER ORDENES POR ID CON SU DETALLE DE CLIENTE
 GO
-CREATE   PROCEDURE MOSTRAR_ORDEN_PORID (@V_ID_ORDEN INT)
+CREATE PROCEDURE MOSTRAR_ORDEN_PORID (@V_ID_ORDEN UNIQUEIDENTIFIER)
 	AS 
 	BEGIN TRY
 		SELECT A.Id,
 		A.Order_User_Id,
 		CONCAT(B.Name,' ', B.First_last_name,' ', B.Second_last_name) NOMBRE_COMPLETO,
+		A.Product,
 		A.Order_date,
 		A.Order_total
 		
@@ -660,4 +669,133 @@ CREATE   PROCEDURE [dbo].[FORGOT_PASS]
 		);
 	END CATCH
 
-EXECUTE SEE_TEMPASSWORD @EMAIL = 'memarojas@hotmail.es'
+EXECUTE SEE_TEMPASSWORD @EMAIL = 'eroaguero01@gmail.com'
+
+
+
+--ALTERAR EL SIGUIENTE SP PARA AGREGARLE NOMBRE DEL PRODUCTO
+GO
+ALTER PROCEDURE [dbo].[MOSTRAR_ORDENES]
+	AS 
+	BEGIN TRY
+		SELECT A.Id,
+		A.Order_User_Id,
+		CONCAT(B.Name,' ', B.First_last_name,' ', B.Second_last_name) NOMBRE_COMPLETO,
+		P.Model AS Product,
+		A.Order_date,
+		A.Order_total
+		
+		
+		FROM Orders A, Users B, Product_By_Order OP, Product P
+		WHERE A.Order_User_Id = B.Id 
+		AND OP.Product_Id = P.Id
+
+	END TRY
+	BEGIN CATCH
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
+		INSERT INTO ERRORES
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+END CATCH;
+GO
+
+  INSERT INTO Product_By_Order VALUES (1,1)
+
+--CREACION DE SP QUE MUESTRA LAS ORDENES DE UN CLIENTE EN ESPECIFICO
+  GO
+CREATE PROCEDURE MOSTRAR_ORDENES_CLIENTE  (@V_ID UNIQUEIDENTIFIER)
+	AS 
+	BEGIN TRY
+	--MUESTRA INFORMACION DE LAS ORDENES Y SU PRODUCTO
+		SELECT A.Id,
+		A.Order_User_Id,
+		CONCAT(B.Name,' ', B.First_last_name,' ', B.Second_last_name) NOMBRE_COMPLETO,
+		Product,
+		A.Status,
+		A.Order_date,
+		A.Order_total
+		
+		
+		FROM Orders A, Users B
+		WHERE a.Order_User_Id = b.Id 
+		
+
+	END TRY
+	BEGIN CATCH
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
+		INSERT INTO ERRORES
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+END CATCH;
+GO
+
+
+EXECUTE MOSTRAR_ORDENES_CLIENTE @V_ID = 'D6F26A93-20D5-4DAB-96F9-1E4EFCBFDAEB'
+
+
+SELECT * FROM Orders o WHERE o.Order_User_Id = 'D6F26A93-20D5-4DAB-96F9-1E4EFCBFDAEB'
+
+SELECT * FROM Users u WHERE u.Id = 'D6F26A93-20D5-4DAB-96F9-1E4EFCBFDAEB'
+
+SELECT * FROM Product_By_Order pbo Where pbo.
+
+ GO
+CREATE PROCEDURE MOSTRAR_ORDEN_Y_ENVIO  (@V_ID UNIQUEIDENTIFIER)
+	AS 
+	BEGIN TRY
+	--MUESTRA INFORMACION DE LAS ORDENES Y SU PRODUCTO
+		SELECT A.Id,
+		A.Order_User_Id,
+		S.shipment_status,
+		S.shipment_date,
+		P.Model AS Product,
+		A.Order_date,
+		A.Order_total
+		
+		
+		FROM Orders A, Product_By_Order OP, Product P, Shipments S
+		WHERE A.Id = S.shipment_order_id
+		AND OP.Product_Id = P.Id
+		AND A.Id = @V_ID
+
+	END TRY
+	BEGIN CATCH
+	-- INSERTA EL ERROR PRODUCIDO EN LA TABLA "ERRORES"
+		INSERT INTO ERRORES
+		VALUES
+		(
+		   ERROR_NUMBER(),
+		   ERROR_STATE(),
+		   ERROR_SEVERITY(),
+		   ERROR_LINE(),
+		   ERROR_PROCEDURE(),
+		   ERROR_MESSAGE(),
+		   GETDATE()
+		);
+END CATCH;
+GO
+
+
+
+--TEST
+EXECUTE MOSTRAR_ORDENES_CLIENTE @V_ID = 'D6F26A93-20D5-4DAB-96F9-1E4EFCBFDAEB'
+
+
+
+

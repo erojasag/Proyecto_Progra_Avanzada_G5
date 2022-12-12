@@ -34,9 +34,9 @@ namespace Aplicacion.Controllers
             {
                 var datos = model.ValidateUser(User);
 
-                var tok = datos.User;
+                var genToken = model.GetToken(User.Id);
 
-                if (datos != null)
+                if (datos.User != null)
                 {
 
                     Session["User"] = new Users();
@@ -45,7 +45,9 @@ namespace Aplicacion.Controllers
                 }
                 else
                 {
-                    return ViewBag.Msj = "¡ERROR! El usuario o la contraseña son incorrectos. Por favor intente de nuevo."; ;
+                    ViewBag.Msj = "¡ERROR! El usuario o la contraseña son incorrectos. Por favor intente de nuevo.";
+                    return View("UserNotActive");
+                    
                 }
             }
             else

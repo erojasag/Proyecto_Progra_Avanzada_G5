@@ -16,105 +16,6 @@ namespace Aplicacion.Models
     {
         string Url = ConfigurationManager.AppSettings["urlServicioProyecto"].ToString();
         
-        public Respuesta ViewOrders()
-         {
-            using (var client = new HttpClient())
-            {
-                try
-                {
-                    string Route = "Orders/ViewOrders";
-
-                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
-
-                    response.EnsureSuccessStatusCode();
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
-                    }
-                    else
-                    {
-                        return null;
-                    }
-
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-
-            }
-        }
-
-        public Respuesta ViewCustomersOrders(Guid Id)
-        {
-            using (var client = new HttpClient())
-            {
-                try
-                {
-                    string Route = "Orders/ViewCustomersOrders?Id=" + Id; 
-
-                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
-
-                    response.EnsureSuccessStatusCode();
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
-                    }
-                    else
-                    {
-                        return null;
-                    }
-
-
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-
-            }
-        }
-
-
-        public Respuesta ViewOrderById(int Id)
-        {
-            using (var client = new HttpClient())
-            {
-                try
-                {
-                    if (Id >= 0)
-                    {
-                        string api = "Orders/ViewOrderById?Id=" + Id;
-                        string route = Url + api;
-
-                        HttpResponseMessage response = client.GetAsync(route).Result;
-
-                        response.EnsureSuccessStatusCode();
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var responseBody = response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
-                            return responseBody;
-                        }
-                        else
-                        {
-                            throw new Exception("Could not find any orders under Id:" + " " + Id);
-                        }
-
-                    }
-                    else
-                    {
-                        throw new Exception("The order Id must be higher than 0");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-
-            }
-        }
-
         public Respuesta InsertOrder(Orders order)
         {
             using (var client = new HttpClient())
@@ -151,6 +52,171 @@ namespace Aplicacion.Models
             }
         }
 
+        public Respuesta EditOrder(Orders order)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    if (order != null)
+                    {
+                        JsonContent body = JsonContent.Create(order);
+                        string api = "Order/EditOrder";
+                        string route = Url + api;
+                        HttpResponseMessage respuesta = client.PostAsync(route, body).Result;
+                        if (respuesta.IsSuccessStatusCode)
+                        {
+                            return respuesta.Content.ReadAsAsync<Respuesta>().Result;
+                        }
 
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
+
+        public Respuesta ViewDetailedOrders()
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    string Route = "OrdenDetallada/ViewDetailedOrders";
+
+                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
+
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+        }
+        public Respuesta ViewCustomersDetailedOrders(Guid Id, bool showCanceledOrders)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    string Route = "Order/ViewCustomersDetailedOrders?Id=" + Id + "&showCanceledOrders="+showCanceledOrders;
+
+                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
+
+                    response.EnsureSuccessStatusCode();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
+
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+        }
+        public Respuesta ViewDetailedOrderById(Guid Id)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    if (Id != null)
+                    {
+                        string api = "Order/ViewDetailedOrderById?Id=" + Id;
+                        string route = Url + api;
+
+                        HttpResponseMessage response = client.GetAsync(route).Result;
+
+                        response.EnsureSuccessStatusCode();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var responseBody = response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
+                            return responseBody;
+                        }
+                        else
+                        {
+                            throw new Exception("Could not find any orders under Id:" + " " + Id);
+                        }
+
+                    }
+                    else
+                    {
+                        throw new Exception("The order Id must be higher than 0");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+        }
+
+        public Respuesta CancelOrder(Guid Id)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    if (Id != null)
+                    {
+                        string api = "Order/CancelOrder?Id=" + Id;
+                        string route = Url + api;
+
+                        HttpResponseMessage response = client.GetAsync(route).Result;
+
+                        response.EnsureSuccessStatusCode();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var responseBody = response.Content.ReadAsAsync<Respuesta>().Result; //serializacion del obj JSON a un objeto
+                            return responseBody;
+                        }
+                        else
+                        {
+                            throw new Exception("Could not delete de order ID:" + " " + Id);
+                        }
+
+                    }
+                    else
+                    {
+                        throw new Exception("The order does not exists");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+        }
     }
-    }
+}

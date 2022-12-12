@@ -45,6 +45,33 @@ namespace Aplicacion.Models
             }
         }
 
+        public string GetToken(Guid Id)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    
+                    string Route = "users/GetToken?Id=" + Id;
+                    HttpResponseMessage response = client.GetAsync(Url + Route).Result;
+
+                    response.EnsureSuccessStatusCode();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return response.Content.ReadAsAsync<string>().Result;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
         
 
 

@@ -36,11 +36,25 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuestaUsers(1, "OK", false, null, model.ViewUsers());
+                return respuesta.ArmarRespuestaUsers(1, "OK", true, null, model.ViewUsers());
             }
             catch (Exception ex)
             {
                 return respuesta.ArmarRespuestaUsers(-1, ex.Message, false, null, null);
+            }
+        }
+
+        [HttpGet]
+        [Route("Users/GetToken")]
+        public string GetToken(Guid Id)
+        {
+            try
+            {
+                return model.GetToken(Id);
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
 
@@ -51,7 +65,7 @@ namespace Servicio.Controllers
         {
             try
             {
-                return respuesta.ArmarRespuestaUsers(1, "OK", false, model.ViewUserById(Id), null);
+                return respuesta.ArmarRespuestaUsers(1, "OK", true, model.ViewUserById(Id), null);
             }
             catch (Exception ex)
             {

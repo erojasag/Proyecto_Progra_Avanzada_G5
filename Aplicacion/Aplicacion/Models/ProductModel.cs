@@ -24,6 +24,7 @@ namespace Aplicacion.Models
                 {
                     string Route = "products/ViewProducts";
 
+
                     HttpResponseMessage response = client.GetAsync(Url + Route).Result;
 
                     response.EnsureSuccessStatusCode();

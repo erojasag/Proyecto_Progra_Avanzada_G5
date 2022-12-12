@@ -11,17 +11,20 @@ namespace Aplicacion.Entities
         public Orders()
         {
             this.Product_By_Order = new HashSet<Product_By_Order>();
+            this.Shipments = new HashSet<Shipments>();
         }
 
-        public int Id { get; set; }
-        public int Order_User_Id { get; set; }
+        public Guid Id { get; set; }
+        public Guid Order_User_Id { get; set; }
         public string NombreCompleto { get; set; }
         public string Product { get; set; }
-        public byte[] Order_date { get; set; }
+        public DateTime Order_date { get; set; }
         public decimal Order_total { get; set; }
-
+        public Nullable<bool> Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_By_Order> Product_By_Order { get; set; }
         public virtual Users Users { get; set; }
+
+        public virtual ICollection<Shipments> Shipments { get; set; }
     }
 }
