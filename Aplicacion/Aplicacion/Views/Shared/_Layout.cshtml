@@ -237,7 +237,7 @@
                                             </a>
                                             <ul class="nav nav-treeview">
                                                 <li class="nav-item">
-                                                    <a href="@Url.Action("ViewOrders", "Orders")" class="nav-link active">
+                                                    <a href="@Url.Action("ViewDetailedOrders", "Order")" class="nav-link active">
                                                         <i class="far fa-circle nav-icon"></i>
                                                         <p>All Orders</p>
                                                     </a>
@@ -453,7 +453,7 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="@Url.Action("ViewCustomersOrders", "Orders", new { Id = sesion.Id })" class="d-block">
+                                            <a href="@Url.Action("ViewCustomersDetailedOrders", "Order", new { Id = sesion.Id, showCanceledOrders = true })" class="nav-link active">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>View My Orders</p>
                                             </a>

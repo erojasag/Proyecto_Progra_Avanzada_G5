@@ -277,13 +277,14 @@
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
-    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PasswordController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShipmentController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Entities\Brand.cs" />
+    <Compile Include="Entities\OrdenDetallada.cs" />
     <Compile Include="Entities\Orders.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Product_By_Order.cs" />
@@ -2248,6 +2249,7 @@
     <Content Include="Funciones\ConsultaUsuario.js" />
     <Content Include="Funciones\DeleteProduct.js" />
     <Content Include="Funciones\Generales.js" />
+    <Content Include="Funciones\coti.js" />
     <Content Include="Funciones\Login.js" />
     <Content Include="Funciones\Password.js" />
     <Content Include="Funciones\Tablas.js" />
@@ -2530,8 +2532,8 @@
     <Content Include="Views\Product\InsertProduct.cshtml" />
     <Content Include="Views\ShoppingCart\ViewShoppingCart.cshtml" />
     <Content Include="Views\ShoppingCart\GoToCheckOut.cshtml" />
-    <Content Include="Views\Orders\ViewOrderStatus.cshtml" />
-    <Content Include="Views\Orders\OrderConfirmation.cshtml" />
+    <Content Include="Views\Order\ViewOrderStatus.cshtml" />
+    <Content Include="Views\Order\OrderConfirmation.cshtml" />
     <Content Include="Views\Shared\ThankYou.cshtml" />
     <Content Include="Views\Product\ProductoEditadoSatisfactoriamente.cshtml" />
     <Content Include="Views\Shared\_NotificationPanel.cshtml" />
@@ -2552,8 +2554,17 @@
     <Content Include="Views\Users\ActivateAccount.cshtml" />
     <Content Include="Views\Users\AccountNotActivated.cshtml" />
     <Content Include="Views\Users\AccountActivated.cshtml" />
-    <Content Include="Views\Orders\ViewOrders.cshtml" />
-    <Content Include="Views\Orders\ViewCustomersOrders.cshtml" />
+    <Content Include="Views\Order\ViewOrders.cshtml" />
+    <Content Include="Views\Order\ViewCustomersOrders.cshtml" />
+    <Content Include="Views\Order\EditOrder.cshtml" />
+    <Content Include="Views\LogIn\UserNotActive.cshtml" />
+    <Content Include="Views\Order\ViewCustomersDetailedOrders.cshtml" />
+    <Content Include="Views\Order\InsertOrder.cshtml" />
+    <Content Include="Views\Order\OrderDeleted.cshtml" />
+    <Content Include="Views\Order\OrderNotDeleted.cshtml" />
+    <Content Include="Views\ShoppingCart\Create.cshtml" />
+    <Content Include="Views\Order\ViewDetailedOrders.cshtml" />
+    <Content Include="Views\LogIn\Terms.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -2565,6 +2576,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\Orders\" />
     <Folder Include="Views\Password\" />
     <Folder Include="Views\ShoeCorp\" />
   </ItemGroup>

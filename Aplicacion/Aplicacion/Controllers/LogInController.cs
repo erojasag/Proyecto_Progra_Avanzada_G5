@@ -18,7 +18,12 @@ namespace Aplicacion.Controllers
             return View(new Users());
         }
 
-        
+        [HttpGet]
+        public ActionResult Terms()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult UserRegistration(Users user)
         {
@@ -34,18 +39,20 @@ namespace Aplicacion.Controllers
             {
                 var datos = model.ValidateUser(User);
 
-                var tok = datos.User;
+                var genToken = model.GetToken(User.Id);
 
-                if (datos != null)
+                if (datos.User != null)
                 {
 
-                    
+                    Session["User"] = new Users();
                     Session["User"] = datos.User;
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    return View("UserLogIn");
+                    ViewBag.Msj = "¡ERROR! El usuario o la contraseña son incorrectos. Por favor intente de nuevo.";
+                    return View("UserNotActive");
+                    
                 }
             }
             else

@@ -313,8 +313,7 @@ namespace Servicio.Models
                     }
                     if(datos != null && datos.Email_Verification == false)
                     {
-                        throw new Exception("El usuario aun no se encuentra activo," +
-                            "por favor refierase a su correo de activacion");
+                       return null;
                     }
                     else
                     {
@@ -353,6 +352,7 @@ namespace Servicio.Models
                                 expires: DateTime.Now.AddDays(1),
                                 signingCredentials: credentials);
                 var jwt_token = new JwtSecurityTokenHandler().WriteToken(token);
+
                 return jwt_token;
             }
             catch(Exception ex)
@@ -362,7 +362,7 @@ namespace Servicio.Models
 
         }
 
-        public bool ActualizarContraseña(Users user)
+        public bool UpdatePassword(Users user)
         {
             using (var contexto = new SHOECORP_BDEntities())
             {

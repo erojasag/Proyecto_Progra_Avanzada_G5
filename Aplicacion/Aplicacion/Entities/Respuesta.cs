@@ -20,6 +20,8 @@ namespace Aplicacion.Entities
         public List<Shipments> Shipments { get; set; }
         public Orders Order { get; set; }
         public List<Orders> Orders { get; set; }
+        public OrdenDetallada DetailedOrder { get; set; }
+        public List<OrdenDetallada> DetailedOrders { get; set; }
 
 
 
@@ -75,6 +77,17 @@ namespace Aplicacion.Entities
             respuesta.Transaction = Transaction;
             respuesta.Order = Order;
             respuesta.Orders = Orders;
+            return respuesta;
+        }
+
+        public Respuesta ArmarRespuestaOrdenDetallada(int Id, string Message, bool Transaction, OrdenDetallada DetailedOrder, List<OrdenDetallada> DetailedOrders)
+        {
+            Respuesta respuesta = new Respuesta();
+            respuesta.Id = Id;
+            respuesta.Message = Message;
+            respuesta.Transaction = Transaction;
+            respuesta.DetailedOrder = DetailedOrder;
+            respuesta.DetailedOrders = DetailedOrders;
             return respuesta;
         }
 

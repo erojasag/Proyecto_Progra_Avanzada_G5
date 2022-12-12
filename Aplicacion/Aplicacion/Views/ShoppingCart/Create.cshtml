@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<link rel="stylesheet" href="~/Content/coti.css">
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <!-- Elementos generados a partir del JSON -->
+        <main id="items" class="col-sm-8 row"></main>
+        <!-- Carrito -->
+        <aside class="col-sm-4">
+            <h2>Cotización</h2>
+            <!-- Elementos del carrito -->
+            <ul id="carrito" class="list-group"></ul>
+            <hr>
+            <p class="text-right">Costo del Tratamiento: ₡<span id="precio"></span></p>
+            <p class="text-right">Impuesto: ₡<span id="impuesto"></span></p>
+            <p class="text-right">SubTotal: ₡<span id="subtotal"></span></p>
+            <p class="text-right">Descuento: ₡<span id="descuento"></span></p>
+            <!-- Precio total -->
+            <p class="text-right">Total: ₡<span id="total"></span></p>
+            <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+            <button id="boton-pdf" class="btn btn-danger">Descargar en PDF</button>
+            <p class="text-right warnings">*El precio de los servicios puede cambiar de precio </p>
+        </aside>
+    </div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="~/Scripts/coti.js"></script>
